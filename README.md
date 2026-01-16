@@ -1,0 +1,2 @@
+# gdman
+Godot manager
