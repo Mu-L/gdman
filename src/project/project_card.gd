@@ -21,9 +21,10 @@ var last_edited_time: int = 0
 
 func _ready() -> void:
 	favorite_button.button_pressed = is_favorite
-	var icon_texture: Texture = load(project_icon_path)
-	if icon_texture != null:
-		project_icon.texture = icon_texture
+	if project_icon_path != "":
+		var icon_texture: Texture = load(project_icon_path)
+		if icon_texture != null:
+			project_icon.texture = icon_texture
 	name_label.text = project_name
 	for tag_text: String in project_tags:
 		pass

@@ -18,14 +18,18 @@ run/low_processor_mode=true
 boot_splash/show_image=false
 config/icon="res://icon.svg"
 
+[autoload]
+
+Config="*uid://b416biq16v3rx"
+
 [debug]
 
 gdscript/warnings/untyped_declaration=1
 
 [display]
 
-window/size/viewport_width=400
-window/size/viewport_height=300
+window/size/viewport_width=800
+window/size/viewport_height=600
 window/stretch/mode="canvas_items"
 window/stretch/aspect="expand"
 

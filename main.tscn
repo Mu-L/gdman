@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://btxvmrjs2fqfi"]
 
 [ext_resource type="PackedScene" uid="uid://b0uu0de2rqxss" path="res://src/side_bar.tscn" id="1_ig7tw"]
+[ext_resource type="PackedScene" uid="uid://cipjvpn3l8a48" path="res://src/project/project_page.tscn" id="2_0xm2m"]
 
 [node name="Main" type="Control" unique_id=1661692792]
 layout_mode = 3
@@ -19,4 +20,7 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="SideBar" parent="HBoxContainer" unique_id=484334225 instance=ExtResource("1_ig7tw")]
+layout_mode = 2
+
+[node name="ProjectPage" parent="HBoxContainer" unique_id=828684455 instance=ExtResource("2_0xm2m")]
 layout_mode = 2

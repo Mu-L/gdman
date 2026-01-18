@@ -1,0 +1,79 @@
+[gd_scene format=3 uid="uid://cipjvpn3l8a48"]
+
+[ext_resource type="Script" uid="uid://dr3siyyotpypu" path="res://src/project/project_page.gd" id="1_ujekw"]
+
+[node name="ProjectPage" type="VBoxContainer" unique_id=828684455]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_ujekw")
+
+[node name="OptionContainer" type="HBoxContainer" parent="." unique_id=933162693]
+layout_mode = 2
+
+[node name="ImportButton" type="Button" parent="OptionContainer" unique_id=1665693487]
+layout_mode = 2
+text = "Import"
+
+[node name="ImportFileDialog" type="FileDialog" parent="OptionContainer/ImportButton" unique_id=584780497]
+oversampling_override = 1.0
+title = "Open a File"
+initial_position = 1
+dialog_hide_on_ok = true
+file_mode = 0
+display_mode = 1
+access = 2
+filters = PackedStringArray("*.godot")
+folder_creation_enabled = false
+deleting_enabled = false
+
+[node name="ScanButton" type="Button" parent="OptionContainer" unique_id=347899072]
+layout_mode = 2
+text = "Scan"
+
+[node name="ScanFileDialog" type="FileDialog" parent="OptionContainer/ScanButton" unique_id=988073660]
+oversampling_override = 1.0
+title = "Open a Directory"
+position = Vector2i(0, 36)
+dialog_hide_on_ok = true
+file_mode = 2
+display_mode = 1
+access = 2
+folder_creation_enabled = false
+deleting_enabled = false
+
+[node name="FilterInput" type="LineEdit" parent="OptionContainer" unique_id=254899975]
+layout_mode = 2
+size_flags_horizontal = 3
+placeholder_text = "Filter"
+
+[node name="FilterButton" type="OptionButton" parent="OptionContainer" unique_id=530222623]
+layout_mode = 2
+selected = 0
+item_count = 3
+popup/item_0/text = "Name"
+popup/item_0/id = 0
+popup/item_1/text = "Ascend"
+popup/item_1/id = 1
+popup/item_2/text = "Descend"
+popup/item_2/id = 2
+
+[node name="DeleteButton" type="Button" parent="OptionContainer" unique_id=1941605909]
+layout_mode = 2
+text = "Delete"
+
+[node name="ScrollContainer" type="ScrollContainer" parent="." unique_id=1139310194]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="CardContainer" type="VBoxContainer" parent="ScrollContainer" unique_id=1899702925]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[connection signal="pressed" from="OptionContainer/ImportButton" to="." method="_on_import_button_pressed"]
+[connection signal="file_selected" from="OptionContainer/ImportButton/ImportFileDialog" to="." method="_on_import_file_dialog_file_selected"]
+[connection signal="pressed" from="OptionContainer/ScanButton" to="." method="_on_scan_button_pressed"]
+[connection signal="dir_selected" from="OptionContainer/ScanButton/ScanFileDialog" to="." method="_on_scan_file_dialog_dir_selected"]
