@@ -20,7 +20,14 @@ var window_sizes: Array[Vector2i] = [
 
 # key: project path
 # value: is_favorite
-var project_info: Dictionary[String, bool] = {}
+var project_info: Dictionary[String, bool] = {
+}
+
+func _ready() -> void:
+	load_config()
+
+func _exit_tree() -> void:
+	store_config()
 
 func store_config() -> void:
 	var config: ConfigFile = ConfigFile.new()
@@ -32,6 +39,7 @@ func load_config() -> void:
 	var config: ConfigFile = ConfigFile.new()
 	if config.load(CONFIG_PATH) != OK:
 		return
-	for project_key: String in config.get_section_keys("project"):
-		var is_favorite: bool = config.get_value("project", project_key, false)
-		project_info[project_key] = is_favorite
+	if config.has_section("project"):
+		for project_key: String in config.get_section_keys("project"):
+			var is_favorite: bool = config.get_value("project", project_key, false)
+			project_info[project_key] = is_favorite
