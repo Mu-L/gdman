@@ -1,0 +1,53 @@
+[gd_scene format=3 uid="uid://bu4qc2q2pjb0t"]
+
+[ext_resource type="Texture2D" uid="uid://f3w2u4j2iw1k" path="res://asset/icon/unstable.svg" id="1_voub6"]
+[ext_resource type="Texture2D" uid="uid://hv0qw0fm1wga" path="res://asset/icon/directory.svg" id="2_vno5b"]
+[ext_resource type="Texture2D" uid="uid://cq454lo24jwpx" path="res://asset/icon/delete.svg" id="3_73bku"]
+
+[node name="EngineCard" type="PanelContainer" unique_id=1647816841]
+anchors_preset = 10
+anchor_right = 1.0
+grow_horizontal = 2
+size_flags_vertical = 0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=797961277]
+layout_mode = 2
+
+[node name="NameLabel" type="Label" parent="HBoxContainer" unique_id=535923778]
+layout_mode = 2
+text = "0.0.0"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer" unique_id=2132253580]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer/VBoxContainer" unique_id=1475940462]
+layout_mode = 2
+
+[node name="FileNameLabel" type="Label" parent="HBoxContainer/VBoxContainer/HBoxContainer" unique_id=1567032915]
+layout_mode = 2
+text = "0.0.0-stable-dotnet"
+
+[node name="UnstableIcon" type="TextureRect" parent="HBoxContainer/VBoxContainer/HBoxContainer" unique_id=486732658]
+layout_mode = 2
+texture = ExtResource("1_voub6")
+expand_mode = 3
+stretch_mode = 5
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="HBoxContainer/VBoxContainer" unique_id=762399761]
+layout_mode = 2
+
+[node name="PathButton" type="Button" parent="HBoxContainer/VBoxContainer/HBoxContainer2" unique_id=188904454]
+layout_mode = 2
+icon = ExtResource("2_vno5b")
+icon_alignment = 1
+
+[node name="PathLabel" type="Label" parent="HBoxContainer/VBoxContainer/HBoxContainer2" unique_id=1911918851]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "path/to/engine"
+text_overrun_behavior = 1
+
+[node name="DeleteButton" type="Button" parent="HBoxContainer" unique_id=640513606]
+layout_mode = 2
+icon = ExtResource("3_73bku")

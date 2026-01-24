@@ -1,12 +1,12 @@
-extends HBoxContainer
+extends PanelContainer
 
 signal download(version_name: String)
 
 var version_name: String = ""
 var is_stable: bool = false
 
-@onready var name_label: Label = $NameLabel
-@onready var unstable_icon: TextureRect = $UnstableIcon
+@onready var name_label: Label = $HBoxContainer/NameLabel
+@onready var unstable_icon: TextureRect = $HBoxContainer/UnstableIcon
 
 func _ready() -> void:
 	if version_name == "":

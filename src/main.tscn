@@ -1,0 +1,83 @@
+[gd_scene format=3 uid="uid://btxvmrjs2fqfi"]
+
+[ext_resource type="Script" uid="uid://hvb7frhvh2aa" path="res://src/main.gd" id="2_mgm53"]
+[ext_resource type="Texture2D" uid="uid://bsia01kbmakd0" path="res://asset/icon/project.svg" id="3_uewes"]
+[ext_resource type="Texture2D" uid="uid://ccmwlrli63fhi" path="res://asset/icon/engine.svg" id="4_kqbth"]
+[ext_resource type="Texture2D" uid="uid://ddqhbrd1han2p" path="res://asset/icon/download.svg" id="5_srxbw"]
+[ext_resource type="Texture2D" uid="uid://mgdysp5iuh4l" path="res://asset/icon/setting.svg" id="6_d3u4l"]
+[ext_resource type="Texture2D" uid="uid://2crx7poin47h" path="res://asset/icon/about.svg" id="7_mlv6i"]
+[ext_resource type="PackedScene" uid="uid://cipjvpn3l8a48" path="res://src/project/project_page.tscn" id="8_tb146"]
+[ext_resource type="PackedScene" uid="uid://cq7qp7e00w6ol" path="res://src/download/download_page.tscn" id="9_e7lu8"]
+
+[node name="Main" type="Panel" unique_id=974855598]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("2_mgm53")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=805635866]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="SideBar" type="VBoxContainer" parent="HBoxContainer" unique_id=1036997934]
+layout_mode = 2
+
+[node name="ProjectButton" type="Button" parent="HBoxContainer/SideBar" unique_id=339599510]
+layout_mode = 2
+text = "Project"
+icon = ExtResource("3_uewes")
+icon_alignment = 1
+vertical_icon_alignment = 0
+expand_icon = true
+
+[node name="EngineButton" type="Button" parent="HBoxContainer/SideBar" unique_id=261578872]
+layout_mode = 2
+text = "Engine"
+icon = ExtResource("4_kqbth")
+icon_alignment = 1
+vertical_icon_alignment = 0
+expand_icon = true
+
+[node name="DownloadButton" type="Button" parent="HBoxContainer/SideBar" unique_id=57152139]
+layout_mode = 2
+text = "Download"
+icon = ExtResource("5_srxbw")
+icon_alignment = 1
+vertical_icon_alignment = 0
+expand_icon = true
+
+[node name="Pass" type="Control" parent="HBoxContainer/SideBar" unique_id=1803702654]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="SettingButton" type="Button" parent="HBoxContainer/SideBar" unique_id=523428525]
+layout_mode = 2
+text = "Setting"
+icon = ExtResource("6_d3u4l")
+icon_alignment = 1
+vertical_icon_alignment = 0
+expand_icon = true
+
+[node name="AboutButton" type="Button" parent="HBoxContainer/SideBar" unique_id=2142396541]
+layout_mode = 2
+text = "About"
+icon = ExtResource("7_mlv6i")
+icon_alignment = 1
+vertical_icon_alignment = 0
+expand_icon = true
+
+[node name="PageContainer" type="VBoxContainer" parent="HBoxContainer" unique_id=1091647719]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="ProjectPage" parent="HBoxContainer/PageContainer" unique_id=828684455 instance=ExtResource("8_tb146")]
+layout_mode = 2
+
+[node name="DownloadPage" parent="HBoxContainer/PageContainer" unique_id=1939612761 instance=ExtResource("9_e7lu8")]
+layout_mode = 2

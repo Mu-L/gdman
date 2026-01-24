@@ -1,0 +1,57 @@
+[gd_scene format=3 uid="uid://cwn383vbptm1q"]
+
+[ext_resource type="Script" uid="uid://ci4ad3t5xmvox" path="res://src/engine/engine_page.gd" id="1_2a3wf"]
+
+[node name="EnginePage" type="VBoxContainer" unique_id=1313993800]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_2a3wf")
+
+[node name="TopBarContainer" type="PanelContainer" parent="." unique_id=727731055]
+layout_mode = 2
+
+[node name="OptionContainer" type="HBoxContainer" parent="TopBarContainer" unique_id=92631344]
+layout_mode = 2
+
+[node name="StableButton" type="CheckButton" parent="TopBarContainer/OptionContainer" unique_id=982545954]
+layout_mode = 2
+button_pressed = true
+text = "Stable"
+
+[node name="VSeparator" type="VSeparator" parent="TopBarContainer/OptionContainer" unique_id=19439007]
+layout_mode = 2
+
+[node name="StanardButton" type="CheckButton" parent="TopBarContainer/OptionContainer" unique_id=426452546]
+layout_mode = 2
+button_pressed = true
+text = "Standard"
+
+[node name="VSeparator2" type="VSeparator" parent="TopBarContainer/OptionContainer" unique_id=1432417225]
+layout_mode = 2
+
+[node name="DotnetButton" type="CheckButton" parent="TopBarContainer/OptionContainer" unique_id=1945195190]
+layout_mode = 2
+button_pressed = true
+text = ".NET"
+
+[node name="Pass" type="Control" parent="TopBarContainer/OptionContainer" unique_id=1247439597]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="RefreshButton" type="Button" parent="TopBarContainer/OptionContainer" unique_id=902004397]
+layout_mode = 2
+text = "Refresh"
+
+[node name="ScrollContainer" type="ScrollContainer" parent="." unique_id=616797287]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="CardContainer" type="VBoxContainer" parent="ScrollContainer" unique_id=1009245551]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[connection signal="pressed" from="TopBarContainer/OptionContainer/RefreshButton" to="." method="_on_refresh_button_pressed"]

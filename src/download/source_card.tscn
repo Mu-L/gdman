@@ -4,29 +4,33 @@
 [ext_resource type="Texture2D" uid="uid://f3w2u4j2iw1k" path="res://asset/icon/unstable.svg" id="2_vno5b"]
 [ext_resource type="Texture2D" uid="uid://ddqhbrd1han2p" path="res://asset/icon/download.svg" id="4_cieoe"]
 
-[node name="SourceCard" type="HBoxContainer" unique_id=1883642242]
+[node name="SourceCard" type="PanelContainer" unique_id=805770578]
 anchors_preset = 10
 anchor_right = 1.0
+offset_bottom = 32.0
 grow_horizontal = 2
 size_flags_horizontal = 3
 script = ExtResource("1_h676o")
 
-[node name="NameLabel" type="Label" parent="." unique_id=1143017360]
+[node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=322069250]
+layout_mode = 2
+
+[node name="NameLabel" type="Label" parent="HBoxContainer" unique_id=1143017360]
 layout_mode = 2
 text = "0.0.0"
 
-[node name="UnstableIcon" type="TextureRect" parent="." unique_id=2018716420]
+[node name="UnstableIcon" type="TextureRect" parent="HBoxContainer" unique_id=2018716420]
 layout_mode = 2
 texture = ExtResource("2_vno5b")
 stretch_mode = 5
 
-[node name="Pass" type="Control" parent="." unique_id=2067015311]
+[node name="Pass" type="Control" parent="HBoxContainer" unique_id=2067015311]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="DownloadButton" type="Button" parent="." unique_id=805701093]
+[node name="DownloadButton" type="Button" parent="HBoxContainer" unique_id=805701093]
 layout_mode = 2
 icon = ExtResource("4_cieoe")
 icon_alignment = 1
 
-[connection signal="pressed" from="DownloadButton" to="." method="_on_download_button_pressed"]
+[connection signal="pressed" from="HBoxContainer/DownloadButton" to="." method="_on_download_button_pressed"]

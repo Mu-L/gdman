@@ -7,9 +7,14 @@ anchors_preset = 10
 anchor_right = 1.0
 offset_bottom = 32.0
 grow_horizontal = 2
-folded = true
 script = ExtResource("1_w5s3m")
 
-[node name="CardContainer" type="VBoxContainer" parent="." unique_id=2054426833]
-visible = false
+[node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=1829934915]
 layout_mode = 2
+
+[node name="VSeparator" type="VSeparator" parent="HBoxContainer" unique_id=419740117]
+layout_mode = 2
+
+[node name="CardContainer" type="VBoxContainer" parent="HBoxContainer" unique_id=2054426833]
+layout_mode = 2
+size_flags_horizontal = 3

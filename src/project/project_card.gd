@@ -10,15 +10,14 @@ var project_version: String = ""
 var project_tags: Array[String] = []
 var last_edited_time: int = 0
 
-@onready var favorite_button: CheckButton = $OptionButton/FavoriteButton
-@onready var confirmation_dialog: ConfirmationDialog = $OptionButton/DeleteButton/ConfirmationDialog
+@onready var favorite_button: CheckButton = $VBoxContainer/FavoriteButton
+@onready var confirmation_dialog: ConfirmationDialog = $VBoxContainer/DeleteButton/ConfirmationDialog
 @onready var project_icon: TextureRect = $ProjectIcon
-@onready var name_label: Label = $InfoContainer/MarkContainer/NameLabel
-@onready var tag_container: HBoxContainer = $InfoContainer/MarkContainer/TagContainer
-@onready var path_label: Label = $InfoContainer/FeatherContainer/PathLabel
-@onready var version_label: Label = $InfoContainer/FeatherContainer/VersionLabel
-@onready var time_label: Label = $InfoContainer/FeatherContainer/TimeLabel
-
+@onready var name_label: Label = $VBoxContainer2/HBoxContainer/NameLabel
+@onready var tag_container: HBoxContainer = $VBoxContainer2/HBoxContainer/TagContainer
+@onready var path_label: Label = $VBoxContainer2/HBoxContainer2/PathLabel
+@onready var version_label: Label = $VBoxContainer2/HBoxContainer2/VersionLabel
+@onready var time_label: Label = $VBoxContainer2/HBoxContainer2/TimeLabel
 
 func _ready() -> void:
 	favorite_button.button_pressed = is_favorite
