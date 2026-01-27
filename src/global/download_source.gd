@@ -93,12 +93,13 @@ const SOURCE_GITHUB_DOTNET_FILE: Dictionary[String, String] = {
 
 var source_data: Dictionary = {
 	"godot": {
-		"4.5": ["4.5.1-stable"],
-		"4.4": ["4.4.1-stable"],
+		"4.6": ["4.6-stable"],
+		"4.5": ["4.5.1-stable", "4.5-stable"],
+		"4.4": ["4.4.1-stable", "4.4-stable"],
 		"4.3": ["4.3-stable"],
-		"4.2": ["4.2.2-stable"],
-		"4.1": ["4.1.4-stable"],
-		"4.0": ["4.0.4-stable"]
+		"4.2": ["4.2.2-stable", "4.2.1-stable", "4.2-stable"],
+		"4.1": ["4.1.4-stable", "4.1.3-stable", "4.1.2-stable", "4.1.1-stable", "4.1-stable"],
+		"4.0": ["4.0.4-stable", "4.0.3-stable", "4.0.2-stable", "4.0.1-stable", "4.0-stable"],
 	}
 }
 
@@ -108,25 +109,45 @@ func _ready() -> void:
 	if json.parse(source_json) == OK:
 		source_data = json.data
 
-func has_source(engine_id: String, source: String) -> bool:
+func has_source(source: String, engine_id: String) -> bool:
 	if not source_data.has(source):
 		return false
 	var engine_info: EngineManager.EngineInfo = EngineManager.id_to_engine_info(engine_id)
+	if engine_info == null:
+		return false
+	if not _is_support_architecture(engine_info.major_version,
+		engine_info.minor_version, App.get_architecture()):
+		return false
 	var version_data: Dictionary = source_data.get(source, {})
-	if not version_data.has(engine_info.project_version):
+	if not version_data.has("%d.%d" % [engine_info.major_version, engine_info.minor_version]):
 		return false
 	var engine_list: PackedStringArray = version_data.get(engine_info.project_version, [])
 	return engine_info.id.replace("-dotnet", "") in engine_list
+
+# some architecture not support some version
+func _is_support_architecture(major: int, minor: int, architecture: String) -> bool:
+	if major == 4:
+		if minor < 3:
+			if architecture == "windows_arm64":
+				return false
+		if minor < 2:
+			if architecture in ["linux_arm32", "linux_arm64"]:
+				return false
+		return true
+	return false
 
 func get_source_godot_url(engine_id: String, architecture: String) -> String:
 	var info: EngineManager.EngineInfo = EngineManager.id_to_engine_info(engine_id)
 	if info == null:
 		return ""
+	var version: String = "%s.%s" % [info.major_version, info.minor_version]
+	if info.patch_version > 0:
+		version = "%s.%d" % [version, info.patch_version]
 	var slug: String = SOURCE_GODOT_SLUG.get(architecture, "")
 	if info.is_dotnet:
 		slug = SOURCE_GODOT_DOTNET_SLUG.get(architecture, "")
 	var platform: String = SOURCE_GODOT_PLATFORM.get(architecture, "")
-	return SOURCE_GODOT_URL % [info.version, info.flavor, slug, platform]
+	return SOURCE_GODOT_URL % [version, info.flavor, slug, platform]
 
 func get_source_github_url(engine_id: String, architecture: String) -> String:
 	var info: EngineManager.EngineInfo = EngineManager.id_to_engine_info(engine_id)

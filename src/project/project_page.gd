@@ -4,7 +4,7 @@ const PROJECT_CARD: PackedScene = preload("uid://cphby36r2gwsb")
 
 @onready var import_file_dialog: FileDialog = $HBoxContainer/ImportButton/ImportFileDialog
 @onready var scan_file_dialog: FileDialog = $HBoxContainer/ScanButton/ScanFileDialog
-@onready var card_container: VBoxContainer = $PanelContainer/ScrollContainer/MarginContainer/CardContainer
+@onready var card_container: GridContainer = $PanelContainer/ScrollContainer/MarginContainer/CardContainer
 
 var project_cards: Dictionary[String, Node] = {}
 

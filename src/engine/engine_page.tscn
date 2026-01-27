@@ -10,35 +10,33 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_2a3wf")
 
-[node name="OptionContainer" type="HBoxContainer" parent="." unique_id=92631344]
+[node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=1917300488]
 layout_mode = 2
 
-[node name="StableButton" type="CheckButton" parent="OptionContainer" unique_id=982545954]
+[node name="StandardCheck" type="CheckBox" parent="HBoxContainer" unique_id=235235217]
 layout_mode = 2
-button_pressed = true
-text = "Stable"
-
-[node name="VSeparator" type="VSeparator" parent="OptionContainer" unique_id=19439007]
-layout_mode = 2
-
-[node name="StanardButton" type="CheckButton" parent="OptionContainer" unique_id=426452546]
-layout_mode = 2
-button_pressed = true
 text = "Standard"
 
-[node name="VSeparator2" type="VSeparator" parent="OptionContainer" unique_id=1432417225]
+[node name="DotnetCheck" type="CheckBox" parent="HBoxContainer" unique_id=2022638552]
 layout_mode = 2
-
-[node name="DotnetButton" type="CheckButton" parent="OptionContainer" unique_id=1945195190]
-layout_mode = 2
-button_pressed = true
 text = ".NET"
 
-[node name="Pass" type="Control" parent="OptionContainer" unique_id=1247439597]
+[node name="VSeparator" type="VSeparator" parent="HBoxContainer" unique_id=1260657796]
+layout_mode = 2
+
+[node name="StableCheck" type="CheckBox" parent="HBoxContainer" unique_id=1863307986]
+layout_mode = 2
+text = "Stable"
+
+[node name="UnstableCheck" type="CheckBox" parent="HBoxContainer" unique_id=1273763945]
+layout_mode = 2
+text = "Unstable"
+
+[node name="Pass" type="Control" parent="HBoxContainer" unique_id=1247439597]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="RefreshButton" type="Button" parent="OptionContainer" unique_id=902004397]
+[node name="RefreshButton" type="Button" parent="HBoxContainer" unique_id=902004397]
 layout_mode = 2
 text = "Refresh"
 
@@ -62,4 +60,4 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 columns = 2
 
-[connection signal="pressed" from="OptionContainer/RefreshButton" to="." method="_on_refresh_button_pressed"]
+[connection signal="pressed" from="HBoxContainer/RefreshButton" to="." method="_on_refresh_button_pressed"]

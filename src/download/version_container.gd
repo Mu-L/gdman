@@ -21,13 +21,24 @@ func _ready() -> void:
 		card_dotnet.download.connect(_on_download_card_download)
 		card_container.add_child(card_dotnet)
 
-func switch_display(stable: bool, dotnet: bool) -> void:
+func switch_display(filters: Array[String]) -> void:
 	for card: Control in card_container.get_children():
-		if card.is_dotnet and not dotnet:
-			card.hide()
-		elif not card.is_stable and stable:
-			card.hide()
-		else:
-			card.show()
+		var target_visible: bool = false
+		for filter: String in filters:
+			match filter:
+				"standard":
+					if not card.is_dotnet:
+						target_visible = true
+				"dotnet":
+					if card.is_dotnet:
+						target_visible = true
+				"stable":
+					if card.is_stable:
+						target_visible = true
+				"unstable":
+					if not card.is_stable:
+						target_visible = true
+		card.visible = target_visible
+
 func _on_download_card_download(engine_id: String) -> void:
 	download.emit(engine_id)

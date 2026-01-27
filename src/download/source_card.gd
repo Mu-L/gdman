@@ -19,7 +19,7 @@ func _ready() -> void:
 		return
 	var info: EngineManager.EngineInfo = EngineManager.id_to_engine_info(engine_id)
 	name_label.text = info.name
-	is_stable = info.is_stable
+	is_stable = info.flavor == EngineManager.EngineFlavor.STABLE
 	if not is_stable:
 		unstable_icon.show()
 	is_dotnet = info.is_dotnet

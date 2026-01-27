@@ -20,17 +20,24 @@ layout_mode = 2
 [node name="OptionContainer" type="HBoxContainer" parent="TopBarContainer" unique_id=877426337]
 layout_mode = 2
 
-[node name="StableButton" type="CheckButton" parent="TopBarContainer/OptionContainer" unique_id=866862509]
+[node name="StandardCheck" type="CheckBox" parent="TopBarContainer/OptionContainer" unique_id=1007961907]
 layout_mode = 2
-button_pressed = true
-text = "Stable"
+text = "Standard"
 
-[node name="VSeparator" type="VSeparator" parent="TopBarContainer/OptionContainer" unique_id=522082090]
-layout_mode = 2
-
-[node name="DotnetButton" type="CheckButton" parent="TopBarContainer/OptionContainer" unique_id=1065839187]
+[node name="DotnetCheck" type="CheckBox" parent="TopBarContainer/OptionContainer" unique_id=1892982159]
 layout_mode = 2
 text = ".NET"
+
+[node name="VSeparator" type="VSeparator" parent="TopBarContainer/OptionContainer" unique_id=1203929751]
+layout_mode = 2
+
+[node name="StableCheck" type="CheckBox" parent="TopBarContainer/OptionContainer" unique_id=86975575]
+layout_mode = 2
+text = "Stable"
+
+[node name="UnstableCheck" type="CheckBox" parent="TopBarContainer/OptionContainer" unique_id=1761071388]
+layout_mode = 2
+text = "Unstable"
 
 [node name="HSplitContainer" type="HSplitContainer" parent="." unique_id=888305415]
 layout_mode = 2
@@ -75,7 +82,7 @@ layout_mode = 2
 title = "4.0"
 
 [node name="ScrollContainer2" type="ScrollContainer" parent="HSplitContainer" unique_id=1675369802]
-custom_minimum_size = Vector2(64, 0)
+custom_minimum_size = Vector2(128, 0)
 layout_mode = 2
 
 [node name="DownloaderContainer" type="VBoxContainer" parent="HSplitContainer/ScrollContainer2" unique_id=686502094]
@@ -86,6 +93,4 @@ size_flags_vertical = 3
 [node name="DownloadConfirm" parent="." unique_id=1392267383 instance=ExtResource("3_ajk1a")]
 visible = false
 
-[connection signal="toggled" from="TopBarContainer/OptionContainer/StableButton" to="." method="_on_stable_button_toggled"]
-[connection signal="toggled" from="TopBarContainer/OptionContainer/DotnetButton" to="." method="_on_dotnet_button_toggled"]
 [connection signal="download" from="DownloadConfirm" to="." method="_on_download_confirm_download"]

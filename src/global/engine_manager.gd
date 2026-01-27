@@ -1,12 +1,28 @@
 extends Node
 
+enum EngineFlavor {
+	STABLE,
+	RC,
+	BETA,
+	ALPHA,
+	DEV,
+}
+
+const FLAVOR_NAME: Dictionary[EngineFlavor, String] = {
+	EngineFlavor.RC: "RC",
+	EngineFlavor.BETA: "Beta",
+	EngineFlavor.ALPHA: "Alpha",
+	EngineFlavor.DEV: "Dev",
+}
+
 class EngineInfo:
-	var id: String # X.Y.Z-flavor[-dotnet]
-	var name: String # name for display
-	var version: String # X.Y[.Z]
-	var project_version: String # X.Y
-	var flavor: String
-	var is_stable: bool
+	var id: String # x.y[.z]-flavor[a][-dotnet]
+	var name: String # Display name
+	var major_version: int
+	var minor_version: int
+	var patch_version: int
+	var flavor: EngineFlavor
+	var build: int
 	var is_dotnet: bool
 	var sort_number: int = 0
 
@@ -14,6 +30,8 @@ class LocalEngine:
 	var dir_path: String
 	var executable_path: String
 	var info: EngineInfo
+
+var _cache_engine_info: Dictionary[String, EngineInfo] = {}
 
 var local_engines: Array[LocalEngine] = []
 
@@ -37,49 +55,62 @@ func load_engines() -> void:
 	local_engines.sort_custom(_compare_local_engine)
 
 func id_to_engine_info(engine_id: String) -> EngineInfo:
+	if _cache_engine_info.has(engine_id):
+		return _cache_engine_info[engine_id]
 	var info: PackedStringArray = engine_id.split("-")
 	if info.size() != 2 and info.size() != 3:
 		return null
 	var engine_info: EngineInfo = EngineInfo.new()
 	engine_info.id = engine_id
-	engine_info.name = id_to_display_name(engine_id)
-	engine_info.version = info[0]
-	var version_info: PackedStringArray = engine_info.version.split(".")
+	# version
+	var version_info: PackedStringArray = info[0].split(".")
 	if version_info.size() >= 2:
-		engine_info.project_version = "%s.%s" % [version_info[0], version_info[1]]
-	else:
-		engine_info.project_version = engine_info.version
-	engine_info.flavor = info[1]
-	engine_info.sort_number = _get_sort_number(engine_info.version, engine_info.flavor)
-	engine_info.is_stable = engine_info.flavor == "stable"
+		engine_info.major_version = version_info[0].to_int()
+		engine_info.minor_version = version_info[1].to_int()
+		if version_info.size() == 3:
+			engine_info.patch_version = version_info[2].to_int()
+	# flavor
+	if info[1] == "stable":
+		engine_info.flavor = EngineFlavor.STABLE
+	elif info[1].begins_with("rc"):
+		engine_info.flavor = EngineFlavor.RC
+	elif info[1].begins_with("beta"):
+		engine_info.flavor = EngineFlavor.BETA
+	elif info[1].begins_with("alpha"):
+		engine_info.flavor = EngineFlavor.ALPHA
+	elif info[1].begins_with("dev"):
+		engine_info.flavor = EngineFlavor.DEV
+	engine_info.build = info[1].to_int()
 	engine_info.is_dotnet = info.size() == 3 and info[2] == "dotnet"
+	# name
+	var name_array: Array[String] = []
+	name_array.append("%d.%d" % [engine_info.major_version, engine_info.minor_version])
+	if engine_info.patch_version > 0:
+		name_array.append(".%d" % engine_info.patch_version)
+	if engine_info.flavor != EngineFlavor.STABLE:
+		name_array.append(" %s" % FLAVOR_NAME[engine_info.flavor])
+	if engine_info.build > 0:
+		name_array.append(" %d" % engine_info.build)
+	if engine_info.is_dotnet:
+		name_array.append(" (.NET)")
+	engine_info.name = "".join(name_array)
+	_cache_engine_info[engine_id] = engine_info
 	return engine_info
 
 # Format: 1Major|1Minor|1Patch|1Flavor|2Build
-func _get_sort_number(version: String, flavor: String) -> int:
-	var major: int = 0
-	var minor: int = 0
-	var patch: int = 0
-	var version_info: PackedStringArray = version.split(".")
-	if version_info.size() == 2:
-		major = version_info[0].to_int()
-		minor = version_info[1].to_int()
-	elif version_info.size() == 3:
-		major = version_info[0].to_int()
-		minor = version_info[1].to_int()
-		patch = version_info[2].to_int()
-	var flavor_number: int = 0 # stable=9, rc=8, beta=7, alpha=6, dev=5
-	if flavor == "stable":
-		flavor_number = 9
-	elif flavor.begins_with("rc"):
-		flavor_number = 8
-	elif flavor.begins_with("beta"):
-		flavor_number = 7
-	elif flavor.begins_with("alpha"):
-		flavor_number = 6
-	elif flavor.begins_with("dev"):
-		flavor_number = 5
-	var build: int = flavor.to_int()
+func _get_sort_number(major: int, minor: int, patch: int, flavor: EngineFlavor, build: int) -> int:
+	var flavor_number: int = 0
+	match flavor:
+		EngineFlavor.STABLE:
+			flavor_number = 9
+		EngineFlavor.RC:
+			flavor_number = 8
+		EngineFlavor.BETA:
+			flavor_number = 7
+		EngineFlavor.ALPHA:
+			flavor_number = 6
+		EngineFlavor.DEV:
+			flavor_number = 5
 	return major * 1000000 + minor * 10000 + patch * 1000 + flavor_number * 100 + build
 
 func _compare_local_engine(a: LocalEngine, b: LocalEngine) -> bool:
@@ -105,24 +136,3 @@ func _get_executable_path(dir_name: String) -> String:
 				file_name = current_dir.get_next()
 			current_dir.list_dir_end()
 	return target_path
-
-func id_to_display_name(engine_id: String) -> String:
-	var info: PackedStringArray = engine_id.split("-")
-	if info.size() != 2 and info.size() != 3:
-		return engine_id
-	var version: String = info[0]
-	var flavor: String = info[1]
-	var result: String = ""
-	if flavor == "stable":
-		result = version
-	elif flavor.begins_with("rc"):
-		result = "%s RC %s" % [version, flavor.replace("rc", "")]
-	elif flavor.begins_with("beta"):
-		result = "%s Beta %s" % [version, flavor.replace("beta", "")]
-	elif flavor.begins_with("dev"):
-		result = "%s Dev %s" % [version, flavor.replace("dev", "")]
-	elif flavor.begins_with("alpha"):
-		result = "%s Alpha %s" % [version, flavor.replace("alpha", "")]
-	if info.size() == 3 and info[2] == "dotnet":
-		result = "%s (.NET)" % result
-	return result

@@ -1,4 +1,4 @@
-extends HBoxContainer
+extends PanelContainer
 
 const PROJECT_TAG: PackedScene = preload("res://src/project/project_tag.tscn")
 
@@ -10,14 +10,14 @@ var project_version: String = ""
 var project_tags: Array[String] = []
 var last_edited_time: int = 0
 
-@onready var favorite_button: CheckButton = $VBoxContainer/FavoriteButton
-@onready var confirmation_dialog: ConfirmationDialog = $VBoxContainer/DeleteButton/ConfirmationDialog
-@onready var project_icon: TextureRect = $ProjectIcon
-@onready var name_label: Label = $VBoxContainer2/HBoxContainer/NameLabel
-@onready var tag_container: HBoxContainer = $VBoxContainer2/HBoxContainer/TagContainer
-@onready var path_label: Label = $VBoxContainer2/HBoxContainer2/PathLabel
-@onready var version_label: Label = $VBoxContainer2/HBoxContainer2/VersionLabel
-@onready var time_label: Label = $VBoxContainer2/HBoxContainer2/TimeLabel
+@onready var favorite_button: CheckButton = $MarginContainer/VBoxContainer/HBoxContainer/FavoriteButton
+@onready var project_icon: TextureRect = $MarginContainer/VBoxContainer/HBoxContainer/ProjectIcon
+@onready var name_label: Label = $MarginContainer/VBoxContainer/HBoxContainer/HBoxContainer/HBoxContainer/NameLabel
+@onready var tag_container: HBoxContainer = $MarginContainer/VBoxContainer/HBoxContainer/HBoxContainer/HBoxContainer/TagContainer
+@onready var version_label: Label = $MarginContainer/VBoxContainer/HBoxContainer/HBoxContainer/HBoxContainer2/VersionLabel
+@onready var time_label: Label = $MarginContainer/VBoxContainer/HBoxContainer/HBoxContainer/HBoxContainer2/TimeLabel
+@onready var path_label: Label = $MarginContainer/VBoxContainer/HBoxContainer2/PathLabel
+
 
 func _ready() -> void:
 	favorite_button.button_pressed = is_favorite
@@ -44,7 +44,7 @@ func _ready() -> void:
 
 
 func _on_delete_button_pressed() -> void:
-	confirmation_dialog.popup_centered()
+	pass
 
 
 func _on_confirmation_dialog_confirmed() -> void:

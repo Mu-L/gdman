@@ -65,15 +65,18 @@ size_flags_vertical = 3
 
 [node name="MarginContainer" type="MarginContainer" parent="PanelContainer/ScrollContainer" unique_id=392487920]
 layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
 theme_override_constants/margin_left = 2
 theme_override_constants/margin_top = 2
 theme_override_constants/margin_right = 2
 theme_override_constants/margin_bottom = 2
 
-[node name="CardContainer" type="VBoxContainer" parent="PanelContainer/ScrollContainer/MarginContainer" unique_id=1899702925]
+[node name="CardContainer" type="GridContainer" parent="PanelContainer/ScrollContainer/MarginContainer" unique_id=1682402761]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
+columns = 2
 
 [connection signal="pressed" from="HBoxContainer/ImportButton" to="." method="_on_import_button_pressed"]
 [connection signal="file_selected" from="HBoxContainer/ImportButton/ImportFileDialog" to="." method="_on_import_file_dialog_file_selected"]
