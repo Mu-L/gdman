@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://wst25oki1eps" path="res://src/download/download_page.gd" id="1_0gws8"]
 [ext_resource type="PackedScene" uid="uid://byfxbqtgp68d" path="res://src/download/version_container.tscn" id="2_gw8yc"]
 [ext_resource type="PackedScene" uid="uid://dhppyf1y4otgk" path="res://src/download/download_confirm.tscn" id="3_ajk1a"]
+[ext_resource type="Texture2D" uid="uid://ddqhbrd1han2p" path="res://asset/icon/download.svg" id="3_qrc2e"]
 
 [node name="DownloadPage" type="VBoxContainer" unique_id=589209203]
 anchors_preset = 15
@@ -12,103 +13,135 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
+theme_override_constants/separation = 5
 script = ExtResource("1_0gws8")
 
-[node name="TopBarContainer" type="PanelContainer" parent="." unique_id=36949173]
+[node name="DownloadConfirm" parent="." unique_id=1392267383 instance=ExtResource("3_ajk1a")]
+visible = false
+
+[node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=992429299]
+layout_mode = 2
+theme_override_constants/separation = 1
+
+[node name="TextureRect" type="TextureRect" parent="HBoxContainer" unique_id=1630641383]
+layout_mode = 2
+texture = ExtResource("3_qrc2e")
+expand_mode = 3
+stretch_mode = 5
+
+[node name="Label" type="Label" parent="HBoxContainer" unique_id=2006014479]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "Download"
+
+[node name="OptionContainer" type="HBoxContainer" parent="." unique_id=877426337]
 layout_mode = 2
 
-[node name="OptionContainer" type="HBoxContainer" parent="TopBarContainer" unique_id=877426337]
-layout_mode = 2
-
-[node name="StandardCheck" type="CheckBox" parent="TopBarContainer/OptionContainer" unique_id=1007961907]
+[node name="StandardCheck" type="CheckBox" parent="OptionContainer" unique_id=1007961907]
 layout_mode = 2
 button_pressed = true
 text = "Standard"
+flat = true
 
-[node name="DotnetCheck" type="CheckBox" parent="TopBarContainer/OptionContainer" unique_id=1892982159]
+[node name="DotnetCheck" type="CheckBox" parent="OptionContainer" unique_id=1892982159]
 layout_mode = 2
 text = ".NET"
+flat = true
 
-[node name="VSeparator" type="VSeparator" parent="TopBarContainer/OptionContainer" unique_id=1203929751]
+[node name="VSeparator" type="VSeparator" parent="OptionContainer" unique_id=1203929751]
 layout_mode = 2
 
-[node name="StableCheck" type="CheckBox" parent="TopBarContainer/OptionContainer" unique_id=86975575]
+[node name="StableCheck" type="CheckBox" parent="OptionContainer" unique_id=86975575]
 layout_mode = 2
 button_pressed = true
 text = "Stable"
+flat = true
 
-[node name="UnstableCheck" type="CheckBox" parent="TopBarContainer/OptionContainer" unique_id=1761071388]
+[node name="UnstableCheck" type="CheckBox" parent="OptionContainer" unique_id=1761071388]
 layout_mode = 2
 text = "Unstable"
+flat = true
 
 [node name="HSplitContainer" type="HSplitContainer" parent="." unique_id=888305415]
 layout_mode = 2
 size_flags_vertical = 3
-split_offsets = PackedInt32Array(-80)
-split_offset = -80
+split_offsets = PackedInt32Array(-4)
+split_offset = -4
 
-[node name="ScrollContainer" type="ScrollContainer" parent="HSplitContainer" unique_id=2134695551]
+[node name="PanelContainer" type="PanelContainer" parent="HSplitContainer" unique_id=1445823982]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="MarginContainer" type="MarginContainer" parent="HSplitContainer/PanelContainer" unique_id=1501888515]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="ScrollContainer" type="ScrollContainer" parent="HSplitContainer/PanelContainer/MarginContainer" unique_id=2134695551]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="CardContainer" type="VBoxContainer" parent="HSplitContainer/ScrollContainer" unique_id=1936648432]
+[node name="CardContainer" type="VBoxContainer" parent="HSplitContainer/PanelContainer/MarginContainer/ScrollContainer" unique_id=1936648432]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 2
+theme_override_constants/separation = 5
 
-[node name="VersionContainer46" parent="HSplitContainer/ScrollContainer/CardContainer" unique_id=1018036535 instance=ExtResource("2_gw8yc")]
+[node name="VersionContainer46" parent="HSplitContainer/PanelContainer/MarginContainer/ScrollContainer/CardContainer" unique_id=1018036535 instance=ExtResource("2_gw8yc")]
 layout_mode = 2
 title = "4.6"
 
-[node name="VersionContainer45" parent="HSplitContainer/ScrollContainer/CardContainer" unique_id=1919425106 instance=ExtResource("2_gw8yc")]
+[node name="VersionContainer45" parent="HSplitContainer/PanelContainer/MarginContainer/ScrollContainer/CardContainer" unique_id=1919425106 instance=ExtResource("2_gw8yc")]
 layout_mode = 2
 title = "4.5"
 
-[node name="VersionContainer44" parent="HSplitContainer/ScrollContainer/CardContainer" unique_id=1368840048 instance=ExtResource("2_gw8yc")]
+[node name="VersionContainer44" parent="HSplitContainer/PanelContainer/MarginContainer/ScrollContainer/CardContainer" unique_id=1368840048 instance=ExtResource("2_gw8yc")]
 layout_mode = 2
 title = "4.4"
 
-[node name="VersionContainer43" parent="HSplitContainer/ScrollContainer/CardContainer" unique_id=1021360041 instance=ExtResource("2_gw8yc")]
+[node name="VersionContainer43" parent="HSplitContainer/PanelContainer/MarginContainer/ScrollContainer/CardContainer" unique_id=1021360041 instance=ExtResource("2_gw8yc")]
 layout_mode = 2
 title = "4.3"
 
-[node name="VersionContainer42" parent="HSplitContainer/ScrollContainer/CardContainer" unique_id=1969246424 instance=ExtResource("2_gw8yc")]
+[node name="VersionContainer42" parent="HSplitContainer/PanelContainer/MarginContainer/ScrollContainer/CardContainer" unique_id=1969246424 instance=ExtResource("2_gw8yc")]
 layout_mode = 2
 title = "4.2"
 
-[node name="VersionContainer41" parent="HSplitContainer/ScrollContainer/CardContainer" unique_id=634278289 instance=ExtResource("2_gw8yc")]
+[node name="VersionContainer41" parent="HSplitContainer/PanelContainer/MarginContainer/ScrollContainer/CardContainer" unique_id=634278289 instance=ExtResource("2_gw8yc")]
 layout_mode = 2
 title = "4.1"
 
-[node name="VersionContainer40" parent="HSplitContainer/ScrollContainer/CardContainer" unique_id=1372194774 instance=ExtResource("2_gw8yc")]
+[node name="VersionContainer40" parent="HSplitContainer/PanelContainer/MarginContainer/ScrollContainer/CardContainer" unique_id=1372194774 instance=ExtResource("2_gw8yc")]
 layout_mode = 2
 title = "4.0"
 
-[node name="PanelContainer" type="PanelContainer" parent="HSplitContainer" unique_id=1207972682]
-custom_minimum_size = Vector2(160, 0)
-layout_mode = 2
-size_flags_horizontal = 8
-size_flags_vertical = 3
-
-[node name="ScrollContainer" type="ScrollContainer" parent="HSplitContainer/PanelContainer" unique_id=1675369802]
+[node name="PanelContainer2" type="PanelContainer" parent="HSplitContainer" unique_id=1207972682]
+custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 
-[node name="MarginContainer" type="MarginContainer" parent="HSplitContainer/PanelContainer/ScrollContainer" unique_id=878528451]
+[node name="MarginContainer" type="MarginContainer" parent="HSplitContainer/PanelContainer2" unique_id=878528451]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-theme_override_constants/margin_left = 2
-theme_override_constants/margin_top = 2
-theme_override_constants/margin_right = 2
-theme_override_constants/margin_bottom = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
 
-[node name="DownloaderContainer" type="VBoxContainer" parent="HSplitContainer/PanelContainer/ScrollContainer/MarginContainer" unique_id=686502094]
+[node name="ScrollContainer" type="ScrollContainer" parent="HSplitContainer/PanelContainer2/MarginContainer" unique_id=1675369802]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="DownloaderContainer" type="VBoxContainer" parent="HSplitContainer/PanelContainer2/MarginContainer/ScrollContainer" unique_id=686502094]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-
-[node name="DownloadConfirm" parent="." unique_id=1392267383 instance=ExtResource("3_ajk1a")]
-visible = false
+theme_override_constants/separation = 5
 
 [connection signal="download" from="DownloadConfirm" to="." method="_on_download_confirm_download"]

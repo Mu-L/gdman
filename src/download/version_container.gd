@@ -7,15 +7,11 @@ const SOURCE_CARD: PackedScene = preload("uid://cvhkrjsovo0lf")
 @onready var card_container: VBoxContainer = $HBoxContainer/CardContainer
 
 func _ready() -> void:
-	for engine_id: String in DownloadSource.valid_version.get(title, []):
+	for engine_id: String in DownloadManager.valid_version.get(title, []):
 		var card: Control = SOURCE_CARD.instantiate()
 		card.engine_id = engine_id
 		card.download.connect(_on_download_card_download)
 		card_container.add_child(card)
-		var card_dotnet: Node = SOURCE_CARD.instantiate()
-		card_dotnet.engine_id = "%s-dotnet" % engine_id
-		card_dotnet.download.connect(_on_download_card_download)
-		card_container.add_child(card_dotnet)
 
 func switch_display(standard: bool, dotnet: bool, stable: bool, unstable: bool) -> void:
 	for card in card_container.get_children():

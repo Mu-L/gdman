@@ -15,12 +15,12 @@ var url_dict: Dictionary[String, String] = {}
 
 func _ready() -> void:
 	_load_source()
-	DownloadSource.source_loaded.connect(_load_source)
+	DownloadManager.source_loaded.connect(_load_source)
 
 func _load_source() -> void:
 	for ping_child: Control in ping_container.get_children():
 		ping_child.queue_free()
-	for source: String in DownloadSource.valid_source:
+	for source: String in DownloadManager.valid_source:
 		var ping_display: Control = PING_DISPLAY.instantiate()
 		ping_display.title = source
 		ping_container.add_child(ping_display)
@@ -42,7 +42,7 @@ func display(engine_id: String) -> void:
 			source_option.set_item_disabled(i, true)
 			var engine_info: EngineManager.EngineInfo = EngineManager.id_to_engine_info(engine_id)
 			var handled_id: String = engine_id.replace("-dotnet", "")
-			var url: String = DownloadSource.get_source_url(
+			var url: String = DownloadManager.get_source_url(
 				"%d.%d" % [engine_info.major_version, engine_info.minor_version],
 				handled_id,
 				engine_info.is_dotnet,

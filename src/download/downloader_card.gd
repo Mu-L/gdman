@@ -11,16 +11,21 @@ var uncompress_task_id: int = -1
 @onready var title_label: Label = $MarginContainer/VBoxContainer/TitleLabel
 @onready var progress_bar: ProgressBar = $MarginContainer/VBoxContainer/ProgressBar
 @onready var info_label: Label = $MarginContainer/VBoxContainer/InfoLabel
-@onready var cancel_button: Button = $MarginContainer/VBoxContainer/CancelButton
+@onready var cancel_button: Button = $MarginContainer/VBoxContainer/HBoxContainer/CancelButton
+@onready var close_button: Button = $MarginContainer/VBoxContainer/HBoxContainer/CloseButton
 @onready var http_request: HTTPRequest = $HTTPRequest
 @onready var timer: Timer = $Timer
 
 func _ready() -> void:
+	if DownloadManager.downloading_task.get(file_name, false):
+		queue_free()
+		return
+	DownloadManager.downloading_task[file_name] = true
 	tooltip_text = url
 	title_label.text = file_name
-	if DirAccess.make_dir_recursive_absolute(DownloadSource.DOWNLOAD_DIR) != OK:
+	if DirAccess.make_dir_recursive_absolute(DownloadManager.DOWNLOAD_DIR) != OK:
 		return
-	download_path = DownloadSource.DOWNLOAD_DIR.path_join("%s.zip" % file_name)
+	download_path = DownloadManager.DOWNLOAD_DIR.path_join("%s.zip" % file_name)
 	http_request.download_file = download_path
 	if http_request.request(url) != OK:
 		return
@@ -43,12 +48,6 @@ func _on_timer_timeout() -> void:
 	progress_bar.set_value_no_signal(float(downloaded) / float(total) * 99)
 	
 	
-func _on_cancel_button_pressed() -> void:
-	if http_request.get_http_client_status() == HTTPClient.STATUS_REQUESTING:
-		http_request.cancel_request()
-	queue_free()
-
-
 func _on_http_request_request_completed(result: int, response_code: int, _headers: PackedStringArray, _body: PackedByteArray) -> void:
 	if (result != HTTPRequest.RESULT_SUCCESS
 		or response_code != 200):
@@ -95,8 +94,19 @@ func _on_uncompressed() -> void:
 	WorkerThreadPool.wait_for_task_completion(uncompress_task_id)
 	info_label.text = "Completed"
 	progress_bar.set_value_no_signal(100)
-	cancel_button.text = "Close"
-	cancel_button.disabled = false
 	if (download_path != ""
 		and FileAccess.file_exists(download_path)):
 		OS.move_to_trash(ProjectSettings.globalize_path(download_path))
+	DownloadManager.downloading_task.erase(file_name)
+	close_button.disabled = false
+
+func _on_cancel_button_pressed() -> void:
+	http_request.cancel_request()
+	DownloadManager.downloading_task.erase(file_name)
+	info_label.text = "Canceled"
+	close_button.disabled = false
+	cancel_button.disabled = true
+
+
+func _on_close_button_pressed() -> void:
+	queue_free()

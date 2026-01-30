@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://dr3siyyotpypu" path="res://src/project/project_page.gd" id="1_ujekw"]
 [ext_resource type="Texture2D" uid="uid://bigyx4j1euktf" path="res://asset/icon/add.svg" id="2_8oi35"]
-[ext_resource type="Texture2D" uid="uid://cn7mvs1yvvohm" path="res://asset/icon/scan.svg" id="3_s6ogv"]
+[ext_resource type="Texture2D" uid="uid://bsia01kbmakd0" path="res://asset/icon/project.svg" id="2_s6ogv"]
 
 [node name="ProjectPage" type="VBoxContainer" unique_id=828684455]
 anchors_preset = 15
@@ -12,7 +12,23 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
+theme_override_constants/separation = 5
 script = ExtResource("1_ujekw")
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="." unique_id=37617909]
+layout_mode = 2
+theme_override_constants/separation = 1
+
+[node name="TextureRect" type="TextureRect" parent="HBoxContainer2" unique_id=1261756612]
+layout_mode = 2
+texture = ExtResource("2_s6ogv")
+expand_mode = 3
+stretch_mode = 5
+
+[node name="Label" type="Label" parent="HBoxContainer2" unique_id=259562586]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "Project"
 
 [node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=933162693]
 layout_mode = 2
@@ -21,6 +37,7 @@ layout_mode = 2
 layout_mode = 2
 text = "Import"
 icon = ExtResource("2_8oi35")
+expand_icon = true
 
 [node name="ImportFileDialog" type="FileDialog" parent="HBoxContainer/ImportButton" unique_id=584780497]
 oversampling_override = 1.0
@@ -34,27 +51,6 @@ filters = PackedStringArray("*.godot")
 folder_creation_enabled = false
 deleting_enabled = false
 
-[node name="ScanButton" type="Button" parent="HBoxContainer" unique_id=347899072]
-layout_mode = 2
-text = "Scan"
-icon = ExtResource("3_s6ogv")
-
-[node name="ScanFileDialog" type="FileDialog" parent="HBoxContainer/ScanButton" unique_id=988073660]
-oversampling_override = 1.0
-title = "Open a Directory"
-position = Vector2i(0, 36)
-dialog_hide_on_ok = true
-file_mode = 2
-display_mode = 1
-access = 2
-folder_creation_enabled = false
-deleting_enabled = false
-
-[node name="FilterInput" type="LineEdit" parent="HBoxContainer" unique_id=254899975]
-layout_mode = 2
-size_flags_horizontal = 3
-placeholder_text = "Filter"
-
 [node name="PanelContainer" type="PanelContainer" parent="." unique_id=639309613]
 layout_mode = 2
 size_flags_vertical = 3
@@ -67,20 +63,18 @@ size_flags_vertical = 3
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-theme_override_constants/margin_left = 5
-theme_override_constants/margin_top = 5
-theme_override_constants/margin_right = 5
-theme_override_constants/margin_bottom = 5
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
 
 [node name="CardContainer" type="GridContainer" parent="PanelContainer/ScrollContainer/MarginContainer" unique_id=1682402761]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-theme_override_constants/h_separation = 10
-theme_override_constants/v_separation = 10
+theme_override_constants/h_separation = 5
+theme_override_constants/v_separation = 5
 columns = 2
 
 [connection signal="pressed" from="HBoxContainer/ImportButton" to="." method="_on_import_button_pressed"]
 [connection signal="file_selected" from="HBoxContainer/ImportButton/ImportFileDialog" to="." method="_on_import_file_dialog_file_selected"]
-[connection signal="pressed" from="HBoxContainer/ScanButton" to="." method="_on_scan_button_pressed"]
-[connection signal="dir_selected" from="HBoxContainer/ScanButton/ScanFileDialog" to="." method="_on_scan_file_dialog_dir_selected"]

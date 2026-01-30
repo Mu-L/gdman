@@ -10,9 +10,9 @@ var is_stable: bool = false
 var is_dotnet: bool = false
 
 @onready var source_icon: TextureRect = $MarginContainer/HBoxContainer/SourceIcon
-@onready var name_label: Label = $MarginContainer/HBoxContainer/VBoxContainer/NameLabel
-@onready var id_label: Label = $MarginContainer/HBoxContainer/VBoxContainer/HBoxContainer/IDLabel
-@onready var unstable_icon: TextureRect = $MarginContainer/HBoxContainer/VBoxContainer/HBoxContainer/UnstableIcon
+@onready var name_label: Label = $MarginContainer/HBoxContainer/NameLabel
+@onready var id_label: Label = $MarginContainer/HBoxContainer/IDLabel
+@onready var unstable_icon: TextureRect = $MarginContainer/HBoxContainer/MarginContainer/UnstableIcon
 
 func _ready() -> void:
 	unstable_icon.hide()

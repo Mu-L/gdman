@@ -5,8 +5,7 @@ signal ping_result(ping_time: int)
 var start_time: int = 0
 
 func ping(url: String) -> void:
-	if get_http_client_status() == HTTPClient.STATUS_REQUESTING:
-		cancel_request()
+	cancel_request()
 	start_time = Time.get_ticks_msec()
 	if request(url, [], HTTPClient.METHOD_HEAD) != OK:
 		ping_result.emit(-1)

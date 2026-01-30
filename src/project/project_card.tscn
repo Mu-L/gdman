@@ -1,7 +1,8 @@
 [gd_scene format=3 uid="uid://cphby36r2gwsb"]
 
 [ext_resource type="Script" uid="uid://c6rjmq5tiptt1" path="res://src/project/project_card.gd" id="1_e88lg"]
-[ext_resource type="Texture2D" uid="uid://b4s86yj60klpo" path="res://asset/icon/godot.svg" id="2_e88lg"]
+[ext_resource type="Texture2D" uid="uid://b4s86yj60klpo" path="res://asset/icon/godot_big.svg" id="2_e88lg"]
+[ext_resource type="Texture2D" uid="uid://bu2rk28e26nqp" path="res://asset/icon/dotnet.svg" id="3_2b60s"]
 [ext_resource type="Texture2D" uid="uid://cq454lo24jwpx" path="res://asset/icon/delete.svg" id="4_7jvji"]
 [ext_resource type="PackedScene" uid="uid://bde5rj4u8f5h4" path="res://src/project/engine_option.tscn" id="5_62uvt"]
 [ext_resource type="Texture2D" uid="uid://hv0qw0fm1wga" path="res://asset/icon/directory.svg" id="7_2b60s"]
@@ -11,23 +12,24 @@
 [node name="ProjectCard" type="PanelContainer" unique_id=740053336]
 anchors_preset = 10
 anchor_right = 1.0
-offset_bottom = 64.0
 grow_horizontal = 2
 size_flags_horizontal = 3
 script = ExtResource("1_e88lg")
 
 [node name="MarginContainer" type="MarginContainer" parent="." unique_id=587044447]
 layout_mode = 2
-theme_override_constants/margin_left = 5
-theme_override_constants/margin_top = 5
-theme_override_constants/margin_right = 5
-theme_override_constants/margin_bottom = 5
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer" unique_id=1488955388]
 layout_mode = 2
+theme_override_constants/separation = 5
 
 [node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer" unique_id=902603703]
 layout_mode = 2
+theme_override_constants/separation = 5
 
 [node name="ProjectIcon" type="TextureRect" parent="MarginContainer/VBoxContainer/HBoxContainer" unique_id=1490471370]
 layout_mode = 2
@@ -38,35 +40,42 @@ stretch_mode = 5
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer" unique_id=54351935]
 layout_mode = 2
 size_flags_horizontal = 3
+theme_override_constants/separation = 1
 
 [node name="NameLabel" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer" unique_id=1109446791]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 30
 
-[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer" unique_id=268355962]
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer" unique_id=810747881]
 layout_mode = 2
 
-[node name="HBoxContainer2" type="HBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer" unique_id=810747881]
-layout_mode = 2
-
-[node name="VersionLabel" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer2" unique_id=1745847180]
+[node name="VersionLabel" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer" unique_id=1745847180]
 layout_mode = 2
 theme_override_font_sizes/font_size = 20
 text = "0.0"
 
-[node name="TimeLabel" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer2" unique_id=1544632113]
+[node name="TimeLabel" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer" unique_id=1544632113]
+modulate = Color(1, 1, 1, 0.53333336)
 layout_mode = 2
 size_flags_horizontal = 0
-theme_override_font_sizes/font_size = 20
+theme_override_font_sizes/font_size = 15
 text = "1970/1/1-0:0:0"
+
+[node name="DotnetIcon" type="TextureRect" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer" unique_id=1135958525]
+layout_mode = 2
+texture = ExtResource("3_2b60s")
+expand_mode = 3
+stretch_mode = 5
 
 [node name="VBoxContainer2" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer" unique_id=1105241886]
 layout_mode = 2
+theme_override_constants/separation = 5
 
 [node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2" unique_id=2130474205]
 layout_mode = 2
 size_flags_vertical = 3
+theme_override_constants/separation = 5
 
 [node name="EditorButton" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer" unique_id=1047668864]
 layout_mode = 2
@@ -87,6 +96,7 @@ layout_mode = 2
 
 [node name="HBoxContainer2" type="HBoxContainer" parent="MarginContainer/VBoxContainer" unique_id=1704252676]
 layout_mode = 2
+theme_override_constants/separation = 2
 
 [node name="PanelContainer" type="PanelContainer" parent="MarginContainer/VBoxContainer/HBoxContainer2" unique_id=2031728716]
 layout_mode = 2
@@ -95,16 +105,18 @@ size_flags_horizontal = 3
 [node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer/HBoxContainer2/PanelContainer" unique_id=479392381]
 layout_mode = 2
 theme_override_constants/margin_left = 5
-theme_override_constants/margin_top = 0
+theme_override_constants/margin_top = 1
 theme_override_constants/margin_right = 5
-theme_override_constants/margin_bottom = 1
+theme_override_constants/margin_bottom = 3
 
 [node name="PathLabel" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer2/PanelContainer/MarginContainer" unique_id=1589666230]
+modulate = Color(1, 1, 1, 0.53333336)
 layout_mode = 2
 theme_override_font_sizes/font_size = 15
+text = "path/to/project"
 
 [node name="PathButton" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer2" unique_id=310988315]
-custom_minimum_size = Vector2(23, 15)
+custom_minimum_size = Vector2(26, 15)
 layout_mode = 2
 icon = ExtResource("7_2b60s")
 icon_alignment = 1
@@ -112,9 +124,10 @@ expand_icon = true
 
 [node name="HBoxContainer3" type="HBoxContainer" parent="MarginContainer/VBoxContainer" unique_id=191042407]
 layout_mode = 2
+theme_override_constants/separation = 20
 
 [node name="DeleteIcon" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer3" unique_id=449926311]
-custom_minimum_size = Vector2(30, 30)
+custom_minimum_size = Vector2(22, 22)
 layout_mode = 2
 icon = ExtResource("4_7jvji")
 icon_alignment = 1
@@ -128,5 +141,9 @@ size_flags_horizontal = 3
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
+theme_override_constants/separation = 5
+alignment = 2
 
 [connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer/EngineButton" to="." method="_on_engine_button_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer2/PathButton" to="." method="_on_path_button_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer3/DeleteIcon" to="." method="_on_delete_icon_pressed"]

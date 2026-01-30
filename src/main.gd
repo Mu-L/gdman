@@ -1,7 +1,6 @@
-extends PanelContainer
+extends ColorRect
 
-@onready var page_container: TabContainer = $HBoxContainer/PageContainer
-
+@onready var page_container: TabContainer = $MarginContainer/HBoxContainer/PageContainer
 
 func _on_project_button_pressed() -> void:
 	page_container.current_tab = 0

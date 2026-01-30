@@ -1,5 +1,6 @@
 [gd_scene format=3 uid="uid://btxvmrjs2fqfi"]
 
+[ext_resource type="Theme" uid="uid://m2yvtxw352cj" path="res://src/theme/default_theme.tres" id="1_mgm53"]
 [ext_resource type="Script" uid="uid://hvb7frhvh2aa" path="res://src/main.gd" id="2_mgm53"]
 [ext_resource type="Texture2D" uid="uid://bsia01kbmakd0" path="res://asset/icon/project.svg" id="3_uewes"]
 [ext_resource type="Texture2D" uid="uid://ccmwlrli63fhi" path="res://asset/icon/engine.svg" id="4_kqbth"]
@@ -10,7 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://cipjvpn3l8a48" path="res://src/project/project_page.tscn" id="8_tb146"]
 [ext_resource type="PackedScene" uid="uid://cq7qp7e00w6ol" path="res://src/download/download_page.tscn" id="9_e7lu8"]
 
-[node name="Main" type="PanelContainer" unique_id=1415400350]
+[node name="Main" type="ColorRect" unique_id=1442228713]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -18,15 +19,30 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
+theme = ExtResource("1_mgm53")
+color = Color(0.2, 0.2, 0.2, 1)
 script = ExtResource("2_mgm53")
 
-[node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=805635866]
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=1939648265]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer" unique_id=805635866]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="SideBar" type="VBoxContainer" parent="MarginContainer/HBoxContainer" unique_id=1036997934]
 layout_mode = 2
 
-[node name="SideBar" type="VBoxContainer" parent="HBoxContainer" unique_id=1036997934]
-layout_mode = 2
-
-[node name="ProjectButton" type="Button" parent="HBoxContainer/SideBar" unique_id=339599510]
+[node name="ProjectButton" type="Button" parent="MarginContainer/HBoxContainer/SideBar" unique_id=339599510]
 layout_mode = 2
 text = "Project"
 icon = ExtResource("3_uewes")
@@ -34,7 +50,7 @@ icon_alignment = 1
 vertical_icon_alignment = 0
 expand_icon = true
 
-[node name="EngineButton" type="Button" parent="HBoxContainer/SideBar" unique_id=261578872]
+[node name="EngineButton" type="Button" parent="MarginContainer/HBoxContainer/SideBar" unique_id=261578872]
 layout_mode = 2
 text = "Engine"
 icon = ExtResource("4_kqbth")
@@ -42,7 +58,7 @@ icon_alignment = 1
 vertical_icon_alignment = 0
 expand_icon = true
 
-[node name="DownloadButton" type="Button" parent="HBoxContainer/SideBar" unique_id=57152139]
+[node name="DownloadButton" type="Button" parent="MarginContainer/HBoxContainer/SideBar" unique_id=57152139]
 layout_mode = 2
 text = "Download"
 icon = ExtResource("5_srxbw")
@@ -50,11 +66,11 @@ icon_alignment = 1
 vertical_icon_alignment = 0
 expand_icon = true
 
-[node name="Pass" type="Control" parent="HBoxContainer/SideBar" unique_id=1803702654]
+[node name="Pass" type="Control" parent="MarginContainer/HBoxContainer/SideBar" unique_id=1803702654]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="SettingButton" type="Button" parent="HBoxContainer/SideBar" unique_id=523428525]
+[node name="SettingButton" type="Button" parent="MarginContainer/HBoxContainer/SideBar" unique_id=523428525]
 layout_mode = 2
 text = "Setting"
 icon = ExtResource("6_d3u4l")
@@ -62,7 +78,7 @@ icon_alignment = 1
 vertical_icon_alignment = 0
 expand_icon = true
 
-[node name="AboutButton" type="Button" parent="HBoxContainer/SideBar" unique_id=2142396541]
+[node name="AboutButton" type="Button" parent="MarginContainer/HBoxContainer/SideBar" unique_id=2142396541]
 layout_mode = 2
 text = "About"
 icon = ExtResource("7_mlv6i")
@@ -70,29 +86,29 @@ icon_alignment = 1
 vertical_icon_alignment = 0
 expand_icon = true
 
-[node name="PageContainer" type="TabContainer" parent="HBoxContainer" unique_id=1190496297]
+[node name="PageContainer" type="TabContainer" parent="MarginContainer/HBoxContainer" unique_id=1190496297]
 layout_mode = 2
 size_flags_horizontal = 3
 current_tab = 0
 tabs_visible = false
 
-[node name="ProjectPage" parent="HBoxContainer/PageContainer" unique_id=828684455 instance=ExtResource("8_tb146")]
+[node name="ProjectPage" parent="MarginContainer/HBoxContainer/PageContainer" unique_id=828684455 instance=ExtResource("8_tb146")]
 layout_mode = 2
 metadata/_tab_index = 0
 
-[node name="EnginePage" parent="HBoxContainer/PageContainer" unique_id=1313993800 instance=ExtResource("8_kf8lf")]
+[node name="EnginePage" parent="MarginContainer/HBoxContainer/PageContainer" unique_id=1313993800 instance=ExtResource("8_kf8lf")]
 visible = false
 layout_mode = 2
 size_flags_vertical = 3
 metadata/_tab_index = 1
 
-[node name="DownloadPage" parent="HBoxContainer/PageContainer" unique_id=1939612761 instance=ExtResource("9_e7lu8")]
+[node name="DownloadPage" parent="MarginContainer/HBoxContainer/PageContainer" unique_id=1939612761 instance=ExtResource("9_e7lu8")]
 visible = false
 layout_mode = 2
 metadata/_tab_index = 2
 
-[connection signal="pressed" from="HBoxContainer/SideBar/ProjectButton" to="." method="_on_project_button_pressed"]
-[connection signal="pressed" from="HBoxContainer/SideBar/EngineButton" to="." method="_on_engine_button_pressed"]
-[connection signal="pressed" from="HBoxContainer/SideBar/DownloadButton" to="." method="_on_download_button_pressed"]
-[connection signal="pressed" from="HBoxContainer/SideBar/SettingButton" to="." method="_on_setting_button_pressed"]
-[connection signal="pressed" from="HBoxContainer/SideBar/AboutButton" to="." method="_on_about_button_pressed"]
+[connection signal="pressed" from="MarginContainer/HBoxContainer/SideBar/ProjectButton" to="." method="_on_project_button_pressed"]
+[connection signal="pressed" from="MarginContainer/HBoxContainer/SideBar/EngineButton" to="." method="_on_engine_button_pressed"]
+[connection signal="pressed" from="MarginContainer/HBoxContainer/SideBar/DownloadButton" to="." method="_on_download_button_pressed"]
+[connection signal="pressed" from="MarginContainer/HBoxContainer/SideBar/SettingButton" to="." method="_on_setting_button_pressed"]
+[connection signal="pressed" from="MarginContainer/HBoxContainer/SideBar/AboutButton" to="." method="_on_about_button_pressed"]

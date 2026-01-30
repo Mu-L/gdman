@@ -25,6 +25,7 @@ signal source_loaded()
 var source: Dictionary = {}
 var valid_version: Dictionary[String, Array] = {}
 var valid_source: Array[String] = []
+var downloading_task: Dictionary[String, bool] = {}
 
 func _ready() -> void:
 	load_source()
@@ -67,10 +68,11 @@ func _add_source(base_version: String, id: String, build_type: String, source_na
 		source[base_version][id][build_type] = {}
 	source[base_version][id][build_type][source_name] = url
 	# Record valid versions
+	var handled_id: String = id if build_type == BUILD_STANDARD else "%s-dotnet" % id
 	if not valid_version.has(base_version):
 		valid_version[base_version] = []
-	if id not in valid_version[base_version]:
-		valid_version[base_version].append(id)
+	if handled_id not in valid_version[base_version]:
+		valid_version[base_version].append(handled_id)
 	# Record valid sources
 	if source_name not in valid_source:
 		valid_source.append(source_name)

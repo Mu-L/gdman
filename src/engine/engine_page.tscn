@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://cwn383vbptm1q"]
 
 [ext_resource type="Script" uid="uid://ci4ad3t5xmvox" path="res://src/engine/engine_page.gd" id="1_2a3wf"]
+[ext_resource type="Texture2D" uid="uid://ccmwlrli63fhi" path="res://asset/icon/engine.svg" id="2_ulk4p"]
 
 [node name="EnginePage" type="VBoxContainer" unique_id=1313993800]
 anchors_preset = 15
@@ -8,56 +9,75 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_constants/separation = 5
 script = ExtResource("1_2a3wf")
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="." unique_id=92740677]
+layout_mode = 2
+theme_override_constants/separation = 1
+
+[node name="TextureRect" type="TextureRect" parent="HBoxContainer2" unique_id=985972921]
+layout_mode = 2
+texture = ExtResource("2_ulk4p")
+expand_mode = 3
+stretch_mode = 5
+
+[node name="Label" type="Label" parent="HBoxContainer2" unique_id=563384693]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "Engine"
 
 [node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=1917300488]
 layout_mode = 2
+theme_override_constants/separation = 5
 
 [node name="StandardCheck" type="CheckBox" parent="HBoxContainer" unique_id=235235217]
 layout_mode = 2
+button_pressed = true
 text = "Standard"
+flat = true
 
 [node name="DotnetCheck" type="CheckBox" parent="HBoxContainer" unique_id=2022638552]
 layout_mode = 2
+button_pressed = true
 text = ".NET"
+flat = true
 
 [node name="VSeparator" type="VSeparator" parent="HBoxContainer" unique_id=1260657796]
 layout_mode = 2
 
 [node name="StableCheck" type="CheckBox" parent="HBoxContainer" unique_id=1863307986]
 layout_mode = 2
+button_pressed = true
 text = "Stable"
+flat = true
 
 [node name="UnstableCheck" type="CheckBox" parent="HBoxContainer" unique_id=1273763945]
 layout_mode = 2
 text = "Unstable"
-
-[node name="Pass" type="Control" parent="HBoxContainer" unique_id=1247439597]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="RefreshButton" type="Button" parent="HBoxContainer" unique_id=902004397]
-layout_mode = 2
-text = "Refresh"
-
-[node name="HSeparator" type="HSeparator" parent="." unique_id=1030728181]
-layout_mode = 2
+flat = true
 
 [node name="PanelContainer" type="PanelContainer" parent="." unique_id=992382484]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="MarginContainer" type="MarginContainer" parent="PanelContainer" unique_id=741907730]
-layout_mode = 2
-
-[node name="ScrollContainer" type="ScrollContainer" parent="PanelContainer/MarginContainer" unique_id=616797287]
+[node name="ScrollContainer" type="ScrollContainer" parent="PanelContainer" unique_id=616797287]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="CardContainer" type="GridContainer" parent="PanelContainer/MarginContainer/ScrollContainer" unique_id=831471754]
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer/ScrollContainer" unique_id=741907730]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-columns = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
 
-[connection signal="pressed" from="HBoxContainer/RefreshButton" to="." method="_on_refresh_button_pressed"]
+[node name="CardContainer" type="GridContainer" parent="PanelContainer/ScrollContainer/MarginContainer" unique_id=831471754]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/h_separation = 5
+theme_override_constants/v_separation = 5
+columns = 2

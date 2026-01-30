@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://cvhkrjsovo0lf"]
 
 [ext_resource type="Script" uid="uid://b1y50kwd8yme3" path="res://src/download/source_card.gd" id="1_h676o"]
-[ext_resource type="Texture2D" uid="uid://b4s86yj60klpo" path="res://asset/icon/godot.svg" id="2_0lsju"]
+[ext_resource type="Texture2D" uid="uid://b4s86yj60klpo" path="res://asset/icon/godot_big.svg" id="2_0lsju"]
 [ext_resource type="Texture2D" uid="uid://f3w2u4j2iw1k" path="res://asset/icon/unstable.svg" id="2_vno5b"]
 [ext_resource type="Texture2D" uid="uid://ddqhbrd1han2p" path="res://asset/icon/download.svg" id="4_cieoe"]
 
@@ -25,35 +25,30 @@ layout_mode = 2
 theme_override_constants/separation = 5
 
 [node name="SourceIcon" type="TextureRect" parent="MarginContainer/HBoxContainer" unique_id=1698356943]
-custom_minimum_size = Vector2(0, 50)
 layout_mode = 2
 texture = ExtResource("2_0lsju")
 expand_mode = 3
 stretch_mode = 5
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/HBoxContainer" unique_id=1919212850]
-layout_mode = 2
-theme_override_constants/separation = 0
-alignment = 1
-
-[node name="NameLabel" type="Label" parent="MarginContainer/HBoxContainer/VBoxContainer" unique_id=1143017360]
+[node name="NameLabel" type="Label" parent="MarginContainer/HBoxContainer" unique_id=1143017360]
 layout_mode = 2
 theme_override_font_sizes/font_size = 20
 text = "0.0.0"
 vertical_alignment = 1
 
-[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/HBoxContainer/VBoxContainer" unique_id=957932650]
-layout_mode = 2
-theme_override_constants/separation = 5
-
-[node name="IDLabel" type="Label" parent="MarginContainer/HBoxContainer/VBoxContainer/HBoxContainer" unique_id=1549217442]
+[node name="IDLabel" type="Label" parent="MarginContainer/HBoxContainer" unique_id=1549217442]
 modulate = Color(1, 1, 1, 0.6)
 layout_mode = 2
 theme_override_font_sizes/font_size = 10
 text = "0.0.0-stable-dotnet"
 vertical_alignment = 1
 
-[node name="UnstableIcon" type="TextureRect" parent="MarginContainer/HBoxContainer/VBoxContainer/HBoxContainer" unique_id=2018716420]
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/HBoxContainer" unique_id=341143519]
+layout_mode = 2
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="UnstableIcon" type="TextureRect" parent="MarginContainer/HBoxContainer/MarginContainer" unique_id=2018716420]
 layout_mode = 2
 texture = ExtResource("2_vno5b")
 expand_mode = 3
@@ -63,16 +58,11 @@ stretch_mode = 5
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="MarginContainer2" type="MarginContainer" parent="MarginContainer/HBoxContainer" unique_id=422190765]
-layout_mode = 2
-theme_override_constants/margin_top = 5
-theme_override_constants/margin_bottom = 5
-
-[node name="DownloadButton" type="Button" parent="MarginContainer/HBoxContainer/MarginContainer2" unique_id=805701093]
-custom_minimum_size = Vector2(40, 0)
+[node name="DownloadButton" type="Button" parent="MarginContainer/HBoxContainer" unique_id=805701093]
+custom_minimum_size = Vector2(28, 0)
 layout_mode = 2
 icon = ExtResource("4_cieoe")
 icon_alignment = 1
 expand_icon = true
 
-[connection signal="pressed" from="MarginContainer/HBoxContainer/MarginContainer2/DownloadButton" to="." method="_on_download_button_pressed"]
+[connection signal="pressed" from="MarginContainer/HBoxContainer/DownloadButton" to="." method="_on_download_button_pressed"]

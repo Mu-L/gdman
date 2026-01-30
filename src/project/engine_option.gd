@@ -13,5 +13,5 @@ func select_id(engine_id: String) -> void:
 
 func load_engine() -> void:
 	clear()
-	for engine: EngineManager.LocalEngine in EngineManager.local_engines:
-		add_item(engine.info.id)
+	for engine_id: String in EngineManager.local_engines.keys():
+		add_item(engine_id)

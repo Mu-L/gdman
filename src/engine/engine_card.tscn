@@ -1,15 +1,16 @@
 [gd_scene format=3 uid="uid://bu4qc2q2pjb0t"]
 
 [ext_resource type="Script" uid="uid://pjng0a2nwkpq" path="res://src/engine/engine_card.gd" id="1_mnpmw"]
-[ext_resource type="Texture2D" uid="uid://b4s86yj60klpo" path="res://asset/icon/godot.svg" id="2_h676o"]
+[ext_resource type="Texture2D" uid="uid://b4s86yj60klpo" path="res://asset/icon/godot_big.svg" id="2_h676o"]
 [ext_resource type="Texture2D" uid="uid://bvdq0a23od033" path="res://asset/icon/run.svg" id="2_vno5b"]
 [ext_resource type="Texture2D" uid="uid://f3w2u4j2iw1k" path="res://asset/icon/unstable.svg" id="4_cieoe"]
 [ext_resource type="Texture2D" uid="uid://cq454lo24jwpx" path="res://asset/icon/delete.svg" id="5_h676o"]
 [ext_resource type="Texture2D" uid="uid://hv0qw0fm1wga" path="res://asset/icon/directory.svg" id="6_mnpmw"]
 
 [node name="EngineCard" type="PanelContainer" unique_id=1647816841]
-offset_right = 800.0
-offset_bottom = 104.0
+anchors_preset = 10
+anchor_right = 1.0
+grow_horizontal = 2
 size_flags_horizontal = 3
 size_flags_vertical = 0
 script = ExtResource("1_mnpmw")
@@ -58,7 +59,7 @@ theme_override_font_sizes/font_size = 12
 text = "0.0"
 
 [node name="IDLabel" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer2" unique_id=2091161799]
-modulate = Color(1, 1, 1, 0.6)
+modulate = Color(1, 1, 1, 0.53333336)
 layout_mode = 2
 theme_override_font_sizes/font_size = 12
 text = "0.0.0-stable-dotnet"
@@ -70,15 +71,18 @@ expand_mode = 3
 stretch_mode = 5
 
 [node name="RunButton" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer" unique_id=431869054]
+custom_minimum_size = Vector2(52, 0)
 layout_mode = 2
 icon = ExtResource("2_vno5b")
+icon_alignment = 1
+expand_icon = true
 
 [node name="HBoxContainer2" type="HBoxContainer" parent="MarginContainer/VBoxContainer" unique_id=1204657544]
 layout_mode = 2
-theme_override_constants/separation = 1
+theme_override_constants/separation = 3
 
 [node name="DeleteButton" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer2" unique_id=1919614049]
-custom_minimum_size = Vector2(23, 0)
+custom_minimum_size = Vector2(26, 0)
 layout_mode = 2
 icon = ExtResource("5_h676o")
 icon_alignment = 1
@@ -91,11 +95,12 @@ size_flags_horizontal = 3
 [node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer/HBoxContainer2/PanelContainer" unique_id=763747897]
 layout_mode = 2
 theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 1
 theme_override_constants/margin_right = 5
-theme_override_constants/margin_bottom = 1
+theme_override_constants/margin_bottom = 3
 
 [node name="PathLabel" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer2/PanelContainer/MarginContainer" unique_id=1756915805]
-modulate = Color(1, 1, 1, 0.6)
+modulate = Color(1, 1, 1, 0.53333336)
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 15
@@ -105,7 +110,7 @@ clip_text = true
 text_overrun_behavior = 3
 
 [node name="PathButton" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer2" unique_id=411695749]
-custom_minimum_size = Vector2(23, 0)
+custom_minimum_size = Vector2(26, 0)
 layout_mode = 2
 icon = ExtResource("6_mnpmw")
 icon_alignment = 1

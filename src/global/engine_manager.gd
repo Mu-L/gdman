@@ -52,7 +52,7 @@ func load_engines() -> void:
 		local_engine.info = engine_info
 		local_engine.dir_path = ProjectSettings.globalize_path(ENGINE_DIR.path_join(dir_name))
 		local_engine.executable_path = ProjectSettings.globalize_path(_get_executable_path(dir_name))
-		local_engines.set(engine_info.id, local_engine)
+		local_engines[engine_info.id] = local_engine
 
 func id_to_engine_info(engine_id: String) -> EngineInfo:
 	if _cache_engine_info.has(engine_id):

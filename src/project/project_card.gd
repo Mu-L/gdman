@@ -7,8 +7,9 @@ var prefer_engine_id: String = ""
 
 @onready var project_icon: TextureRect = $MarginContainer/VBoxContainer/HBoxContainer/ProjectIcon
 @onready var name_label: Label = $MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/NameLabel
-@onready var version_label: Label = $MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer2/VersionLabel
-@onready var time_label: Label = $MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer2/TimeLabel
+@onready var version_label: Label = $MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer/VersionLabel
+@onready var time_label: Label = $MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer/TimeLabel
+@onready var dotnet_icon: TextureRect = $MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer/DotnetIcon
 @onready var path_label: Label = $MarginContainer/VBoxContainer/HBoxContainer2/PanelContainer/MarginContainer/PathLabel
 @onready var tag_container: HBoxContainer = $MarginContainer/VBoxContainer/HBoxContainer3/ScrollContainer/TagContainer
 @onready var engine_option: OptionButton = $MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/EngineOption
@@ -26,7 +27,8 @@ func _ready() -> void:
 		var img: Image = Image.new()
 		if img.load(icon_path) == OK:
 			project_icon.texture = ImageTexture.create_from_image(img)
-	version_label.text = "Version: %s" % _get_project_version(config)
+	version_label.text = _get_project_version(config)
+	dotnet_icon.visible = config.has_section("dotnet")
 	var time_dict: Dictionary = Time.get_datetime_dict_from_unix_time(
 		_get_directory_last_edited_time(project_path))
 	time_label.text = "%d/%d/%d-%0d:%0d:%0d" % [
@@ -37,6 +39,7 @@ func _ready() -> void:
 		time_dict.get("minute", 0),
 		time_dict.get("second", 0),
 	]
+	path_label.text = project_path
 	engine_option.select_id(prefer_engine_id)
 	
 func _get_project_version(config: ConfigFile) -> String:
@@ -142,4 +145,12 @@ func _on_engine_button_pressed() -> void:
 		engine_option.get_item_text(engine_option.selected), null)
 	if engine == null:
 		return
-	OS.open_with_program(engine.executable_path, [project_path])
+	OS.open_with_program(engine.executable_path, [project_path.path_join("project.godot")])
+	print(engine.info.id)
+	ProjectManager.project_info[project_path].prefer_engine_id = engine.info.id
+	ProjectManager.store_config()
+
+
+func _on_delete_icon_pressed() -> void:
+	ProjectManager.project_info.erase(project_path)
+	queue_free()

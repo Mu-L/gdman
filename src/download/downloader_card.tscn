@@ -5,35 +5,50 @@
 [node name="DownloaderCard" type="PanelContainer" unique_id=1990204292]
 anchors_preset = 10
 anchor_right = 1.0
-offset_bottom = 116.0
 grow_horizontal = 2
 script = ExtResource("1_7mnk0")
 
 [node name="MarginContainer" type="MarginContainer" parent="." unique_id=1454216049]
 layout_mode = 2
-theme_override_constants/margin_left = 2
-theme_override_constants/margin_top = 2
-theme_override_constants/margin_right = 2
-theme_override_constants/margin_bottom = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer" unique_id=613592775]
 layout_mode = 2
 
 [node name="TitleLabel" type="Label" parent="MarginContainer/VBoxContainer" unique_id=1815212366]
 layout_mode = 2
+theme_override_font_sizes/font_size = 15
 text = "version"
 
 [node name="ProgressBar" type="ProgressBar" parent="MarginContainer/VBoxContainer" unique_id=741040197]
 layout_mode = 2
+theme_override_font_sizes/font_size = 10
 
 [node name="InfoLabel" type="Label" parent="MarginContainer/VBoxContainer" unique_id=2118462129]
 layout_mode = 2
+theme_override_font_sizes/font_size = 10
 text = "Downloading..."
 
-[node name="CancelButton" type="Button" parent="MarginContainer/VBoxContainer" unique_id=1919645693]
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer" unique_id=1613973105]
 layout_mode = 2
+theme_override_constants/separation = 5
+
+[node name="CancelButton" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer" unique_id=1919645693]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 10
 disabled = true
 text = "Cancel"
+
+[node name="CloseButton" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer" unique_id=1129653929]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 10
+disabled = true
+text = "Close"
 
 [node name="HTTPRequest" type="HTTPRequest" parent="." unique_id=25683267]
 
@@ -41,6 +56,7 @@ text = "Cancel"
 wait_time = 0.2
 
 [connection signal="uncompressed" from="." to="." method="_on_uncompressed"]
-[connection signal="pressed" from="MarginContainer/VBoxContainer/CancelButton" to="." method="_on_cancel_button_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer/CancelButton" to="." method="_on_cancel_button_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer/CloseButton" to="." method="_on_close_button_pressed"]
 [connection signal="request_completed" from="HTTPRequest" to="." method="_on_http_request_request_completed"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

@@ -18,11 +18,7 @@ func _ready() -> void:
 
 func ping(url: String) -> void:
 	tooltip_text = url
-	var status: HTTPClient.Status = http_request.get_http_client_status()
-	if (status == HTTPClient.STATUS_RESOLVING or
-		status == HTTPClient.STATUS_CONNECTING or
-		status == HTTPClient.STATUS_REQUESTING):
-		http_request.cancel_request()
+	http_request.cancel_request()
 	start_time = Time.get_ticks_msec()
 	ping_label.text = "..."
 	texture_rect.modulate = Color.BLUE

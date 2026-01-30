@@ -4,12 +4,12 @@ const DOWNLOADER_CARD: PackedScene = preload("uid://bgk1814jgblda")
 
 @onready var download_confirm: ConfirmationDialog = $DownloadConfirm
 
-@onready var standard_check: CheckBox = $TopBarContainer/OptionContainer/StandardCheck
-@onready var dotnet_check: CheckBox = $TopBarContainer/OptionContainer/DotnetCheck
-@onready var stable_check: CheckBox = $TopBarContainer/OptionContainer/StableCheck
-@onready var unstable_check: CheckBox = $TopBarContainer/OptionContainer/UnstableCheck
+@onready var standard_check: CheckBox = $OptionContainer/StandardCheck
+@onready var dotnet_check: CheckBox = $OptionContainer/DotnetCheck
+@onready var stable_check: CheckBox = $OptionContainer/StableCheck
+@onready var unstable_check: CheckBox = $OptionContainer/UnstableCheck
 
-@onready var downloader_container: VBoxContainer = $HSplitContainer/PanelContainer/ScrollContainer/MarginContainer/DownloaderContainer
+@onready var downloader_container: VBoxContainer = $HSplitContainer/PanelContainer2/MarginContainer/ScrollContainer/DownloaderContainer
 
 func _ready() -> void:
 	var version_containers: Array[Node] = get_tree().get_nodes_in_group("download_version_container")

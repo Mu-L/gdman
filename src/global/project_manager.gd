@@ -26,7 +26,10 @@ func load_config() -> void:
 		return
 	project_info.clear()
 	for path: String in config.get_sections():
-		add_project(path)
+		var project: ProjectInfo = ProjectInfo.new()
+		project.path = path
+		project.prefer_engine_id = config.get_value(path, "prefer_engine_id", "")
+		project_info[path] = project
 
 func add_project(dir_path: String) -> void:
 	var config: ConfigFile = ConfigFile.new()
@@ -34,10 +37,11 @@ func add_project(dir_path: String) -> void:
 		return
 	var project: ProjectInfo = ProjectInfo.new()
 	project.path = dir_path
-	project.prefer_engine_id = ""
-	for engine: EngineManager.LocalEngine in EngineManager.local_engines:
-		if engine.info.id.begins_with(project.version):
-			project.prefer_engine_id = engine.info.id
-			break
-	project_info.set(dir_path, project)
+	var project_version: String = config.get_value("application", "config/features", [""])[0]
+	if project_version != "":
+		for engine_id: String in EngineManager.local_engines.keys():
+			if engine_id.begins_with(project_version):
+				project.prefer_engine_id = engine_id
+				break
+	project_info[dir_path] = project
 	store_config()
