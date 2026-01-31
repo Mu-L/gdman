@@ -24,7 +24,7 @@ theme_override_constants/margin_bottom = 10
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer" unique_id=1113786506]
 layout_mode = 2
-theme_override_constants/separation = 5
+theme_override_constants/separation = 10
 
 [node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer" unique_id=1087895990]
 layout_mode = 2
@@ -41,12 +41,9 @@ layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/separation = 1
 
-[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer" unique_id=819268403]
+[node name="NameLabel" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer" unique_id=897098581]
 layout_mode = 2
-
-[node name="NameLabel" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer" unique_id=897098581]
-layout_mode = 2
-theme_override_font_sizes/font_size = 24
+theme_override_font_sizes/font_size = 25
 text = "0.0.0 Stable"
 
 [node name="HBoxContainer2" type="HBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer" unique_id=2064721061]
@@ -55,13 +52,13 @@ theme_override_constants/separation = 5
 
 [node name="VersionLabel" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer2" unique_id=1360493292]
 layout_mode = 2
-theme_override_font_sizes/font_size = 12
+theme_override_font_sizes/font_size = 15
 text = "0.0"
 
 [node name="IDLabel" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer2" unique_id=2091161799]
-modulate = Color(1, 1, 1, 0.53333336)
+modulate = Color(1, 1, 1, 0.49803922)
 layout_mode = 2
-theme_override_font_sizes/font_size = 12
+theme_override_font_sizes/font_size = 15
 text = "0.0.0-stable-dotnet"
 
 [node name="UnstableIcon" type="TextureRect" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer2" unique_id=15117629]
@@ -71,7 +68,7 @@ expand_mode = 3
 stretch_mode = 5
 
 [node name="RunButton" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer" unique_id=431869054]
-custom_minimum_size = Vector2(52, 0)
+custom_minimum_size = Vector2(58, 0)
 layout_mode = 2
 icon = ExtResource("2_vno5b")
 icon_alignment = 1
@@ -79,38 +76,25 @@ expand_icon = true
 
 [node name="HBoxContainer2" type="HBoxContainer" parent="MarginContainer/VBoxContainer" unique_id=1204657544]
 layout_mode = 2
-theme_override_constants/separation = 3
+theme_override_constants/separation = 5
 
 [node name="DeleteButton" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer2" unique_id=1919614049]
-custom_minimum_size = Vector2(26, 0)
+custom_minimum_size = Vector2(30, 0)
 layout_mode = 2
 icon = ExtResource("5_h676o")
 icon_alignment = 1
 expand_icon = true
 
-[node name="PanelContainer" type="PanelContainer" parent="MarginContainer/VBoxContainer/HBoxContainer2" unique_id=148825489]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer/HBoxContainer2/PanelContainer" unique_id=763747897]
-layout_mode = 2
-theme_override_constants/margin_left = 5
-theme_override_constants/margin_top = 1
-theme_override_constants/margin_right = 5
-theme_override_constants/margin_bottom = 3
-
-[node name="PathLabel" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer2/PanelContainer/MarginContainer" unique_id=1756915805]
-modulate = Color(1, 1, 1, 0.53333336)
+[node name="PathLine" type="LineEdit" parent="MarginContainer/VBoxContainer/HBoxContainer2" unique_id=898994183]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 15
 text = "path/to/engine"
-vertical_alignment = 1
-clip_text = true
-text_overrun_behavior = 3
+placeholder_text = "path/to/engine"
+editable = false
 
 [node name="PathButton" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer2" unique_id=411695749]
-custom_minimum_size = Vector2(26, 0)
+custom_minimum_size = Vector2(30, 0)
 layout_mode = 2
 icon = ExtResource("6_mnpmw")
 icon_alignment = 1

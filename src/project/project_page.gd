@@ -22,7 +22,7 @@ func _ready() -> void:
 
 
 func _on_import_button_pressed() -> void:
-	import_file_dialog.popup_centered()
+	import_file_dialog.popup_file_dialog()
 
 func _on_import_file_dialog_file_selected(path: String) -> void:
 	if not path.ends_with("project.godot"):
@@ -38,7 +38,3 @@ func _on_import_file_dialog_file_selected(path: String) -> void:
 	card.project_path = project.path
 	card.prefer_engine_id = project.prefer_engine_id
 	card_container.add_child(card)
-	
-	
-func _on_scan_file_dialog_dir_selected(dir: String) -> void:
-	print(dir)

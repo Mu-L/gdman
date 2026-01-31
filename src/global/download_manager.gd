@@ -15,7 +15,7 @@ const SOURCE_TEMPLATE: Dictionary = {
 	}
 }
 
-const DOWNLOAD_DIR: String = "user://download"
+const DOWNLOAD_DIR: String = "user://.download"
 const BUILD_STANDARD: String = "standard"
 const BUILD_DOTNET: String = "dotnet"
 const OFFICIAL_SOURCE: Array[String] = ["godot", "github"]
@@ -35,7 +35,7 @@ func load_source() -> void:
 	var json: JSON = JSON.new()
 	if json.parse(source_json) != OK:
 		return
-	var arch: String = App.get_architecture()
+	var arch: String = Config.get_architecture()
 	var source_name_data: Dictionary = json.data
 	for source_name: String in source_name_data.keys():
 		var source_path: String = source_name_data[source_name]

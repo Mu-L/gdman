@@ -23,9 +23,22 @@ func _ready() -> void:
 	DownloadManager.downloading_task[file_name] = true
 	tooltip_text = url
 	title_label.text = file_name
+	# Check cached file
+	var cached_file_path: String = ProjectSettings.globalize_path(
+		DownloadManager.DOWNLOAD_DIR.path_join("%s.zip" % file_name))
+	if FileAccess.file_exists(cached_file_path):
+		var zip: ZIPReader = ZIPReader.new()
+		# Can open and can get files mean valid cached file
+		if zip.open(cached_file_path) == OK:
+			var files: PackedStringArray = zip.get_files()
+			zip.close()
+			if files.size() > 0:
+				_uncompress_file(cached_file_path)
+				return
 	if DirAccess.make_dir_recursive_absolute(DownloadManager.DOWNLOAD_DIR) != OK:
 		return
-	download_path = DownloadManager.DOWNLOAD_DIR.path_join("%s.zip" % file_name)
+	download_path = ProjectSettings.globalize_path(
+		DownloadManager.DOWNLOAD_DIR.path_join("%s.tmp" % file_name))
 	http_request.download_file = download_path
 	if http_request.request(url) != OK:
 		return
@@ -38,22 +51,33 @@ func _failed() -> void:
 	timer.stop()
 	if (download_path != ""
 		and FileAccess.file_exists(download_path)):
-		OS.move_to_trash(ProjectSettings.globalize_path(download_path))
+		OS.move_to_trash(download_path)
 	
 func _on_timer_timeout() -> void:
 	var total: int = http_request.get_body_size()
 	if total <= 0:
 		return
 	var downloaded: int = http_request.get_downloaded_bytes()
-	progress_bar.set_value_no_signal(float(downloaded) / float(total) * 99)
+	progress_bar.set_value_no_signal(float(downloaded) / float(total) * 98)
 	
 	
 func _on_http_request_request_completed(result: int, response_code: int, _headers: PackedStringArray, _body: PackedByteArray) -> void:
+	# Check download result
 	if (result != HTTPRequest.RESULT_SUCCESS
 		or response_code != 200):
 		_failed()
 		return
 	timer.stop()
+	progress_bar.set_value_no_signal(98)
+	# Rename file
+	var new_file_path: String = ProjectSettings.globalize_path(
+		DownloadManager.DOWNLOAD_DIR.path_join("%s.zip" % file_name))
+	if DirAccess.rename_absolute(download_path, new_file_path) != OK:
+		_failed()
+		return
+	_uncompress_file(new_file_path)
+
+func _uncompress_file(file_path: String) -> void:
 	progress_bar.set_value_no_signal(99)
 	var finish_dir: String = EngineManager.ENGINE_DIR.path_join(file_name)
 	if DirAccess.make_dir_recursive_absolute(finish_dir) != OK:
@@ -61,9 +85,9 @@ func _on_http_request_request_completed(result: int, response_code: int, _header
 		return
 	info_label.text = "Uncompressing..."
 	cancel_button.disabled = true
-	uncompress_task_id = WorkerThreadPool.add_task(_uncompress_file.bind(download_path, finish_dir))
-
-func _uncompress_file(zip_path: String, output_dir: String) -> void:
+	uncompress_task_id = WorkerThreadPool.add_task(_uncompress_task.bind(file_path, finish_dir))
+	
+func _uncompress_task(zip_path: String, output_dir: String) -> void:
 	var zip: ZIPReader = ZIPReader.new()
 	if zip.open(zip_path) != OK:
 		zip.close()
@@ -96,7 +120,7 @@ func _on_uncompressed() -> void:
 	progress_bar.set_value_no_signal(100)
 	if (download_path != ""
 		and FileAccess.file_exists(download_path)):
-		OS.move_to_trash(ProjectSettings.globalize_path(download_path))
+		OS.move_to_trash(download_path)
 	DownloadManager.downloading_task.erase(file_name)
 	close_button.disabled = false
 

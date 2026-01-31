@@ -1,0 +1,191 @@
+[gd_scene format=3 uid="uid://dt41w75686fay"]
+
+[ext_resource type="Texture2D" uid="uid://mgdysp5iuh4l" path="res://asset/icon/setting.svg" id="1_afo07"]
+[ext_resource type="Script" uid="uid://cbp0uixo4og42" path="res://src/setting/setting_page.gd" id="1_q1ett"]
+[ext_resource type="Texture2D" uid="uid://cn7mvs1yvvohm" path="res://asset/icon/scan.svg" id="2_pvusw"]
+
+[node name="SettingPage" type="VBoxContainer" unique_id=458143825]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_q1ett")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=1191291194]
+layout_mode = 2
+theme_override_constants/separation = 1
+
+[node name="TextureRect" type="TextureRect" parent="HBoxContainer" unique_id=1557801069]
+layout_mode = 2
+texture = ExtResource("1_afo07")
+expand_mode = 3
+stretch_mode = 5
+
+[node name="Label" type="Label" parent="HBoxContainer" unique_id=533075563]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "Setting"
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="." unique_id=1910175746]
+layout_mode = 2
+size_flags_vertical = 3
+alignment = 1
+
+[node name="Control" type="Control" parent="HBoxContainer2" unique_id=1116334138]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="ScrollContainer" type="ScrollContainer" parent="HBoxContainer2" unique_id=100671604]
+custom_minimum_size = Vector2(600, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer2/ScrollContainer" unique_id=1301815618]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/separation = 10
+
+[node name="PanelContainer" type="PanelContainer" parent="HBoxContainer2/ScrollContainer/VBoxContainer" unique_id=1791939916]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="MarginContainer" type="MarginContainer" parent="HBoxContainer2/ScrollContainer/VBoxContainer/PanelContainer" unique_id=1152187245]
+layout_mode = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 10
+
+[node name="GridContainer" type="GridContainer" parent="HBoxContainer2/ScrollContainer/VBoxContainer/PanelContainer/MarginContainer" unique_id=1249218190]
+layout_mode = 2
+theme_override_constants/h_separation = 10
+theme_override_constants/v_separation = 10
+columns = 2
+
+[node name="Label5" type="Label" parent="HBoxContainer2/ScrollContainer/VBoxContainer/PanelContainer/MarginContainer/GridContainer" unique_id=1536794194]
+layout_mode = 2
+theme_override_font_sizes/font_size = 15
+text = "Version"
+
+[node name="VersionLabel" type="Label" parent="HBoxContainer2/ScrollContainer/VBoxContainer/PanelContainer/MarginContainer/GridContainer" unique_id=1811253271]
+layout_mode = 2
+theme_override_font_sizes/font_size = 15
+text = "0.0.0"
+horizontal_alignment = 2
+
+[node name="Label" type="Label" parent="HBoxContainer2/ScrollContainer/VBoxContainer/PanelContainer/MarginContainer/GridContainer" unique_id=445090489]
+layout_mode = 2
+theme_override_font_sizes/font_size = 15
+text = "Language"
+
+[node name="LanguageOption" type="OptionButton" parent="HBoxContainer2/ScrollContainer/VBoxContainer/PanelContainer/MarginContainer/GridContainer" unique_id=28907257]
+layout_mode = 2
+theme_override_font_sizes/font_size = 15
+alignment = 1
+selected = 0
+item_count = 3
+popup/item_0/text = "English"
+popup/item_0/id = 0
+popup/item_1/text = "简体中文"
+popup/item_1/id = 1
+popup/item_2/text = "繁體中文"
+popup/item_2/id = 2
+
+[node name="Label2" type="Label" parent="HBoxContainer2/ScrollContainer/VBoxContainer/PanelContainer/MarginContainer/GridContainer" unique_id=1886676435]
+layout_mode = 2
+theme_override_font_sizes/font_size = 15
+text = "Architecture"
+
+[node name="ArchitectureOption" type="OptionButton" parent="HBoxContainer2/ScrollContainer/VBoxContainer/PanelContainer/MarginContainer/GridContainer" unique_id=500190583]
+layout_mode = 2
+theme_override_font_sizes/font_size = 15
+alignment = 1
+
+[node name="Label3" type="Label" parent="HBoxContainer2/ScrollContainer/VBoxContainer/PanelContainer/MarginContainer/GridContainer" unique_id=1524774143]
+layout_mode = 2
+theme_override_font_sizes/font_size = 15
+text = "Delete Download File"
+
+[node name="DeleteCheck" type="CheckButton" parent="HBoxContainer2/ScrollContainer/VBoxContainer/PanelContainer/MarginContainer/GridContainer" unique_id=40003426]
+layout_mode = 2
+theme_override_font_sizes/font_size = 15
+
+[node name="Label4" type="Label" parent="HBoxContainer2/ScrollContainer/VBoxContainer/PanelContainer/MarginContainer/GridContainer" unique_id=2000010349]
+layout_mode = 2
+theme_override_font_sizes/font_size = 15
+text = "External Editor"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer2/ScrollContainer/VBoxContainer/PanelContainer/MarginContainer/GridContainer" unique_id=1034744901]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 5
+
+[node name="EditorPathLine" type="LineEdit" parent="HBoxContainer2/ScrollContainer/VBoxContainer/PanelContainer/MarginContainer/GridContainer/HBoxContainer" unique_id=1980407609]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 15
+caret_blink = true
+
+[node name="EditorSelectButton" type="Button" parent="HBoxContainer2/ScrollContainer/VBoxContainer/PanelContainer/MarginContainer/GridContainer/HBoxContainer" unique_id=1675579252]
+custom_minimum_size = Vector2(30, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 15
+icon = ExtResource("2_pvusw")
+expand_icon = true
+
+[node name="EditorFileDialog" type="FileDialog" parent="HBoxContainer2/ScrollContainer/VBoxContainer/PanelContainer/MarginContainer/GridContainer/HBoxContainer/EditorSelectButton" unique_id=1879102863]
+title = "Open a File"
+file_mode = 0
+access = 2
+
+[node name="Label7" type="Label" parent="HBoxContainer2/ScrollContainer/VBoxContainer/PanelContainer/MarginContainer/GridContainer" unique_id=1714940174]
+layout_mode = 2
+theme_override_font_sizes/font_size = 15
+text = "Hide Path"
+
+[node name="HidePathCheck" type="CheckButton" parent="HBoxContainer2/ScrollContainer/VBoxContainer/PanelContainer/MarginContainer/GridContainer" unique_id=1437175857]
+layout_mode = 2
+theme_override_font_sizes/font_size = 15
+
+[node name="Label6" type="Label" parent="HBoxContainer2/ScrollContainer/VBoxContainer/PanelContainer/MarginContainer/GridContainer" unique_id=1551275695]
+layout_mode = 2
+theme_override_font_sizes/font_size = 15
+text = "User Path"
+
+[node name="UserPathButton" type="Button" parent="HBoxContainer2/ScrollContainer/VBoxContainer/PanelContainer/MarginContainer/GridContainer" unique_id=1658310235]
+layout_mode = 2
+theme_override_font_sizes/font_size = 15
+text = "user://"
+text_overrun_behavior = 3
+
+[node name="PanelContainer2" type="PanelContainer" parent="HBoxContainer2/ScrollContainer/VBoxContainer" unique_id=2131377467]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="MarginContainer" type="MarginContainer" parent="HBoxContainer2/ScrollContainer/VBoxContainer/PanelContainer2" unique_id=792575991]
+layout_mode = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 10
+
+[node name="LinkButton" type="LinkButton" parent="HBoxContainer2/ScrollContainer/VBoxContainer/PanelContainer2/MarginContainer" unique_id=734777400]
+layout_mode = 2
+theme_override_font_sizes/font_size = 15
+text = "https://github.com/hbread00/gdman"
+uri = "https://github.com/hbread00/gdman"
+
+[node name="Control2" type="Control" parent="HBoxContainer2" unique_id=1179570988]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[connection signal="item_selected" from="HBoxContainer2/ScrollContainer/VBoxContainer/PanelContainer/MarginContainer/GridContainer/LanguageOption" to="." method="_on_language_option_item_selected"]
+[connection signal="item_selected" from="HBoxContainer2/ScrollContainer/VBoxContainer/PanelContainer/MarginContainer/GridContainer/ArchitectureOption" to="." method="_on_architecture_option_item_selected"]
+[connection signal="toggled" from="HBoxContainer2/ScrollContainer/VBoxContainer/PanelContainer/MarginContainer/GridContainer/DeleteCheck" to="." method="_on_delete_check_toggled"]
+[connection signal="text_submitted" from="HBoxContainer2/ScrollContainer/VBoxContainer/PanelContainer/MarginContainer/GridContainer/HBoxContainer/EditorPathLine" to="." method="_on_editor_path_line_text_submitted"]
+[connection signal="pressed" from="HBoxContainer2/ScrollContainer/VBoxContainer/PanelContainer/MarginContainer/GridContainer/HBoxContainer/EditorSelectButton" to="." method="_on_editor_select_button_pressed"]
+[connection signal="file_selected" from="HBoxContainer2/ScrollContainer/VBoxContainer/PanelContainer/MarginContainer/GridContainer/HBoxContainer/EditorSelectButton/EditorFileDialog" to="." method="_on_editor_file_dialog_file_selected"]
+[connection signal="toggled" from="HBoxContainer2/ScrollContainer/VBoxContainer/PanelContainer/MarginContainer/GridContainer/HidePathCheck" to="." method="_on_hide_path_check_toggled"]
+[connection signal="pressed" from="HBoxContainer2/ScrollContainer/VBoxContainer/PanelContainer/MarginContainer/GridContainer/UserPathButton" to="." method="_on_user_path_button_pressed"]

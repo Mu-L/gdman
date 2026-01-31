@@ -99,7 +99,7 @@ func id_to_engine_info(engine_id: String) -> EngineInfo:
 	
 func _get_executable_path(dir_name: String) -> String:
 	var target_path: String = ""
-	var target_suffix: String = App.architecture_to_executable_suffix(App.get_architecture())
+	var target_suffix: String = App.architecture_to_executable_suffix(Config.get_architecture())
 	var dirs_to_scan: Array[String] = [ENGINE_DIR.path_join(dir_name)]
 	while dirs_to_scan.size() > 0:
 		var current_path: String = dirs_to_scan.pop_back()

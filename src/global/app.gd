@@ -1,5 +1,7 @@
 extends Node
 
+signal small_update
+
 const ARCHITECTURE: Array[String] = [
 	"windows_x86",
 	"windows_x64",
@@ -13,18 +15,17 @@ const ARCHITECTURE: Array[String] = [
 
 # resolution
 var window_sizes: Array[Vector2i] = [
-	Vector2i(3200, 2400), # QUXGA
-	Vector2i(2800, 2100), # QSXGA+
-	Vector2i(2048, 1536), # QXGA
-	Vector2i(1600, 1200), # UXGA
-	Vector2i(1440, 1080), # HDV 1080i
-	Vector2i(1400, 1050), # SXGA+
-	Vector2i(1280, 960), # SXGA-
-	Vector2i(1152, 864), # XGA+
-	Vector2i(1024, 768), # XGA
-	Vector2i(800, 600), # SVGA
-	Vector2i(768, 576), # PAL (4:3)
-	Vector2i(640, 480), # VGA
+	Vector2i(3840, 2400), # 4K UHD
+	Vector2i(3200, 2000), # QHD+
+	Vector2i(2560, 1600), # QHD
+	Vector2i(2048, 1280), # QWXGA
+	Vector2i(1920, 1200), # Full HD
+	Vector2i(1600, 1000), # HD+
+	Vector2i(1366, 768), # FWXGA
+	Vector2i(1280, 800), # HD
+	Vector2i(1024, 640), # WSVGA
+	Vector2i(960, 600), # qHD
+	Vector2i(640, 400), # nHD
 ]
 
 func get_architecture() -> String:
@@ -51,19 +52,6 @@ func get_architecture() -> String:
 					return "linux_arm64"
 	return ""
 
-func engine_flavor_to_display_name(flavor: String) -> String:
-	if flavor == "stable":
-		return ""
-	elif flavor.begins_with("rc"):
-		return flavor.replace("rc", "RC ")
-	elif flavor.begins_with("beta"):
-		return flavor.replace("beta", "Beta ")
-	elif flavor.begins_with("alpha"):
-		return flavor.replace("alpha", "Alpha ")
-	elif flavor.begins_with("dev"):
-		return flavor.replace("dev", "Dev ")
-	return flavor.to_upper()
-
 func architecture_to_executable_suffix(architecture: String) -> String:
 	match architecture:
 		"windows_x86", "windows_x64", "windows_arm64":
@@ -79,3 +67,26 @@ func architecture_to_executable_suffix(architecture: String) -> String:
 		"macos":
 			return ".app"
 	return "foo" # Should not reach here
+
+
+func set_language(locale: String) -> void:
+	var lang: PackedStringArray = locale.split("_")
+	if lang.size() < 1:
+		TranslationServer.set_locale("en")
+	else:
+		match lang[0]:
+			"zh":
+				if lang.size() > 1:
+					match lang[1]:
+						"HK", "MO", "TW": # Hong Kong, Macau, Taiwan use Traditional Chinese
+							TranslationServer.set_locale("zh_HK")
+						_:
+							TranslationServer.set_locale("zh_CN")
+				else:
+					TranslationServer.set_locale("zh_CN")
+			_:
+				TranslationServer.set_locale("en")
+
+
+func _on_small_update_timer_timeout() -> void:
+	small_update.emit()

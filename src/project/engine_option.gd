@@ -2,6 +2,7 @@ extends OptionButton
 
 func _ready() -> void:
 	load_engine()
+	select(-1)
 
 func select_id(engine_id: String) -> void:
 	for i: int in get_item_count():
@@ -10,6 +11,7 @@ func select_id(engine_id: String) -> void:
 		if get_item_text(i) == engine_id:
 			select(i)
 			return
+	select(-1)
 
 func load_engine() -> void:
 	clear()

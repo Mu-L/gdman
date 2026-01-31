@@ -10,9 +10,11 @@ var prefer_engine_id: String = ""
 @onready var version_label: Label = $MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer/VersionLabel
 @onready var time_label: Label = $MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer/TimeLabel
 @onready var dotnet_icon: TextureRect = $MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer/DotnetIcon
-@onready var path_label: Label = $MarginContainer/VBoxContainer/HBoxContainer2/PanelContainer/MarginContainer/PathLabel
+@onready var path_line: LineEdit = $MarginContainer/VBoxContainer/HBoxContainer2/PathLine
 @onready var tag_container: HBoxContainer = $MarginContainer/VBoxContainer/HBoxContainer3/ScrollContainer/TagContainer
 @onready var engine_option: OptionButton = $MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/EngineOption
+@onready var editor_button: Button = $MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer/EditorButton
+@onready var engine_button: Button = $MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer/EngineButton
 
 func _ready() -> void:
 	var config: ConfigFile = ConfigFile.new()
@@ -39,8 +41,36 @@ func _ready() -> void:
 		time_dict.get("minute", 0),
 		time_dict.get("second", 0),
 	]
-	path_label.text = project_path
+	path_line.text = project_path
+	path_line.secret = Config.hide_path
+	for tag: String in config.get_value("application", "config/tags", []):
+		var tag_node: Control = PROJECT_TAG.instantiate()
+		tag_node.text = tag
+		tag_container.add_child(tag_node)
 	engine_option.select_id(prefer_engine_id)
+	editor_button.disabled = Config.external_editor_path == ""
+	engine_button.disabled = engine_option.get_selected_id() == -1
+	App.small_update.connect(_small_update)
+	Config.config_updated.connect(_config_update)
+
+func _small_update() -> void:
+	var time_dict: Dictionary = Time.get_datetime_dict_from_unix_time(
+		_get_directory_last_edited_time(project_path))
+	time_label.text = "%d/%d/%d-%0d:%0d:%0d" % [
+		time_dict.get("year", 1970),
+		time_dict.get("month", 1),
+		time_dict.get("day", 1),
+		time_dict.get("hour", 0),
+		time_dict.get("minute", 0),
+		time_dict.get("second", 0),
+	]
+
+func _config_update(config_name: String) -> void:
+	match config_name:
+		"hide_path":
+			path_line.secret = Config.hide_path
+		"external_editor_path":
+			editor_button.disabled = Config.external_editor_path == ""
 	
 func _get_project_version(config: ConfigFile) -> String:
 	var feature: PackedStringArray = config.get_value("application", "config/features", ["unknown"])
@@ -129,13 +159,6 @@ func _get_directory_last_edited_time(dir_path: String) -> int:
 		return last_time
 	return 0
 
-func _get_config_tags(config: ConfigFile) -> Array[String]:
-	var result: Array[String] = []
-	var tags: PackedStringArray = config.get_value("application", "config/tags", [])
-	for tag: String in tags:
-		result.append(tag)
-	return result
-
 func _on_path_button_pressed() -> void:
 	OS.shell_show_in_file_manager(project_path)
 
@@ -153,4 +176,18 @@ func _on_engine_button_pressed() -> void:
 
 func _on_delete_icon_pressed() -> void:
 	ProjectManager.project_info.erase(project_path)
+	ProjectManager.store_config()
 	queue_free()
+
+
+func _on_editor_button_pressed() -> void:
+	if Config.external_editor_path == "":
+		return
+	OS.open_with_program(Config.external_editor_path, [project_path])
+
+
+func _on_engine_option_item_selected(index: int) -> void:
+	if index >= 0:
+		engine_button.disabled = false
+	else:
+		engine_button.disabled = true

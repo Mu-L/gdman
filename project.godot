@@ -11,6 +11,7 @@ config_version=5
 [application]
 
 config/name="GDMan"
+config/version="0.1.0"
 config/tags=PackedStringArray("test1", "test2")
 run/main_scene="uid://btxvmrjs2fqfi"
 config/custom_user_dir_name="gdman"
@@ -21,7 +22,7 @@ config/icon="res://icon.svg"
 
 [autoload]
 
-App="*uid://dtto62rc43fkr"
+App="*uid://b6fsu76afbkba"
 Config="*uid://b416biq16v3rx"
 EngineManager="*uid://f1fsb2d0pkkw"
 DownloadManager="*uid://cga0fc7y2vyr8"
@@ -33,14 +34,10 @@ gdscript/warnings/untyped_declaration=1
 
 [display]
 
-window/size/viewport_width=800
+window/size/viewport_width=960
 window/size/viewport_height=600
 window/stretch/mode="canvas_items"
 window/stretch/aspect="expand"
-
-[dotnet]
-
-project/assembly_name="GDMan"
 
 [physics]
 

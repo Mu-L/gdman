@@ -9,15 +9,15 @@ var is_stable: bool = false
 var is_dotnet: bool = false
 
 @onready var engine_icon: TextureRect = $MarginContainer/VBoxContainer/HBoxContainer/EngineIcon
-@onready var name_label: Label = $MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer/NameLabel
+@onready var name_label: Label = $MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/NameLabel
 @onready var version_label: Label = $MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer2/VersionLabel
 @onready var id_label: Label = $MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer2/IDLabel
 @onready var unstable_icon: TextureRect = $MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer2/UnstableIcon
-@onready var path_label: Label = $MarginContainer/VBoxContainer/HBoxContainer2/PanelContainer/MarginContainer/PathLabel
+@onready var path_line: LineEdit = $MarginContainer/VBoxContainer/HBoxContainer2/PathLine
 
 func _ready() -> void:
 	id_label.text = engine_id
-	path_label.text = dir_path
+	path_line.text = dir_path
 	var engine_info: EngineManager.EngineInfo = EngineManager.id_to_engine_info(engine_id)
 	if engine_info == null:
 		return
@@ -28,7 +28,12 @@ func _ready() -> void:
 	is_stable = engine_info.flavor == EngineManager.EngineFlavor.STABLE
 	is_dotnet = engine_info.is_dotnet
 	unstable_icon.visible = not is_stable
+	path_line.secret = Config.hide_path
+	Config.config_updated.connect(_config_updated)
 	
+func _config_updated(config_name: String) -> void:
+	if config_name == "hide_path":
+		path_line.secret = Config.hide_path
 
 func _on_delete_button_pressed() -> void:
 	OS.move_to_trash(dir_path)
