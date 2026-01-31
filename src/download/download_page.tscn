@@ -32,7 +32,7 @@ stretch_mode = 5
 [node name="Label" type="Label" parent="HBoxContainer" unique_id=2006014479]
 layout_mode = 2
 theme_override_font_sizes/font_size = 20
-text = "Download"
+text = "TITLE_DOWNLOAD"
 
 [node name="OptionContainer" type="HBoxContainer" parent="." unique_id=877426337]
 layout_mode = 2

@@ -1,20 +1,17 @@
 extends Node
 
 const CONFIG_PATH: String = "user://config.cfg"
-
-const ARCHITECTURE: Array[String] = [
-	"auto",
-	"windows_x86",
-	"windows_x64",
-	"windows_arm64",
-	"linux_x86",
-	"linux_x64",
-	"linux_arm32",
-	"linux_arm64",
-	"macos",
-]
-
 signal config_updated(config_name: String)
+
+var language: String = "auto":
+	set(v):
+		language = v
+		if language == "auto":
+			App.set_language(OS.get_locale())
+		else:
+			TranslationServer.set_locale(language)
+		store_config()
+		config_updated.emit("language")
 
 var architecture: String = "auto":
 	set(v):
@@ -48,6 +45,7 @@ func _exit_tree() -> void:
 
 func store_config() -> void:
 	var config: ConfigFile = ConfigFile.new()
+	config.set_value("general", "language", language)
 	config.set_value("general", "architecture", architecture)
 	config.set_value("general", "delete_download_file", delete_download_file)
 	config.set_value("general", "external_editor_path", external_editor_path)
@@ -58,6 +56,7 @@ func load_config() -> void:
 	var config: ConfigFile = ConfigFile.new()
 	if config.load(CONFIG_PATH) != OK:
 		return
+	language = config.get_value("general", "language", "auto")
 	architecture = config.get_value("general", "architecture", "auto")
 	delete_download_file = config.get_value("general", "delete_download_file", false)
 	external_editor_path = config.get_value("general", "external_editor_path", "")

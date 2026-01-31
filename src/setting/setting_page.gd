@@ -10,16 +10,18 @@ extends VBoxContainer
 @onready var user_path_button: Button = $HBoxContainer2/ScrollContainer/VBoxContainer/PanelContainer/MarginContainer/GridContainer/UserPathButton
 
 func _ready() -> void:
-	match TranslationServer.get_locale():
-		"en":
+	match Config.language:
+		"auto":
 			language_option.select(0)
-		"zh_CN":
+		"en":
 			language_option.select(1)
-		"zh_HK":
+		"zh_CN":
 			language_option.select(2)
+		"zh_HK":
+			language_option.select(3)
 		_:
 			language_option.select(0)
-	for architecture: String in Config.ARCHITECTURE:
+	for architecture: String in App.ARCHITECTURE:
 		architecture_option.add_item(architecture)
 	for i in range(architecture_option.get_item_count()):
 		if architecture_option.get_item_text(i) == Config.architecture:
@@ -34,11 +36,15 @@ func _ready() -> void:
 func _on_language_option_item_selected(index: int) -> void:
 	match index:
 		0:
-			TranslationServer.set_locale("en")
+			Config.language = "auto"
 		1:
-			TranslationServer.set_locale("zh_CN")
+			Config.language = "en"
 		2:
-			TranslationServer.set_locale("zh_HK")
+			Config.language = "zh_CN"
+		3:
+			Config.language = "zh_HK"
+		_:
+			Config.language = "auto"
 
 func _on_architecture_option_item_selected(index: int) -> void:
 	Config.architecture = architecture_option.get_item_text(index)

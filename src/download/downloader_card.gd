@@ -123,6 +123,11 @@ func _on_uncompressed() -> void:
 		OS.move_to_trash(download_path)
 	DownloadManager.downloading_task.erase(file_name)
 	close_button.disabled = false
+	if Config.delete_download_file:
+		var zip_path: String = ProjectSettings.globalize_path(
+			DownloadManager.DOWNLOAD_DIR.path_join("%s.zip" % file_name))
+		if FileAccess.file_exists(zip_path):
+			OS.move_to_trash(zip_path)
 
 func _on_cancel_button_pressed() -> void:
 	http_request.cancel_request()
