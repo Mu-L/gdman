@@ -22,6 +22,7 @@ func _ready() -> void:
 	_switch_display(false)
 
 func _on_version_container_download(engine_id: String) -> void:
+	download_confirm.title = tr("DOWNLOAD_CONFIRM_TITLE") % engine_id
 	download_confirm.display(engine_id)
 
 func _switch_display(_pass: bool) -> void:

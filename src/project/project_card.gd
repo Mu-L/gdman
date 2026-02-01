@@ -22,6 +22,7 @@ func _ready() -> void:
 		queue_free()
 		return
 	name_label.text = config.get_value("application", "config/name", "Unnamed Project")
+	name_label.tooltip_text = name_label.text
 	var icon_path: String = _get_icon_path(
 		config.get_value("application", "config/icon", ""),
 		project_path)
@@ -33,7 +34,7 @@ func _ready() -> void:
 	dotnet_icon.visible = config.has_section("dotnet")
 	var time_dict: Dictionary = Time.get_datetime_dict_from_unix_time(
 		_get_directory_last_edited_time(project_path))
-	time_label.text = "%d/%d/%d-%0d:%0d:%0d" % [
+	time_label.text = "%d/%d/%d-%d:%d:%d" % [
 		time_dict.get("year", 1970),
 		time_dict.get("month", 1),
 		time_dict.get("day", 1),
@@ -42,6 +43,7 @@ func _ready() -> void:
 		time_dict.get("second", 0),
 	]
 	path_line.text = project_path
+	path_line.tooltip_text = project_path
 	path_line.secret = Config.hide_path
 	for tag: String in config.get_value("application", "config/tags", []):
 		var tag_node: Control = PROJECT_TAG.instantiate()
@@ -56,7 +58,7 @@ func _ready() -> void:
 func _small_update() -> void:
 	var time_dict: Dictionary = Time.get_datetime_dict_from_unix_time(
 		_get_directory_last_edited_time(project_path))
-	time_label.text = "%d/%d/%d-%0d:%0d:%0d" % [
+	time_label.text = "%d/%d/%d-%d:%d:%d" % [
 		time_dict.get("year", 1970),
 		time_dict.get("month", 1),
 		time_dict.get("day", 1),
@@ -121,7 +123,7 @@ func _get_directory_last_edited_time(dir_path: String) -> int:
 			"Windows":
 				exit_code = OS.execute("powershell",
 				["-Command",
-				"[DateTimeOffset]::new((Get-Item '%s').LastWriteTime).ToUnixTimeSeconds()" % dir_path],
+				"[DateTimeOffset]::new((Get-Item '%s').LastWriteTimeUtc).ToUnixTimeSeconds()" % dir_path],
 				output)
 			"macOS":
 				exit_code = OS.execute("stat",
@@ -132,31 +134,8 @@ func _get_directory_last_edited_time(dir_path: String) -> int:
 				["-c", "%Y", dir_path],
 				output)
 		if exit_code == 0 and not output.is_empty():
-			return output[0].strip_edges().to_int()
-	else:
-		# Bad method
-		var dir: DirAccess = DirAccess.open(dir_path)
-		if dir == null:
-			return 0
-		var last_time: int = 0
-		var dirs_to_scan: Array[String] = [dir_path]
-		while dirs_to_scan.size() > 0:
-			var current_path: String = dirs_to_scan.pop_back()
-			var current_dir: DirAccess = DirAccess.open(current_path)
-			if current_dir != null:
-				current_dir.list_dir_begin()
-				var file_name: String = current_dir.get_next()
-				while file_name != "":
-					if current_dir.current_is_dir():
-						if file_name != "." and file_name != "..":
-							dirs_to_scan.append(current_path.path_join(file_name))
-					else:
-						var file_time: int = FileAccess.get_modified_time(current_path.path_join(file_name))
-						if file_time > last_time:
-							last_time = file_time
-					file_name = current_dir.get_next()
-				current_dir.list_dir_end()
-		return last_time
+			return (output[0].strip_edges().to_int()
+				+ Time.get_time_zone_from_system().bias * 60)
 	return 0
 
 func _on_path_button_pressed() -> void:
@@ -174,7 +153,7 @@ func _on_engine_button_pressed() -> void:
 	ProjectManager.store_config()
 
 
-func _on_delete_icon_pressed() -> void:
+func _on_remove_button_pressed() -> void:
 	ProjectManager.project_info.erase(project_path)
 	ProjectManager.store_config()
 	queue_free()

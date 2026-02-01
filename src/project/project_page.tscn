@@ -12,7 +12,7 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-theme_override_constants/separation = 5
+theme_override_constants/separation = 10
 script = ExtResource("1_ujekw")
 
 [node name="HBoxContainer2" type="HBoxContainer" parent="." unique_id=37617909]
@@ -32,10 +32,13 @@ text = "TITLE_PROJECT"
 
 [node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=933162693]
 layout_mode = 2
+theme_override_constants/separation = 5
 
 [node name="ImportButton" type="Button" parent="HBoxContainer" unique_id=1665693487]
+custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
-text = "Import"
+tooltip_text = "PROJECT_IMPORT_HINT"
+text = "PROJECT_IMPORT"
 icon = ExtResource("2_8oi35")
 expand_icon = true
 
@@ -43,11 +46,13 @@ expand_icon = true
 oversampling_override = 1.0
 title = "Open a File"
 initial_position = 1
+ok_button_text = "DIALOG_CONFIRM"
 dialog_hide_on_ok = true
+cancel_button_text = "DIALOG_CANCEL"
 file_mode = 0
-display_mode = 1
 access = 2
 filters = PackedStringArray("project.godot")
+use_native_dialog = true
 folder_creation_enabled = false
 deleting_enabled = false
 

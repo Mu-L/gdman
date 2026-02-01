@@ -50,6 +50,7 @@ theme_override_constants/margin_bottom = 5
 
 [node name="UnstableIcon" type="TextureRect" parent="MarginContainer/HBoxContainer/MarginContainer" unique_id=2018716420]
 layout_mode = 2
+tooltip_text = "SOURCE_CARD_UNSTABLE_HINT"
 texture = ExtResource("2_vno5b")
 expand_mode = 3
 stretch_mode = 5
@@ -61,6 +62,7 @@ size_flags_horizontal = 3
 [node name="DownloadButton" type="Button" parent="MarginContainer/HBoxContainer" unique_id=805701093]
 custom_minimum_size = Vector2(28, 0)
 layout_mode = 2
+tooltip_text = "SOURCE_CARD_DOWNLOAD_HINT"
 icon = ExtResource("4_cieoe")
 icon_alignment = 1
 expand_icon = true

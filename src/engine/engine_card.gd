@@ -18,6 +18,8 @@ var is_dotnet: bool = false
 func _ready() -> void:
 	id_label.text = engine_id
 	path_line.text = dir_path
+	path_line.tooltip_text = dir_path
+	path_line.secret = Config.hide_path
 	var engine_info: EngineManager.EngineInfo = EngineManager.id_to_engine_info(engine_id)
 	if engine_info == null:
 		return
@@ -28,7 +30,6 @@ func _ready() -> void:
 	is_stable = engine_info.flavor == EngineManager.EngineFlavor.STABLE
 	is_dotnet = engine_info.is_dotnet
 	unstable_icon.visible = not is_stable
-	path_line.secret = Config.hide_path
 	Config.config_updated.connect(_config_updated)
 	
 func _config_updated(config_name: String) -> void:

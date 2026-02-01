@@ -13,6 +13,7 @@ var is_dotnet: bool = false
 @onready var name_label: Label = $MarginContainer/HBoxContainer/NameLabel
 @onready var id_label: Label = $MarginContainer/HBoxContainer/IDLabel
 @onready var unstable_icon: TextureRect = $MarginContainer/HBoxContainer/MarginContainer/UnstableIcon
+@onready var download_button: Button = $MarginContainer/HBoxContainer/DownloadButton
 
 func _ready() -> void:
 	unstable_icon.hide()
@@ -27,6 +28,7 @@ func _ready() -> void:
 	is_dotnet = info.is_dotnet
 	if is_dotnet:
 		source_icon.texture = DOTNET
+	download_button.tooltip_text = tr("SOURCE_CARD_DOWNLOAD_HINT") % engine_id
 
 func _on_download_button_pressed() -> void:
 	download.emit(engine_id)

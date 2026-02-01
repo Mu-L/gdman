@@ -1,14 +1,15 @@
 extends PanelContainer
 
-signal uncompressed()
+signal extracted()
 
 var url: String = ""
 var file_name: String = ""
 
 var download_path: String = ""
-var uncompress_task_id: int = -1
+var extract_task_id: int = -1
 
-@onready var title_label: Label = $MarginContainer/VBoxContainer/TitleLabel
+@onready var title_container: HBoxContainer = $MarginContainer/VBoxContainer/TitleContainer
+@onready var title_label: Label = $MarginContainer/VBoxContainer/TitleContainer/TitleLabel
 @onready var progress_bar: ProgressBar = $MarginContainer/VBoxContainer/ProgressBar
 @onready var info_label: Label = $MarginContainer/VBoxContainer/InfoLabel
 @onready var cancel_button: Button = $MarginContainer/VBoxContainer/HBoxContainer/CancelButton
@@ -21,7 +22,7 @@ func _ready() -> void:
 		queue_free()
 		return
 	DownloadManager.downloading_task[file_name] = true
-	tooltip_text = url
+	title_container.tooltip_text = url
 	title_label.text = file_name
 	# Check cached file
 	var cached_file_path: String = ProjectSettings.globalize_path(
@@ -33,7 +34,7 @@ func _ready() -> void:
 			var files: PackedStringArray = zip.get_files()
 			zip.close()
 			if files.size() > 0:
-				_uncompress_file(cached_file_path)
+				_extract_file(cached_file_path)
 				return
 	if DirAccess.make_dir_recursive_absolute(DownloadManager.DOWNLOAD_DIR) != OK:
 		return
@@ -75,19 +76,19 @@ func _on_http_request_request_completed(result: int, response_code: int, _header
 	if DirAccess.rename_absolute(download_path, new_file_path) != OK:
 		_failed()
 		return
-	_uncompress_file(new_file_path)
+	_extract_file(new_file_path)
 
-func _uncompress_file(file_path: String) -> void:
+func _extract_file(file_path: String) -> void:
 	progress_bar.set_value_no_signal(99)
 	var finish_dir: String = EngineManager.ENGINE_DIR.path_join(file_name)
 	if DirAccess.make_dir_recursive_absolute(finish_dir) != OK:
 		_failed()
 		return
-	info_label.text = "Uncompressing..."
+	info_label.text = tr("DOWNLOADER_EXTRACT")
 	cancel_button.disabled = true
-	uncompress_task_id = WorkerThreadPool.add_task(_uncompress_task.bind(file_path, finish_dir))
+	extract_task_id = WorkerThreadPool.add_task(_extract_task.bind(file_path, finish_dir))
 	
-func _uncompress_task(zip_path: String, output_dir: String) -> void:
+func _extract_task(zip_path: String, output_dir: String) -> void:
 	var zip: ZIPReader = ZIPReader.new()
 	if zip.open(zip_path) != OK:
 		zip.close()
@@ -112,11 +113,11 @@ func _uncompress_task(zip_path: String, output_dir: String) -> void:
 			file.store_buffer(buffer)
 			file.close()
 	zip.close()
-	uncompressed.emit.call_deferred()
+	extracted.emit.call_deferred()
 
-func _on_uncompressed() -> void:
-	WorkerThreadPool.wait_for_task_completion(uncompress_task_id)
-	info_label.text = "Completed"
+func _on_extracted() -> void:
+	WorkerThreadPool.wait_for_task_completion(extract_task_id)
+	info_label.text = tr("DOWNLOADER_COMPLETE")
 	progress_bar.set_value_no_signal(100)
 	if (download_path != ""
 		and FileAccess.file_exists(download_path)):
@@ -132,7 +133,7 @@ func _on_uncompressed() -> void:
 func _on_cancel_button_pressed() -> void:
 	http_request.cancel_request()
 	DownloadManager.downloading_task.erase(file_name)
-	info_label.text = "Canceled"
+	info_label.text = tr("DOWNLOADER_CANCEL")
 	close_button.disabled = false
 	cancel_button.disabled = true
 

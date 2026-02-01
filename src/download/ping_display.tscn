@@ -30,5 +30,6 @@ layout_mode = 2
 text = "..."
 
 [node name="HTTPRequest" type="HTTPRequest" parent="." unique_id=70816791]
+timeout = 5.0
 
 [connection signal="request_completed" from="HTTPRequest" to="." method="_on_http_request_request_completed"]

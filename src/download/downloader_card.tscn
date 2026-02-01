@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://bgk1814jgblda"]
 
 [ext_resource type="Script" uid="uid://di0qwc8stt20s" path="res://src/download/downloader_card.gd" id="1_7mnk0"]
+[ext_resource type="Texture2D" uid="uid://ddqhbrd1han2p" path="res://asset/icon/download.svg" id="2_ggmq3"]
 
 [node name="DownloaderCard" type="PanelContainer" unique_id=1990204292]
 anchors_preset = 10
@@ -10,17 +11,28 @@ script = ExtResource("1_7mnk0")
 
 [node name="MarginContainer" type="MarginContainer" parent="." unique_id=1454216049]
 layout_mode = 2
-theme_override_constants/margin_left = 5
-theme_override_constants/margin_top = 5
-theme_override_constants/margin_right = 5
-theme_override_constants/margin_bottom = 5
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer" unique_id=613592775]
 layout_mode = 2
 theme_override_constants/separation = 10
 
-[node name="TitleLabel" type="Label" parent="MarginContainer/VBoxContainer" unique_id=1815212366]
+[node name="TitleContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer" unique_id=97087460]
 layout_mode = 2
+theme_override_constants/separation = 5
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/VBoxContainer/TitleContainer" unique_id=1740949170]
+layout_mode = 2
+texture = ExtResource("2_ggmq3")
+expand_mode = 3
+stretch_mode = 5
+
+[node name="TitleLabel" type="Label" parent="MarginContainer/VBoxContainer/TitleContainer" unique_id=1815212366]
+layout_mode = 2
+size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 15
 text = "version"
 text_overrun_behavior = 3
@@ -32,7 +44,7 @@ theme_override_font_sizes/font_size = 10
 [node name="InfoLabel" type="Label" parent="MarginContainer/VBoxContainer" unique_id=2118462129]
 layout_mode = 2
 theme_override_font_sizes/font_size = 10
-text = "Downloading..."
+text = "DOWNLOADER_DOWNLOAD"
 text_overrun_behavior = 3
 
 [node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer" unique_id=1613973105]
@@ -44,21 +56,21 @@ layout_mode = 2
 size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 10
 disabled = true
-text = "Cancel"
+text = "DIALOG_CANCEL"
 
 [node name="CloseButton" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer" unique_id=1129653929]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 10
 disabled = true
-text = "Close"
+text = "DIALOG_CLOSE"
 
 [node name="HTTPRequest" type="HTTPRequest" parent="." unique_id=25683267]
 
 [node name="Timer" type="Timer" parent="." unique_id=545999979]
 wait_time = 0.2
 
-[connection signal="uncompressed" from="." to="." method="_on_uncompressed"]
+[connection signal="extracted" from="." to="." method="_on_extracted"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer/CancelButton" to="." method="_on_cancel_button_pressed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer/CloseButton" to="." method="_on_close_button_pressed"]
 [connection signal="request_completed" from="HTTPRequest" to="." method="_on_http_request_request_completed"]

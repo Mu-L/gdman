@@ -9,7 +9,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_constants/separation = 5
+theme_override_constants/separation = 10
 script = ExtResource("1_2a3wf")
 
 [node name="HBoxContainer2" type="HBoxContainer" parent="." unique_id=92740677]
@@ -34,13 +34,13 @@ theme_override_constants/separation = 5
 [node name="StandardCheck" type="CheckBox" parent="HBoxContainer" unique_id=235235217]
 layout_mode = 2
 button_pressed = true
-text = "Standard"
+text = "ENGINE_CHECK_STANDARD"
 flat = true
 
 [node name="DotnetCheck" type="CheckBox" parent="HBoxContainer" unique_id=2022638552]
 layout_mode = 2
 button_pressed = true
-text = ".NET"
+text = "ENGINE_CHECK_DOTNET"
 flat = true
 
 [node name="VSeparator" type="VSeparator" parent="HBoxContainer" unique_id=1260657796]
@@ -49,12 +49,12 @@ layout_mode = 2
 [node name="StableCheck" type="CheckBox" parent="HBoxContainer" unique_id=1863307986]
 layout_mode = 2
 button_pressed = true
-text = "Stable"
+text = "ENGINE_CHECK_STABLE"
 flat = true
 
 [node name="UnstableCheck" type="CheckBox" parent="HBoxContainer" unique_id=1273763945]
 layout_mode = 2
-text = "Unstable"
+text = "ENGINE_CHECK_UNSTABLE"
 flat = true
 
 [node name="PanelContainer" type="PanelContainer" parent="." unique_id=992382484]

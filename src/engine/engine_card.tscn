@@ -63,6 +63,7 @@ text = "0.0.0-stable-dotnet"
 
 [node name="UnstableIcon" type="TextureRect" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer2" unique_id=15117629]
 layout_mode = 2
+tooltip_text = "ENGINE_CARD_UNSTABLE_HINT"
 texture = ExtResource("4_cieoe")
 expand_mode = 3
 stretch_mode = 5
@@ -70,6 +71,7 @@ stretch_mode = 5
 [node name="RunButton" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer" unique_id=431869054]
 custom_minimum_size = Vector2(58, 0)
 layout_mode = 2
+tooltip_text = "ENGINE_CARD_RUN_HINT"
 icon = ExtResource("2_vno5b")
 icon_alignment = 1
 expand_icon = true
@@ -81,6 +83,7 @@ theme_override_constants/separation = 5
 [node name="DeleteButton" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer2" unique_id=1919614049]
 custom_minimum_size = Vector2(30, 0)
 layout_mode = 2
+tooltip_text = "ENGINE_CARD_DELETE_HINT"
 icon = ExtResource("5_h676o")
 icon_alignment = 1
 expand_icon = true
@@ -96,6 +99,7 @@ editable = false
 [node name="PathButton" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer2" unique_id=411695749]
 custom_minimum_size = Vector2(30, 0)
 layout_mode = 2
+tooltip_text = "ENGINE_CARD_PATH_HINT"
 icon = ExtResource("6_mnpmw")
 icon_alignment = 1
 expand_icon = true

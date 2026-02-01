@@ -13,11 +13,15 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-theme_override_constants/separation = 5
+theme_override_constants/separation = 10
 script = ExtResource("1_0gws8")
 
 [node name="DownloadConfirm" parent="." unique_id=1392267383 instance=ExtResource("3_ajk1a")]
+title = "DOWNLOAD_CONFIRM_TITLE"
+initial_position = 2
 visible = false
+ok_button_text = "DIALOG_CONFIRM"
+cancel_button_text = "DIALOG_CANCEL"
 
 [node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=992429299]
 layout_mode = 2
@@ -40,12 +44,12 @@ layout_mode = 2
 [node name="StandardCheck" type="CheckBox" parent="OptionContainer" unique_id=1007961907]
 layout_mode = 2
 button_pressed = true
-text = "Standard"
+text = "DOWNLOAD_CHECK_STANDARD"
 flat = true
 
 [node name="DotnetCheck" type="CheckBox" parent="OptionContainer" unique_id=1892982159]
 layout_mode = 2
-text = ".NET"
+text = "DOWNLOAD_CHECK_DOTNET"
 flat = true
 
 [node name="VSeparator" type="VSeparator" parent="OptionContainer" unique_id=1203929751]
@@ -54,12 +58,12 @@ layout_mode = 2
 [node name="StableCheck" type="CheckBox" parent="OptionContainer" unique_id=86975575]
 layout_mode = 2
 button_pressed = true
-text = "Stable"
+text = "DOWNLOAD_CHECK_STABLE"
 flat = true
 
 [node name="UnstableCheck" type="CheckBox" parent="OptionContainer" unique_id=1761071388]
 layout_mode = 2
-text = "Unstable"
+text = "DOWNLOAD_CHECK_UNSTABLE"
 flat = true
 
 [node name="HSplitContainer" type="HSplitContainer" parent="." unique_id=888305415]

@@ -40,12 +40,14 @@ layout_mode = 2
 theme_override_constants/separation = 10
 
 [node name="SideBar" type="VBoxContainer" parent="MarginContainer/HBoxContainer" unique_id=1036997934]
+custom_minimum_size = Vector2(50, 0)
 layout_mode = 2
 theme_override_constants/separation = 5
 
 [node name="ProjectNav" type="Button" parent="MarginContainer/HBoxContainer/SideBar" unique_id=311530294]
 layout_mode = 2
 size_flags_vertical = 3
+theme_override_font_sizes/font_size = 15
 text = "TITLE_PROJECT"
 icon = ExtResource("3_uewes")
 icon_alignment = 1
@@ -55,6 +57,7 @@ expand_icon = true
 [node name="EngineNav" type="Button" parent="MarginContainer/HBoxContainer/SideBar" unique_id=364069615]
 layout_mode = 2
 size_flags_vertical = 3
+theme_override_font_sizes/font_size = 15
 text = "TITLE_ENGINE"
 icon = ExtResource("4_kqbth")
 icon_alignment = 1
@@ -64,6 +67,7 @@ expand_icon = true
 [node name="DownloadNav" type="Button" parent="MarginContainer/HBoxContainer/SideBar" unique_id=482896009]
 layout_mode = 2
 size_flags_vertical = 3
+theme_override_font_sizes/font_size = 15
 text = "TITLE_DOWNLOAD"
 icon = ExtResource("5_srxbw")
 icon_alignment = 1
@@ -97,6 +101,7 @@ size_flags_vertical = 3
 [node name="SettingNav" type="Button" parent="MarginContainer/HBoxContainer/SideBar" unique_id=795076466]
 layout_mode = 2
 size_flags_vertical = 3
+theme_override_font_sizes/font_size = 15
 text = "TITLE_SETTING"
 icon = ExtResource("6_d3u4l")
 icon_alignment = 1

@@ -29,10 +29,12 @@ func _ready() -> void:
 			break
 	delete_check.button_pressed = Config.delete_download_file
 	editor_path_line.text = Config.external_editor_path
+	editor_path_line.tooltip_text = Config.external_editor_path
 	hide_path_check.button_pressed = Config.hide_path
 	version_label.text = ProjectSettings.get_setting("application/config/version", "unknown")
 	user_path_button.text = ProjectSettings.globalize_path("user://")
-
+	user_path_button.tooltip_text = ProjectSettings.globalize_path("user://")
+	
 func _on_language_option_item_selected(index: int) -> void:
 	match index:
 		0:
@@ -61,6 +63,7 @@ func _on_editor_path_line_text_submitted(new_text: String) -> void:
 
 func _on_editor_file_dialog_file_selected(path: String) -> void:
 	editor_path_line.text = path
+	editor_path_line.tooltip_text = path
 	Config.external_editor_path = editor_path_line.text
 	
 func _on_hide_path_check_toggled(toggled_on: bool) -> void:

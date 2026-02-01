@@ -3,6 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://mgdysp5iuh4l" path="res://asset/icon/setting.svg" id="1_afo07"]
 [ext_resource type="Script" uid="uid://cbp0uixo4og42" path="res://src/setting/setting_page.gd" id="1_q1ett"]
 [ext_resource type="Texture2D" uid="uid://cn7mvs1yvvohm" path="res://asset/icon/scan.svg" id="2_pvusw"]
+[ext_resource type="Texture2D" uid="uid://hv0qw0fm1wga" path="res://asset/icon/directory.svg" id="4_xuaq7"]
 
 [node name="SettingPage" type="VBoxContainer" unique_id=458143825]
 anchors_preset = 15
@@ -10,6 +11,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_constants/separation = 10
 script = ExtResource("1_q1ett")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=1191291194]
@@ -66,19 +68,25 @@ columns = 2
 
 [node name="Label5" type="Label" parent="HBoxContainer2/ScrollContainer/VBoxContainer/PanelContainer/MarginContainer/GridContainer" unique_id=1536794194]
 layout_mode = 2
+size_flags_horizontal = 3
+tooltip_text = "SETTING_VERSION_HINT"
+mouse_filter = 1
 theme_override_font_sizes/font_size = 15
-text = "Version"
+text = "SETTING_VERSION"
 
 [node name="VersionLabel" type="Label" parent="HBoxContainer2/ScrollContainer/VBoxContainer/PanelContainer/MarginContainer/GridContainer" unique_id=1811253271]
 layout_mode = 2
+size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 15
 text = "0.0.0"
 horizontal_alignment = 2
 
 [node name="Label" type="Label" parent="HBoxContainer2/ScrollContainer/VBoxContainer/PanelContainer/MarginContainer/GridContainer" unique_id=445090489]
 layout_mode = 2
+tooltip_text = "SETTING_LANGUAGE_HINT"
+mouse_filter = 1
 theme_override_font_sizes/font_size = 15
-text = "Language"
+text = "SETTING_LANGUAGE"
 
 [node name="LanguageOption" type="OptionButton" parent="HBoxContainer2/ScrollContainer/VBoxContainer/PanelContainer/MarginContainer/GridContainer" unique_id=28907257]
 layout_mode = 2
@@ -97,8 +105,10 @@ popup/item_3/id = 3
 
 [node name="Label2" type="Label" parent="HBoxContainer2/ScrollContainer/VBoxContainer/PanelContainer/MarginContainer/GridContainer" unique_id=1886676435]
 layout_mode = 2
+tooltip_text = "SETTING_ARCHITECTURE_HINT"
+mouse_filter = 1
 theme_override_font_sizes/font_size = 15
-text = "Architecture"
+text = "SETTING_ARCHITECTURE"
 
 [node name="ArchitectureOption" type="OptionButton" parent="HBoxContainer2/ScrollContainer/VBoxContainer/PanelContainer/MarginContainer/GridContainer" unique_id=500190583]
 layout_mode = 2
@@ -111,8 +121,10 @@ popup/item_0/id = 0
 
 [node name="Label3" type="Label" parent="HBoxContainer2/ScrollContainer/VBoxContainer/PanelContainer/MarginContainer/GridContainer" unique_id=1524774143]
 layout_mode = 2
+tooltip_text = "SETTING_DELETE_DOWNLOAD_HINT"
+mouse_filter = 1
 theme_override_font_sizes/font_size = 15
-text = "Delete Download File"
+text = "SETTING_DELETE_DOWNLOAD"
 
 [node name="DeleteCheck" type="CheckButton" parent="HBoxContainer2/ScrollContainer/VBoxContainer/PanelContainer/MarginContainer/GridContainer" unique_id=40003426]
 layout_mode = 2
@@ -120,8 +132,10 @@ theme_override_font_sizes/font_size = 15
 
 [node name="Label4" type="Label" parent="HBoxContainer2/ScrollContainer/VBoxContainer/PanelContainer/MarginContainer/GridContainer" unique_id=2000010349]
 layout_mode = 2
+tooltip_text = "SETTING_EDITOR_HINT"
+mouse_filter = 1
 theme_override_font_sizes/font_size = 15
-text = "External Editor"
+text = "SETTING_EDITOR"
 
 [node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer2/ScrollContainer/VBoxContainer/PanelContainer/MarginContainer/GridContainer" unique_id=1034744901]
 layout_mode = 2
@@ -142,14 +156,22 @@ icon = ExtResource("2_pvusw")
 expand_icon = true
 
 [node name="EditorFileDialog" type="FileDialog" parent="HBoxContainer2/ScrollContainer/VBoxContainer/PanelContainer/MarginContainer/GridContainer/HBoxContainer/EditorSelectButton" unique_id=1879102863]
+oversampling_override = 1.0
 title = "Open a File"
+initial_position = 1
+ok_button_text = "DIALOG_CONFIRM"
+dialog_hide_on_ok = true
+cancel_button_text = "DIALOG_CANCEL"
 file_mode = 0
 access = 2
+use_native_dialog = true
 
 [node name="Label7" type="Label" parent="HBoxContainer2/ScrollContainer/VBoxContainer/PanelContainer/MarginContainer/GridContainer" unique_id=1714940174]
 layout_mode = 2
+tooltip_text = "SETTING_HIDE_PATH_HINT"
+mouse_filter = 1
 theme_override_font_sizes/font_size = 15
-text = "Hide Path"
+text = "SETTING_HIDE_PATH"
 
 [node name="HidePathCheck" type="CheckButton" parent="HBoxContainer2/ScrollContainer/VBoxContainer/PanelContainer/MarginContainer/GridContainer" unique_id=1437175857]
 layout_mode = 2
@@ -157,14 +179,18 @@ theme_override_font_sizes/font_size = 15
 
 [node name="Label6" type="Label" parent="HBoxContainer2/ScrollContainer/VBoxContainer/PanelContainer/MarginContainer/GridContainer" unique_id=1551275695]
 layout_mode = 2
+tooltip_text = "SETTING_USER_PATH_HINT"
+mouse_filter = 1
 theme_override_font_sizes/font_size = 15
-text = "User Path"
+text = "SETTING_USER_PATH"
 
 [node name="UserPathButton" type="Button" parent="HBoxContainer2/ScrollContainer/VBoxContainer/PanelContainer/MarginContainer/GridContainer" unique_id=1658310235]
 layout_mode = 2
 theme_override_font_sizes/font_size = 15
 text = "user://"
+icon = ExtResource("4_xuaq7")
 text_overrun_behavior = 3
+expand_icon = true
 
 [node name="PanelContainer2" type="PanelContainer" parent="HBoxContainer2/ScrollContainer/VBoxContainer" unique_id=2131377467]
 layout_mode = 2
