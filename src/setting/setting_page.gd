@@ -21,8 +21,10 @@ func _ready() -> void:
 			language_option.select(3)
 		_:
 			language_option.select(0)
+	language_option.set_item_text(0, tr("SELECT_AUTO") % OS.get_locale())
 	for architecture: String in App.ARCHITECTURE:
 		architecture_option.add_item(architecture)
+	architecture_option.set_item_text(0, tr("SELECT_AUTO") % App.get_architecture())
 	for i in range(architecture_option.get_item_count()):
 		if architecture_option.get_item_text(i) == Config.architecture:
 			architecture_option.select(i)
@@ -34,7 +36,14 @@ func _ready() -> void:
 	version_label.text = ProjectSettings.get_setting("application/config/version", "unknown")
 	user_path_button.text = ProjectSettings.globalize_path("user://")
 	user_path_button.tooltip_text = ProjectSettings.globalize_path("user://")
-	
+	Config.config_updated.connect(_config_update)
+
+func _config_update(config_name: String) -> void:
+	match config_name:
+		"language":
+			language_option.set_item_text(0, tr("SELECT_AUTO") % OS.get_locale())
+			architecture_option.set_item_text(0, tr("SELECT_AUTO") % App.get_architecture())
+
 func _on_language_option_item_selected(index: int) -> void:
 	match index:
 		0:
@@ -49,7 +58,10 @@ func _on_language_option_item_selected(index: int) -> void:
 			Config.language = "auto"
 
 func _on_architecture_option_item_selected(index: int) -> void:
-	Config.architecture = architecture_option.get_item_text(index)
+	if index == 0:
+		Config.architecture = "auto"
+	else:
+		Config.architecture = architecture_option.get_item_text(index)
 
 func _on_delete_check_toggled(toggled_on: bool) -> void:
 	Config.delete_download_file = toggled_on

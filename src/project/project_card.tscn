@@ -3,11 +3,11 @@
 [ext_resource type="Script" uid="uid://c6rjmq5tiptt1" path="res://src/project/project_card.gd" id="1_e88lg"]
 [ext_resource type="Texture2D" uid="uid://b4s86yj60klpo" path="res://asset/icon/godot_big.svg" id="2_e88lg"]
 [ext_resource type="Texture2D" uid="uid://bu2rk28e26nqp" path="res://asset/icon/dotnet.svg" id="3_2b60s"]
-[ext_resource type="Texture2D" uid="uid://cq454lo24jwpx" path="res://asset/icon/delete.svg" id="4_7jvji"]
 [ext_resource type="PackedScene" uid="uid://bde5rj4u8f5h4" path="res://src/project/engine_option.tscn" id="5_62uvt"]
 [ext_resource type="Texture2D" uid="uid://hv0qw0fm1wga" path="res://asset/icon/directory.svg" id="7_2b60s"]
 [ext_resource type="Texture2D" uid="uid://bvdq0a23od033" path="res://asset/icon/run.svg" id="7_62uvt"]
 [ext_resource type="Texture2D" uid="uid://bq8vp5ajsd7pe" path="res://asset/icon/code.svg" id="8_2b60s"]
+[ext_resource type="Texture2D" uid="uid://gxilskxh25uu" path="res://asset/icon/remove.svg" id="8_sr25u"]
 
 [node name="ProjectCard" type="PanelContainer" unique_id=740053336]
 anchors_preset = 10
@@ -128,7 +128,7 @@ theme_override_constants/separation = 20
 custom_minimum_size = Vector2(22, 22)
 layout_mode = 2
 tooltip_text = "PROJECT_CARD_REMOVE_HINT"
-icon = ExtResource("4_7jvji")
+icon = ExtResource("8_sr25u")
 icon_alignment = 1
 expand_icon = true
 

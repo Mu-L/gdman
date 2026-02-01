@@ -136,6 +136,9 @@ func _on_cancel_button_pressed() -> void:
 	info_label.text = tr("DOWNLOADER_CANCEL")
 	close_button.disabled = false
 	cancel_button.disabled = true
+	if (download_path != ""
+		and FileAccess.file_exists(download_path)):
+		OS.move_to_trash(download_path)
 
 
 func _on_close_button_pressed() -> void:

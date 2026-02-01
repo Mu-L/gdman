@@ -4,6 +4,7 @@
 [ext_resource type="Script" uid="uid://cbp0uixo4og42" path="res://src/setting/setting_page.gd" id="1_q1ett"]
 [ext_resource type="Texture2D" uid="uid://cn7mvs1yvvohm" path="res://asset/icon/scan.svg" id="2_pvusw"]
 [ext_resource type="Texture2D" uid="uid://hv0qw0fm1wga" path="res://asset/icon/directory.svg" id="4_xuaq7"]
+[ext_resource type="PackedScene" uid="uid://885qdmu56i1l" path="res://src/setting/license.tscn" id="5_cjous"]
 
 [node name="SettingPage" type="VBoxContainer" unique_id=458143825]
 anchors_preset = 15
@@ -203,11 +204,26 @@ theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 20
 theme_override_constants/margin_bottom = 10
 
-[node name="LinkButton" type="LinkButton" parent="HBoxContainer2/ScrollContainer/VBoxContainer/PanelContainer2/MarginContainer" unique_id=734777400]
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer2/ScrollContainer/VBoxContainer/PanelContainer2/MarginContainer" unique_id=1549463926]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="LinkButton" type="LinkButton" parent="HBoxContainer2/ScrollContainer/VBoxContainer/PanelContainer2/MarginContainer/VBoxContainer" unique_id=734777400]
 layout_mode = 2
 theme_override_font_sizes/font_size = 15
 text = "https://github.com/hbread00/gdman"
 uri = "https://github.com/hbread00/gdman"
+
+[node name="FoldableContainer" type="FoldableContainer" parent="HBoxContainer2/ScrollContainer/VBoxContainer/PanelContainer2/MarginContainer/VBoxContainer" unique_id=197256468]
+layout_mode = 2
+theme_override_font_sizes/font_size = 10
+folded = true
+title = "SETTING_LICENSE"
+
+[node name="License" parent="HBoxContainer2/ScrollContainer/VBoxContainer/PanelContainer2/MarginContainer/VBoxContainer/FoldableContainer" unique_id=1875125344 instance=ExtResource("5_cjous")]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 3
 
 [node name="Control2" type="Control" parent="HBoxContainer2" unique_id=1179570988]
 layout_mode = 2

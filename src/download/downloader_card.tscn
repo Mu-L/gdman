@@ -2,6 +2,8 @@
 
 [ext_resource type="Script" uid="uid://di0qwc8stt20s" path="res://src/download/downloader_card.gd" id="1_7mnk0"]
 [ext_resource type="Texture2D" uid="uid://ddqhbrd1han2p" path="res://asset/icon/download.svg" id="2_ggmq3"]
+[ext_resource type="Texture2D" uid="uid://dgx4hdqpij0bs" path="res://asset/icon/cancel.svg" id="3_5bkof"]
+[ext_resource type="Texture2D" uid="uid://f0xfxrrn3nkq" path="res://asset/icon/close.svg" id="4_rdx5i"]
 
 [node name="DownloaderCard" type="PanelContainer" unique_id=1990204292]
 anchors_preset = 10
@@ -57,6 +59,8 @@ size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 10
 disabled = true
 text = "DIALOG_CANCEL"
+icon = ExtResource("3_5bkof")
+expand_icon = true
 
 [node name="CloseButton" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer" unique_id=1129653929]
 layout_mode = 2
@@ -64,6 +68,8 @@ size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 10
 disabled = true
 text = "DIALOG_CLOSE"
+icon = ExtResource("4_rdx5i")
+expand_icon = true
 
 [node name="HTTPRequest" type="HTTPRequest" parent="." unique_id=25683267]
 

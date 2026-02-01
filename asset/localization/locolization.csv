@@ -4,51 +4,55 @@ TITLE_ENGINE,Engine,引擎,引擎
 TITLE_DOWNLOAD,Download,下载,下載
 TITLE_SETTING,Setting,设置,設置
 ,,,
-DIALOG_CONFIRM,,确认,
-DIALOG_CANCEL,,取消,
-DIALOG_CLOSE,,关闭,
+SELECT_AUTO,Auto (%s),自动（%s）,自動（%s）
 ,,,
-PROJECT_IMPORT,Import,导入,
-PROJECT_IMPORT_HINT,,导入新的项目,
-PROJECT_CARD_EDITOR_HINT,,通过外部编辑器打开项目,
-PROJECT_CARD_ENGINE_HINT,,通过选中版本的引擎打开项目,
-PROJECT_CARD_DOTNET_HINT,,该项目是.NET项目,
-PROJECT_CARD_PATH_HINT,,打开项目所在目录,
-PROJECT_CARD_REMOVE_HINT,,移除项目\n*不会删除项目目录,
+DIALOG_CONFIRM,Confirm,确认,確認
+DIALOG_CANCEL,Cancel,取消,取消
+DIALOG_CLOSE,Close,关闭,關閉
 ,,,
-ENGINE_CHECK_STANDARD,Standard,标准版,
-ENGINE_CHECK_DOTNET,.NET,.NET版,
-ENGINE_CHECK_STABLE,Stable,稳定版,
-ENGINE_CHECK_UNSTABLE,Unstable,不稳定版,
-ENGINE_CARD_UNSTABLE_HINT,,不稳定版,
-ENGINE_CARD_RUN_HINT,,启动引擎,
-ENGINE_CARD_DELETE_HINT,,删除引擎\n*会同时删除引擎目录,
-ENGINE_CARD_PATH_HINT,,打开引擎所在目录,
+PROJECT_IMPORT,Import,导入,導入
+PROJECT_IMPORT_HINT,Import new project,导入新的项目,導入新的項目
+PROJECT_CARD_EDITOR_HINT,Edit in external editor,通过外部编辑器打开项目,通過外部編輯器打開項目
+PROJECT_CARD_ENGINE_HINT,Launch with selected engine,通过选中版本的引擎打开项目,通過選中版本的引擎打開項目
+PROJECT_CARD_DOTNET_HINT,.NET Project,该项目是.NET项目,該項目是.NET項目
+PROJECT_CARD_PATH_HINT,Show in File Manager,打开项目所在目录,打開項目所在目錄
+PROJECT_CARD_REMOVE_HINT,Remove\n*Directory will be kept,移除项目\n*不会删除项目目录,移除項目\n*不會刪除項目目錄
 ,,,
-DOWNLOAD_CHECK_STANDARD,Standard,标准版,
-DOWNLOAD_CHECK_DOTNET,.NET,.NET版,
-DOWNLOAD_CHECK_STABLE,Stable,稳定版,
-DOWNLOAD_CHECK_UNSTABLE,Unstable,不稳定版,
-SOURCE_CARD_UNSTABLE_HINT,,不稳定版,
-SOURCE_CARD_DOWNLOAD_HINT,,下载%s,
-DOWNLOAD_CONFIRM_TITLE,,下载%s,
-DOWNLOADER_DOWNLOAD,,下载中……,
-DOWNLOADER_EXTRACT,,提取中……,
-DOWNLOADER_FAIL,,失败,
-DOWNLOADER_CANCEL,,已取消,
-DOWNLOADER_COMPLETE,,完成,
+ENGINE_CHECK_STANDARD,Standard,标准版,標準版
+ENGINE_CHECK_DOTNET,.NET,.NET版,.NET版
+ENGINE_CHECK_STABLE,Stable,稳定版,穩定版
+ENGINE_CHECK_UNSTABLE,Unstable,不稳定版,不穩定版
+ENGINE_CARD_UNSTABLE_HINT,"Unstable(RC, Beta, Alpha, Dev, etc.)",不稳定版（RC，Beta，Alpha，Dev等）,不穩定版（RC，Beta，Alpha，Dev等）
+ENGINE_CARD_RUN_HINT,Launch,启动,啟動
+ENGINE_CARD_DELETE_HINT,Delete\n*Deletes engine directory,删除\n*会同时删除引擎目录,刪除\n*會同時刪除引擎目錄
+ENGINE_CARD_PATH_HINT,Open folder,打开引擎所在目录,打開引擎所在目錄
 ,,,
-SETTING_VERSION,Version,版本,
-SETTING_VERSION_HINT,GDMan's version,GDMan的版本,
-SETTING_LANGUAGE,Language,语言,
-SETTING_LANGUAGE_HINT,,为auto时，会根据系统语言判断,
-SETTING_ARCHITECTURE,,系统架构,
-SETTING_ARCHITECTURE_HINT,,为auto时，会自动判断系统架构\n*请勿修改此项，除非你知道自己在做什么,
-SETTING_DELETE_DOWNLOAD,,删除下载文件,
-SETTING_DELETE_DOWNLOAD_HINT,,下载并提取引擎后，删除产生的临时文件,
-SETTING_EDITOR,,外部编辑器,
-SETTING_EDITOR_HINT,,选定后，可在项目页面使用该编辑器打开项目目录\n*在Windows一般是.exe，在MacOS一般是.app,
-SETTING_HIDE_PATH,,隐藏路径,
-SETTING_HIDE_PATH_HINT,,隐藏卡片中的路径显示\n*在悬浮时仍会显示完整路径,
-SETTING_USER_PATH,,用户目录,
-SETTING_USER_PATH_HINT,,GDMan在本机用户使用的目录,
+DOWNLOAD_CHECK_STANDARD,Standard,标准版,標準版
+DOWNLOAD_CHECK_DOTNET,.NET,.NET版,.NET版
+DOWNLOAD_CHECK_STABLE,Stable,稳定版,穩定版
+DOWNLOAD_CHECK_UNSTABLE,Unstable,不稳定版,不穩定版
+SOURCE_CARD_UNSTABLE_HINT,"Unstable(RC, Beta, Alpha, Dev, etc.)",不稳定版（RC，Beta，Alpha，Dev等）,不穩定版（RC，Beta，Alpha，Dev等）
+SOURCE_CARD_DOWNLOAD_HINT,Download %s,下载%s,下載%s
+DOWNLOAD_CONFIRM_TITLE,Download %s,下载%s,下載%s
+DOWNLOADER_DOWNLOAD,Downloading...,下载中……,下載中……
+DOWNLOADER_EXTRACT,Extracting...,提取中……,提取中……
+DOWNLOADER_FAIL,Failed,失败,失敗
+DOWNLOADER_CANCEL,Canceled,已取消,已取消
+DOWNLOADER_COMPLETE,Done,完成,完成
+,,,
+SETTING_VERSION,Version,版本,版本
+SETTING_VERSION_HINT,GDMan Version,GDMan的版本,GDMan的版本
+SETTING_LANGUAGE,Language,语言,語言
+SETTING_LANGUAGE_HINT,Auto-detects system language,为自动时，会根据系统语言判断,為自動時，會根據系統語言判斷
+SETTING_ARCHITECTURE,Architecture,系统架构,系統架構
+SETTING_ARCHITECTURE_HINT,Auto-detects architecture\n*Do not change unless you know what you are doing,为自动时，会自动判断系统架构\n*请勿修改此项，除非你知道自己在做什么,為自動時，會自動判斷系統架構\n*請勿修改此項，除非你知道自己在做什麼
+SETTING_DELETE_DOWNLOAD,Clean Download Archieve,删除下载文件,刪除下載文件
+SETTING_DELETE_DOWNLOAD_HINT,Delete temporary files after extraction,下载并提取引擎后，删除产生的临时文件,下載並提取引擎後，刪除產生的臨時文件
+SETTING_EDITOR,External Editor,外部编辑器,外部編輯器
+SETTING_EDITOR_HINT,"Project editor executable\n*Typically .exe on Windows, .app on MacOS",选定后，可在项目页面使用该编辑器打开项目目录\n*在Windows通常是.exe，在MacOS通常是.app,選定後，可在項目頁面使用該編輯器打開項目目錄\n*在Windows通常是.exe，在MacOS通常是.app
+SETTING_HIDE_PATH,Hide Path,隐藏路径,隱藏路徑
+SETTING_HIDE_PATH_HINT,Hide path in cards\n*Full path shown on hover,隐藏卡片中的路径显示\n*在悬浮时仍会显示完整路径,隱藏卡片中的路徑顯示\n*在懸浮時仍會顯示完整路徑
+SETTING_USER_PATH,User Directory,用户目录,用戶目錄
+SETTING_USER_PATH_HINT,Local data directory,GDMan在本机用户使用的目录,GDMan在本機用戶使用的目錄
+SETTING_LICENSE,License,开源协议,開源協議
+,,,
