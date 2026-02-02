@@ -6,7 +6,7 @@
             "standard": {
                 "windows_x86": "https://github.com/godotengine/godot-builds/releases/download/4.6-stable/Godot_v4.6-stable_win32.exe.zip",
                 "windows_x64": "https://github.com/godotengine/godot-builds/releases/download/4.6-stable/Godot_v4.6-stable_win64.exe.zip",
-                "windows_arm64": "https://github.com/godotengine/godot-builds/releases/download/4.6-stable/Godot_v4.6-stable_windows_arm64.zip",
+                "windows_arm64": "https://github.com/godotengine/godot-builds/releases/download/4.6-stable/Godot_v4.6-stable_windows_arm64.exe.zip",
                 "linux_x86": "https://github.com/godotengine/godot-builds/releases/download/4.6-stable/Godot_v4.6-stable_linux.x86_32.zip",
                 "linux_x64": "https://github.com/godotengine/godot-builds/releases/download/4.6-stable/Godot_v4.6-stable_linux.x86_64.zip",
                 "linux_arm32": "https://github.com/godotengine/godot-builds/releases/download/4.6-stable/Godot_v4.6-stable_linux.arm32.zip",
@@ -30,7 +30,7 @@
             "standard": {
                 "windows_x86": "https://github.com/godotengine/godot-builds/releases/download/4.6-rc2/Godot_v4.6-rc2_win32.exe.zip",
                 "windows_x64": "https://github.com/godotengine/godot-builds/releases/download/4.6-rc2/Godot_v4.6-rc2_win64.exe.zip",
-                "windows_arm64": "https://github.com/godotengine/godot-builds/releases/download/4.6-rc2/Godot_v4.6-rc2_windows_arm64.zip",
+                "windows_arm64": "https://github.com/godotengine/godot-builds/releases/download/4.6-rc2/Godot_v4.6-rc2_windows_arm64.exe.zip",
                 "linux_x86": "https://github.com/godotengine/godot-builds/releases/download/4.6-rc2/Godot_v4.6-rc2_linux.x86_32.zip",
                 "linux_x64": "https://github.com/godotengine/godot-builds/releases/download/4.6-rc2/Godot_v4.6-rc2_linux.x86_64.zip",
                 "linux_arm32": "https://github.com/godotengine/godot-builds/releases/download/4.6-rc2/Godot_v4.6-rc2_linux.arm32.zip",
@@ -54,7 +54,7 @@
             "standard": {
                 "windows_x86": "https://github.com/godotengine/godot-builds/releases/download/4.6-rc1/Godot_v4.6-rc1_win32.exe.zip",
                 "windows_x64": "https://github.com/godotengine/godot-builds/releases/download/4.6-rc1/Godot_v4.6-rc1_win64.exe.zip",
-                "windows_arm64": "https://github.com/godotengine/godot-builds/releases/download/4.6-rc1/Godot_v4.6-rc1_windows_arm64.zip",
+                "windows_arm64": "https://github.com/godotengine/godot-builds/releases/download/4.6-rc1/Godot_v4.6-rc1_windows_arm64.exe.zip",
                 "linux_x86": "https://github.com/godotengine/godot-builds/releases/download/4.6-rc1/Godot_v4.6-rc1_linux.x86_32.zip",
                 "linux_x64": "https://github.com/godotengine/godot-builds/releases/download/4.6-rc1/Godot_v4.6-rc1_linux.x86_64.zip",
                 "linux_arm32": "https://github.com/godotengine/godot-builds/releases/download/4.6-rc1/Godot_v4.6-rc1_linux.arm32.zip",
@@ -271,12 +271,36 @@
             }
         },
         {
+            "id": "4.5.2-rc1",
+            "base_version": "4.5",
+            "standard": {
+                "windows_x86": "https://github.com/godotengine/godot-builds/releases/download/4.5.2-rc1/Godot_v4.5.2-rc1_win32.exe.zip",
+                "windows_x64": "https://github.com/godotengine/godot-builds/releases/download/4.5.2-rc1/Godot_v4.5.2-rc1_win64.exe.zip",
+                "windows_arm64": "https://github.com/godotengine/godot-builds/releases/download/4.5.2-rc1/Godot_v4.5.2-rc1_windows_arm64.exe.zip",
+                "linux_x86": "https://github.com/godotengine/godot-builds/releases/download/4.5.2-rc1/Godot_v4.5.2-rc1_linux.x86_32.zip",
+                "linux_x64": "https://github.com/godotengine/godot-builds/releases/download/4.5.2-rc1/Godot_v4.5.2-rc1_linux.x86_64.zip",
+                "linux_arm32": "https://github.com/godotengine/godot-builds/releases/download/4.5.2-rc1/Godot_v4.5.2-rc1_linux.arm32.zip",
+                "linux_arm64": "https://github.com/godotengine/godot-builds/releases/download/4.5.2-rc1/Godot_v4.5.2-rc1_linux.arm64.zip",
+                "macos": "https://github.com/godotengine/godot-builds/releases/download/4.5.2-rc1/Godot_v4.5.2-rc1_macos.universal.zip"
+            },
+            "dotnet": {
+                "windows_x86": "https://github.com/godotengine/godot-builds/releases/download/4.5.2-rc1/Godot_v4.5.2-rc1_mono_win32.zip",
+                "windows_x64": "https://github.com/godotengine/godot-builds/releases/download/4.5.2-rc1/Godot_v4.5.2-rc1_mono_win64.zip",
+                "windows_arm64": "https://github.com/godotengine/godot-builds/releases/download/4.5.2-rc1/Godot_v4.5.2-rc1_mono_windows_arm64.zip",
+                "linux_x86": "https://github.com/godotengine/godot-builds/releases/download/4.5.2-rc1/Godot_v4.5.2-rc1_mono_linux_x86_32.zip",
+                "linux_x64": "https://github.com/godotengine/godot-builds/releases/download/4.5.2-rc1/Godot_v4.5.2-rc1_mono_linux_x86_64.zip",
+                "linux_arm32": "https://github.com/godotengine/godot-builds/releases/download/4.5.2-rc1/Godot_v4.5.2-rc1_mono_linux_arm32.zip",
+                "linux_arm64": "https://github.com/godotengine/godot-builds/releases/download/4.5.2-rc1/Godot_v4.5.2-rc1_mono_linux_arm64.zip",
+                "macos": "https://github.com/godotengine/godot-builds/releases/download/4.5.2-rc1/Godot_v4.5.2-rc1_mono_macos.universal.zip"
+            }
+        },
+        {
             "id": "4.5.1-stable",
             "base_version": "4.5",
             "standard": {
                 "windows_x86": "https://github.com/godotengine/godot-builds/releases/download/4.5.1-stable/Godot_v4.5.1-stable_win32.exe.zip",
                 "windows_x64": "https://github.com/godotengine/godot-builds/releases/download/4.5.1-stable/Godot_v4.5.1-stable_win64.exe.zip",
-                "windows_arm64": "https://github.com/godotengine/godot-builds/releases/download/4.5.1-stable/Godot_v4.5.1-stable_windows_arm64.zip",
+                "windows_arm64": "https://github.com/godotengine/godot-builds/releases/download/4.5.1-stable/Godot_v4.5.1-stable_windows_arm64.exe.zip",
                 "linux_x86": "https://github.com/godotengine/godot-builds/releases/download/4.5.1-stable/Godot_v4.5.1-stable_linux.x86_32.zip",
                 "linux_x64": "https://github.com/godotengine/godot-builds/releases/download/4.5.1-stable/Godot_v4.5.1-stable_linux.x86_64.zip",
                 "linux_arm32": "https://github.com/godotengine/godot-builds/releases/download/4.5.1-stable/Godot_v4.5.1-stable_linux.arm32.zip",
@@ -300,7 +324,7 @@
             "standard": {
                 "windows_x86": "https://github.com/godotengine/godot-builds/releases/download/4.5.1-rc2/Godot_v4.5.1-rc2_win32.exe.zip",
                 "windows_x64": "https://github.com/godotengine/godot-builds/releases/download/4.5.1-rc2/Godot_v4.5.1-rc2_win64.exe.zip",
-                "windows_arm64": "https://github.com/godotengine/godot-builds/releases/download/4.5.1-rc2/Godot_v4.5.1-rc2_windows_arm64.zip",
+                "windows_arm64": "https://github.com/godotengine/godot-builds/releases/download/4.5.1-rc2/Godot_v4.5.1-rc2_windows_arm64.exe.zip",
                 "linux_x86": "https://github.com/godotengine/godot-builds/releases/download/4.5.1-rc2/Godot_v4.5.1-rc2_linux.x86_32.zip",
                 "linux_x64": "https://github.com/godotengine/godot-builds/releases/download/4.5.1-rc2/Godot_v4.5.1-rc2_linux.x86_64.zip",
                 "linux_arm32": "https://github.com/godotengine/godot-builds/releases/download/4.5.1-rc2/Godot_v4.5.1-rc2_linux.arm32.zip",
@@ -324,7 +348,7 @@
             "standard": {
                 "windows_x86": "https://github.com/godotengine/godot-builds/releases/download/4.5.1-rc1/Godot_v4.5.1-rc1_win32.exe.zip",
                 "windows_x64": "https://github.com/godotengine/godot-builds/releases/download/4.5.1-rc1/Godot_v4.5.1-rc1_win64.exe.zip",
-                "windows_arm64": "https://github.com/godotengine/godot-builds/releases/download/4.5.1-rc1/Godot_v4.5.1-rc1_windows_arm64.zip",
+                "windows_arm64": "https://github.com/godotengine/godot-builds/releases/download/4.5.1-rc1/Godot_v4.5.1-rc1_windows_arm64.exe.zip",
                 "linux_x86": "https://github.com/godotengine/godot-builds/releases/download/4.5.1-rc1/Godot_v4.5.1-rc1_linux.x86_32.zip",
                 "linux_x64": "https://github.com/godotengine/godot-builds/releases/download/4.5.1-rc1/Godot_v4.5.1-rc1_linux.x86_64.zip",
                 "linux_arm32": "https://github.com/godotengine/godot-builds/releases/download/4.5.1-rc1/Godot_v4.5.1-rc1_linux.arm32.zip",
@@ -348,7 +372,7 @@
             "standard": {
                 "windows_x86": "https://github.com/godotengine/godot-builds/releases/download/4.5-stable/Godot_v4.5-stable_win32.exe.zip",
                 "windows_x64": "https://github.com/godotengine/godot-builds/releases/download/4.5-stable/Godot_v4.5-stable_win64.exe.zip",
-                "windows_arm64": "https://github.com/godotengine/godot-builds/releases/download/4.5-stable/Godot_v4.5-stable_windows_arm64.zip",
+                "windows_arm64": "https://github.com/godotengine/godot-builds/releases/download/4.5-stable/Godot_v4.5-stable_windows_arm64.exe.zip",
                 "linux_x86": "https://github.com/godotengine/godot-builds/releases/download/4.5-stable/Godot_v4.5-stable_linux.x86_32.zip",
                 "linux_x64": "https://github.com/godotengine/godot-builds/releases/download/4.5-stable/Godot_v4.5-stable_linux.x86_64.zip",
                 "linux_arm32": "https://github.com/godotengine/godot-builds/releases/download/4.5-stable/Godot_v4.5-stable_linux.arm32.zip",
@@ -372,7 +396,7 @@
             "standard": {
                 "windows_x86": "https://github.com/godotengine/godot-builds/releases/download/4.5-rc2/Godot_v4.5-rc2_win32.exe.zip",
                 "windows_x64": "https://github.com/godotengine/godot-builds/releases/download/4.5-rc2/Godot_v4.5-rc2_win64.exe.zip",
-                "windows_arm64": "https://github.com/godotengine/godot-builds/releases/download/4.5-rc2/Godot_v4.5-rc2_windows_arm64.zip",
+                "windows_arm64": "https://github.com/godotengine/godot-builds/releases/download/4.5-rc2/Godot_v4.5-rc2_windows_arm64.exe.zip",
                 "linux_x86": "https://github.com/godotengine/godot-builds/releases/download/4.5-rc2/Godot_v4.5-rc2_linux.x86_32.zip",
                 "linux_x64": "https://github.com/godotengine/godot-builds/releases/download/4.5-rc2/Godot_v4.5-rc2_linux.x86_64.zip",
                 "linux_arm32": "https://github.com/godotengine/godot-builds/releases/download/4.5-rc2/Godot_v4.5-rc2_linux.arm32.zip",
@@ -396,7 +420,7 @@
             "standard": {
                 "windows_x86": "https://github.com/godotengine/godot-builds/releases/download/4.5-rc1/Godot_v4.5-rc1_win32.exe.zip",
                 "windows_x64": "https://github.com/godotengine/godot-builds/releases/download/4.5-rc1/Godot_v4.5-rc1_win64.exe.zip",
-                "windows_arm64": "https://github.com/godotengine/godot-builds/releases/download/4.5-rc1/Godot_v4.5-rc1_windows_arm64.zip",
+                "windows_arm64": "https://github.com/godotengine/godot-builds/releases/download/4.5-rc1/Godot_v4.5-rc1_windows_arm64.exe.zip",
                 "linux_x86": "https://github.com/godotengine/godot-builds/releases/download/4.5-rc1/Godot_v4.5-rc1_linux.x86_32.zip",
                 "linux_x64": "https://github.com/godotengine/godot-builds/releases/download/4.5-rc1/Godot_v4.5-rc1_linux.x86_64.zip",
                 "linux_arm32": "https://github.com/godotengine/godot-builds/releases/download/4.5-rc1/Godot_v4.5-rc1_linux.arm32.zip",
@@ -684,7 +708,7 @@
             "standard": {
                 "windows_x86": "https://github.com/godotengine/godot-builds/releases/download/4.4.1-stable/Godot_v4.4.1-stable_win32.exe.zip",
                 "windows_x64": "https://github.com/godotengine/godot-builds/releases/download/4.4.1-stable/Godot_v4.4.1-stable_win64.exe.zip",
-                "windows_arm64": "https://github.com/godotengine/godot-builds/releases/download/4.4.1-stable/Godot_v4.4.1-stable_windows_arm64.zip",
+                "windows_arm64": "https://github.com/godotengine/godot-builds/releases/download/4.4.1-stable/Godot_v4.4.1-stable_windows_arm64.exe.zip",
                 "linux_x86": "https://github.com/godotengine/godot-builds/releases/download/4.4.1-stable/Godot_v4.4.1-stable_linux.x86_32.zip",
                 "linux_x64": "https://github.com/godotengine/godot-builds/releases/download/4.4.1-stable/Godot_v4.4.1-stable_linux.x86_64.zip",
                 "linux_arm32": "https://github.com/godotengine/godot-builds/releases/download/4.4.1-stable/Godot_v4.4.1-stable_linux.arm32.zip",
@@ -708,7 +732,7 @@
             "standard": {
                 "windows_x86": "https://github.com/godotengine/godot-builds/releases/download/4.4.1-rc2/Godot_v4.4.1-rc2_win32.exe.zip",
                 "windows_x64": "https://github.com/godotengine/godot-builds/releases/download/4.4.1-rc2/Godot_v4.4.1-rc2_win64.exe.zip",
-                "windows_arm64": "https://github.com/godotengine/godot-builds/releases/download/4.4.1-rc2/Godot_v4.4.1-rc2_windows_arm64.zip",
+                "windows_arm64": "https://github.com/godotengine/godot-builds/releases/download/4.4.1-rc2/Godot_v4.4.1-rc2_windows_arm64.exe.zip",
                 "linux_x86": "https://github.com/godotengine/godot-builds/releases/download/4.4.1-rc2/Godot_v4.4.1-rc2_linux.x86_32.zip",
                 "linux_x64": "https://github.com/godotengine/godot-builds/releases/download/4.4.1-rc2/Godot_v4.4.1-rc2_linux.x86_64.zip",
                 "linux_arm32": "https://github.com/godotengine/godot-builds/releases/download/4.4.1-rc2/Godot_v4.4.1-rc2_linux.arm32.zip",
@@ -732,7 +756,7 @@
             "standard": {
                 "windows_x86": "https://github.com/godotengine/godot-builds/releases/download/4.4.1-rc1/Godot_v4.4.1-rc1_win32.exe.zip",
                 "windows_x64": "https://github.com/godotengine/godot-builds/releases/download/4.4.1-rc1/Godot_v4.4.1-rc1_win64.exe.zip",
-                "windows_arm64": "https://github.com/godotengine/godot-builds/releases/download/4.4.1-rc1/Godot_v4.4.1-rc1_windows_arm64.zip",
+                "windows_arm64": "https://github.com/godotengine/godot-builds/releases/download/4.4.1-rc1/Godot_v4.4.1-rc1_windows_arm64.exe.zip",
                 "linux_x86": "https://github.com/godotengine/godot-builds/releases/download/4.4.1-rc1/Godot_v4.4.1-rc1_linux.x86_32.zip",
                 "linux_x64": "https://github.com/godotengine/godot-builds/releases/download/4.4.1-rc1/Godot_v4.4.1-rc1_linux.x86_64.zip",
                 "linux_arm32": "https://github.com/godotengine/godot-builds/releases/download/4.4.1-rc1/Godot_v4.4.1-rc1_linux.arm32.zip",
@@ -756,7 +780,7 @@
             "standard": {
                 "windows_x86": "https://github.com/godotengine/godot-builds/releases/download/4.4-stable/Godot_v4.4-stable_win32.exe.zip",
                 "windows_x64": "https://github.com/godotengine/godot-builds/releases/download/4.4-stable/Godot_v4.4-stable_win64.exe.zip",
-                "windows_arm64": "https://github.com/godotengine/godot-builds/releases/download/4.4-stable/Godot_v4.4-stable_windows_arm64.zip",
+                "windows_arm64": "https://github.com/godotengine/godot-builds/releases/download/4.4-stable/Godot_v4.4-stable_windows_arm64.exe.zip",
                 "linux_x86": "https://github.com/godotengine/godot-builds/releases/download/4.4-stable/Godot_v4.4-stable_linux.x86_32.zip",
                 "linux_x64": "https://github.com/godotengine/godot-builds/releases/download/4.4-stable/Godot_v4.4-stable_linux.x86_64.zip",
                 "linux_arm32": "https://github.com/godotengine/godot-builds/releases/download/4.4-stable/Godot_v4.4-stable_linux.arm32.zip",
@@ -780,7 +804,7 @@
             "standard": {
                 "windows_x86": "https://github.com/godotengine/godot-builds/releases/download/4.4-rc3/Godot_v4.4-rc3_win32.exe.zip",
                 "windows_x64": "https://github.com/godotengine/godot-builds/releases/download/4.4-rc3/Godot_v4.4-rc3_win64.exe.zip",
-                "windows_arm64": "https://github.com/godotengine/godot-builds/releases/download/4.4-rc3/Godot_v4.4-rc3_windows_arm64.zip",
+                "windows_arm64": "https://github.com/godotengine/godot-builds/releases/download/4.4-rc3/Godot_v4.4-rc3_windows_arm64.exe.zip",
                 "linux_x86": "https://github.com/godotengine/godot-builds/releases/download/4.4-rc3/Godot_v4.4-rc3_linux.x86_32.zip",
                 "linux_x64": "https://github.com/godotengine/godot-builds/releases/download/4.4-rc3/Godot_v4.4-rc3_linux.x86_64.zip",
                 "linux_arm32": "https://github.com/godotengine/godot-builds/releases/download/4.4-rc3/Godot_v4.4-rc3_linux.arm32.zip",
@@ -804,7 +828,7 @@
             "standard": {
                 "windows_x86": "https://github.com/godotengine/godot-builds/releases/download/4.4-rc2/Godot_v4.4-rc2_win32.exe.zip",
                 "windows_x64": "https://github.com/godotengine/godot-builds/releases/download/4.4-rc2/Godot_v4.4-rc2_win64.exe.zip",
-                "windows_arm64": "https://github.com/godotengine/godot-builds/releases/download/4.4-rc2/Godot_v4.4-rc2_windows_arm64.zip",
+                "windows_arm64": "https://github.com/godotengine/godot-builds/releases/download/4.4-rc2/Godot_v4.4-rc2_windows_arm64.exe.zip",
                 "linux_x86": "https://github.com/godotengine/godot-builds/releases/download/4.4-rc2/Godot_v4.4-rc2_linux.x86_32.zip",
                 "linux_x64": "https://github.com/godotengine/godot-builds/releases/download/4.4-rc2/Godot_v4.4-rc2_linux.x86_64.zip",
                 "linux_arm32": "https://github.com/godotengine/godot-builds/releases/download/4.4-rc2/Godot_v4.4-rc2_linux.arm32.zip",
@@ -828,7 +852,7 @@
             "standard": {
                 "windows_x86": "https://github.com/godotengine/godot-builds/releases/download/4.4-rc1/Godot_v4.4-rc1_win32.exe.zip",
                 "windows_x64": "https://github.com/godotengine/godot-builds/releases/download/4.4-rc1/Godot_v4.4-rc1_win64.exe.zip",
-                "windows_arm64": "https://github.com/godotengine/godot-builds/releases/download/4.4-rc1/Godot_v4.4-rc1_windows_arm64.zip",
+                "windows_arm64": "https://github.com/godotengine/godot-builds/releases/download/4.4-rc1/Godot_v4.4-rc1_windows_arm64.exe.zip",
                 "linux_x86": "https://github.com/godotengine/godot-builds/releases/download/4.4-rc1/Godot_v4.4-rc1_linux.x86_32.zip",
                 "linux_x64": "https://github.com/godotengine/godot-builds/releases/download/4.4-rc1/Godot_v4.4-rc1_linux.x86_64.zip",
                 "linux_arm32": "https://github.com/godotengine/godot-builds/releases/download/4.4-rc1/Godot_v4.4-rc1_linux.arm32.zip",
@@ -1094,7 +1118,7 @@
             "standard": {
                 "windows_x86": "https://github.com/godotengine/godot-builds/releases/download/4.3-stable/Godot_v4.3-stable_win32.exe.zip",
                 "windows_x64": "https://github.com/godotengine/godot-builds/releases/download/4.3-stable/Godot_v4.3-stable_win64.exe.zip",
-                "windows_arm64": "https://github.com/godotengine/godot-builds/releases/download/4.3-stable/Godot_v4.3-stable_windows_arm64.zip",
+                "windows_arm64": "https://github.com/godotengine/godot-builds/releases/download/4.3-stable/Godot_v4.3-stable_windows_arm64.exe.zip",
                 "linux_x86": "https://github.com/godotengine/godot-builds/releases/download/4.3-stable/Godot_v4.3-stable_linux.x86_32.zip",
                 "linux_x64": "https://github.com/godotengine/godot-builds/releases/download/4.3-stable/Godot_v4.3-stable_linux.x86_64.zip",
                 "linux_arm32": "https://github.com/godotengine/godot-builds/releases/download/4.3-stable/Godot_v4.3-stable_linux.arm32.zip",
@@ -1118,7 +1142,7 @@
             "standard": {
                 "windows_x86": "https://github.com/godotengine/godot-builds/releases/download/4.3-rc3/Godot_v4.3-rc3_win32.exe.zip",
                 "windows_x64": "https://github.com/godotengine/godot-builds/releases/download/4.3-rc3/Godot_v4.3-rc3_win64.exe.zip",
-                "windows_arm64": "https://github.com/godotengine/godot-builds/releases/download/4.3-rc3/Godot_v4.3-rc3_windows_arm64.zip",
+                "windows_arm64": "https://github.com/godotengine/godot-builds/releases/download/4.3-rc3/Godot_v4.3-rc3_windows_arm64.exe.zip",
                 "linux_x86": "https://github.com/godotengine/godot-builds/releases/download/4.3-rc3/Godot_v4.3-rc3_linux.x86_32.zip",
                 "linux_x64": "https://github.com/godotengine/godot-builds/releases/download/4.3-rc3/Godot_v4.3-rc3_linux.x86_64.zip",
                 "linux_arm32": "https://github.com/godotengine/godot-builds/releases/download/4.3-rc3/Godot_v4.3-rc3_linux.arm32.zip",
@@ -1142,7 +1166,7 @@
             "standard": {
                 "windows_x86": "https://github.com/godotengine/godot-builds/releases/download/4.3-rc2/Godot_v4.3-rc2_win32.exe.zip",
                 "windows_x64": "https://github.com/godotengine/godot-builds/releases/download/4.3-rc2/Godot_v4.3-rc2_win64.exe.zip",
-                "windows_arm64": "https://github.com/godotengine/godot-builds/releases/download/4.3-rc2/Godot_v4.3-rc2_windows_arm64.zip",
+                "windows_arm64": "https://github.com/godotengine/godot-builds/releases/download/4.3-rc2/Godot_v4.3-rc2_windows_arm64.exe.zip",
                 "linux_x86": "https://github.com/godotengine/godot-builds/releases/download/4.3-rc2/Godot_v4.3-rc2_linux.x86_32.zip",
                 "linux_x64": "https://github.com/godotengine/godot-builds/releases/download/4.3-rc2/Godot_v4.3-rc2_linux.x86_64.zip",
                 "linux_arm32": "https://github.com/godotengine/godot-builds/releases/download/4.3-rc2/Godot_v4.3-rc2_linux.arm32.zip",
@@ -1166,7 +1190,7 @@
             "standard": {
                 "windows_x86": "https://github.com/godotengine/godot-builds/releases/download/4.3-rc1/Godot_v4.3-rc1_win32.exe.zip",
                 "windows_x64": "https://github.com/godotengine/godot-builds/releases/download/4.3-rc1/Godot_v4.3-rc1_win64.exe.zip",
-                "windows_arm64": "https://github.com/godotengine/godot-builds/releases/download/4.3-rc1/Godot_v4.3-rc1_windows_arm64.zip",
+                "windows_arm64": "https://github.com/godotengine/godot-builds/releases/download/4.3-rc1/Godot_v4.3-rc1_windows_arm64.exe.zip",
                 "linux_x86": "https://github.com/godotengine/godot-builds/releases/download/4.3-rc1/Godot_v4.3-rc1_linux.x86_32.zip",
                 "linux_x64": "https://github.com/godotengine/godot-builds/releases/download/4.3-rc1/Godot_v4.3-rc1_linux.x86_64.zip",
                 "linux_arm32": "https://github.com/godotengine/godot-builds/releases/download/4.3-rc1/Godot_v4.3-rc1_linux.arm32.zip",
@@ -2840,9 +2864,9 @@
             "standard": {
                 "windows_x86": "https://github.com/godotengine/godot-builds/releases/download/4.0-alpha14/Godot_v4.0-alpha14_win32.exe.zip",
                 "windows_x64": "https://github.com/godotengine/godot-builds/releases/download/4.0-alpha14/Godot_v4.0-alpha14_win64.exe.zip",
-                "linux_x86": "https://github.com/godotengine/godot-builds/releases/download/4.0-alpha14/Godot_v4.0-alpha14_linux.x86_32.zip",
-                "linux_x64": "https://github.com/godotengine/godot-builds/releases/download/4.0-alpha14/Godot_v4.0-alpha14_linux.x86_64.zip",
-                "macos": "https://github.com/godotengine/godot-builds/releases/download/4.0-alpha14/Godot_v4.0-alpha14_macos.universal.zip"
+                "linux_x86": "https://github.com/godotengine/godot-builds/releases/download/4.0-alpha14/Godot_v4.0-alpha14_linux.32.zip",
+                "linux_x64": "https://github.com/godotengine/godot-builds/releases/download/4.0-alpha14/Godot_v4.0-alpha14_linux.64.zip",
+                "macos": "https://github.com/godotengine/godot-builds/releases/download/4.0-alpha14/Godot_v4.0-alpha14_osx.universal.zip"
             }
         },
         {
@@ -2851,9 +2875,9 @@
             "standard": {
                 "windows_x86": "https://github.com/godotengine/godot-builds/releases/download/4.0-alpha13/Godot_v4.0-alpha13_win32.exe.zip",
                 "windows_x64": "https://github.com/godotengine/godot-builds/releases/download/4.0-alpha13/Godot_v4.0-alpha13_win64.exe.zip",
-                "linux_x86": "https://github.com/godotengine/godot-builds/releases/download/4.0-alpha13/Godot_v4.0-alpha13_linux.x86_32.zip",
-                "linux_x64": "https://github.com/godotengine/godot-builds/releases/download/4.0-alpha13/Godot_v4.0-alpha13_linux.x86_64.zip",
-                "macos": "https://github.com/godotengine/godot-builds/releases/download/4.0-alpha13/Godot_v4.0-alpha13_macos.universal.zip"
+                "linux_x86": "https://github.com/godotengine/godot-builds/releases/download/4.0-alpha13/Godot_v4.0-alpha13_linux.32.zip",
+                "linux_x64": "https://github.com/godotengine/godot-builds/releases/download/4.0-alpha13/Godot_v4.0-alpha13_linux.64.zip",
+                "macos": "https://github.com/godotengine/godot-builds/releases/download/4.0-alpha13/Godot_v4.0-alpha13_osx.universal.zip"
             }
         },
         {
@@ -2862,9 +2886,9 @@
             "standard": {
                 "windows_x86": "https://github.com/godotengine/godot-builds/releases/download/4.0-alpha12/Godot_v4.0-alpha12_win32.exe.zip",
                 "windows_x64": "https://github.com/godotengine/godot-builds/releases/download/4.0-alpha12/Godot_v4.0-alpha12_win64.exe.zip",
-                "linux_x86": "https://github.com/godotengine/godot-builds/releases/download/4.0-alpha12/Godot_v4.0-alpha12_linux.x86_32.zip",
-                "linux_x64": "https://github.com/godotengine/godot-builds/releases/download/4.0-alpha12/Godot_v4.0-alpha12_linux.x86_64.zip",
-                "macos": "https://github.com/godotengine/godot-builds/releases/download/4.0-alpha12/Godot_v4.0-alpha12_macos.universal.zip"
+                "linux_x86": "https://github.com/godotengine/godot-builds/releases/download/4.0-alpha12/Godot_v4.0-alpha12_linux.32.zip",
+                "linux_x64": "https://github.com/godotengine/godot-builds/releases/download/4.0-alpha12/Godot_v4.0-alpha12_linux.64.zip",
+                "macos": "https://github.com/godotengine/godot-builds/releases/download/4.0-alpha12/Godot_v4.0-alpha12_osx.universal.zip"
             }
         },
         {
@@ -2873,9 +2897,9 @@
             "standard": {
                 "windows_x86": "https://github.com/godotengine/godot-builds/releases/download/4.0-alpha11/Godot_v4.0-alpha11_win32.exe.zip",
                 "windows_x64": "https://github.com/godotengine/godot-builds/releases/download/4.0-alpha11/Godot_v4.0-alpha11_win64.exe.zip",
-                "linux_x86": "https://github.com/godotengine/godot-builds/releases/download/4.0-alpha11/Godot_v4.0-alpha11_linux.x86_32.zip",
-                "linux_x64": "https://github.com/godotengine/godot-builds/releases/download/4.0-alpha11/Godot_v4.0-alpha11_linux.x86_64.zip",
-                "macos": "https://github.com/godotengine/godot-builds/releases/download/4.0-alpha11/Godot_v4.0-alpha11_macos.universal.zip"
+                "linux_x86": "https://github.com/godotengine/godot-builds/releases/download/4.0-alpha11/Godot_v4.0-alpha11_linux.32.zip",
+                "linux_x64": "https://github.com/godotengine/godot-builds/releases/download/4.0-alpha11/Godot_v4.0-alpha11_linux.64.zip",
+                "macos": "https://github.com/godotengine/godot-builds/releases/download/4.0-alpha11/Godot_v4.0-alpha11_osx.universal.zip"
             }
         },
         {
@@ -2884,9 +2908,9 @@
             "standard": {
                 "windows_x86": "https://github.com/godotengine/godot-builds/releases/download/4.0-alpha10/Godot_v4.0-alpha10_win32.exe.zip",
                 "windows_x64": "https://github.com/godotengine/godot-builds/releases/download/4.0-alpha10/Godot_v4.0-alpha10_win64.exe.zip",
-                "linux_x86": "https://github.com/godotengine/godot-builds/releases/download/4.0-alpha10/Godot_v4.0-alpha10_linux.x86_32.zip",
-                "linux_x64": "https://github.com/godotengine/godot-builds/releases/download/4.0-alpha10/Godot_v4.0-alpha10_linux.x86_64.zip",
-                "macos": "https://github.com/godotengine/godot-builds/releases/download/4.0-alpha10/Godot_v4.0-alpha10_macos.universal.zip"
+                "linux_x86": "https://github.com/godotengine/godot-builds/releases/download/4.0-alpha10/Godot_v4.0-alpha10_linux.32.zip",
+                "linux_x64": "https://github.com/godotengine/godot-builds/releases/download/4.0-alpha10/Godot_v4.0-alpha10_linux.64.zip",
+                "macos": "https://github.com/godotengine/godot-builds/releases/download/4.0-alpha10/Godot_v4.0-alpha10_osx.universal.zip"
             }
         },
         {
@@ -2895,9 +2919,9 @@
             "standard": {
                 "windows_x86": "https://github.com/godotengine/godot-builds/releases/download/4.0-alpha9/Godot_v4.0-alpha9_win32.exe.zip",
                 "windows_x64": "https://github.com/godotengine/godot-builds/releases/download/4.0-alpha9/Godot_v4.0-alpha9_win64.exe.zip",
-                "linux_x86": "https://github.com/godotengine/godot-builds/releases/download/4.0-alpha9/Godot_v4.0-alpha9_linux.x86_32.zip",
-                "linux_x64": "https://github.com/godotengine/godot-builds/releases/download/4.0-alpha9/Godot_v4.0-alpha9_linux.x86_64.zip",
-                "macos": "https://github.com/godotengine/godot-builds/releases/download/4.0-alpha9/Godot_v4.0-alpha9_macos.universal.zip"
+                "linux_x86": "https://github.com/godotengine/godot-builds/releases/download/4.0-alpha9/Godot_v4.0-alpha9_linux.32.zip",
+                "linux_x64": "https://github.com/godotengine/godot-builds/releases/download/4.0-alpha9/Godot_v4.0-alpha9_linux.64.zip",
+                "macos": "https://github.com/godotengine/godot-builds/releases/download/4.0-alpha9/Godot_v4.0-alpha9_osx.universal.zip"
             }
         },
         {
@@ -2906,9 +2930,9 @@
             "standard": {
                 "windows_x86": "https://github.com/godotengine/godot-builds/releases/download/4.0-alpha8/Godot_v4.0-alpha8_win32.exe.zip",
                 "windows_x64": "https://github.com/godotengine/godot-builds/releases/download/4.0-alpha8/Godot_v4.0-alpha8_win64.exe.zip",
-                "linux_x86": "https://github.com/godotengine/godot-builds/releases/download/4.0-alpha8/Godot_v4.0-alpha8_linux.x86_32.zip",
-                "linux_x64": "https://github.com/godotengine/godot-builds/releases/download/4.0-alpha8/Godot_v4.0-alpha8_linux.x86_64.zip",
-                "macos": "https://github.com/godotengine/godot-builds/releases/download/4.0-alpha8/Godot_v4.0-alpha8_macos.universal.zip"
+                "linux_x86": "https://github.com/godotengine/godot-builds/releases/download/4.0-alpha8/Godot_v4.0-alpha8_linux.32.zip",
+                "linux_x64": "https://github.com/godotengine/godot-builds/releases/download/4.0-alpha8/Godot_v4.0-alpha8_linux.64.zip",
+                "macos": "https://github.com/godotengine/godot-builds/releases/download/4.0-alpha8/Godot_v4.0-alpha8_osx.universal.zip"
             }
         },
         {
@@ -2917,9 +2941,9 @@
             "standard": {
                 "windows_x86": "https://github.com/godotengine/godot-builds/releases/download/4.0-alpha7/Godot_v4.0-alpha7_win32.exe.zip",
                 "windows_x64": "https://github.com/godotengine/godot-builds/releases/download/4.0-alpha7/Godot_v4.0-alpha7_win64.exe.zip",
-                "linux_x86": "https://github.com/godotengine/godot-builds/releases/download/4.0-alpha7/Godot_v4.0-alpha7_linux.x86_32.zip",
-                "linux_x64": "https://github.com/godotengine/godot-builds/releases/download/4.0-alpha7/Godot_v4.0-alpha7_linux.x86_64.zip",
-                "macos": "https://github.com/godotengine/godot-builds/releases/download/4.0-alpha7/Godot_v4.0-alpha7_macos.universal.zip"
+                "linux_x86": "https://github.com/godotengine/godot-builds/releases/download/4.0-alpha7/Godot_v4.0-alpha7_linux.32.zip",
+                "linux_x64": "https://github.com/godotengine/godot-builds/releases/download/4.0-alpha7/Godot_v4.0-alpha7_linux.64.zip",
+                "macos": "https://github.com/godotengine/godot-builds/releases/download/4.0-alpha7/Godot_v4.0-alpha7_osx.universal.zip"
             }
         },
         {
@@ -2928,9 +2952,9 @@
             "standard": {
                 "windows_x86": "https://github.com/godotengine/godot-builds/releases/download/4.0-alpha6/Godot_v4.0-alpha6_win32.exe.zip",
                 "windows_x64": "https://github.com/godotengine/godot-builds/releases/download/4.0-alpha6/Godot_v4.0-alpha6_win64.exe.zip",
-                "linux_x86": "https://github.com/godotengine/godot-builds/releases/download/4.0-alpha6/Godot_v4.0-alpha6_linux.x86_32.zip",
-                "linux_x64": "https://github.com/godotengine/godot-builds/releases/download/4.0-alpha6/Godot_v4.0-alpha6_linux.x86_64.zip",
-                "macos": "https://github.com/godotengine/godot-builds/releases/download/4.0-alpha6/Godot_v4.0-alpha6_macos.universal.zip"
+                "linux_x86": "https://github.com/godotengine/godot-builds/releases/download/4.0-alpha6/Godot_v4.0-alpha6_linux.32.zip",
+                "linux_x64": "https://github.com/godotengine/godot-builds/releases/download/4.0-alpha6/Godot_v4.0-alpha6_linux.64.zip",
+                "macos": "https://github.com/godotengine/godot-builds/releases/download/4.0-alpha6/Godot_v4.0-alpha6_osx.universal.zip"
             }
         },
         {
@@ -2939,9 +2963,9 @@
             "standard": {
                 "windows_x86": "https://github.com/godotengine/godot-builds/releases/download/4.0-alpha5/Godot_v4.0-alpha5_win32.exe.zip",
                 "windows_x64": "https://github.com/godotengine/godot-builds/releases/download/4.0-alpha5/Godot_v4.0-alpha5_win64.exe.zip",
-                "linux_x86": "https://github.com/godotengine/godot-builds/releases/download/4.0-alpha5/Godot_v4.0-alpha5_linux.x86_32.zip",
-                "linux_x64": "https://github.com/godotengine/godot-builds/releases/download/4.0-alpha5/Godot_v4.0-alpha5_linux.x86_64.zip",
-                "macos": "https://github.com/godotengine/godot-builds/releases/download/4.0-alpha5/Godot_v4.0-alpha5_macos.universal.zip"
+                "linux_x86": "https://github.com/godotengine/godot-builds/releases/download/4.0-alpha5/Godot_v4.0-alpha5_linux.32.zip",
+                "linux_x64": "https://github.com/godotengine/godot-builds/releases/download/4.0-alpha5/Godot_v4.0-alpha5_linux.64.zip",
+                "macos": "https://github.com/godotengine/godot-builds/releases/download/4.0-alpha5/Godot_v4.0-alpha5_osx.universal.zip"
             }
         },
         {
@@ -2950,9 +2974,9 @@
             "standard": {
                 "windows_x86": "https://github.com/godotengine/godot-builds/releases/download/4.0-alpha4/Godot_v4.0-alpha4_win32.exe.zip",
                 "windows_x64": "https://github.com/godotengine/godot-builds/releases/download/4.0-alpha4/Godot_v4.0-alpha4_win64.exe.zip",
-                "linux_x86": "https://github.com/godotengine/godot-builds/releases/download/4.0-alpha4/Godot_v4.0-alpha4_linux.x86_32.zip",
-                "linux_x64": "https://github.com/godotengine/godot-builds/releases/download/4.0-alpha4/Godot_v4.0-alpha4_linux.x86_64.zip",
-                "macos": "https://github.com/godotengine/godot-builds/releases/download/4.0-alpha4/Godot_v4.0-alpha4_macos.universal.zip"
+                "linux_x86": "https://github.com/godotengine/godot-builds/releases/download/4.0-alpha4/Godot_v4.0-alpha4_linux.32.zip",
+                "linux_x64": "https://github.com/godotengine/godot-builds/releases/download/4.0-alpha4/Godot_v4.0-alpha4_linux.64.zip",
+                "macos": "https://github.com/godotengine/godot-builds/releases/download/4.0-alpha4/Godot_v4.0-alpha4_osx.universal.zip"
             }
         },
         {
@@ -2961,9 +2985,9 @@
             "standard": {
                 "windows_x86": "https://github.com/godotengine/godot-builds/releases/download/4.0-alpha3/Godot_v4.0-alpha3_win32.exe.zip",
                 "windows_x64": "https://github.com/godotengine/godot-builds/releases/download/4.0-alpha3/Godot_v4.0-alpha3_win64.exe.zip",
-                "linux_x86": "https://github.com/godotengine/godot-builds/releases/download/4.0-alpha3/Godot_v4.0-alpha3_linux.x86_32.zip",
-                "linux_x64": "https://github.com/godotengine/godot-builds/releases/download/4.0-alpha3/Godot_v4.0-alpha3_linux.x86_64.zip",
-                "macos": "https://github.com/godotengine/godot-builds/releases/download/4.0-alpha3/Godot_v4.0-alpha3_macos.universal.zip"
+                "linux_x86": "https://github.com/godotengine/godot-builds/releases/download/4.0-alpha3/Godot_v4.0-alpha3_linux.32.zip",
+                "linux_x64": "https://github.com/godotengine/godot-builds/releases/download/4.0-alpha3/Godot_v4.0-alpha3_linux.64.zip",
+                "macos": "https://github.com/godotengine/godot-builds/releases/download/4.0-alpha3/Godot_v4.0-alpha3_osx.universal.zip"
             }
         },
         {
@@ -2972,9 +2996,9 @@
             "standard": {
                 "windows_x86": "https://github.com/godotengine/godot-builds/releases/download/4.0-alpha2/Godot_v4.0-alpha2_win32.exe.zip",
                 "windows_x64": "https://github.com/godotengine/godot-builds/releases/download/4.0-alpha2/Godot_v4.0-alpha2_win64.exe.zip",
-                "linux_x86": "https://github.com/godotengine/godot-builds/releases/download/4.0-alpha2/Godot_v4.0-alpha2_linux.x86_32.zip",
-                "linux_x64": "https://github.com/godotengine/godot-builds/releases/download/4.0-alpha2/Godot_v4.0-alpha2_linux.x86_64.zip",
-                "macos": "https://github.com/godotengine/godot-builds/releases/download/4.0-alpha2/Godot_v4.0-alpha2_macos.universal.zip"
+                "linux_x86": "https://github.com/godotengine/godot-builds/releases/download/4.0-alpha2/Godot_v4.0-alpha2_linux.32.zip",
+                "linux_x64": "https://github.com/godotengine/godot-builds/releases/download/4.0-alpha2/Godot_v4.0-alpha2_linux.64.zip",
+                "macos": "https://github.com/godotengine/godot-builds/releases/download/4.0-alpha2/Godot_v4.0-alpha2_osx.universal.zip"
             }
         },
         {
@@ -2983,9 +3007,9 @@
             "standard": {
                 "windows_x86": "https://github.com/godotengine/godot-builds/releases/download/4.0-alpha1/Godot_v4.0-alpha1_win32.exe.zip",
                 "windows_x64": "https://github.com/godotengine/godot-builds/releases/download/4.0-alpha1/Godot_v4.0-alpha1_win64.exe.zip",
-                "linux_x86": "https://github.com/godotengine/godot-builds/releases/download/4.0-alpha1/Godot_v4.0-alpha1_linux.x86_32.zip",
-                "linux_x64": "https://github.com/godotengine/godot-builds/releases/download/4.0-alpha1/Godot_v4.0-alpha1_linux.x86_64.zip",
-                "macos": "https://github.com/godotengine/godot-builds/releases/download/4.0-alpha1/Godot_v4.0-alpha1_macos.universal.zip"
+                "linux_x86": "https://github.com/godotengine/godot-builds/releases/download/4.0-alpha1/Godot_v4.0-alpha1_linux.32.zip",
+                "linux_x64": "https://github.com/godotengine/godot-builds/releases/download/4.0-alpha1/Godot_v4.0-alpha1_linux.64.zip",
+                "macos": "https://github.com/godotengine/godot-builds/releases/download/4.0-alpha1/Godot_v4.0-alpha1_osx.universal.zip"
             }
         }
     ]

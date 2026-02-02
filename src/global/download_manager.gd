@@ -29,8 +29,12 @@ var downloading_task: Dictionary[String, bool] = {}
 
 func _ready() -> void:
 	load_source()
+	Config.config_updated.connect(_config_update)
 
 func load_source() -> void:
+	source.clear()
+	valid_version.clear()
+	valid_source.clear()
 	var source_json: String = FileAccess.get_file_as_string("res://src/global/source/source.json")
 	var json: JSON = JSON.new()
 	if json.parse(source_json) != OK:
@@ -58,6 +62,10 @@ func load_source() -> void:
 				if dotnet_url != "":
 					_add_source(base_version, id, BUILD_DOTNET, source_name, dotnet_url)
 	source_loaded.emit()
+
+func _config_update(config_name: String) -> void:
+	if config_name == "architecture":
+		load_source()
 
 func _add_source(base_version: String, id: String, build_type: String, source_name: String, url: String) -> void:
 	if not source.has(base_version):

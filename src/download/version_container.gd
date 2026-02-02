@@ -7,6 +7,12 @@ const SOURCE_CARD: PackedScene = preload("uid://cvhkrjsovo0lf")
 @onready var card_container: VBoxContainer = $HBoxContainer/CardContainer
 
 func _ready() -> void:
+	_load_source()
+	DownloadManager.source_loaded.connect(_load_source)
+
+func _load_source() -> void:
+	for card: Control in card_container.get_children():
+		card.queue_free()
 	for engine_id: String in DownloadManager.valid_version.get(title, []):
 		var card: Control = SOURCE_CARD.instantiate()
 		card.engine_id = engine_id
