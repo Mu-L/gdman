@@ -37,6 +37,12 @@ var hide_path: bool = false:
 		store_config()
 		config_updated.emit("hide_path")
 
+var remote_source: bool = false:
+	set(v):
+		remote_source = v
+		store_config()
+		config_updated.emit("remote_source")
+
 func _ready() -> void:
 	load_config()
 
@@ -50,6 +56,7 @@ func store_config() -> void:
 	config.set_value("general", "delete_download_file", delete_download_file)
 	config.set_value("general", "external_editor_path", external_editor_path)
 	config.set_value("general", "hide_path", hide_path)
+	config.set_value("general", "remote_source", remote_source)
 	config.save(CONFIG_PATH)
 
 func load_config() -> void:
@@ -61,6 +68,7 @@ func load_config() -> void:
 	delete_download_file = config.get_value("general", "delete_download_file", false)
 	external_editor_path = config.get_value("general", "external_editor_path", "")
 	hide_path = config.get_value("general", "hide_path", false)
+	remote_source = config.get_value("general", "remote_source", false)
 
 func get_architecture() -> String:
 	if architecture == "auto":
