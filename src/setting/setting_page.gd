@@ -2,6 +2,7 @@ extends VBoxContainer
 
 @onready var language_option: OptionButton = $HBoxContainer2/ScrollContainer/VBoxContainer/PanelContainer/MarginContainer/GridContainer/LanguageOption
 @onready var architecture_option: OptionButton = $HBoxContainer2/ScrollContainer/VBoxContainer/PanelContainer/MarginContainer/GridContainer/ArchitectureOption
+@onready var remote_source_check: CheckButton = $HBoxContainer2/ScrollContainer/VBoxContainer/PanelContainer/MarginContainer/GridContainer/RemoteSourceCheck
 @onready var delete_check: CheckButton = $HBoxContainer2/ScrollContainer/VBoxContainer/PanelContainer/MarginContainer/GridContainer/DeleteCheck
 @onready var editor_path_line: LineEdit = $HBoxContainer2/ScrollContainer/VBoxContainer/PanelContainer/MarginContainer/GridContainer/HBoxContainer/EditorPathLine
 @onready var editor_file_dialog: FileDialog = $HBoxContainer2/ScrollContainer/VBoxContainer/PanelContainer/MarginContainer/GridContainer/HBoxContainer/EditorSelectButton/EditorFileDialog
@@ -33,6 +34,7 @@ func _ready() -> void:
 	editor_path_line.text = Config.external_editor_path
 	editor_path_line.tooltip_text = Config.external_editor_path
 	hide_path_check.button_pressed = Config.hide_path
+	remote_source_check.button_pressed = Config.remote_source
 	version_label.text = ProjectSettings.get_setting("application/config/version", "unknown")
 	user_path_button.text = ProjectSettings.globalize_path("user://")
 	user_path_button.tooltip_text = ProjectSettings.globalize_path("user://")
@@ -62,6 +64,9 @@ func _on_architecture_option_item_selected(index: int) -> void:
 		Config.architecture = "auto"
 	else:
 		Config.architecture = architecture_option.get_item_text(index)
+
+func _on_remote_source_check_toggled(toggled_on: bool) -> void:
+	Config.remote_source = toggled_on
 
 func _on_delete_check_toggled(toggled_on: bool) -> void:
 	Config.delete_download_file = toggled_on

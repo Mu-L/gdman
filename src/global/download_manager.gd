@@ -76,8 +76,12 @@ func load_source() -> void:
 	source_loaded.emit()
 
 func _config_update(config_name: String) -> void:
-	if config_name == "architecture":
-		load_source()
+	match config_name:
+		"architecture":
+			load_source()
+		"remote_source":
+			_request_remote_source()
+	
 
 func _add_source(base_version: String, id: String, build_type: String, source_name: String, url: String) -> void:
 	if not source.has(base_version):

@@ -120,6 +120,15 @@ item_count = 1
 popup/item_0/text = "auto"
 popup/item_0/id = 0
 
+[node name="Label8" type="Label" parent="HBoxContainer2/ScrollContainer/VBoxContainer/PanelContainer/MarginContainer/GridContainer" unique_id=171366908]
+layout_mode = 2
+tooltip_text = "SETTING_REMOTE_SOURCE_HINT"
+mouse_filter = 1
+text = "SETTING_REMOTE_SOURCE"
+
+[node name="RemoteSourceCheck" type="CheckButton" parent="HBoxContainer2/ScrollContainer/VBoxContainer/PanelContainer/MarginContainer/GridContainer" unique_id=1383476523]
+layout_mode = 2
+
 [node name="Label3" type="Label" parent="HBoxContainer2/ScrollContainer/VBoxContainer/PanelContainer/MarginContainer/GridContainer" unique_id=1524774143]
 layout_mode = 2
 tooltip_text = "SETTING_DELETE_DOWNLOAD_HINT"
@@ -231,6 +240,7 @@ size_flags_horizontal = 3
 
 [connection signal="item_selected" from="HBoxContainer2/ScrollContainer/VBoxContainer/PanelContainer/MarginContainer/GridContainer/LanguageOption" to="." method="_on_language_option_item_selected"]
 [connection signal="item_selected" from="HBoxContainer2/ScrollContainer/VBoxContainer/PanelContainer/MarginContainer/GridContainer/ArchitectureOption" to="." method="_on_architecture_option_item_selected"]
+[connection signal="toggled" from="HBoxContainer2/ScrollContainer/VBoxContainer/PanelContainer/MarginContainer/GridContainer/RemoteSourceCheck" to="." method="_on_remote_source_check_toggled"]
 [connection signal="toggled" from="HBoxContainer2/ScrollContainer/VBoxContainer/PanelContainer/MarginContainer/GridContainer/DeleteCheck" to="." method="_on_delete_check_toggled"]
 [connection signal="text_submitted" from="HBoxContainer2/ScrollContainer/VBoxContainer/PanelContainer/MarginContainer/GridContainer/HBoxContainer/EditorPathLine" to="." method="_on_editor_path_line_text_submitted"]
 [connection signal="pressed" from="HBoxContainer2/ScrollContainer/VBoxContainer/PanelContainer/MarginContainer/GridContainer/HBoxContainer/EditorSelectButton" to="." method="_on_editor_select_button_pressed"]

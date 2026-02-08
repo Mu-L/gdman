@@ -31,6 +31,7 @@ DOWNLOAD_CHECK_STANDARD,Standard,标准版,標準版
 DOWNLOAD_CHECK_DOTNET,.NET,.NET版,.NET版
 DOWNLOAD_CHECK_STABLE,Stable,稳定版,穩定版
 DOWNLOAD_CHECK_UNSTABLE,Unstable,不稳定版,不穩定版
+DOWNLOAD_UPDATE_PROMPT,,下载源有更新，重启以应用！,
 SOURCE_CARD_UNSTABLE_HINT,"Unstable(RC, Beta, Alpha, Dev, etc.)",不稳定版（RC，Beta，Alpha，Dev等）,不穩定版（RC，Beta，Alpha，Dev等）
 SOURCE_CARD_DOWNLOAD_HINT,Download %s,下载%s,下載%s
 DOWNLOAD_CONFIRM_TITLE,Download %s,下载%s,下載%s
@@ -55,4 +56,5 @@ SETTING_HIDE_PATH_HINT,Hide path in cards\n*Full path shown on hover,隐藏卡�
 SETTING_USER_PATH,User Directory,用户目录,用戶目錄
 SETTING_USER_PATH_HINT,Local data directory,GDMan在本机用户使用的目录,GDMan在本機用戶使用的目錄
 SETTING_LICENSE,License,开源协议,開源協議
-,,,
+SETTING_REMOTE_SOURCE,,在线更新源,
+SETTING_REMOTE_SOURCE_HINT,,启动时从在线仓库获取最新的引擎下载地址,

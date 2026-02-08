@@ -38,6 +38,7 @@ theme_override_constants/separation = 5
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 tooltip_text = "PROJECT_IMPORT_HINT"
+theme_override_font_sizes/font_size = 15
 text = "PROJECT_IMPORT"
 icon = ExtResource("2_8oi35")
 expand_icon = true

@@ -33,12 +33,14 @@ theme_override_constants/separation = 5
 
 [node name="StandardCheck" type="CheckBox" parent="HBoxContainer" unique_id=235235217]
 layout_mode = 2
+theme_override_font_sizes/font_size = 15
 button_pressed = true
 text = "ENGINE_CHECK_STANDARD"
 flat = true
 
 [node name="DotnetCheck" type="CheckBox" parent="HBoxContainer" unique_id=2022638552]
 layout_mode = 2
+theme_override_font_sizes/font_size = 15
 button_pressed = true
 text = "ENGINE_CHECK_DOTNET"
 flat = true
@@ -48,12 +50,14 @@ layout_mode = 2
 
 [node name="StableCheck" type="CheckBox" parent="HBoxContainer" unique_id=1863307986]
 layout_mode = 2
+theme_override_font_sizes/font_size = 15
 button_pressed = true
 text = "ENGINE_CHECK_STABLE"
 flat = true
 
 [node name="UnstableCheck" type="CheckBox" parent="HBoxContainer" unique_id=1273763945]
 layout_mode = 2
+theme_override_font_sizes/font_size = 15
 text = "ENGINE_CHECK_UNSTABLE"
 flat = true
 

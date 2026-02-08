@@ -8,10 +8,13 @@ const DOWNLOADER_CARD: PackedScene = preload("uid://bgk1814jgblda")
 @onready var dotnet_check: CheckBox = $OptionContainer/DotnetCheck
 @onready var stable_check: CheckBox = $OptionContainer/StableCheck
 @onready var unstable_check: CheckBox = $OptionContainer/UnstableCheck
+@onready var update_prompt_button: LinkButton = $OptionContainer/UpdatePromptButton
 
 @onready var downloader_container: VBoxContainer = $HSplitContainer/PanelContainer2/MarginContainer/ScrollContainer/DownloaderContainer
 
 func _ready() -> void:
+	update_prompt_button.hide()
+	DownloadManager.source_updated.connect(update_prompt_button.show)
 	var version_containers: Array[Node] = get_tree().get_nodes_in_group("download_version_container")
 	for container: Control in version_containers:
 		container.download.connect(_on_version_container_download)

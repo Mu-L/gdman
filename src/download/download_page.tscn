@@ -43,12 +43,14 @@ layout_mode = 2
 
 [node name="StandardCheck" type="CheckBox" parent="OptionContainer" unique_id=1007961907]
 layout_mode = 2
+theme_override_font_sizes/font_size = 15
 button_pressed = true
 text = "DOWNLOAD_CHECK_STANDARD"
 flat = true
 
 [node name="DotnetCheck" type="CheckBox" parent="OptionContainer" unique_id=1892982159]
 layout_mode = 2
+theme_override_font_sizes/font_size = 15
 text = "DOWNLOAD_CHECK_DOTNET"
 flat = true
 
@@ -57,14 +59,27 @@ layout_mode = 2
 
 [node name="StableCheck" type="CheckBox" parent="OptionContainer" unique_id=86975575]
 layout_mode = 2
+theme_override_font_sizes/font_size = 15
 button_pressed = true
 text = "DOWNLOAD_CHECK_STABLE"
 flat = true
 
 [node name="UnstableCheck" type="CheckBox" parent="OptionContainer" unique_id=1761071388]
 layout_mode = 2
+theme_override_font_sizes/font_size = 15
 text = "DOWNLOAD_CHECK_UNSTABLE"
 flat = true
+
+[node name="Pass" type="Control" parent="OptionContainer" unique_id=1539109190]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="UpdatePromptButton" type="LinkButton" parent="OptionContainer" unique_id=1049523697]
+visible = false
+layout_mode = 2
+theme_override_font_sizes/font_size = 15
+text = "DOWNLOAD_UPDATE_PROMPT"
+uri = "https://github.com/hbread00/gdman-source"
 
 [node name="HSplitContainer" type="HSplitContainer" parent="." unique_id=888305415]
 layout_mode = 2
