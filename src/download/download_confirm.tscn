@@ -5,7 +5,7 @@
 [node name="DownloadConfirm" type="ConfirmationDialog" unique_id=1392267383]
 oversampling_override = 1.0
 position = Vector2i(0, 36)
-size = Vector2i(372, 101)
+size = Vector2i(372, 110)
 visible = true
 script = ExtResource("1_2r55n")
 
@@ -15,38 +15,30 @@ anchor_right = 1.0
 offset_left = 8.0
 offset_top = 8.0
 offset_right = -8.0
-offset_bottom = 52.0
+offset_bottom = 61.0
 grow_horizontal = 2
+theme_override_constants/separation = 5
 
 [node name="HSeparator" type="HSeparator" parent="VBoxContainer" unique_id=1139881922]
 layout_mode = 2
 
 [node name="PingContainer" type="VBoxContainer" parent="VBoxContainer" unique_id=709997604]
 layout_mode = 2
+theme_override_constants/separation = 5
 
 [node name="HSeparator2" type="HSeparator" parent="VBoxContainer" unique_id=1031333277]
 layout_mode = 2
 
 [node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer" unique_id=872519067]
 layout_mode = 2
+theme_override_constants/separation = 5
 
-[node name="PanelContainer" type="PanelContainer" parent="VBoxContainer/HBoxContainer" unique_id=417335236]
+[node name="UrlLine" type="LineEdit" parent="VBoxContainer/HBoxContainer" unique_id=860932887]
 layout_mode = 2
 size_flags_horizontal = 3
-
-[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/HBoxContainer/PanelContainer" unique_id=1086418925]
-layout_mode = 2
-theme_override_constants/margin_left = 5
-theme_override_constants/margin_right = 5
-theme_override_constants/margin_bottom = 1
-
-[node name="UrlLabel" type="Label" parent="VBoxContainer/HBoxContainer/PanelContainer/MarginContainer" unique_id=1198836144]
-custom_minimum_size = Vector2(160, 0)
-layout_mode = 2
 theme_override_font_sizes/font_size = 15
 text = "url"
-vertical_alignment = 1
-text_overrun_behavior = 3
+editable = false
 
 [node name="SourceOption" type="OptionButton" parent="VBoxContainer/HBoxContainer" unique_id=1846271872]
 layout_mode = 2

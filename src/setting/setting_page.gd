@@ -8,7 +8,7 @@ extends VBoxContainer
 @onready var editor_file_dialog: FileDialog = $HBoxContainer2/ScrollContainer/VBoxContainer/PanelContainer/MarginContainer/GridContainer/HBoxContainer/EditorSelectButton/EditorFileDialog
 @onready var hide_path_check: CheckButton = $HBoxContainer2/ScrollContainer/VBoxContainer/PanelContainer/MarginContainer/GridContainer/HidePathCheck
 @onready var version_label: Label = $HBoxContainer2/ScrollContainer/VBoxContainer/PanelContainer/MarginContainer/GridContainer/VersionLabel
-@onready var user_path_button: Button = $HBoxContainer2/ScrollContainer/VBoxContainer/PanelContainer/MarginContainer/GridContainer/UserPathButton
+@onready var user_path_line: LineEdit = $HBoxContainer2/ScrollContainer/VBoxContainer/PanelContainer/MarginContainer/GridContainer/HBoxContainer2/UserPathLine
 
 func _ready() -> void:
 	match Config.language:
@@ -36,8 +36,8 @@ func _ready() -> void:
 	hide_path_check.button_pressed = Config.hide_path
 	remote_source_check.button_pressed = Config.remote_source
 	version_label.text = ProjectSettings.get_setting("application/config/version", "unknown")
-	user_path_button.text = ProjectSettings.globalize_path("user://")
-	user_path_button.tooltip_text = ProjectSettings.globalize_path("user://")
+	user_path_line.text = ProjectSettings.globalize_path("user://")
+	user_path_line.tooltip_text = ProjectSettings.globalize_path("user://")
 	Config.config_updated.connect(_config_update)
 
 func _config_update(config_name: String) -> void:

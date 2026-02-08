@@ -11,7 +11,7 @@ var url_dict: Dictionary[String, String] = {}
 
 @onready var ping_container: VBoxContainer = $VBoxContainer/PingContainer
 @onready var source_option: OptionButton = $VBoxContainer/HBoxContainer/SourceOption
-@onready var url_label: Label = $VBoxContainer/HBoxContainer/PanelContainer/MarginContainer/UrlLabel
+@onready var url_line: LineEdit = $VBoxContainer/HBoxContainer/UrlLine
 
 func _ready() -> void:
 	_load_source()
@@ -33,7 +33,8 @@ func display(engine_id: String) -> void:
 		title = "Download %s" % engine_id
 		source_option.select(-1)
 		get_ok_button().disabled = true
-		url_label.text = ""
+		url_line.text = ""
+		url_line.tooltip_text = ""
 		for source: String in url_dict.keys():
 			url_dict[source] = ""
 		for i: int in source_option.get_item_count():
@@ -55,7 +56,8 @@ func display(engine_id: String) -> void:
 
 func _on_source_option_item_selected(index: int) -> void:
 	var url: String = url_dict.get(source_option.get_item_text(index), "")
-	url_label.text = url
+	url_line.text = url
+	url_line.tooltip_text = url
 	if url == "":
 		get_ok_button().disabled = true
 	else:

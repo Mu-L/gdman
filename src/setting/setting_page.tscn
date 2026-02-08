@@ -194,12 +194,21 @@ mouse_filter = 1
 theme_override_font_sizes/font_size = 15
 text = "SETTING_USER_PATH"
 
-[node name="UserPathButton" type="Button" parent="HBoxContainer2/ScrollContainer/VBoxContainer/PanelContainer/MarginContainer/GridContainer" unique_id=1658310235]
+[node name="HBoxContainer2" type="HBoxContainer" parent="HBoxContainer2/ScrollContainer/VBoxContainer/PanelContainer/MarginContainer/GridContainer" unique_id=119828098]
 layout_mode = 2
+
+[node name="UserPathLine" type="LineEdit" parent="HBoxContainer2/ScrollContainer/VBoxContainer/PanelContainer/MarginContainer/GridContainer/HBoxContainer2" unique_id=1554066396]
+layout_mode = 2
+size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 15
 text = "user://"
+editable = false
+
+[node name="UserPathButton" type="Button" parent="HBoxContainer2/ScrollContainer/VBoxContainer/PanelContainer/MarginContainer/GridContainer/HBoxContainer2" unique_id=1658310235]
+custom_minimum_size = Vector2(30, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 15
 icon = ExtResource("4_xuaq7")
-text_overrun_behavior = 3
 expand_icon = true
 
 [node name="PanelContainer2" type="PanelContainer" parent="HBoxContainer2/ScrollContainer/VBoxContainer" unique_id=2131377467]
@@ -246,4 +255,4 @@ size_flags_horizontal = 3
 [connection signal="pressed" from="HBoxContainer2/ScrollContainer/VBoxContainer/PanelContainer/MarginContainer/GridContainer/HBoxContainer/EditorSelectButton" to="." method="_on_editor_select_button_pressed"]
 [connection signal="file_selected" from="HBoxContainer2/ScrollContainer/VBoxContainer/PanelContainer/MarginContainer/GridContainer/HBoxContainer/EditorSelectButton/EditorFileDialog" to="." method="_on_editor_file_dialog_file_selected"]
 [connection signal="toggled" from="HBoxContainer2/ScrollContainer/VBoxContainer/PanelContainer/MarginContainer/GridContainer/HidePathCheck" to="." method="_on_hide_path_check_toggled"]
-[connection signal="pressed" from="HBoxContainer2/ScrollContainer/VBoxContainer/PanelContainer/MarginContainer/GridContainer/UserPathButton" to="." method="_on_user_path_button_pressed"]
+[connection signal="pressed" from="HBoxContainer2/ScrollContainer/VBoxContainer/PanelContainer/MarginContainer/GridContainer/HBoxContainer2/UserPathButton" to="." method="_on_user_path_button_pressed"]
