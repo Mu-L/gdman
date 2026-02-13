@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="GDMan"
-config/version="0.1.0"
+config/version="0.2.0"
 run/main_scene="uid://btxvmrjs2fqfi"
 config/custom_user_dir_name="gdman"
 config/features=PackedStringArray("4.6", "GL Compatibility")

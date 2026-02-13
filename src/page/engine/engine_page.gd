@@ -20,7 +20,10 @@ func _ready() -> void:
 func _load_engine() -> void:
 	for card: Control in card_container.get_children():
 		card.queue_free()
-	for local_engine_id: String in EngineManager.local_engines.keys():
+	var engine_ids: Array = EngineManager.local_engines.keys()
+	engine_ids.sort()
+	engine_ids.reverse()
+	for local_engine_id: String in engine_ids:
 		var local_engine: EngineManager.LocalEngine = EngineManager.local_engines.get(local_engine_id, null)
 		if local_engine == null:
 			continue

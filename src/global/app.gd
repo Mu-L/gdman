@@ -29,7 +29,7 @@ var window_sizes: Array[Vector2i] = [
 ]
 
 func _ready() -> void:
-	set_windowed()
+	_set_windowed()
 
 func get_architecture() -> String:
 	match OS.get_name():
@@ -91,19 +91,13 @@ func set_language(locale: String) -> void:
 				TranslationServer.set_locale("en")
 
 
-func set_windowed() -> void:
+func _set_windowed() -> void:
 	DisplayServer.window_set_mode(DisplayServer.WindowMode.WINDOW_MODE_WINDOWED)
 	for size: Vector2i in window_sizes:
 		if size < DisplayServer.screen_get_size():
 			DisplayServer.window_set_size(size)
 			break
-	# 居中临时方案
-	var screen_size: Vector2i = DisplayServer.screen_get_size()
-	var screen_position: Vector2i = DisplayServer.screen_get_position()
-	var window_size: Vector2i = DisplayServer.window_get_size()
-	var window_position: Vector2i = screen_position + (screen_size - window_size) / 2
-	DisplayServer.window_set_position(window_position)
-
+	get_window().move_to_center()
 
 func _on_small_update_timer_timeout() -> void:
 	small_update.emit()
