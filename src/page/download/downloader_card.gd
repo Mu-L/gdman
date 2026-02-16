@@ -129,6 +129,8 @@ func _on_extracted() -> void:
 			DownloadManager.DOWNLOAD_DIR.path_join("%s.zip" % file_name))
 		if FileAccess.file_exists(zip_path):
 			OS.move_to_trash(zip_path)
+	EngineManager.load_engines.call_deferred()
+	
 
 func _on_cancel_button_pressed() -> void:
 	http_request.cancel_request()

@@ -11,6 +11,7 @@ const ENGINE_CARD: PackedScene = preload("uid://bu4qc2q2pjb0t")
 
 func _ready() -> void:
 	_load_engine()
+	EngineManager.engines_loaded.connect(_load_engine)
 	standard_check.toggled.connect(_switch_display)
 	dotnet_check.toggled.connect(_switch_display)
 	stable_check.toggled.connect(_switch_display)

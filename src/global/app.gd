@@ -93,11 +93,11 @@ func set_language(locale: String) -> void:
 
 func _set_windowed() -> void:
 	DisplayServer.window_set_mode(DisplayServer.WindowMode.WINDOW_MODE_WINDOWED)
-	for size: Vector2i in window_sizes:
-		if size < DisplayServer.screen_get_size():
-			DisplayServer.window_set_size(size)
+	for idx: int in window_sizes.size():
+		if window_sizes[idx] < DisplayServer.screen_get_size():
+			DisplayServer.window_set_size(window_sizes[mini(idx + 1, window_sizes.size() - 1)])
 			break
-	get_window().move_to_center()
+	get_window().move_to_center.call_deferred()
 
 func _on_small_update_timer_timeout() -> void:
 	small_update.emit()

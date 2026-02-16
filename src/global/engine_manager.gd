@@ -17,6 +17,8 @@ const FLAVOR_NAME: Dictionary[EngineFlavor, String] = {
 	EngineFlavor.DEV: "Dev",
 }
 
+signal engines_loaded
+
 class EngineInfo:
 	var id: String # x.y[.z]-flavor[a][-dotnet]
 	var name: String # Display name
@@ -53,6 +55,7 @@ func load_engines() -> void:
 		local_engine.dir_path = ProjectSettings.globalize_path(ENGINE_DIR.path_join(dir_name))
 		local_engine.executable_path = ProjectSettings.globalize_path(_get_executable_path(dir_name))
 		local_engines[engine_info.id] = local_engine
+	engines_loaded.emit.call_deferred()
 
 func id_to_engine_info(engine_id: String) -> EngineInfo:
 	if _cache_engine_info.has(engine_id):
