@@ -106,7 +106,11 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 2
 
-[node name="VersionContainer46" parent="HSplitContainer/PanelContainer/MarginContainer/ScrollContainer/CardContainer" unique_id=1018036535 instance=ExtResource("2_gw8yc")]
+[node name="VersionContainer47" parent="HSplitContainer/PanelContainer/MarginContainer/ScrollContainer/CardContainer" unique_id=1018036535 instance=ExtResource("2_gw8yc")]
+layout_mode = 2
+title = "4.7"
+
+[node name="VersionContainer46" parent="HSplitContainer/PanelContainer/MarginContainer/ScrollContainer/CardContainer" unique_id=187689483 instance=ExtResource("2_gw8yc")]
 layout_mode = 2
 title = "4.6"
 
