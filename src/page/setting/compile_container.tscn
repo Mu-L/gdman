@@ -5,6 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://bacfa0xs2su2p" path="res://asset/icon/refresh.svg" id="2_y4nsr"]
 [ext_resource type="Texture2D" uid="uid://kma3p4cm8w3o" path="res://asset/icon/godot.svg" id="3_l7ble"]
 [ext_resource type="Texture2D" uid="uid://bu2rk28e26nqp" path="res://asset/icon/dotnet.svg" id="3_pnxjj"]
+[ext_resource type="Texture2D" uid="uid://2crx7poin47h" path="res://asset/icon/about.svg" id="3_sjon8"]
 [ext_resource type="Texture2D" uid="uid://d1vmufog6bk75" path="res://asset/icon/windows.svg" id="4_l7ble"]
 [ext_resource type="Texture2D" uid="uid://cc26nw5lgktse" path="res://asset/icon/macos.svg" id="6_xar62"]
 [ext_resource type="Texture2D" uid="uid://ekg8dk2bwkxd" path="res://asset/icon/android.svg" id="7_821rm"]
@@ -18,271 +19,366 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_y4nsr")
 
-[node name="CompileContainer" type="GridContainer" parent="." unique_id=797116436]
-layout_mode = 2
-columns = 4
-
-[node name="RefreshButton" type="Button" parent="CompileContainer" unique_id=920946059]
+[node name="RefreshButton" type="Button" parent="." unique_id=920946059]
 custom_minimum_size = Vector2(23, 0)
 layout_mode = 2
+text = "SETTING_COMPILE_REFRESH"
 icon = ExtResource("2_y4nsr")
 expand_icon = true
 
-[node name="ToolLabel" type="Label" parent="CompileContainer" unique_id=829274605]
+[node name="GridContainer" type="GridContainer" parent="." unique_id=2082444110]
+layout_mode = 2
+theme_override_constants/h_separation = 8
+columns = 4
+
+[node name="InfoIcon" type="TextureRect" parent="GridContainer" unique_id=371539339]
+layout_mode = 2
+texture = ExtResource("3_sjon8")
+expand_mode = 3
+stretch_mode = 5
+
+[node name="ToolLabel" type="Label" parent="GridContainer" unique_id=2027728482]
 layout_mode = 2
 text = "SETTING_COMPILE_TOOL"
 
-[node name="VersionLabel" type="Label" parent="CompileContainer" unique_id=684222573]
+[node name="VersionLabel" type="Label" parent="GridContainer" unique_id=788521506]
 layout_mode = 2
-size_flags_horizontal = 3
 text = "SETTING_COMPILE_VERSION"
-horizontal_alignment = 1
 
-[node name="CustomLabel" type="Label" parent="CompileContainer" unique_id=739735775]
+[node name="CustomLabel" type="Label" parent="GridContainer" unique_id=260358267]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "SETTING_COMPILE_CUSTOM"
-horizontal_alignment = 1
 
-[node name="GodotIcon" type="TextureRect" parent="CompileContainer" unique_id=780558000]
+[node name="GodotIcon" type="TextureRect" parent="GridContainer" unique_id=1548238000]
 layout_mode = 2
 texture = ExtResource("3_l7ble")
-expand_mode = 5
+expand_mode = 3
 stretch_mode = 5
 
-[node name="PythonLabel" type="Label" parent="CompileContainer" unique_id=441899216]
+[node name="PythonLabel" type="Label" parent="GridContainer" unique_id=441899216]
 layout_mode = 2
+tooltip_text = "python3"
+mouse_filter = 1
 text = "Python"
 
-[node name="PythonVersionLabel" type="Label" parent="CompileContainer" unique_id=1017160357]
+[node name="PythonVersionLabel" type="Label" parent="GridContainer" unique_id=1017160357]
 layout_mode = 2
 text = "?"
-horizontal_alignment = 1
 clip_text = true
 text_overrun_behavior = 3
 
-[node name="Pass" type="Control" parent="CompileContainer" unique_id=1888894049]
+[node name="Pass" type="Control" parent="GridContainer" unique_id=136971868]
 layout_mode = 2
-size_flags_horizontal = 3
 
-[node name="GodotIcon2" type="TextureRect" parent="CompileContainer" unique_id=1498399801]
+[node name="GodotIcon2" type="TextureRect" parent="GridContainer" unique_id=852644027]
 layout_mode = 2
 texture = ExtResource("3_l7ble")
-expand_mode = 5
+expand_mode = 3
 stretch_mode = 5
 
-[node name="SconsLabel" type="Label" parent="CompileContainer" unique_id=540089350]
+[node name="SconsLabel" type="Label" parent="GridContainer" unique_id=540089350]
 layout_mode = 2
+tooltip_text = "scons"
+mouse_filter = 1
 text = "SCons"
 
-[node name="SconsVersionLabel" type="Label" parent="CompileContainer" unique_id=1374065054]
+[node name="SconsVersionLabel" type="Label" parent="GridContainer" unique_id=1374065054]
 layout_mode = 2
 text = "?"
-horizontal_alignment = 1
 clip_text = true
 text_overrun_behavior = 3
 
-[node name="SconsOption" type="OptionButton" parent="CompileContainer" unique_id=1521906011]
+[node name="Pass2" type="Control" parent="GridContainer" unique_id=1497895755]
 layout_mode = 2
-size_flags_horizontal = 3
-selected = 0
-item_count = 2
-popup/item_0/text = "scons"
-popup/item_0/id = 0
-popup/item_1/text = "uvx scons"
-popup/item_1/id = 1
 
-[node name="DotnetIcon" type="TextureRect" parent="CompileContainer" unique_id=2059717698]
+[node name="DotnetIcon" type="TextureRect" parent="GridContainer" unique_id=236740275]
 layout_mode = 2
-tooltip_text = ".NET"
 texture = ExtResource("3_pnxjj")
 expand_mode = 5
 stretch_mode = 5
 
-[node name="DotnetLabel" type="Label" parent="CompileContainer" unique_id=329213973]
+[node name="DotnetLabel" type="Label" parent="GridContainer" unique_id=329213973]
 layout_mode = 2
+tooltip_text = "dotnet"
+mouse_filter = 1
 text = ".NET SDK"
 
-[node name="DotnetVersionLabel" type="Label" parent="CompileContainer" unique_id=1990690975]
+[node name="DotnetVersionLabel" type="Label" parent="GridContainer" unique_id=1990690975]
 layout_mode = 2
 text = "?"
-horizontal_alignment = 1
 clip_text = true
 text_overrun_behavior = 3
 
-[node name="Pass4" type="Control" parent="CompileContainer" unique_id=23041982]
+[node name="Pass3" type="Control" parent="GridContainer" unique_id=113928471]
 layout_mode = 2
-size_flags_horizontal = 3
 
-[node name="WindowsIcon" type="TextureRect" parent="CompileContainer" unique_id=1556957342]
+[node name="WindowsIcon" type="TextureRect" parent="GridContainer" unique_id=451883891]
 layout_mode = 2
-tooltip_text = "Windows"
 texture = ExtResource("4_l7ble")
 expand_mode = 5
 stretch_mode = 5
 
-[node name="MinGWLabel" type="Label" parent="CompileContainer" unique_id=444379122]
+[node name="MinGWLabel" type="Label" parent="GridContainer" unique_id=444379122]
 layout_mode = 2
+tooltip_text = "g++"
+mouse_filter = 1
 text = "MinGW"
 
-[node name="MinGWVersionLabel" type="Label" parent="CompileContainer" unique_id=861418359]
+[node name="MinGWVersionLabel" type="Label" parent="GridContainer" unique_id=861418359]
 layout_mode = 2
 text = "?"
-horizontal_alignment = 1
 clip_text = true
 text_overrun_behavior = 3
 
-[node name="MinGWContainer" type="HBoxContainer" parent="CompileContainer" unique_id=356463487]
+[node name="MinGWContainer" type="HBoxContainer" parent="GridContainer" unique_id=18445207]
 layout_mode = 2
-size_flags_horizontal = 3
 
-[node name="MinGWPathLine" type="LineEdit" parent="CompileContainer/MinGWContainer" unique_id=1873314412]
+[node name="MinGWPathLine" type="LineEdit" parent="GridContainer/MinGWContainer" unique_id=1873314412]
 layout_mode = 2
 size_flags_horizontal = 3
 placeholder_text = "MINGW_PREFIX"
 
-[node name="MinGWPathButton" type="Button" parent="CompileContainer/MinGWContainer" unique_id=1797513464]
+[node name="MinGWPathButton" type="Button" parent="GridContainer/MinGWContainer" unique_id=1797513464]
 custom_minimum_size = Vector2(31, 0)
 layout_mode = 2
 icon = ExtResource("1_36afp")
 icon_alignment = 1
 expand_icon = true
 
-[node name="MinGWFileDialog" type="FileDialog" parent="CompileContainer/MinGWContainer/MinGWPathButton" unique_id=179394767]
+[node name="MinGWFileDialog" type="FileDialog" parent="GridContainer/MinGWContainer/MinGWPathButton" unique_id=179394767]
 title = "Open a Directory"
 file_mode = 2
+access = 2
 show_hidden_files = true
 use_native_dialog = true
 
-[node name="MacOSIcon" type="TextureRect" parent="CompileContainer" unique_id=1005382184]
+[node name="MacOSIcon" type="TextureRect" parent="GridContainer" unique_id=1223969404]
 layout_mode = 2
-tooltip_text = "MacOS"
 texture = ExtResource("6_xar62")
 expand_mode = 5
 stretch_mode = 5
 
-[node name="VulkanSDKLabel" type="Label" parent="CompileContainer" unique_id=1094239302]
+[node name="VulkanSDKLabel" type="Label" parent="GridContainer" unique_id=1094239302]
 layout_mode = 2
 text = "Vulkan SDK"
 
-[node name="VulkanSDKVersionLabel" type="Label" parent="CompileContainer" unique_id=1173527793]
+[node name="VulkanSDKVersionLabel" type="Label" parent="GridContainer" unique_id=1173527793]
 layout_mode = 2
 text = "?"
-horizontal_alignment = 1
 clip_text = true
 text_overrun_behavior = 3
 
-[node name="Pass2" type="Control" parent="CompileContainer" unique_id=663667498]
+[node name="Pass4" type="Control" parent="GridContainer" unique_id=886355569]
 layout_mode = 2
-size_flags_horizontal = 3
 
-[node name="AndroidIcon" type="TextureRect" parent="CompileContainer" unique_id=1856146039]
+[node name="WebIcon" type="TextureRect" parent="GridContainer" unique_id=1230495133]
 layout_mode = 2
-tooltip_text = "Android"
-texture = ExtResource("7_821rm")
-expand_mode = 5
-stretch_mode = 5
-
-[node name="JDKLabel" type="Label" parent="CompileContainer" unique_id=1997615952]
-layout_mode = 2
-text = "JDK"
-
-[node name="JDKVersionLabel" type="Label" parent="CompileContainer" unique_id=701584776]
-layout_mode = 2
-text = "?"
-horizontal_alignment = 1
-clip_text = true
-text_overrun_behavior = 3
-
-[node name="JDKContainer" type="HBoxContainer" parent="CompileContainer" unique_id=1777893526]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="JDKPathLine" type="LineEdit" parent="CompileContainer/JDKContainer" unique_id=138154316]
-layout_mode = 2
-size_flags_horizontal = 3
-placeholder_text = "JAVA_HOME"
-
-[node name="JDKPathButton" type="Button" parent="CompileContainer/JDKContainer" unique_id=1511294036]
-custom_minimum_size = Vector2(31, 0)
-layout_mode = 2
-icon = ExtResource("1_36afp")
-icon_alignment = 1
-expand_icon = true
-
-[node name="JDKFileDialog" type="FileDialog" parent="CompileContainer/JDKContainer/JDKPathButton" unique_id=1303295638]
-title = "Open a Directory"
-file_mode = 2
-show_hidden_files = true
-use_native_dialog = true
-
-[node name="AndroidIcon2" type="TextureRect" parent="CompileContainer" unique_id=1541901361]
-layout_mode = 2
-tooltip_text = "Android"
-texture = ExtResource("7_821rm")
-expand_mode = 5
-stretch_mode = 5
-
-[node name="AndroidSDKLabel" type="Label" parent="CompileContainer" unique_id=220894173]
-layout_mode = 2
-text = "Android SDK"
-
-[node name="AndroidSDKVersionLabel" type="Label" parent="CompileContainer" unique_id=526838197]
-layout_mode = 2
-text = "?"
-horizontal_alignment = 1
-clip_text = true
-text_overrun_behavior = 3
-
-[node name="AndroidSDKContainer" type="HBoxContainer" parent="CompileContainer" unique_id=322774448]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="AndroidSDKPathLine" type="LineEdit" parent="CompileContainer/AndroidSDKContainer" unique_id=1276642007]
-layout_mode = 2
-size_flags_horizontal = 3
-placeholder_text = "ANDROID_HOME"
-
-[node name="AndroidSDKPathButton" type="Button" parent="CompileContainer/AndroidSDKContainer" unique_id=1986548852]
-custom_minimum_size = Vector2(31, 0)
-layout_mode = 2
-icon = ExtResource("1_36afp")
-icon_alignment = 1
-expand_icon = true
-
-[node name="AndroidSDKFileDialog" type="FileDialog" parent="CompileContainer/AndroidSDKContainer/AndroidSDKPathButton" unique_id=1356462611]
-title = "Open a Directory"
-file_mode = 2
-show_hidden_files = true
-use_native_dialog = true
-
-[node name="BrowserIcon" type="TextureRect" parent="CompileContainer" unique_id=661827793]
-layout_mode = 2
-tooltip_text = "Web"
 texture = ExtResource("9_1jmai")
 expand_mode = 5
 stretch_mode = 5
 
-[node name="EmscriptenLabel" type="Label" parent="CompileContainer" unique_id=1172239026]
+[node name="EmscriptenLabel" type="Label" parent="GridContainer" unique_id=1847266485]
 layout_mode = 2
+tooltip_text = "emcc"
+mouse_filter = 1
 text = "Emscripten"
 
-[node name="EmscriptenVersionLabel" type="Label" parent="CompileContainer" unique_id=1328750861]
+[node name="EmscriptenVersionLabel" type="Label" parent="GridContainer" unique_id=860109968]
 layout_mode = 2
 text = "?"
-horizontal_alignment = 1
 clip_text = true
 text_overrun_behavior = 3
 
-[node name="Pass3" type="Control" parent="CompileContainer" unique_id=1388095188]
+[node name="Pass5" type="Control" parent="GridContainer" unique_id=1709152385]
+layout_mode = 2
+
+[node name="AndroidIcon" type="TextureRect" parent="GridContainer" unique_id=1554288731]
+layout_mode = 2
+texture = ExtResource("7_821rm")
+expand_mode = 5
+stretch_mode = 5
+
+[node name="JDKLabel" type="Label" parent="GridContainer" unique_id=1997615952]
+layout_mode = 2
+tooltip_text = "javac"
+mouse_filter = 1
+text = "JDK"
+
+[node name="JDKVersionLabel" type="Label" parent="GridContainer" unique_id=701584776]
+layout_mode = 2
+text = "?"
+clip_text = true
+text_overrun_behavior = 3
+
+[node name="JDKContainer" type="HBoxContainer" parent="GridContainer" unique_id=1501804699]
+layout_mode = 2
+
+[node name="JDKPathLine" type="LineEdit" parent="GridContainer/JDKContainer" unique_id=138154316]
+layout_mode = 2
+size_flags_horizontal = 3
+placeholder_text = "JAVA_HOME"
+
+[node name="JDKPathButton" type="Button" parent="GridContainer/JDKContainer" unique_id=1511294036]
+custom_minimum_size = Vector2(31, 0)
+layout_mode = 2
+icon = ExtResource("1_36afp")
+icon_alignment = 1
+expand_icon = true
+
+[node name="JDKFileDialog" type="FileDialog" parent="GridContainer/JDKContainer/JDKPathButton" unique_id=1303295638]
+title = "Open a Directory"
+file_mode = 2
+access = 2
+show_hidden_files = true
+use_native_dialog = true
+
+[node name="AndroidIcon2" type="TextureRect" parent="GridContainer" unique_id=1368644385]
+layout_mode = 2
+texture = ExtResource("7_821rm")
+expand_mode = 5
+stretch_mode = 5
+
+[node name="AndroidSDKLabel" type="Label" parent="GridContainer" unique_id=220894173]
+layout_mode = 2
+text = "Android SDK"
+
+[node name="Pass6" type="Control" parent="GridContainer" unique_id=502473008]
+layout_mode = 2
+
+[node name="AndroidSDKContainer" type="HBoxContainer" parent="GridContainer" unique_id=322774448]
 layout_mode = 2
 size_flags_horizontal = 3
 
+[node name="AndroidSDKPathLine" type="LineEdit" parent="GridContainer/AndroidSDKContainer" unique_id=1276642007]
+layout_mode = 2
+size_flags_horizontal = 3
+placeholder_text = "ANDROID_HOME"
+
+[node name="AndroidSDKPathButton" type="Button" parent="GridContainer/AndroidSDKContainer" unique_id=1986548852]
+custom_minimum_size = Vector2(31, 0)
+layout_mode = 2
+icon = ExtResource("1_36afp")
+icon_alignment = 1
+expand_icon = true
+
+[node name="AndroidSDKFileDialog" type="FileDialog" parent="GridContainer/AndroidSDKContainer/AndroidSDKPathButton" unique_id=1356462611]
+title = "Open a Directory"
+file_mode = 2
+access = 2
+show_hidden_files = true
+use_native_dialog = true
+
+[node name="AndroidIcon3" type="TextureRect" parent="GridContainer" unique_id=1796166124]
+layout_mode = 2
+texture = ExtResource("7_821rm")
+expand_mode = 5
+stretch_mode = 5
+
+[node name="AndroidPlatformToolsLabel" type="Label" parent="GridContainer" unique_id=627034594]
+layout_mode = 2
+text = "Platform-Tools"
+
+[node name="AndroidPlatformToolsVersionLabel" type="Label" parent="GridContainer" unique_id=78627296]
+layout_mode = 2
+text = "?"
+
+[node name="Pass7" type="Control" parent="GridContainer" unique_id=2091105573]
+layout_mode = 2
+
+[node name="AndroidIcon4" type="TextureRect" parent="GridContainer" unique_id=885110841]
+layout_mode = 2
+texture = ExtResource("7_821rm")
+expand_mode = 5
+stretch_mode = 5
+
+[node name="AndroidBuildToolsLabel" type="Label" parent="GridContainer" unique_id=1666719058]
+layout_mode = 2
+text = "Build-Tools"
+
+[node name="AndroidBuildToolsVersionLabel" type="Label" parent="GridContainer" unique_id=161980082]
+layout_mode = 2
+text = "?"
+
+[node name="Pass8" type="Control" parent="GridContainer" unique_id=1650394338]
+layout_mode = 2
+
+[node name="AndroidIcon5" type="TextureRect" parent="GridContainer" unique_id=166844674]
+layout_mode = 2
+texture = ExtResource("7_821rm")
+expand_mode = 5
+stretch_mode = 5
+
+[node name="AndroidPlatformLabel" type="Label" parent="GridContainer" unique_id=617301108]
+layout_mode = 2
+text = "SDK Platform"
+
+[node name="AndroidPlatformVersionLabel" type="Label" parent="GridContainer" unique_id=122419992]
+layout_mode = 2
+text = "?"
+
+[node name="Pass9" type="Control" parent="GridContainer" unique_id=1515881919]
+layout_mode = 2
+
+[node name="AndroidIcon6" type="TextureRect" parent="GridContainer" unique_id=111107524]
+layout_mode = 2
+texture = ExtResource("7_821rm")
+expand_mode = 5
+stretch_mode = 5
+
+[node name="AndroidCommandLineLabel" type="Label" parent="GridContainer" unique_id=1199239492]
+layout_mode = 2
+text = "Command-line Tools"
+
+[node name="AndroidCommandLineVersionLabel" type="Label" parent="GridContainer" unique_id=796895056]
+layout_mode = 2
+text = "?"
+
+[node name="Pass10" type="Control" parent="GridContainer" unique_id=1559748097]
+layout_mode = 2
+
+[node name="AndroidIcon7" type="TextureRect" parent="GridContainer" unique_id=1869275043]
+layout_mode = 2
+texture = ExtResource("7_821rm")
+expand_mode = 5
+stretch_mode = 5
+
+[node name="CMakeLabel" type="Label" parent="GridContainer" unique_id=1392790605]
+layout_mode = 2
+text = "CMake"
+
+[node name="CMakeVersionLabel" type="Label" parent="GridContainer" unique_id=2081880708]
+layout_mode = 2
+text = "?"
+
+[node name="Pass11" type="Control" parent="GridContainer" unique_id=394115724]
+layout_mode = 2
+
+[node name="AndroidIcon8" type="TextureRect" parent="GridContainer" unique_id=1717342168]
+layout_mode = 2
+texture = ExtResource("7_821rm")
+expand_mode = 5
+stretch_mode = 5
+
+[node name="NDKLabel" type="Label" parent="GridContainer" unique_id=688556842]
+layout_mode = 2
+text = "NDK"
+
+[node name="NDKVersionLabel" type="Label" parent="GridContainer" unique_id=576313355]
+layout_mode = 2
+text = "?"
+
+[node name="Pass12" type="Control" parent="GridContainer" unique_id=537266589]
+layout_mode = 2
+
 [connection signal="version_refreshed" from="." to="." method="_on_version_refreshed"]
-[connection signal="pressed" from="CompileContainer/RefreshButton" to="." method="_on_refresh_button_pressed"]
-[connection signal="pressed" from="CompileContainer/MinGWContainer/MinGWPathButton" to="." method="_on_min_gw_path_button_pressed"]
-[connection signal="dir_selected" from="CompileContainer/MinGWContainer/MinGWPathButton/MinGWFileDialog" to="." method="_on_min_gw_file_dialog_dir_selected"]
-[connection signal="pressed" from="CompileContainer/JDKContainer/JDKPathButton" to="." method="_on_jdk_path_button_pressed"]
-[connection signal="dir_selected" from="CompileContainer/JDKContainer/JDKPathButton/JDKFileDialog" to="." method="_on_jdk_file_dialog_dir_selected"]
-[connection signal="pressed" from="CompileContainer/AndroidSDKContainer/AndroidSDKPathButton" to="." method="_on_android_sdk_path_button_pressed"]
-[connection signal="dir_selected" from="CompileContainer/AndroidSDKContainer/AndroidSDKPathButton/AndroidSDKFileDialog" to="." method="_on_android_sdk_file_dialog_dir_selected"]
+[connection signal="pressed" from="RefreshButton" to="." method="_on_refresh_button_pressed"]
+[connection signal="text_submitted" from="GridContainer/MinGWContainer/MinGWPathLine" to="." method="_on_min_gw_path_line_text_submitted"]
+[connection signal="pressed" from="GridContainer/MinGWContainer/MinGWPathButton" to="." method="_on_min_gw_path_button_pressed"]
+[connection signal="dir_selected" from="GridContainer/MinGWContainer/MinGWPathButton/MinGWFileDialog" to="." method="_on_min_gw_file_dialog_dir_selected"]
+[connection signal="text_submitted" from="GridContainer/JDKContainer/JDKPathLine" to="." method="_on_jdk_path_line_text_submitted"]
+[connection signal="pressed" from="GridContainer/JDKContainer/JDKPathButton" to="." method="_on_jdk_path_button_pressed"]
+[connection signal="dir_selected" from="GridContainer/JDKContainer/JDKPathButton/JDKFileDialog" to="." method="_on_jdk_file_dialog_dir_selected"]
+[connection signal="text_submitted" from="GridContainer/AndroidSDKContainer/AndroidSDKPathLine" to="." method="_on_android_sdk_path_line_text_submitted"]
+[connection signal="pressed" from="GridContainer/AndroidSDKContainer/AndroidSDKPathButton" to="." method="_on_android_sdk_path_button_pressed"]
+[connection signal="dir_selected" from="GridContainer/AndroidSDKContainer/AndroidSDKPathButton/AndroidSDKFileDialog" to="." method="_on_android_sdk_file_dialog_dir_selected"]

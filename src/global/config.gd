@@ -3,6 +3,8 @@ extends Node
 const CONFIG_PATH: String = "user://config.cfg"
 signal config_updated(config_name: String)
 
+### General ###
+
 var language: String = "auto":
 	set(v):
 		language = v
@@ -43,6 +45,26 @@ var remote_source: bool = false:
 		store_config()
 		config_updated.emit("remote_source")
 
+### Compile ###
+
+var mingw_prefix: String = "": # MINGW_PREFIX
+	set(v):
+		mingw_prefix = v
+		store_config()
+		config_updated.emit("mingw_prefix")
+
+var java_home: String = "": # JAVA_HOME
+	set(v):
+		java_home = v
+		store_config()
+		config_updated.emit("java_home")
+
+var android_home: String = "": # ANDROID_HOME
+	set(v):
+		android_home = v
+		store_config()
+		config_updated.emit("android_home")
+
 func _ready() -> void:
 	load_config()
 
@@ -57,6 +79,9 @@ func store_config() -> void:
 	config.set_value("general", "external_editor_path", external_editor_path)
 	config.set_value("general", "hide_path", hide_path)
 	config.set_value("general", "remote_source", remote_source)
+	config.set_value("compile", "mingw_prefix", mingw_prefix)
+	config.set_value("compile", "java_home", java_home)
+	config.set_value("compile", "android_home", android_home)
 	config.save(CONFIG_PATH)
 
 func load_config() -> void:
@@ -69,6 +94,9 @@ func load_config() -> void:
 	external_editor_path = config.get_value("general", "external_editor_path", "")
 	hide_path = config.get_value("general", "hide_path", false)
 	remote_source = config.get_value("general", "remote_source", false)
+	mingw_prefix = config.get_value("compile", "mingw_prefix", "")
+	java_home = config.get_value("compile", "java_home", "")
+	android_home = config.get_value("compile", "android_home", "")
 
 func get_architecture() -> String:
 	if architecture == "auto":
