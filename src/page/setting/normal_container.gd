@@ -80,7 +80,7 @@ func _on_editor_path_line_text_submitted(new_text: String) -> void:
 
 func _on_editor_select_button_pressed() -> void:
 	editor_file_dialog.current_dir = editor_path_line.text.get_base_dir()
-	editor_file_dialog.popup_file_dialog()
+	editor_file_dialog.popup_centered()
 
 func _on_hide_path_check_toggled(toggled_on: bool) -> void:
 	Config.hide_path = toggled_on

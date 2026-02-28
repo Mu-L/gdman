@@ -11,13 +11,14 @@ var extract_task_id: int = -1
 @onready var title_container: HBoxContainer = $MarginContainer/VBoxContainer/TitleContainer
 @onready var title_label: Label = $MarginContainer/VBoxContainer/TitleContainer/TitleLabel
 @onready var progress_bar: ProgressBar = $MarginContainer/VBoxContainer/ProgressBar
-@onready var info_label: Label = $MarginContainer/VBoxContainer/InfoLabel
-@onready var cancel_button: Button = $MarginContainer/VBoxContainer/HBoxContainer/CancelButton
-@onready var close_button: Button = $MarginContainer/VBoxContainer/HBoxContainer/CloseButton
+@onready var info_label: Label = $MarginContainer/VBoxContainer/InfoContainer/InfoLabel
+@onready var close_button: Button = $MarginContainer/VBoxContainer/TitleContainer/CloseButton
+@onready var cancel_button: Button = $MarginContainer/VBoxContainer/InfoContainer/CancelButton
 @onready var http_request: HTTPRequest = $HTTPRequest
 @onready var timer: Timer = $Timer
 
 func _ready() -> void:
+	_handle_component()
 	if DownloadManager.downloading_task.get(file_name, false):
 		queue_free()
 		return
@@ -45,6 +46,14 @@ func _ready() -> void:
 		return
 	cancel_button.disabled = false
 	timer.start()
+
+func _config_updated(config_name: String) -> void:
+	match config_name:
+		"language":
+			_handle_component()
+
+func _handle_component() -> void:
+	App.fix_button_width(cancel_button)
 
 func _failed() -> void:
 	info_label.text = "Failed"

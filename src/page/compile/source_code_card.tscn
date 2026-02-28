@@ -2,6 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://ck4lqudvr3t3t" path="res://asset/icon/edit.svg" id="1_6lkmo"]
 [ext_resource type="Texture2D" uid="uid://hv0qw0fm1wga" path="res://asset/icon/directory.svg" id="1_456xb"]
+[ext_resource type="Script" uid="uid://ccyhvfb5npcnp" path="res://src/page/compile/source_code_card.gd" id="1_nm3am"]
 [ext_resource type="Texture2D" uid="uid://cq454lo24jwpx" path="res://asset/icon/delete.svg" id="2_1um6n"]
 [ext_resource type="Texture2D" uid="uid://cdxig436m2j1x" path="res://asset/icon/compile.svg" id="4_mf43m"]
 
@@ -9,6 +10,7 @@
 anchors_preset = 10
 anchor_right = 1.0
 grow_horizontal = 2
+script = ExtResource("1_nm3am")
 
 [node name="MarginContainer" type="MarginContainer" parent="." unique_id=1429407114]
 layout_mode = 2
@@ -44,6 +46,7 @@ expand_icon = true
 [node name="PathLine" type="LineEdit" parent="MarginContainer/VBoxContainer" unique_id=741965575]
 layout_mode = 2
 size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 12
 editable = false
 
 [node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer" unique_id=2077001861]
@@ -51,28 +54,36 @@ layout_mode = 2
 
 [node name="PathButton" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer" unique_id=1110798999]
 layout_mode = 2
-text = "COMPILE_PATH"
+theme_override_font_sizes/font_size = 12
+text = "COMPILE_CARD_PATH"
 icon = ExtResource("1_456xb")
 expand_icon = true
 
 [node name="BinButton" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer" unique_id=1537402566]
 layout_mode = 2
-text = "COMPILE_BIN_PATH"
+theme_override_font_sizes/font_size = 12
+text = "COMPILE_CARD_BIN"
 icon = ExtResource("1_456xb")
 expand_icon = true
 
-[node name="BinButton2" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer" unique_id=1626716193]
+[node name="VSeparator" type="VSeparator" parent="MarginContainer/VBoxContainer/HBoxContainer" unique_id=2129292477]
 layout_mode = 2
-text = "COMPILE_EDIT_CUSTOM"
+
+[node name="CustomButton" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer" unique_id=1626716193]
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+text = "COMPILE_CARD_CUSTOM"
 icon = ExtResource("1_456xb")
 expand_icon = true
 
 [node name="Pass" type="Control" parent="MarginContainer/VBoxContainer/HBoxContainer" unique_id=1090424291]
+custom_minimum_size = Vector2(32, 0)
 layout_mode = 2
 size_flags_horizontal = 3
 
 [node name="CompileButton" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer" unique_id=134434489]
 layout_mode = 2
-text = "COMPILE_COMPILE"
+theme_override_font_sizes/font_size = 12
+text = "COMPILE_CARD_COMPILE"
 icon = ExtResource("4_mf43m")
 expand_icon = true

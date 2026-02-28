@@ -1,0 +1,50 @@
+[gd_scene format=3 uid="uid://bge5qk8gnq2or"]
+
+[ext_resource type="Script" uid="uid://bapw18612p4db" path="res://src/page/compile/download_source_code_dialog.gd" id="1_weohi"]
+
+[node name="DownloadSourceCodeDialog" type="ConfirmationDialog" unique_id=2087969455]
+oversampling_override = 1.0
+title = "COMPILE_DOWNLOAD"
+position = Vector2i(0, 36)
+size = Vector2i(637, 119)
+visible = true
+ok_button_text = "BUTTON_DOWNLOAD"
+cancel_button_text = "DIALOG_CANCEL"
+script = ExtResource("1_weohi")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1039627368]
+offset_left = 8.0
+offset_top = 8.0
+offset_right = 629.0
+offset_bottom = 70.0
+
+[node name="FileNameLine" type="LineEdit" parent="VBoxContainer" unique_id=59721995]
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+placeholder_text = "COMPILE_DOWNLOAD_FILE_NAME"
+max_length = 200
+
+[node name="HSeparator" type="HSeparator" parent="VBoxContainer" unique_id=195870482]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer" unique_id=514580356]
+layout_mode = 2
+
+[node name="URLLine" type="LineEdit" parent="VBoxContainer/HBoxContainer" unique_id=915673265]
+custom_minimum_size = Vector2(400, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 12
+placeholder_text = "URL"
+
+[node name="VersionOption" type="OptionButton" parent="VBoxContainer/HBoxContainer" unique_id=912769777]
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+selected = 0
+item_count = 1
+popup/item_0/text = "DOWNLOAD_CUSTOM_URL"
+popup/item_0/id = 0
+
+[connection signal="text_changed" from="VBoxContainer/FileNameLine" to="." method="_on_file_name_line_text_changed"]
+[connection signal="text_changed" from="VBoxContainer/HBoxContainer/URLLine" to="." method="_on_url_line_text_changed"]
+[connection signal="item_selected" from="VBoxContainer/HBoxContainer/VersionOption" to="." method="_on_option_button_item_selected"]

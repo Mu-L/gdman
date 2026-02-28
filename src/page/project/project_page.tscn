@@ -42,11 +42,12 @@ expand_icon = true
 
 [node name="ImportFileDialog" type="FileDialog" parent="HBoxContainer/ImportButton" unique_id=584780497]
 oversampling_override = 1.0
-title = "Open a File"
+title = "PROJECT_IMPORT_TITLE"
 initial_position = 1
 ok_button_text = "DIALOG_CONFIRM"
 dialog_hide_on_ok = true
 cancel_button_text = "DIALOG_CANCEL"
+mode_overrides_title = false
 file_mode = 0
 access = 2
 filters = PackedStringArray("project.godot")

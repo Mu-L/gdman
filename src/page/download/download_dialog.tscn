@@ -1,13 +1,16 @@
 [gd_scene format=3 uid="uid://dhppyf1y4otgk"]
 
-[ext_resource type="Script" uid="uid://da5txdpgdjcu7" path="res://src/page/download/download_confirm.gd" id="1_2r55n"]
+[ext_resource type="Script" uid="uid://da5txdpgdjcu7" path="res://src/page/download/download_dialog.gd" id="1_ieq72"]
+[ext_resource type="PackedScene" uid="uid://o4df7hsmn462" path="res://src/page/download/ping_display.tscn" id="2_8786j"]
 
-[node name="DownloadConfirm" type="ConfirmationDialog" unique_id=1392267383]
+[node name="DownloadDialog" type="ConfirmationDialog" unique_id=1392267383]
 oversampling_override = 1.0
-position = Vector2i(0, 36)
-size = Vector2i(372, 110)
+title = "DOWNLOAD_DIALOG_TITLE"
+size = Vector2i(493, 152)
 visible = true
-script = ExtResource("1_2r55n")
+ok_button_text = "BUTTON_DOWNLOAD"
+cancel_button_text = "DIALOG_CANCEL"
+script = ExtResource("1_ieq72")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=2071972493]
 anchors_preset = 10
@@ -15,7 +18,7 @@ anchor_right = 1.0
 offset_left = 8.0
 offset_top = 8.0
 offset_right = -8.0
-offset_bottom = 61.0
+offset_bottom = 103.0
 grow_horizontal = 2
 
 [node name="HSeparator" type="HSeparator" parent="VBoxContainer" unique_id=1139881922]
@@ -24,6 +27,14 @@ layout_mode = 2
 [node name="PingContainer" type="VBoxContainer" parent="VBoxContainer" unique_id=709997604]
 layout_mode = 2
 
+[node name="GodotPingDisplay" parent="VBoxContainer/PingContainer" unique_id=780376390 instance=ExtResource("2_8786j")]
+layout_mode = 2
+title = "Godot"
+
+[node name="GitHubPingDisplay" parent="VBoxContainer/PingContainer" unique_id=47792720 instance=ExtResource("2_8786j")]
+layout_mode = 2
+title = "GitHub"
+
 [node name="HSeparator2" type="HSeparator" parent="VBoxContainer" unique_id=1031333277]
 layout_mode = 2
 
@@ -31,15 +42,21 @@ layout_mode = 2
 layout_mode = 2
 
 [node name="UrlLine" type="LineEdit" parent="VBoxContainer/HBoxContainer" unique_id=860932887]
+custom_minimum_size = Vector2(400, 0)
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 12
-text = "url"
+placeholder_text = "URL"
 editable = false
 
 [node name="SourceOption" type="OptionButton" parent="VBoxContainer/HBoxContainer" unique_id=1846271872]
 layout_mode = 2
 theme_override_font_sizes/font_size = 12
+item_count = 2
+popup/item_0/text = "Godot"
+popup/item_0/id = 0
+popup/item_1/text = "GitHub"
+popup/item_1/id = 0
 
 [connection signal="confirmed" from="." to="." method="_on_confirmed"]
 [connection signal="item_selected" from="VBoxContainer/HBoxContainer/SourceOption" to="." method="_on_source_option_item_selected"]

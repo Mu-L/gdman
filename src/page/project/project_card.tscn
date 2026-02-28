@@ -55,13 +55,6 @@ layout_mode = 2
 layout_mode = 2
 text = "0.0"
 
-[node name="TimeLabel" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer" unique_id=1544632113]
-modulate = Color(1, 1, 1, 0.53333336)
-layout_mode = 2
-size_flags_horizontal = 0
-theme_override_font_sizes/font_size = 12
-text = "1970/1/1-0:0:0"
-
 [node name="DotnetIcon" type="TextureRect" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer" unique_id=1135958525]
 layout_mode = 2
 tooltip_text = "PROJECT_CARD_DOTNET_HINT"
@@ -69,56 +62,27 @@ texture = ExtResource("3_2b60s")
 expand_mode = 3
 stretch_mode = 5
 
-[node name="VBoxContainer2" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer" unique_id=1105241886]
+[node name="TimeLabel" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer" unique_id=1544632113]
+modulate = Color(1, 1, 1, 0.53333336)
 layout_mode = 2
-
-[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2" unique_id=2130474205]
-layout_mode = 2
-size_flags_vertical = 3
-
-[node name="EditorButton" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer" unique_id=1047668864]
-layout_mode = 2
-size_flags_horizontal = 3
-tooltip_text = "PROJECT_CARD_EDITOR_HINT"
-icon = ExtResource("8_2b60s")
-icon_alignment = 1
-expand_icon = true
-
-[node name="EngineButton" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer" unique_id=1682800574]
-layout_mode = 2
-size_flags_horizontal = 3
-tooltip_text = "PROJECT_CARD_ENGINE_HINT"
-icon = ExtResource("7_62uvt")
-icon_alignment = 1
-expand_icon = true
-
-[node name="EngineOption" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2" unique_id=1720390930 instance=ExtResource("5_62uvt")]
-layout_mode = 2
-
-[node name="HBoxContainer2" type="HBoxContainer" parent="MarginContainer/VBoxContainer" unique_id=1704252676]
-layout_mode = 2
-
-[node name="PathLine" type="LineEdit" parent="MarginContainer/VBoxContainer/HBoxContainer2" unique_id=2142027203]
-layout_mode = 2
-size_flags_horizontal = 3
+size_flags_horizontal = 0
 theme_override_font_sizes/font_size = 12
-text = "path/to/project"
-placeholder_text = "path/to/project"
-editable = false
+text = "1970/1/1-0:0:0"
 
-[node name="PathButton" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer2" unique_id=310988315]
-custom_minimum_size = Vector2(25, 0)
+[node name="ScrollContainer" type="ScrollContainer" parent="MarginContainer/VBoxContainer/HBoxContainer" unique_id=1326523705]
 layout_mode = 2
-tooltip_text = "PROJECT_CARD_PATH_HINT"
-icon = ExtResource("7_2b60s")
-icon_alignment = 1
-expand_icon = true
+horizontal_scroll_mode = 0
 
-[node name="HBoxContainer3" type="HBoxContainer" parent="MarginContainer/VBoxContainer" unique_id=191042407]
+[node name="TagContainer" type="GridContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/ScrollContainer" unique_id=1635525355]
 layout_mode = 2
-theme_override_constants/separation = 16
+size_flags_horizontal = 3
+size_flags_vertical = 3
+columns = 2
 
-[node name="RemoveButton" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer3" unique_id=449926311]
+[node name="VBoxContainer2" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer" unique_id=2129595725]
+layout_mode = 2
+
+[node name="RemoveButton" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2" unique_id=449926311]
 custom_minimum_size = Vector2(25, 25)
 layout_mode = 2
 tooltip_text = "PROJECT_CARD_REMOVE_HINT"
@@ -126,18 +90,55 @@ icon = ExtResource("8_sr25u")
 icon_alignment = 1
 expand_icon = true
 
-[node name="ScrollContainer" type="ScrollContainer" parent="MarginContainer/VBoxContainer/HBoxContainer3" unique_id=1326523705]
+[node name="PathLine" type="LineEdit" parent="MarginContainer/VBoxContainer" unique_id=2142027203]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 12
+text = "path/to/project"
+placeholder_text = "path/to/project"
+editable = false
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="MarginContainer/VBoxContainer" unique_id=1704252676]
+layout_mode = 2
+
+[node name="PathButton" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer2" unique_id=310988315]
+custom_minimum_size = Vector2(25, 0)
+layout_mode = 2
+tooltip_text = "PROJECT_CARD_PATH_HINT"
+theme_override_font_sizes/font_size = 12
+text = "BUTTON_PATH"
+icon = ExtResource("7_2b60s")
+expand_icon = true
+
+[node name="Pass" type="Control" parent="MarginContainer/VBoxContainer/HBoxContainer2" unique_id=463433483]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="TagContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer3/ScrollContainer" unique_id=505135486]
+[node name="EditorButton" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer2" unique_id=1047668864]
 layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-alignment = 2
+tooltip_text = "PROJECT_CARD_EDITOR_HINT"
+theme_override_font_sizes/font_size = 12
+text = "PROJECT_CARD_EDITOR"
+icon = ExtResource("8_2b60s")
+expand_icon = true
 
-[connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer/EditorButton" to="." method="_on_editor_button_pressed"]
-[connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer/EngineButton" to="." method="_on_engine_button_pressed"]
-[connection signal="item_selected" from="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/EngineOption" to="." method="_on_engine_option_item_selected"]
+[node name="VSeparator" type="VSeparator" parent="MarginContainer/VBoxContainer/HBoxContainer2" unique_id=1754088780]
+layout_mode = 2
+
+[node name="EngineOption" parent="MarginContainer/VBoxContainer/HBoxContainer2" unique_id=1720390930 instance=ExtResource("5_62uvt")]
+layout_mode = 2
+
+[node name="EngineButton" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer2" unique_id=1682800574]
+custom_minimum_size = Vector2(25, 0)
+layout_mode = 2
+tooltip_text = "PROJECT_CARD_ENGINE_HINT"
+theme_override_font_sizes/font_size = 12
+text = "BUTTON_RUN"
+icon = ExtResource("7_62uvt")
+expand_icon = true
+
+[connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/RemoveButton" to="." method="_on_remove_button_pressed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer2/PathButton" to="." method="_on_path_button_pressed"]
-[connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer3/RemoveButton" to="." method="_on_remove_button_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer2/EditorButton" to="." method="_on_editor_button_pressed"]
+[connection signal="item_selected" from="MarginContainer/VBoxContainer/HBoxContainer2/EngineOption" to="." method="_on_engine_option_item_selected"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer2/EngineButton" to="." method="_on_engine_button_pressed"]

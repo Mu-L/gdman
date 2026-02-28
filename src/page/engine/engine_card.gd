@@ -13,7 +13,9 @@ var is_dotnet: bool = false
 @onready var version_label: Label = $MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer2/VersionLabel
 @onready var id_label: Label = $MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer2/IDLabel
 @onready var unstable_icon: TextureRect = $MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer2/UnstableIcon
-@onready var path_line: LineEdit = $MarginContainer/VBoxContainer/HBoxContainer2/PathLine
+@onready var path_line: LineEdit = $MarginContainer/VBoxContainer/PathLine
+@onready var path_button: Button = $MarginContainer/VBoxContainer/HBoxContainer2/PathButton
+@onready var run_button: Button = $MarginContainer/VBoxContainer/HBoxContainer2/RunButton
 
 func _ready() -> void:
 	id_label.text = engine_id
@@ -31,10 +33,18 @@ func _ready() -> void:
 	is_dotnet = engine_info.is_dotnet
 	unstable_icon.visible = not is_stable
 	Config.config_updated.connect(_config_updated)
+	_handle_component()
 	
 func _config_updated(config_name: String) -> void:
-	if config_name == "hide_path":
-		path_line.secret = Config.hide_path
+	match config_name:
+		"hide_path":
+			path_line.secret = Config.hide_path
+		"language":
+			_handle_component()
+
+func _handle_component() -> void:
+	App.fix_button_width(path_button)
+	App.fix_button_width(run_button)
 
 func _on_delete_button_pressed() -> void:
 	OS.move_to_trash(dir_path)

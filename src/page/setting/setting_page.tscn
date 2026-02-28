@@ -33,14 +33,9 @@ layout_mode = 2
 size_flags_vertical = 3
 alignment = 1
 
-[node name="Pass" type="Control" parent="MainContainer" unique_id=1116334138]
-layout_mode = 2
-size_flags_horizontal = 3
-
 [node name="ScrollContainer" type="ScrollContainer" parent="MainContainer" unique_id=100671604]
-custom_minimum_size = Vector2(600, 0)
+custom_minimum_size = Vector2(720, 0)
 layout_mode = 2
-size_flags_horizontal = 3
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MainContainer/ScrollContainer" unique_id=1301815618]
 layout_mode = 2
@@ -96,7 +91,3 @@ theme_override_constants/margin_bottom = 12
 
 [node name="LicenseContainer" parent="MainContainer/ScrollContainer/VBoxContainer/AboutPanel/MarginContainer" unique_id=1277865361 instance=ExtResource("4_31xfx")]
 layout_mode = 2
-
-[node name="Pass2" type="Control" parent="MainContainer" unique_id=1179570988]
-layout_mode = 2
-size_flags_horizontal = 3

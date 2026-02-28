@@ -20,23 +20,19 @@ func _ready() -> void:
 		card.project_path = project.path
 		card.prefer_engine_id = project.prefer_engine_id
 		card_container.add_child(card)
-	_handle_component_size()
+	_handle_component()
 	Config.config_updated.connect(_config_update)
 
 func _config_update(config_name: String) -> void:
 	match config_name:
 		"language":
-			_handle_component_size()
+			_handle_component()
 			
-func _handle_component_size() -> void:
-	import_button.custom_minimum_size.x = import_button.get_theme_font("font").get_string_size(
-		tr(import_button.text),
-		HORIZONTAL_ALIGNMENT_LEFT,
-		-1,
-		import_button.get_theme_font_size("font_size")).x + import_button.size.y
+func _handle_component() -> void:
+	App.fix_button_width(import_button)
 
 func _on_import_button_pressed() -> void:
-	import_file_dialog.popup_file_dialog()
+	import_file_dialog.popup_centered()
 
 func _on_import_file_dialog_file_selected(path: String) -> void:
 	if not path.ends_with("project.godot"):

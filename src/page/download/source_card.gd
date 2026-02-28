@@ -29,6 +29,17 @@ func _ready() -> void:
 	if is_dotnet:
 		source_icon.texture = DOTNET
 	download_button.tooltip_text = tr("SOURCE_CARD_DOWNLOAD_HINT") % engine_id
+	Config.config_updated.connect(_config_update)
+	_handle_component()
+
+func _config_update(config_name: String) -> void:
+	match config_name:
+		"language":
+			_handle_component()
+			download_button.tooltip_text = tr("SOURCE_CARD_DOWNLOAD_HINT") % engine_id
+
+func _handle_component() -> void:
+	App.fix_button_width(download_button)
 
 func _on_download_button_pressed() -> void:
 	download.emit(engine_id)

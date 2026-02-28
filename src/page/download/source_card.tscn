@@ -61,8 +61,8 @@ size_flags_horizontal = 3
 custom_minimum_size = Vector2(34, 0)
 layout_mode = 2
 tooltip_text = "SOURCE_CARD_DOWNLOAD_HINT"
+text = "BUTTON_DOWNLOAD"
 icon = ExtResource("4_cieoe")
-icon_alignment = 1
 expand_icon = true
 
 [connection signal="pressed" from="MarginContainer/HBoxContainer/DownloadButton" to="." method="_on_download_button_pressed"]

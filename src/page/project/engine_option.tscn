@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://c25h47emdltel" path="res://src/page/project/engine_option.gd" id="1_lua2q"]
 
 [node name="EngineOption" type="OptionButton" unique_id=1720390930]
-custom_minimum_size = Vector2(96, 0)
+custom_minimum_size = Vector2(128, 0)
 offset_right = 64.0
 offset_bottom = 20.0
 theme_override_font_sizes/font_size = 12

@@ -8,6 +8,7 @@
 [node name="DownloaderCard" type="PanelContainer" unique_id=1990204292]
 anchors_preset = 10
 anchor_right = 1.0
+offset_bottom = 98.0
 grow_horizontal = 2
 script = ExtResource("1_7mnk0")
 
@@ -37,35 +38,33 @@ size_flags_horizontal = 3
 text = "version"
 text_overrun_behavior = 3
 
+[node name="CloseButton" type="Button" parent="MarginContainer/VBoxContainer/TitleContainer" unique_id=1129653929]
+custom_minimum_size = Vector2(23, 0)
+layout_mode = 2
+disabled = true
+icon = ExtResource("4_rdx5i")
+expand_icon = true
+
 [node name="ProgressBar" type="ProgressBar" parent="MarginContainer/VBoxContainer" unique_id=741040197]
 layout_mode = 2
 theme_override_font_sizes/font_size = 8
 
-[node name="InfoLabel" type="Label" parent="MarginContainer/VBoxContainer" unique_id=2118462129]
+[node name="InfoContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer" unique_id=1616166750]
 layout_mode = 2
+
+[node name="InfoLabel" type="Label" parent="MarginContainer/VBoxContainer/InfoContainer" unique_id=2118462129]
+layout_mode = 2
+size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 12
 text = "DOWNLOADER_DOWNLOAD"
 text_overrun_behavior = 3
 
-[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer" unique_id=1613973105]
+[node name="CancelButton" type="Button" parent="MarginContainer/VBoxContainer/InfoContainer" unique_id=1919645693]
 layout_mode = 2
-
-[node name="CancelButton" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer" unique_id=1919645693]
-layout_mode = 2
-size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 12
 disabled = true
 text = "DIALOG_CANCEL"
 icon = ExtResource("3_5bkof")
-expand_icon = true
-
-[node name="CloseButton" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer" unique_id=1129653929]
-layout_mode = 2
-size_flags_horizontal = 3
-theme_override_font_sizes/font_size = 12
-disabled = true
-text = "DIALOG_CLOSE"
-icon = ExtResource("4_rdx5i")
 expand_icon = true
 
 [node name="HTTPRequest" type="HTTPRequest" parent="." unique_id=25683267]
@@ -74,7 +73,7 @@ expand_icon = true
 wait_time = 0.2
 
 [connection signal="extracted" from="." to="." method="_on_extracted"]
-[connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer/CancelButton" to="." method="_on_cancel_button_pressed"]
-[connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer/CloseButton" to="." method="_on_close_button_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/TitleContainer/CloseButton" to="." method="_on_close_button_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/InfoContainer/CancelButton" to="." method="_on_cancel_button_pressed"]
 [connection signal="request_completed" from="HTTPRequest" to="." method="_on_http_request_request_completed"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

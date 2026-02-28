@@ -46,6 +46,7 @@ custom_minimum_size = Vector2(50, 0)
 layout_mode = 2
 
 [node name="ProjectNav" type="Button" parent="MarginContainer/HBoxContainer/SideBar" unique_id=311530294]
+custom_minimum_size = Vector2(55, 0)
 layout_mode = 2
 size_flags_vertical = 3
 text = "TITLE_PROJECT"
@@ -55,6 +56,7 @@ vertical_icon_alignment = 0
 expand_icon = true
 
 [node name="EngineNav" type="Button" parent="MarginContainer/HBoxContainer/SideBar" unique_id=364069615]
+custom_minimum_size = Vector2(55, 0)
 layout_mode = 2
 size_flags_vertical = 3
 text = "TITLE_ENGINE"
@@ -64,6 +66,7 @@ vertical_icon_alignment = 0
 expand_icon = true
 
 [node name="DownloadNav" type="Button" parent="MarginContainer/HBoxContainer/SideBar" unique_id=482896009]
+custom_minimum_size = Vector2(55, 0)
 layout_mode = 2
 size_flags_vertical = 3
 text = "TITLE_DOWNLOAD"
@@ -73,6 +76,7 @@ vertical_icon_alignment = 0
 expand_icon = true
 
 [node name="CompileNav" type="Button" parent="MarginContainer/HBoxContainer/SideBar" unique_id=1957822871]
+custom_minimum_size = Vector2(55, 0)
 layout_mode = 2
 size_flags_vertical = 3
 text = "TITLE_COMPILE"
@@ -102,6 +106,7 @@ layout_mode = 2
 size_flags_vertical = 3
 
 [node name="SettingNav" type="Button" parent="MarginContainer/HBoxContainer/SideBar" unique_id=795076466]
+custom_minimum_size = Vector2(55, 0)
 layout_mode = 2
 size_flags_vertical = 3
 text = "TITLE_SETTING"

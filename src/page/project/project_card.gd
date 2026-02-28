@@ -8,13 +8,14 @@ var prefer_engine_id: String = ""
 @onready var project_icon: TextureRect = $MarginContainer/VBoxContainer/HBoxContainer/ProjectIcon
 @onready var name_label: Label = $MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/NameLabel
 @onready var version_label: Label = $MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer/VersionLabel
-@onready var time_label: Label = $MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer/TimeLabel
 @onready var dotnet_icon: TextureRect = $MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer/DotnetIcon
-@onready var path_line: LineEdit = $MarginContainer/VBoxContainer/HBoxContainer2/PathLine
-@onready var tag_container: HBoxContainer = $MarginContainer/VBoxContainer/HBoxContainer3/ScrollContainer/TagContainer
-@onready var engine_option: OptionButton = $MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/EngineOption
-@onready var editor_button: Button = $MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer/EditorButton
-@onready var engine_button: Button = $MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer/EngineButton
+@onready var time_label: Label = $MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer/TimeLabel
+@onready var tag_container: GridContainer = $MarginContainer/VBoxContainer/HBoxContainer/ScrollContainer/TagContainer
+@onready var path_line: LineEdit = $MarginContainer/VBoxContainer/PathLine
+@onready var path_button: Button = $MarginContainer/VBoxContainer/HBoxContainer2/PathButton
+@onready var editor_button: Button = $MarginContainer/VBoxContainer/HBoxContainer2/EditorButton
+@onready var engine_option: OptionButton = $MarginContainer/VBoxContainer/HBoxContainer2/EngineOption
+@onready var engine_button: Button = $MarginContainer/VBoxContainer/HBoxContainer2/EngineButton
 
 func _ready() -> void:
 	var config: ConfigFile = ConfigFile.new()
@@ -54,6 +55,7 @@ func _ready() -> void:
 	engine_button.disabled = engine_option.get_selected_id() == -1
 	App.small_update.connect(_small_update)
 	Config.config_updated.connect(_config_update)
+	_handle_component()
 
 func _small_update() -> void:
 	var time_dict: Dictionary = Time.get_datetime_dict_from_unix_time(
@@ -73,6 +75,13 @@ func _config_update(config_name: String) -> void:
 			path_line.secret = Config.hide_path
 		"external_editor_path":
 			editor_button.disabled = Config.external_editor_path == ""
+		"language":
+			_handle_component()
+
+func _handle_component() -> void:
+	App.fix_button_width(path_button)
+	App.fix_button_width(editor_button)
+	App.fix_button_width(engine_button)
 	
 func _get_project_version(config: ConfigFile) -> String:
 	var feature: PackedStringArray = config.get_value("application", "config/features", ["unknown"])

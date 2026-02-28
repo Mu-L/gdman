@@ -32,6 +32,7 @@ signal source_loaded()
 signal source_updated()
 
 var source: Dictionary = {}
+var valid_id: Array[String] = []
 var valid_version: Dictionary[String, Array] = {}
 var valid_source: Array[String] = []
 var downloading_task: Dictionary[String, bool] = {}
@@ -65,6 +66,7 @@ func load_source() -> void:
 			var base_version: String = version_data.get("base_version", "")
 			if id == "" or base_version == "":
 				continue
+			valid_id.append(id)
 			if version_data.has(BUILD_STANDARD):
 				var standard_url: String = version_data[BUILD_STANDARD].get(arch, "")
 				if standard_url != "":
@@ -106,6 +108,16 @@ func get_source_url(version: String, id: String, is_dotnet: bool, source_name: S
 	if is_dotnet:
 		build_type = BUILD_DOTNET
 	return source.get(version, {}).get(id, {}).get(build_type, {}).get(source_name, "")
+
+func get_source_url_by_id(engine_id: String, source_name: String) -> String:
+	var engine_info: EngineManager.EngineInfo = EngineManager.id_to_engine_info(engine_id)
+	var handled_id: String = engine_id.replace("-dotnet", "")
+	return get_source_url(
+		"%d.%d" % [engine_info.major_version, engine_info.minor_version],
+		handled_id,
+		engine_info.is_dotnet,
+		source_name)
+
 
 func _request_remote_source() -> void:
 	if not Config.remote_source:

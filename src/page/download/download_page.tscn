@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://wst25oki1eps" path="res://src/page/download/download_page.gd" id="1_0gws8"]
 [ext_resource type="PackedScene" uid="uid://byfxbqtgp68d" path="res://src/page/download/version_container.tscn" id="2_gw8yc"]
-[ext_resource type="PackedScene" uid="uid://dhppyf1y4otgk" path="res://src/page/download/download_confirm.tscn" id="3_ajk1a"]
+[ext_resource type="PackedScene" uid="uid://dhppyf1y4otgk" path="res://src/page/download/download_dialog.tscn" id="3_ajk1a"]
 [ext_resource type="Texture2D" uid="uid://ddqhbrd1han2p" path="res://asset/icon/download.svg" id="3_qrc2e"]
 
 [node name="DownloadPage" type="VBoxContainer" unique_id=589209203]
@@ -21,7 +21,6 @@ title = "DOWNLOAD_CONFIRM_TITLE"
 initial_position = 2
 visible = false
 ok_button_text = "DIALOG_CONFIRM"
-cancel_button_text = "DIALOG_CANCEL"
 
 [node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=992429299]
 layout_mode = 2

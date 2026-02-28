@@ -28,7 +28,10 @@ var window_sizes: Array[Vector2i] = [
 	Vector2i(640, 400), # nHD
 ]
 
+var url_regex: RegEx = RegEx.new()
+
 func _ready() -> void:
+	url_regex.compile(r"^https?://[^\s/$.?#].[^\s]*$")
 	_set_windowed()
 
 func get_architecture() -> String:
@@ -101,3 +104,18 @@ func _set_windowed() -> void:
 
 func _on_small_update_timer_timeout() -> void:
 	small_update.emit()
+
+func fix_button_width(button: Button) -> void:
+	if button.icon == null:
+		return
+	if button.text == "":
+		button.custom_minimum_size.x = button.size.y
+		return
+	button.custom_minimum_size.x = button.get_theme_font("font").get_string_size(
+		tr(button.text),
+		HORIZONTAL_ALIGNMENT_LEFT,
+		-1,
+		button.get_theme_font_size("font_size")).x + button.get_theme_constant("h_separation") + button.size.y
+
+func is_valid_url(url: String) -> bool:
+	return url_regex.search(url) != null

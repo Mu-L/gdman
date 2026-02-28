@@ -2,16 +2,25 @@ id,en,zh_CN,zh_HK
 TITLE_PROJECT,Project,项目,項目
 TITLE_ENGINE,Engine,引擎,引擎
 TITLE_DOWNLOAD,Download,下载,下載
+TITLE_COMPILE,Compile,编译,
 TITLE_SETTING,Setting,设置,設置
 ,,,
 SELECT_AUTO,Auto (%s),自动（%s）,自動（%s）
+,,,
+BUTTON_RUN,Run,运行,
+BUTTON_PATH,Path,目录,
+BUTTON_DOWNLOAD,Download,下载,
 ,,,
 DIALOG_CONFIRM,Confirm,确认,確認
 DIALOG_CANCEL,Cancel,取消,取消
 DIALOG_CLOSE,Close,关闭,關閉
 ,,,
+DOWNLOAD_CUSTOM_URL,Custom URL,自定义URL,
+,,,
 PROJECT_IMPORT,Import,导入,導入
 PROJECT_IMPORT_HINT,Import new project,导入新的项目,導入新的項目
+PROJECT_IMPORT_TITLE,,选择项目文件（godot.project）,
+PROJECT_CARD_EDITOR,Editor,编辑器,
 PROJECT_CARD_EDITOR_HINT,Edit in external editor,通过外部编辑器打开项目,通過外部編輯器打開項目
 PROJECT_CARD_ENGINE_HINT,Launch with selected engine,通过选中版本的引擎打开项目,通過選中版本的引擎打開項目
 PROJECT_CARD_DOTNET_HINT,.NET Project,该项目是.NET项目,該項目是.NET項目
@@ -34,7 +43,7 @@ DOWNLOAD_CHECK_UNSTABLE,Unstable,不稳定版,不穩定版
 DOWNLOAD_UPDATE_PROMPT,Download source updated. Restart to apply!,下载源有更新，重启以应用！,下載源有更新，重啟以應用！
 SOURCE_CARD_UNSTABLE_HINT,"Unstable(RC, Beta, Alpha, Dev, etc.)",不稳定版（RC，Beta，Alpha，Dev等）,不穩定版（RC，Beta，Alpha，Dev等）
 SOURCE_CARD_DOWNLOAD_HINT,Download %s,下载%s,下載%s
-DOWNLOAD_CONFIRM_TITLE,Download %s,下载%s,下載%s
+DOWNLOAD_DIALOG_TITLE,Download %s,下载%s,下載%s
 DOWNLOADER_DOWNLOAD,Downloading...,下载中……,下載中……
 DOWNLOADER_EXTRACT,Extracting...,提取中……,提取中……
 DOWNLOADER_FAIL,Failed,失败,失敗
@@ -64,3 +73,10 @@ SETTING_COMPILE_TOOL,Tool,工具,
 SETTING_COMPILE_VERSION,Version,版本,
 SETTING_COMPILE_CUSTOM,Custom,自定义,
 SETTING_COMPILE_REFRESH,Refresh,刷新,
+,,,
+COMPILE_DOWNLOAD,Download,下载源码,
+COMPILE_CARD_PATH,,源码,
+COMPILE_CARD_BIN,,产物,
+COMPILE_CARD_CUSTOM,,自定义,
+COMPILE_CARD_COMPILE,,编译,
+COMPILE_DOWNLOAD_FILE_NAME,,存放源码的目录名,
