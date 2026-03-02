@@ -54,11 +54,9 @@ text = "Python"
 [node name="Pass14" type="Control" parent="GridContainer" unique_id=1356935798]
 layout_mode = 2
 
-[node name="PythonVersionLabel" type="Label" parent="GridContainer" unique_id=1017160357]
+[node name="PythonCheck" type="CheckBox" parent="GridContainer" unique_id=2075692029]
 layout_mode = 2
-text = "?"
-clip_text = true
-text_overrun_behavior = 3
+disabled = true
 
 [node name="Pass" type="Control" parent="GridContainer" unique_id=136971868]
 layout_mode = 2
@@ -72,11 +70,9 @@ text = "SCons"
 [node name="Pass15" type="Control" parent="GridContainer" unique_id=1944698625]
 layout_mode = 2
 
-[node name="SconsVersionLabel" type="Label" parent="GridContainer" unique_id=1374065054]
+[node name="SconsCheck" type="CheckBox" parent="GridContainer" unique_id=211469032]
 layout_mode = 2
-text = "?"
-clip_text = true
-text_overrun_behavior = 3
+disabled = true
 
 [node name="Pass2" type="Control" parent="GridContainer" unique_id=1497895755]
 layout_mode = 2
@@ -89,15 +85,14 @@ text = ".NET SDK"
 
 [node name="DotnetIcon" type="TextureRect" parent="GridContainer" unique_id=236740275]
 layout_mode = 2
+tooltip_text = ".NET"
 texture = ExtResource("3_pnxjj")
 expand_mode = 3
 stretch_mode = 5
 
-[node name="DotnetVersionLabel" type="Label" parent="GridContainer" unique_id=1990690975]
+[node name="DotnetCheck" type="CheckBox" parent="GridContainer" unique_id=635337936]
 layout_mode = 2
-text = "?"
-clip_text = true
-text_overrun_behavior = 3
+disabled = true
 
 [node name="Pass3" type="Control" parent="GridContainer" unique_id=113928471]
 layout_mode = 2
@@ -115,11 +110,9 @@ texture = ExtResource("4_l7ble")
 expand_mode = 5
 stretch_mode = 5
 
-[node name="MingwVersionLabel" type="Label" parent="GridContainer" unique_id=861418359]
+[node name="MingwCheck" type="CheckBox" parent="GridContainer" unique_id=843091896]
 layout_mode = 2
-text = "?"
-clip_text = true
-text_overrun_behavior = 3
+disabled = true
 
 [node name="MingwContainer" type="HBoxContainer" parent="GridContainer" unique_id=18445207]
 layout_mode = 2
@@ -155,11 +148,9 @@ texture = ExtResource("6_xar62")
 expand_mode = 5
 stretch_mode = 5
 
-[node name="VulkanSDKVersionLabel" type="Label" parent="GridContainer" unique_id=1173527793]
+[node name="VulkanSDKCheck" type="CheckBox" parent="GridContainer" unique_id=2000882414]
 layout_mode = 2
-text = "?"
-clip_text = true
-text_overrun_behavior = 3
+disabled = true
 
 [node name="Pass4" type="Control" parent="GridContainer" unique_id=886355569]
 layout_mode = 2
@@ -177,11 +168,9 @@ texture = ExtResource("9_1jmai")
 expand_mode = 5
 stretch_mode = 5
 
-[node name="EmscriptenVersionLabel" type="Label" parent="GridContainer" unique_id=860109968]
+[node name="EmscriptenCheck" type="CheckBox" parent="GridContainer" unique_id=1995187167]
 layout_mode = 2
-text = "?"
-clip_text = true
-text_overrun_behavior = 3
+disabled = true
 
 [node name="Pass5" type="Control" parent="GridContainer" unique_id=1709152385]
 layout_mode = 2
@@ -199,11 +188,9 @@ texture = ExtResource("7_821rm")
 expand_mode = 5
 stretch_mode = 5
 
-[node name="JDKVersionLabel" type="Label" parent="GridContainer" unique_id=701584776]
+[node name="JDKCheck" type="CheckBox" parent="GridContainer" unique_id=1872374105]
 layout_mode = 2
-text = "?"
-clip_text = true
-text_overrun_behavior = 3
+disabled = true
 
 [node name="JDKContainer" type="HBoxContainer" parent="GridContainer" unique_id=1501804699]
 layout_mode = 2
@@ -241,7 +228,7 @@ texture = ExtResource("7_821rm")
 expand_mode = 5
 stretch_mode = 5
 
-[node name="Pass6" type="Control" parent="GridContainer" unique_id=502473008]
+[node name="Pass6" type="Control" parent="GridContainer" unique_id=2088177799]
 layout_mode = 2
 
 [node name="AndroidSDKContainer" type="HBoxContainer" parent="GridContainer" unique_id=322774448]
@@ -279,9 +266,9 @@ texture = ExtResource("7_821rm")
 expand_mode = 5
 stretch_mode = 5
 
-[node name="AndroidPlatformToolsVersionLabel" type="Label" parent="GridContainer" unique_id=78627296]
+[node name="AndroidPlatformToolsCheck" type="CheckBox" parent="GridContainer" unique_id=1444486499]
 layout_mode = 2
-text = "?"
+disabled = true
 
 [node name="Pass7" type="Control" parent="GridContainer" unique_id=2091105573]
 layout_mode = 2
@@ -297,9 +284,9 @@ texture = ExtResource("7_821rm")
 expand_mode = 5
 stretch_mode = 5
 
-[node name="AndroidBuildToolsVersionLabel" type="Label" parent="GridContainer" unique_id=161980082]
+[node name="AndroidBuildToolsCheck" type="CheckBox" parent="GridContainer" unique_id=1802392670]
 layout_mode = 2
-text = "?"
+disabled = true
 
 [node name="Pass8" type="Control" parent="GridContainer" unique_id=1650394338]
 layout_mode = 2
@@ -315,9 +302,9 @@ texture = ExtResource("7_821rm")
 expand_mode = 5
 stretch_mode = 5
 
-[node name="AndroidPlatformVersionLabel" type="Label" parent="GridContainer" unique_id=122419992]
+[node name="AndroidPlatformCheck" type="CheckBox" parent="GridContainer" unique_id=710778458]
 layout_mode = 2
-text = "?"
+disabled = true
 
 [node name="Pass9" type="Control" parent="GridContainer" unique_id=1515881919]
 layout_mode = 2
@@ -333,9 +320,9 @@ texture = ExtResource("7_821rm")
 expand_mode = 5
 stretch_mode = 5
 
-[node name="AndroidCommandLineToolsVersionLabel" type="Label" parent="GridContainer" unique_id=796895056]
+[node name="AndroidCommandLineToolsCheck" type="CheckBox" parent="GridContainer" unique_id=1277981829]
 layout_mode = 2
-text = "?"
+disabled = true
 
 [node name="Pass10" type="Control" parent="GridContainer" unique_id=1559748097]
 layout_mode = 2
@@ -351,9 +338,9 @@ texture = ExtResource("7_821rm")
 expand_mode = 5
 stretch_mode = 5
 
-[node name="AndroidCmakeVersionLabel" type="Label" parent="GridContainer" unique_id=2081880708]
+[node name="AndroidCmakeCheck" type="CheckBox" parent="GridContainer" unique_id=893764405]
 layout_mode = 2
-text = "?"
+disabled = true
 
 [node name="Pass11" type="Control" parent="GridContainer" unique_id=394115724]
 layout_mode = 2
@@ -369,9 +356,9 @@ texture = ExtResource("7_821rm")
 expand_mode = 5
 stretch_mode = 5
 
-[node name="AndroidNDKVersionLabel" type="Label" parent="GridContainer" unique_id=576313355]
+[node name="AndroidNDKCheck" type="CheckBox" parent="GridContainer" unique_id=345388479]
 layout_mode = 2
-text = "?"
+disabled = true
 
 [node name="Pass12" type="Control" parent="GridContainer" unique_id=537266589]
 layout_mode = 2
