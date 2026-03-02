@@ -52,7 +52,7 @@ func get_vulkan_sdk_version() -> String:
 		or output.size() == 0):
 		return ""
 	var version_info: Array[String] = []
-	for line: String in output:
+	for line: String in output[0].split("\n"):
 		if line.containsn("version"):
 			version_info.append(line.strip_edges())
 	if version_info.size() == 0:
