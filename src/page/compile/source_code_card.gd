@@ -6,6 +6,7 @@ signal compile(file_name: String, source_code_path: String)
 
 var file_name: String = ""
 
+var dir_path: String = ""
 var source_code_path: String = ""
 var custom_file_path: String = ""
 var bin_dir_path: String = ""
@@ -19,7 +20,7 @@ var bin_dir_path: String = ""
 @onready var path_line: LineEdit = $MarginContainer/VBoxContainer/PathLine
 
 func _ready() -> void:
-	var dir_path: String = ProjectSettings.globalize_path(CompileManager.SOURCE_CODE_DIR.path_join(file_name))
+	dir_path = ProjectSettings.globalize_path(CompileManager.SOURCE_CODE_DIR.path_join(file_name))
 	var dir: DirAccess = DirAccess.open(dir_path)
 	if dir == null:
 		queue_free()
@@ -63,7 +64,7 @@ func _handle_component() -> void:
 	App.fix_button_width(compile_button)
 
 func _on_delete_button_pressed() -> void:
-	OS.move_to_trash(source_code_path)
+	App.remove_file(dir_path)
 	queue_free()
 
 

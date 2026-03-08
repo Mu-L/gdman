@@ -68,9 +68,9 @@ func _failed(info: String = "") -> void:
 	timer.stop()
 	DownloadManager.downloading_task.erase(download_task_id)
 	if FileAccess.file_exists(download_path):
-		OS.move_to_trash(download_path)
+		App.remove_file(download_path)
 	if FileAccess.file_exists(cache_path):
-		OS.move_to_trash(cache_path)
+		App.remove_file(cache_path)
 	
 
 func _on_timer_timeout() -> void:
@@ -115,7 +115,7 @@ func _on_extracted() -> void:
 	info_label.text = tr("DOWNLOADER_COMPLETE")
 	if (Config.delete_download_file
 		and FileAccess.file_exists(download_path)):
-		OS.move_to_trash(download_path)
+		App.remove_file(download_path)
 	close_button.disabled = false
 	_succeeded()
 
@@ -131,7 +131,7 @@ func _on_cancel_button_pressed() -> void:
 	cancel_button.disabled = true
 	if (download_path != ""
 		and FileAccess.file_exists(download_path)):
-		OS.move_to_trash(download_path)
+		App.remove_file(download_path)
 
 
 func _on_close_button_pressed() -> void:

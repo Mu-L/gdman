@@ -79,7 +79,6 @@ func _on_refresh_button_pressed() -> void:
 func _on_version_refreshed() -> void:
 	WorkerThreadPool.wait_for_task_completion(check_version_task_id)
 	refresh_button.set_deferred("disabled", false)
-
 func _on_mingw_path_button_pressed() -> void:
 	mingw_file_dialog.popup_centered()
 
@@ -95,10 +94,12 @@ func _on_mingw_file_dialog_dir_selected(dir: String) -> void:
 
 func _on_jdk_file_dialog_dir_selected(dir: String) -> void:
 	jdk_path_line.text = dir
+	jdk_path_line.tooltip_text = dir
 	Config.java_home = dir
 
 func _on_android_sdk_file_dialog_dir_selected(dir: String) -> void:
 	android_sdk_path_line.text = dir
+	android_sdk_path_line.tooltip_text = dir
 	Config.android_home = dir
 
 func _on_mingw_path_line_text_submitted(new_text: String) -> void:

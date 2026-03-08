@@ -47,7 +47,7 @@ func _handle_component() -> void:
 	App.fix_button_width(run_button)
 
 func _on_delete_button_pressed() -> void:
-	OS.move_to_trash(dir_path)
+	App.remove_file(dir_path)
 	queue_free()
 
 

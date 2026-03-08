@@ -122,3 +122,8 @@ func is_valid_url(url: String) -> bool:
 
 func is_unix_platform() -> bool:
 	return OS.get_name() in ["macOS", "Linux", "FreeBSD", "NetBSD", "OpenBSD", "BSD", ]
+
+func remove_file(path: String) -> void:
+	var handled_path: String = ProjectSettings.globalize_path(path)
+	if DirAccess.remove_absolute(handled_path) != OK:
+		OS.move_to_trash(handled_path)

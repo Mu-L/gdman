@@ -46,7 +46,8 @@ func _ready() -> void:
 func display() -> void:
 	file_name_line.text = ""
 	url_line.text = ""
-	version_option.select(-1)
+	version_option.select(0)
+	url_line.editable = true
 	_handle_ok()
 	popup_centered()
 

@@ -18,7 +18,30 @@ func display(code_file_name: String, code_file_path: String) -> void:
 	popup_centered()
 
 func _update_command() -> void:
-	var command: String = ("scons" + platform_param + architecture_param).strip_edges()
+	var os_name: String = OS.get_name()
+	var env_commands: Array[String] = []
+	if os_name == "Windows":
+		if Config.mingw_prefix != "":
+			env_commands.append("$env:MINGW_PREFIX = \"%s\"" % Config.mingw_prefix)
+		if platform_param == "android":
+			if Config.java_home != "":
+				env_commands.append("$env:JAVA_HOME = \"%s\"" % Config.java_home)
+			if Config.android_home != "":
+				env_commands.append("$env:ANDROID_HOME = \"%s\"" % Config.android_home)
+	else:
+		if platform_param == "android":
+			if Config.java_home != "":
+				env_commands.append("export JAVA_HOME=\"%s\"" % Config.java_home)
+			if Config.android_home != "":
+				env_commands.append("export ANDROID_HOME=\"%s\"" % Config.android_home)
+	var command: String = ""
+	if env_commands.size() > 0:
+		command = "; ".join(env_commands) + "; "
+	command += "scons"
+	if platform_param != "":
+		command += " platform=%s" % platform_param
+	if architecture_param != "":
+		command += " arch=%s" % architecture_param
 	command_line.text = command
 	command_line.tooltip_text = command
 
@@ -27,19 +50,19 @@ func _on_platform_option_item_selected(index: int) -> void:
 		0:
 			platform_param = ""
 		1:
-			platform_param = " platform=windows"
+			platform_param = "windows"
 		2:
-			platform_param = " platform=linuxbsd"
+			platform_param = "linuxbsd"
 		3:
-			platform_param = " platform=macos"
+			platform_param = "macos"
 		4:
-			platform_param = " platform=android"
+			platform_param = "android"
 		5:
-			platform_param = " platform=ios"
+			platform_param = "ios"
 		6:
-			platform_param = " platform=visionos"
+			platform_param = "visionos"
 		7:
-			platform_param = " platform=web"
+			platform_param = "web"
 		_:
 			platform_param = ""
 	_update_command()
@@ -50,23 +73,23 @@ func _on_architecture_option_item_selected(index: int) -> void:
 		0:
 			architecture_param = ""
 		1:
-			architecture_param = " arch=x86_32"
+			architecture_param = "x86_32"
 		2:
-			architecture_param = " arch=x86_64"
+			architecture_param = "x86_64"
 		3:
-			architecture_param = " arch=arm32"
+			architecture_param = "arm32"
 		4:
-			architecture_param = " arch=arm64"
+			architecture_param = "arm64"
 		5:
-			architecture_param = " arch=rv64"
+			architecture_param = "rv64"
 		6:
-			architecture_param = " arch=ppc64"
+			architecture_param = "ppc64"
 		7:
-			architecture_param = " arch=wasm32"
+			architecture_param = "wasm32"
 		8:
-			architecture_param = " arch=wasm64"
+			architecture_param = "wasm64"
 		9:
-			architecture_param = " arch=loongarch64"
+			architecture_param = "loongarch64"
 		_:
 			architecture_param = ""
 	_update_command()
