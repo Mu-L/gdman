@@ -116,7 +116,7 @@ expand_icon = true
 
 [node name="EditorFileDialog" type="FileDialog" parent="EditorContainer/EditorSelectButton" unique_id=912803333]
 oversampling_override = 1.0
-title = "Open a File"
+title = "SETTING_EDITOR_OPEN"
 initial_position = 1
 ok_button_text = "DIALOG_CONFIRM"
 dialog_hide_on_ok = true

@@ -12,37 +12,37 @@ var language: String = "auto":
 			App.set_language(OS.get_locale())
 		else:
 			TranslationServer.set_locale(language)
-		store_config()
+		store_config.call_deferred()
 		config_updated.emit("language")
 
 var architecture: String = "auto":
 	set(v):
 		architecture = v
-		store_config()
+		store_config.call_deferred()
 		config_updated.emit("architecture")
 
 var delete_download_file: bool = false:
 	set(v):
 		delete_download_file = v
-		store_config()
+		store_config.call_deferred()
 		config_updated.emit("delete_download_file")
 
 var external_editor_path: String = "":
 	set(v):
 		external_editor_path = v
-		store_config()
+		store_config.call_deferred()
 		config_updated.emit("external_editor_path")
 
 var hide_path: bool = false:
 	set(v):
 		hide_path = v
-		store_config()
+		store_config.call_deferred()
 		config_updated.emit("hide_path")
 
 var remote_source: bool = false:
 	set(v):
 		remote_source = v
-		store_config()
+		store_config.call_deferred()
 		config_updated.emit("remote_source")
 
 ### Compile ###
@@ -50,19 +50,19 @@ var remote_source: bool = false:
 var mingw_prefix: String = "": # MINGW_PREFIX
 	set(v):
 		mingw_prefix = v
-		store_config()
+		store_config.call_deferred()
 		config_updated.emit("mingw_prefix")
 
 var java_home: String = "": # JAVA_HOME
 	set(v):
 		java_home = v
-		store_config()
+		store_config.call_deferred()
 		config_updated.emit("java_home")
 
 var android_home: String = "": # ANDROID_HOME
 	set(v):
 		android_home = v
-		store_config()
+		store_config.call_deferred()
 		config_updated.emit("android_home")
 
 func _ready() -> void:

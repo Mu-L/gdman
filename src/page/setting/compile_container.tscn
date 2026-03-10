@@ -1,10 +1,10 @@
 [gd_scene format=3 uid="uid://0f770t4bh788"]
 
-[ext_resource type="Texture2D" uid="uid://hv0qw0fm1wga" path="res://asset/icon/directory.svg" id="1_36afp"]
 [ext_resource type="Script" uid="uid://dvw8vp020gt4u" path="res://src/page/setting/compile_container.gd" id="1_y4nsr"]
 [ext_resource type="Texture2D" uid="uid://bacfa0xs2su2p" path="res://asset/icon/refresh.svg" id="2_y4nsr"]
 [ext_resource type="Texture2D" uid="uid://bu2rk28e26nqp" path="res://asset/icon/dotnet.svg" id="3_pnxjj"]
 [ext_resource type="Texture2D" uid="uid://d1vmufog6bk75" path="res://asset/icon/windows.svg" id="4_l7ble"]
+[ext_resource type="Texture2D" uid="uid://cn7mvs1yvvohm" path="res://asset/icon/scan.svg" id="5_nhs75"]
 [ext_resource type="Texture2D" uid="uid://cc26nw5lgktse" path="res://asset/icon/macos.svg" id="6_xar62"]
 [ext_resource type="Texture2D" uid="uid://ekg8dk2bwkxd" path="res://asset/icon/android.svg" id="7_821rm"]
 [ext_resource type="Texture2D" uid="uid://bv1fd6m6p2lke" path="res://asset/icon/browser.svg" id="9_1jmai"]
@@ -126,12 +126,14 @@ placeholder_text = "MINGW_PREFIX"
 [node name="MingwPathButton" type="Button" parent="GridContainer/MingwContainer" unique_id=1797513464]
 custom_minimum_size = Vector2(25, 0)
 layout_mode = 2
-icon = ExtResource("1_36afp")
+icon = ExtResource("5_nhs75")
 icon_alignment = 1
 expand_icon = true
 
 [node name="MingwFileDialog" type="FileDialog" parent="GridContainer/MingwContainer/MingwPathButton" unique_id=179394767]
-title = "Open a Directory"
+title = "OPEN_DIRECTORY"
+ok_button_text = "DIALOG_CONFIRM"
+cancel_button_text = "DIALOG_CANCEL"
 file_mode = 2
 access = 2
 show_hidden_files = true
@@ -204,12 +206,14 @@ placeholder_text = "JAVA_HOME"
 [node name="JDKPathButton" type="Button" parent="GridContainer/JDKContainer" unique_id=1511294036]
 custom_minimum_size = Vector2(25, 0)
 layout_mode = 2
-icon = ExtResource("1_36afp")
+icon = ExtResource("5_nhs75")
 icon_alignment = 1
 expand_icon = true
 
 [node name="JDKFileDialog" type="FileDialog" parent="GridContainer/JDKContainer/JDKPathButton" unique_id=1303295638]
-title = "Open a Directory"
+title = "OPEN_DIRECTORY"
+ok_button_text = "DIALOG_CONFIRM"
+cancel_button_text = "DIALOG_CANCEL"
 file_mode = 2
 access = 2
 show_hidden_files = true
@@ -244,12 +248,14 @@ placeholder_text = "ANDROID_HOME"
 [node name="AndroidSDKPathButton" type="Button" parent="GridContainer/AndroidSDKContainer" unique_id=1986548852]
 custom_minimum_size = Vector2(25, 0)
 layout_mode = 2
-icon = ExtResource("1_36afp")
+icon = ExtResource("5_nhs75")
 icon_alignment = 1
 expand_icon = true
 
 [node name="AndroidSDKFileDialog" type="FileDialog" parent="GridContainer/AndroidSDKContainer/AndroidSDKPathButton" unique_id=1356462611]
-title = "Open a Directory"
+title = "OPEN_DIRECTORY"
+ok_button_text = "DIALOG_CONFIRM"
+cancel_button_text = "DIALOG_CANCEL"
 file_mode = 2
 access = 2
 show_hidden_files = true

@@ -61,7 +61,7 @@ func _handle_data() -> bool:
 	return false
 
 func _failed(info: String = "") -> void:
-	info_label.text = tr("DOWNLOAD_FAILED")
+	info_label.text = tr("DOWNLOADER_FAIL")
 	info_label.tooltip_text = info
 	cancel_button.disabled = true
 	close_button.disabled = false

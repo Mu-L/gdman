@@ -2,25 +2,26 @@ id,en,zh_CN,zh_HK
 TITLE_PROJECT,Project,项目,項目
 TITLE_ENGINE,Engine,引擎,引擎
 TITLE_DOWNLOAD,Download,下载,下載
-TITLE_COMPILE,Compile,编译,
+TITLE_COMPILE,Compile,编译,編譯
 TITLE_SETTING,Setting,设置,設置
 ,,,
 SELECT_AUTO,Auto (%s),自动（%s）,自動（%s）
+OPEN_DIRECTORY,Select Directory,选择目录,選擇目錄
 ,,,
-BUTTON_RUN,Run,运行,
-BUTTON_PATH,Path,目录,
-BUTTON_DOWNLOAD,Download,下载,
+BUTTON_RUN,Run,运行,運行
+BUTTON_PATH,Path,目录,目錄
+BUTTON_DOWNLOAD,Download,下载,下載
 ,,,
 DIALOG_CONFIRM,Confirm,确认,確認
 DIALOG_CANCEL,Cancel,取消,取消
 DIALOG_CLOSE,Close,关闭,關閉
 ,,,
-DOWNLOAD_CUSTOM_URL,Custom URL,自定义URL,
+DOWNLOAD_CUSTOM_URL,Custom URL,自定义URL,自定義URL
 ,,,
 PROJECT_IMPORT,Import,导入,導入
 PROJECT_IMPORT_HINT,Import new project,导入新的项目,導入新的項目
-PROJECT_IMPORT_TITLE,,选择项目文件（godot.project）,
-PROJECT_CARD_EDITOR,Editor,编辑器,
+PROJECT_IMPORT_TITLE,Select Project File (godot.project),选择项目文件（godot.project）,選擇項目文件（godot.project）
+PROJECT_CARD_EDITOR,Editor,编辑器,編輯器
 PROJECT_CARD_EDITOR_HINT,Edit in external editor,通过外部编辑器打开项目,通過外部編輯器打開項目
 PROJECT_CARD_ENGINE_HINT,Launch with selected engine,通过选中版本的引擎打开项目,通過選中版本的引擎打開項目
 PROJECT_CARD_DOTNET_HINT,.NET Project,该项目是.NET项目,該項目是.NET項目
@@ -45,7 +46,7 @@ SOURCE_CARD_UNSTABLE_HINT,"Unstable(RC, Beta, Alpha, Dev, etc.)",不稳定版（
 SOURCE_CARD_DOWNLOAD_HINT,Download %s,下载%s,下載%s
 DOWNLOAD_DIALOG_TITLE,Download %s,下载%s,下載%s
 ,,,
-DOWNLOADER_READY,,准备中……,
+DOWNLOADER_READY,Preparing…,准备中……,準備中……
 DOWNLOADER_DOWNLOAD,Downloading...,下载中……,下載中……
 DOWNLOADER_EXTRACT,Extracting...,提取中……,提取中……
 DOWNLOADER_FAIL,Failed,失败,失敗
@@ -61,29 +62,28 @@ SETTING_ARCHITECTURE_HINT,Auto-detects architecture\n*Do not change unless you k
 SETTING_DELETE_DOWNLOAD,Clean Download Archieve,删除下载文件,刪除下載文件
 SETTING_DELETE_DOWNLOAD_HINT,Delete temporary files after extraction,下载并提取引擎后，删除产生的临时文件,下載並提取引擎後，刪除產生的臨時文件
 SETTING_EDITOR,External Editor,外部编辑器,外部編輯器
-SETTING_EDITOR_HINT,"Project editor executable\n*Typically .exe on Windows, .app on MacOS",相关文件会用指定的编辑器打开\n*在Windows通常是.exe，在MacOS通常是.app,選定後，可在項目頁面使用該編輯器打開項目目錄\n*在Windows通常是.exe，在MacOS通常是.app
+SETTING_EDITOR_HINT,"Project editor executable\n*Typically .exe on Windows, .app on MacOS",相关文件会用指定的编辑器打开\n*在Windows通常是.exe，在MacOS通常是.app,相關文件會用指定的編輯器打開\n*在Windows通常是.exe，在MacOS通常是.app
+SETTING_EDITOR_OPEN,Select Editor,选择编辑器,選擇編輯器
 SETTING_HIDE_PATH,Hide Path,隐藏路径,隱藏路徑
 SETTING_HIDE_PATH_HINT,Hide path in cards\n*Full path shown on hover,隐藏卡片中的路径显示\n*在悬浮时仍会显示完整路径,隱藏卡片中的路徑顯示\n*在懸浮時仍會顯示完整路徑
 SETTING_USER_PATH,User Directory,用户目录,用戶目錄
 SETTING_USER_PATH_HINT,Local data directory,GDMan在本机用户使用的目录,GDMan在本機用戶使用的目錄
-SETTING_SHELL,,命令行解释器,
-SETTING_SHELL_HINT,,,
 SETTING_LICENSE,License,开源协议,開源協議
 SETTING_REMOTE_SOURCE,Remote Update Source,在线更新源,在線更新源
 SETTING_REMOTE_SOURCE_HINT,Fetch latest engine download URL from online repository at startup,启动时从在线仓库获取最新的引擎下载地址,啟動時從在線倉庫獲取最新的引擎下載地址
-SETTING_TYPE_COMPILE,Compile,编译,
-SETTING_TYPE_ABOUT,About,关于,
-SETTING_COMPILE_TOOL,Tool,工具,
-SETTING_COMPILE_VERSION,Version,版本,
-SETTING_COMPILE_CUSTOM,Custom,自定义,
-SETTING_COMPILE_REFRESH,Refresh,刷新,
+SETTING_TYPE_COMPILE,Compile,编译,編譯
+SETTING_TYPE_ABOUT,About,关于,關於
+SETTING_COMPILE_TOOL,Tool,工具,工具
+SETTING_COMPILE_VERSION,Version,版本,版本
+SETTING_COMPILE_CUSTOM,Custom,自定义,自定義
+SETTING_COMPILE_REFRESH,Refresh,刷新,刷新
 ,,,
-COMPILE_DOWNLOAD,Download,下载源码,
-COMPILE_CARD_BIN,,产物,
-COMPILE_CARD_CUSTOM,,自定义,
-COMPILE_CARD_COMPILE,,编译,
-COMPILE_DOWNLOAD_FILE_NAME,,存放源码的目录名,
-COMPILE_DEFAULT,,默认,
-COMPILE_PLATFORM,,目标平台,
-COMPILE_ARCHITECTURE,,目标架构,
-COMPILE_PARAM,,编译参数,
+COMPILE_DOWNLOAD,Download Code,下载源码,下載源碼
+COMPILE_CARD_BIN,Artifact,产物,產物
+COMPILE_CARD_CUSTOM,Custom,自定义,自定義
+COMPILE_CARD_COMPILE,Build,编译,編譯
+COMPILE_DOWNLOAD_FILE_NAME,Source Directory Name,存放源码的目录名,存放源碼的目錄名
+COMPILE_DEFAULT,Default,默认,默認
+COMPILE_PLATFORM,Target Platform,目标平台,目標平台
+COMPILE_ARCHITECTURE,Target Architecture,目标架构,目標架構
+COMPILE_PARAM,Build Flags,编译参数,編譯參數
