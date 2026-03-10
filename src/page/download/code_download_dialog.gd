@@ -38,6 +38,8 @@ signal download(url: String, file_name: String)
 @onready var url_line: LineEdit = $VBoxContainer/HBoxContainer/URLLine
 @onready var version_option: OptionButton = $VBoxContainer/HBoxContainer/VersionOption
 
+var existing_names: Array[String] = []
+
 func _ready() -> void:
 	valid_name_regex.compile("^[\\p{L}\\p{N} ]+$")
 	for id: String in DownloadManager.valid_id:
@@ -48,6 +50,11 @@ func display() -> void:
 	url_line.text = ""
 	version_option.select(0)
 	url_line.editable = true
+	existing_names.clear()
+	var source_code_dir: DirAccess = DirAccess.open(CompileManager.SOURCE_CODE_DIR)
+	if source_code_dir != null:
+		for file_name: String in source_code_dir.get_directories():
+			existing_names.append(file_name)
 	_handle_ok()
 	popup_centered()
 
@@ -60,6 +67,8 @@ func _is_valid_file_name(file_name: String) -> bool:
 	if WINDOWS_RESERVED_FILE_NAMES.has(file_name.to_upper()):
 		return false
 	if valid_name_regex.search(file_name) == null:
+		return false
+	if existing_names.has(file_name):
 		return false
 	return true
 
