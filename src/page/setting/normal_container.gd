@@ -79,7 +79,14 @@ func _on_editor_path_line_text_submitted(new_text: String) -> void:
 	Config.external_editor_path = new_text
 
 func _on_editor_select_button_pressed() -> void:
-	editor_file_dialog.current_dir = editor_path_line.text.get_base_dir()
+	if editor_path_line.text != "":
+		editor_file_dialog.current_dir = editor_path_line.text.get_base_dir()
+	else:
+		match OS.get_name():
+			"macOS":
+				editor_file_dialog.current_dir = "/Applications/"
+			"Linux":
+				editor_file_dialog.current_dir = "/usr/bin/"
 	editor_file_dialog.popup_centered()
 
 func _on_hide_path_check_toggled(toggled_on: bool) -> void:

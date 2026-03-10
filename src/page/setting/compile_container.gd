@@ -79,13 +79,20 @@ func _on_refresh_button_pressed() -> void:
 func _on_version_refreshed() -> void:
 	WorkerThreadPool.wait_for_task_completion(check_version_task_id)
 	refresh_button.set_deferred("disabled", false)
+
 func _on_mingw_path_button_pressed() -> void:
+	if mingw_path_line.text != "":
+		mingw_file_dialog.current_dir = mingw_path_line.text.get_base_dir()
 	mingw_file_dialog.popup_centered()
 
 func _on_jdk_path_button_pressed() -> void:
+	if jdk_path_line.text != "":
+		jdk_file_dialog.current_dir = jdk_path_line.text.get_base_dir()
 	jdk_file_dialog.popup_centered()
 
 func _on_android_sdk_path_button_pressed() -> void:
+	if android_sdk_path_line.text != "":
+		android_sdk_file_dialog.current_dir = android_sdk_path_line.text.get_base_dir()
 	android_sdk_file_dialog.popup_centered()
 
 func _on_mingw_file_dialog_dir_selected(dir: String) -> void:
