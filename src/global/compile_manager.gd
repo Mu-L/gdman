@@ -76,9 +76,9 @@ func open_terminal_to_dir(dir_path: String) -> void:
 		return
 	match shell:
 		SHELL_TYPE.WIN_PS7:
-			OS.create_process("pwsh", ["-NoExit", "-Command", "Set-Location -LiteralPath \"%s\"" % dir_path], true)
+			OS.create_process("pwsh", ["-NoExit", "Set-Location \"%s\"" % dir_path], true)
 		SHELL_TYPE.WIN_PS:
-			OS.create_process("powershell", ["-NoExit", "-Command", "Set-Location -LiteralPath \"%s\"" % dir_path], true)
+			OS.create_process("powershell", ["-NoExit", "Set-Location \"%s\"" % dir_path], true)
 		SHELL_TYPE.WIN_CMD:
 			OS.create_process("cmd", ["/K", "cd /d \"%s\"" % dir_path], true)
 		SHELL_TYPE.LINUX_KDE:
