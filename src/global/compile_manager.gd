@@ -89,7 +89,7 @@ func open_terminal_to_dir(dir_path: String) -> void:
 		SHELL_TYPE.LINUX_LXQT:
 			OS.create_process("qterminal", ["--workdir", dir_path], true)
 		SHELL_TYPE.MAC:
-			OS.create_process("zsh", ["-c", "cd \"%s\"" % dir_path], true)
+			OS.create_process("osascript", ["-e", "tell application \"Terminal\" to do script \"cd \"%s\"\"" % dir_path], true)
 
 func get_python_version() -> String:
 	# python3 --version
