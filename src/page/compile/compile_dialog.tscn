@@ -8,13 +8,12 @@
 [ext_resource type="Texture2D" uid="uid://bv1fd6m6p2lke" path="res://asset/icon/browser.svg" id="6_f0kqr"]
 [ext_resource type="Texture2D" uid="uid://plrt3pfpp3fu" path="res://asset/icon/copy.svg" id="7_sptwo"]
 
-[node name="CompileDialog" type="AcceptDialog" unique_id=1596048638]
+[node name="CompileDialog" type="AcceptDialog" unique_id=1598584558]
 oversampling_override = 1.0
-title = "COMPILE_TARGET"
+title = "COMPILE_PARAM"
 position = Vector2i(0, 36)
-size = Vector2i(451, 161)
+size = Vector2i(451, 160)
 visible = true
-ok_button_text = "DIALOG_CONFIRM"
 script = ExtResource("1_kko8o")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=967369905]
@@ -39,7 +38,7 @@ expand_icon = true
 selected = 0
 allow_reselect = true
 item_count = 8
-popup/item_0/text = "COMPILE_AUTO"
+popup/item_0/text = "COMPILE_DEFAULT"
 popup/item_0/id = 0
 popup/item_1/text = "Windows"
 popup/item_1/icon = ExtResource("2_lp5xi")
@@ -73,7 +72,7 @@ layout_mode = 2
 size_flags_horizontal = 3
 selected = 0
 item_count = 10
-popup/item_0/text = "COMPILE_AUTO"
+popup/item_0/text = "COMPILE_DEFAULT"
 popup/item_0/id = 0
 popup/item_1/text = "x86_32"
 popup/item_1/id = 1
@@ -111,6 +110,7 @@ icon = ExtResource("7_sptwo")
 icon_alignment = 1
 expand_icon = true
 
+[connection signal="confirmed" from="." to="." method="_on_confirmed"]
 [connection signal="item_selected" from="VBoxContainer/GridContainer/PlatformOption" to="." method="_on_platform_option_item_selected"]
 [connection signal="item_selected" from="VBoxContainer/GridContainer/ArchitectureOption" to="." method="_on_architecture_option_item_selected"]
 [connection signal="pressed" from="VBoxContainer/HBoxContainer/CopyButton" to="." method="_on_copy_button_pressed"]

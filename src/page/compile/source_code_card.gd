@@ -88,8 +88,4 @@ func _on_custom_button_pressed() -> void:
 
 func _on_compile_button_pressed() -> void:
 	compile.emit()
-	match OS.get_name():
-		"Windows":
-			OS.create_process("powershell", ["-NoExit", "Set-Location -LiteralPath '%s'" % source_code_path], true)
-		"MacOS":
-			OS.create_process("zsh", ["-c", "cd \"%s\"; exec bash" % source_code_path], true)
+	CompileManager.open_terminal_to_dir(source_code_path)
