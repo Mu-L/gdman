@@ -28,7 +28,6 @@ func _extract_task() -> void:
 	var zip: ZIPReader = ZIPReader.new()
 	if zip.open(download_path) != OK:
 		zip.close()
-		print("Failed to open zip file: %s" % download_path)
 		_failed.call_deferred()
 		return
 	var files: PackedStringArray = zip.get_files()

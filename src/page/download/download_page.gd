@@ -21,11 +21,6 @@ func _ready() -> void:
 	var version_containers: Array[Node] = get_tree().get_nodes_in_group("download_version_container")
 	for container: Control in version_containers:
 		container.download.connect(_on_version_container_download)
-	standard_check.toggled.connect(_switch_display)
-	dotnet_check.toggled.connect(_switch_display)
-	stable_check.toggled.connect(_switch_display)
-	unstable_check.toggled.connect(_switch_display)
-	_switch_display(false)
 	_handle_component()
 	Config.config_updated.connect(_config_update)
 
@@ -41,15 +36,10 @@ func _on_version_container_download(engine_id: String) -> void:
 	engine_download_dialog.title = tr("DOWNLOAD_DIALOG_TITLE") % engine_id
 	engine_download_dialog.display(engine_id)
 
-func _switch_display(_pass: bool) -> void:
+func _switch_display() -> void:
 	var version_containers: Array[Node] = get_tree().get_nodes_in_group("download_version_container")
 	for container: Control in version_containers:
-		container.switch_display(
-			standard_check.button_pressed,
-			dotnet_check.button_pressed,
-			stable_check.button_pressed,
-			unstable_check.button_pressed
-		)
+		container.switch_display()
 
 
 func _on_engine_download_dialog_download(url: String, engine_id: String) -> void:
@@ -68,3 +58,23 @@ func _on_code_download_dialog_download(url: String, file_name: String) -> void:
 	downloader_card.url = url
 	downloader_card.file_name = file_name
 	downloader_container.add_child(downloader_card)
+
+
+func _on_standard_check_toggled(toggled_on: bool) -> void:
+	DownloadManager.display_standard = toggled_on
+	_switch_display()
+
+
+func _on_dotnet_check_toggled(toggled_on: bool) -> void:
+	DownloadManager.display_dotnet = toggled_on
+	_switch_display()
+
+
+func _on_stable_check_toggled(toggled_on: bool) -> void:
+	DownloadManager.display_stable = toggled_on
+	_switch_display()
+
+
+func _on_unstable_check_toggled(toggled_on: bool) -> void:
+	DownloadManager.display_unstable = toggled_on
+	_switch_display()

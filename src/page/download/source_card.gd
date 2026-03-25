@@ -31,6 +31,14 @@ func _ready() -> void:
 	download_button.tooltip_text = tr("SOURCE_CARD_DOWNLOAD_HINT") % engine_id
 	Config.config_updated.connect(_config_update)
 	_handle_component()
+	_switch_display()
+
+func _switch_display() -> void:
+	var match_type: bool = ((DownloadManager.display_standard and not is_dotnet)
+			or (DownloadManager.display_dotnet and is_dotnet))
+	var match_stability: bool = ((DownloadManager.display_stable and is_stable)
+		or (DownloadManager.display_unstable and not is_stable))
+	visible = match_type and match_stability
 
 func _config_update(config_name: String) -> void:
 	match config_name:

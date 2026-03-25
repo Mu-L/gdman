@@ -41,6 +41,11 @@ var source_need_download_count: int = 0
 var source_downloaded_count: int = 0
 var source_downloaded_data: Dictionary[String, PackedByteArray] = {}
 
+var display_standard: bool = true
+var display_dotnet: bool = false
+var display_stable: bool = true
+var display_unstable: bool = false
+
 func _ready() -> void:
 	load_source()
 	Config.config_updated.connect(_config_update)

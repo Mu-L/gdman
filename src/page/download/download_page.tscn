@@ -174,5 +174,9 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [connection signal="download" from="EngineDownloadDialog" to="." method="_on_engine_download_dialog_download"]
+[connection signal="toggled" from="OptionContainer/StandardCheck" to="." method="_on_standard_check_toggled"]
+[connection signal="toggled" from="OptionContainer/DotnetCheck" to="." method="_on_dotnet_check_toggled"]
+[connection signal="toggled" from="OptionContainer/StableCheck" to="." method="_on_stable_check_toggled"]
+[connection signal="toggled" from="OptionContainer/UnstableCheck" to="." method="_on_unstable_check_toggled"]
 [connection signal="pressed" from="OptionContainer/CodeDownloadButton" to="." method="_on_code_download_button_pressed"]
 [connection signal="download" from="OptionContainer/CodeDownloadButton/CodeDownloadDialog" to="." method="_on_code_download_dialog_download"]
