@@ -56,6 +56,17 @@ layout_mode = 2
 text = "ENGINE_CHECK_UNSTABLE"
 flat = true
 
+[node name="Control" type="Control" parent="HBoxContainer" unique_id=332183582]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="CardSpin" type="SpinBox" parent="HBoxContainer" unique_id=1083262152]
+layout_mode = 2
+min_value = 1.0
+max_value = 10.0
+value = 3.0
+alignment = 1
+
 [node name="PanelContainer" type="PanelContainer" parent="." unique_id=992382484]
 layout_mode = 2
 size_flags_vertical = 3
@@ -78,3 +89,5 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 columns = 3
+
+[connection signal="value_changed" from="HBoxContainer/CardSpin" to="." method="_on_card_spin_value_changed"]

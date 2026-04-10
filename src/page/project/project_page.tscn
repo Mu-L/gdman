@@ -55,6 +55,17 @@ use_native_dialog = true
 folder_creation_enabled = false
 deleting_enabled = false
 
+[node name="Control" type="Control" parent="HBoxContainer" unique_id=2084994726]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="CardSpin" type="SpinBox" parent="HBoxContainer" unique_id=2045222374]
+layout_mode = 2
+min_value = 1.0
+max_value = 10.0
+value = 2.0
+alignment = 1
+
 [node name="PanelContainer" type="PanelContainer" parent="." unique_id=639309613]
 layout_mode = 2
 size_flags_vertical = 3
@@ -80,3 +91,4 @@ columns = 2
 
 [connection signal="pressed" from="HBoxContainer/ImportButton" to="." method="_on_import_button_pressed"]
 [connection signal="file_selected" from="HBoxContainer/ImportButton/ImportFileDialog" to="." method="_on_import_file_dialog_file_selected"]
+[connection signal="value_changed" from="HBoxContainer/CardSpin" to="." method="_on_card_spin_value_changed"]

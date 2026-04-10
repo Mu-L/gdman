@@ -30,6 +30,20 @@ layout_mode = 2
 theme_override_font_sizes/font_size = 24
 text = "TITLE_COMPILE"
 
+[node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=1963541378]
+layout_mode = 2
+
+[node name="Control" type="Control" parent="HBoxContainer" unique_id=266629579]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="CardSpin" type="SpinBox" parent="HBoxContainer" unique_id=1615000053]
+layout_mode = 2
+min_value = 1.0
+max_value = 10.0
+value = 3.0
+alignment = 1
+
 [node name="PanelContainer" type="PanelContainer" parent="." unique_id=740300699]
 custom_minimum_size = Vector2(400, 0)
 layout_mode = 2
@@ -55,3 +69,5 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 2
 columns = 3
+
+[connection signal="value_changed" from="HBoxContainer/CardSpin" to="." method="_on_card_spin_value_changed"]
