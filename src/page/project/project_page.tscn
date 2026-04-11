@@ -62,7 +62,7 @@ size_flags_horizontal = 3
 [node name="CardSpin" type="SpinBox" parent="HBoxContainer" unique_id=2045222374]
 layout_mode = 2
 min_value = 1.0
-max_value = 10.0
+max_value = 9.0
 value = 2.0
 alignment = 1
 
