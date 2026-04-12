@@ -88,4 +88,4 @@ func _on_custom_button_pressed() -> void:
 
 func _on_compile_button_pressed() -> void:
 	compile.emit()
-	CompileManager.open_terminal_to_dir(source_code_path)
+	OS.shell_open(source_code_path)

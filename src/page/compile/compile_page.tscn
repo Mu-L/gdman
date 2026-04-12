@@ -10,6 +10,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_constants/separation = 8
 script = ExtResource("1_1cu7o")
 
 [node name="CompileDialog" parent="." unique_id=1749735415 instance=ExtResource("2_kxg1l")]

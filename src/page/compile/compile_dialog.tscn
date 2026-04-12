@@ -12,15 +12,15 @@
 oversampling_override = 1.0
 title = "COMPILE_PARAM"
 position = Vector2i(0, 36)
-size = Vector2i(451, 160)
+size = Vector2i(455, 250)
 visible = true
 script = ExtResource("1_kko8o")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=967369905]
 offset_left = 8.0
 offset_top = 8.0
-offset_right = 443.0
-offset_bottom = 111.0
+offset_right = 447.0
+offset_bottom = 201.0
 
 [node name="GridContainer" type="GridContainer" parent="VBoxContainer" unique_id=1433465889]
 layout_mode = 2
@@ -93,19 +93,51 @@ popup/item_8/id = 8
 popup/item_9/text = "loongarch64"
 popup/item_9/id = 9
 
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer" unique_id=467790784]
-layout_mode = 2
-
-[node name="CommandLine" type="LineEdit" parent="VBoxContainer/HBoxContainer" unique_id=85932487]
-custom_minimum_size = Vector2(400, 0)
+[node name="ShellLabel" type="Label" parent="VBoxContainer/GridContainer" unique_id=1890684067]
 layout_mode = 2
 size_flags_horizontal = 3
-text = "scons"
-editable = false
+text = "COMPILE_SHELL"
 
-[node name="CopyButton" type="Button" parent="VBoxContainer/HBoxContainer" unique_id=2037970594]
-custom_minimum_size = Vector2(31, 0)
+[node name="ShellOption" type="OptionButton" parent="VBoxContainer/GridContainer" unique_id=787264733]
 layout_mode = 2
+size_flags_horizontal = 3
+item_count = 1
+popup/item_0/id = 0
+
+[node name="PanelContainer" type="PanelContainer" parent="VBoxContainer" unique_id=1061391535]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/PanelContainer" unique_id=556955385]
+layout_mode = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 4
+
+[node name="CommandText" type="RichTextLabel" parent="VBoxContainer/PanelContainer/MarginContainer" unique_id=1894044945]
+custom_minimum_size = Vector2(0, 80)
+layout_mode = 2
+focus_mode = 2
+mouse_filter = 1
+selection_enabled = true
+
+[node name="Control" type="Control" parent="VBoxContainer/PanelContainer/MarginContainer" unique_id=1664551567]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="CopyButton" type="Button" parent="VBoxContainer/PanelContainer/MarginContainer/Control" unique_id=2037970594]
+custom_minimum_size = Vector2(31, 31)
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -31.0
+offset_top = -31.0
+grow_horizontal = 0
+grow_vertical = 0
+mouse_filter = 1
 icon = ExtResource("7_sptwo")
 icon_alignment = 1
 expand_icon = true
@@ -113,4 +145,7 @@ expand_icon = true
 [connection signal="confirmed" from="." to="." method="_on_confirmed"]
 [connection signal="item_selected" from="VBoxContainer/GridContainer/PlatformOption" to="." method="_on_platform_option_item_selected"]
 [connection signal="item_selected" from="VBoxContainer/GridContainer/ArchitectureOption" to="." method="_on_architecture_option_item_selected"]
-[connection signal="pressed" from="VBoxContainer/HBoxContainer/CopyButton" to="." method="_on_copy_button_pressed"]
+[connection signal="item_selected" from="VBoxContainer/GridContainer/ShellOption" to="." method="_on_shell_option_item_selected"]
+[connection signal="mouse_entered" from="VBoxContainer/PanelContainer" to="." method="_on_panel_container_mouse_entered"]
+[connection signal="mouse_exited" from="VBoxContainer/PanelContainer" to="." method="_on_panel_container_mouse_exited"]
+[connection signal="pressed" from="VBoxContainer/PanelContainer/MarginContainer/Control/CopyButton" to="." method="_on_copy_button_pressed"]
