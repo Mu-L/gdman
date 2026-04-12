@@ -36,14 +36,16 @@ func display() -> void:
 
 func _update_command() -> void:
 	var env_commands: Array[String] = []
-	var set_env_command: String = SHELL_ENV_COMMAND.get(shell_option.get_item_text(shell_option.get_selected_id()), "")
-	if Config.mingw_prefix != "" and set_env_command != "":
-		env_commands.append(set_env_command % ["MINGW_PREFIX", Config.mingw_prefix])
-	if platform_param == "android":
-		if Config.java_home != "" and set_env_command != "":
-			env_commands.append(set_env_command % ["JAVA_HOME", Config.java_home])
-		if Config.android_home != "" and set_env_command != "":
-			env_commands.append(set_env_command % ["ANDROID_HOME", Config.android_home])
+	if shell_option.get_selected_id() >= 0:
+		command_text.text = "scons"
+		var set_env_command: String = SHELL_ENV_COMMAND.get(shell_option.get_item_text(shell_option.get_selected_id()), "")
+		if Config.mingw_prefix != "":
+			env_commands.append(set_env_command % ["MINGW_PREFIX", Config.mingw_prefix])
+		if platform_param == "android":
+			if Config.java_home != "":
+				env_commands.append(set_env_command % ["JAVA_HOME", Config.java_home])
+			if Config.android_home != "":
+				env_commands.append(set_env_command % ["ANDROID_HOME", Config.android_home])
 	var command: String = ""
 	if env_commands.size() > 0:
 		command = "; ".join(env_commands) + "; "

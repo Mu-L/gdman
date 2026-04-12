@@ -4,29 +4,30 @@ const SOURCE_CODE_DIR: String = "user://code"
 
 signal source_code_added(file_name: String)
 
+func _command_to_version_text(path: String, args: PackedStringArray) -> String:
+	var output: Array[String] = []
+	if (OS.execute(path, args, output) != OK
+		or output.size() == 0):
+		return ""
+	# 去除输出中的空行和首尾空白
+	var lines: PackedStringArray = output[0].split("\n")
+	var handled_lines: Array[String] = []
+	for line: String in lines:
+		if line.strip_edges() != "":
+			handled_lines.append(line.strip_edges())
+	return "\n".join(handled_lines)
+
 func get_python_version() -> String:
 	# python3 --version
-	var output: Array[String] = []
-	if (OS.execute("python3", ["--version"], output) != OK
-		or output.size() == 0):
-		return "?"
-	return output[0].strip_edges().replace("Python ", "")
+	return _command_to_version_text("python3", ["--version"])
 
 func get_scons_version() -> String:
 	# scons --version
-	var output: Array[String] = []
-	if (OS.execute("scons", ["--version"], output) != OK
-		or output.size() == 0):
-		return ""
-	return output[0].strip_edges()
+	return _command_to_version_text("scons", ["--version"])
 
 func get_dotnet_version() -> String:
 	# dotnet --version
-	var output: Array[String] = []
-	if (OS.execute("dotnet", ["--version"], output) != OK
-		or output.size() == 0):
-		return ""
-	return output[0].strip_edges()
+	return _command_to_version_text("dotnet", ["--version"])
 
 # MINGW_PREFIX
 func get_mingw_version(custom_path: String) -> String:
@@ -42,11 +43,7 @@ func get_mingw_version(custom_path: String) -> String:
 			path = path.path_join("bin/g++")
 		else:
 			path = "g++"
-	var output: Array[String] = []
-	if (OS.execute(path, ["--version"], output) != OK
-		or output.size() == 0):
-		return ""
-	return output[0].strip_edges()
+	return _command_to_version_text(path, ["--version"])
 
 func get_vulkan_sdk_version() -> String:
 	if OS.get_name() != "macOS":
@@ -64,11 +61,8 @@ func get_vulkan_sdk_version() -> String:
 	return "\n".join(version_info)
 
 func get_emscripten_version() -> String:
-	var output: Array[String] = []
-	if (OS.execute("emcc", ["--version"], output) != OK
-		or output.size() == 0):
-		return ""
-	return output[0].strip_edges()
+	# emcc --version
+	return _command_to_version_text("emcc", ["--version"])
 
 # JAVA_HOME
 func get_jdk_version(custom_path: String) -> String:
@@ -81,21 +75,13 @@ func get_jdk_version(custom_path: String) -> String:
 			path = path.path_join("bin/javac")
 		else:
 			path = "javac"
-	var output: Array[String] = []
-	if (OS.execute(path, ["--version"], output) != OK
-		or output.size() == 0):
-		return ""
-	return output[0].strip_edges()
+	return _command_to_version_text(path, ["--version"])
 
 func get_android_sdk_platform_tools_version(custom_path: String) -> String:
 	var path: String = custom_path if custom_path != "" else OS.get_environment("ANDROID_HOME")
 	if path == "":
 		return ""
-	var output: Array[String] = []
-	if (OS.execute(path.path_join("platform-tools/adb"), ["--version"], output) != OK
-		or output.size() == 0):
-		return ""
-	return output[0].strip_edges()
+	return _command_to_version_text(path.path_join("platform-tools/adb"), ["--version"])
 
 func get_android_sdk_build_tools_version(custom_path: String) -> String:
 	var path: String = custom_path if custom_path != "" else OS.get_environment("ANDROID_HOME")
