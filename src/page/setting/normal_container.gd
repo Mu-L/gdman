@@ -3,6 +3,7 @@ extends GridContainer
 @onready var version_name_label: Label = $VersionNameLabel
 @onready var language_option: OptionButton = $LanguageOption
 @onready var architecture_option: OptionButton = $ArchitectureOption
+@onready var fast_load_check: CheckButton = $FastLoadCheck
 @onready var remote_source_check: CheckButton = $RemoteSourceCheck
 @onready var delete_download_check: CheckButton = $DeleteDownloadCheck
 @onready var editor_path_line: LineEdit = $EditorContainer/EditorPathLine
@@ -34,6 +35,7 @@ func _ready() -> void:
 	editor_path_line.text = Config.external_editor_path
 	editor_path_line.tooltip_text = Config.external_editor_path
 	hide_path_check.button_pressed = Config.hide_path
+	fast_load_check.button_pressed = Config.fast_load
 	remote_source_check.button_pressed = Config.remote_source
 	version_name_label.text = ProjectSettings.get_setting("application/config/version", "unknown")
 	user_path_line.text = ProjectSettings.globalize_path("user://")
@@ -71,6 +73,8 @@ func _on_architecture_option_item_selected(index: int) -> void:
 func _on_remote_source_check_toggled(toggled_on: bool) -> void:
 	Config.remote_source = toggled_on
 
+func _on_fast_load_check_toggled(toggled_on: bool) -> void:
+	Config.fast_load = toggled_on
 
 func _on_delete_download_check_toggled(toggled_on: bool) -> void:
 	Config.delete_download_file = toggled_on

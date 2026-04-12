@@ -6,33 +6,41 @@ const PROJECT_CARD: PackedScene = preload("uid://cphby36r2gwsb")
 @onready var import_file_dialog: FileDialog = $HBoxContainer/ImportButton/ImportFileDialog
 @onready var card_container: GridContainer = $PanelContainer/ScrollContainer/MarginContainer/CardContainer
 
-var projects: Array[String] = []
+var project_request: Array[String] = []
 
 func _ready() -> void:
-	_load_card()
+	set_process(false)
+	_load_project()
 	_handle_component()
 	Config.config_updated.connect(_config_update)
 
 func _process(_delta: float) -> void:
-	if projects.size() <= 0:
+	if project_request.size() <= 0:
 		import_button.disabled = false
 		set_process(false)
 	else:
-		var project: ProjectManager.ProjectInfo = ProjectManager.project_info.get(
-			projects.pop_back(), null)
-		if project == null:
-			return
-		var card: Control = PROJECT_CARD.instantiate()
-		card.project_path = project.path
-		card.prefer_engine_id = project.prefer_engine_id
-		card_container.add_child(card)
+		_add_project_card(project_request.pop_back())
 
-func _load_card() -> void:
+func _load_project() -> void:
 	import_button.disabled = true
 	for card: Control in card_container.get_children():
 		card.queue_free()
-	projects = ProjectManager.project_info.keys()
-	set_process(true)
+	project_request = ProjectManager.project_info.keys()
+	if Config.fast_load:
+		set_process(true)
+	else:
+		for project_path: String in project_request:
+			_add_project_card(project_path)
+		import_button.disabled = false
+
+func _add_project_card(project_path: String) -> void:
+	var project: ProjectManager.ProjectInfo = ProjectManager.project_info.get(project_path, null)
+	if project == null:
+		return
+	var card: Control = PROJECT_CARD.instantiate()
+	card.project_path = project.path
+	card.prefer_engine_id = project.prefer_engine_id
+	card_container.add_child.call_deferred(card)
 
 func _config_update(config_name: String) -> void:
 	match config_name:

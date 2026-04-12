@@ -45,6 +45,12 @@ var remote_source: bool = false:
 		store_config.call_deferred()
 		config_updated.emit("remote_source")
 
+var fast_load: bool = false:
+	set(v):
+		fast_load = v
+		store_config.call_deferred()
+		config_updated.emit("fast_load")
+
 ### Compile ###
 
 var mingw_prefix: String = "": # MINGW_PREFIX
@@ -78,6 +84,7 @@ func store_config() -> void:
 	config.set_value("general", "delete_download_file", delete_download_file)
 	config.set_value("general", "external_editor_path", external_editor_path)
 	config.set_value("general", "hide_path", hide_path)
+	config.set_value("general", "fast_load", fast_load)
 	config.set_value("general", "remote_source", remote_source)
 	config.set_value("compile", "mingw_prefix", mingw_prefix)
 	config.set_value("compile", "java_home", java_home)
@@ -93,6 +100,7 @@ func load_config() -> void:
 	delete_download_file = config.get_value("general", "delete_download_file", false)
 	external_editor_path = config.get_value("general", "external_editor_path", "")
 	hide_path = config.get_value("general", "hide_path", false)
+	fast_load = config.get_value("general", "fast_load", false)
 	remote_source = config.get_value("general", "remote_source", false)
 	mingw_prefix = config.get_value("compile", "mingw_prefix", "")
 	java_home = config.get_value("compile", "java_home", "")
