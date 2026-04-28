@@ -96,7 +96,7 @@ popup/item_9/id = 9
 [node name="ShellLabel" type="Label" parent="VBoxContainer/GridContainer" unique_id=1890684067]
 layout_mode = 2
 size_flags_horizontal = 3
-text = "COMPILE_SHELL"
+text = "Shell"
 
 [node name="ShellOption" type="OptionButton" parent="VBoxContainer/GridContainer" unique_id=787264733]
 layout_mode = 2

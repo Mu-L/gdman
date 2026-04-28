@@ -77,6 +77,8 @@ SETTING_COMPILE_TOOL,Tool,工具,工具
 SETTING_COMPILE_VERSION,Version,版本,版本
 SETTING_COMPILE_CUSTOM,Custom,自定义,自定義
 SETTING_COMPILE_REFRESH,Refresh,刷新,刷新
+SETTING_FAST_LOAD,Fast Load,快速加载,快速加載
+SETTING_FAST_LOAD_HINT,Initialize without loading certain elements to improve startup speed,初始化时不加载某些元素以提高应用启动速度,初始化時不加載某些元素以提高應用啟動速度
 ,,,
 COMPILE_DOWNLOAD,Download Code,下载源码,下載源碼
 COMPILE_CARD_BIN,Artifact,产物,產物
