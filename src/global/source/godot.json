@@ -1,6 +1,138 @@
 {
     "godot": [
         {
+            "id": "4.7-beta2",
+            "base_version": "4.7",
+            "standard": {
+                "windows_x86": "https://downloads.godotengine.org/?version=4.7&flavor=beta2&slug=win32.exe.zip&platform=windows.32",
+                "windows_x64": "https://downloads.godotengine.org/?version=4.7&flavor=beta2&slug=win64.exe.zip&platform=windows.64",
+                "linux_x86": "https://downloads.godotengine.org/?version=4.7&flavor=beta2&slug=linux.x86_32.zip&platform=linux.32",
+                "linux_x64": "https://downloads.godotengine.org/?version=4.7&flavor=beta2&slug=linux.x86_64.zip&platform=linux.64",
+                "linux_arm32": "https://downloads.godotengine.org/?version=4.7&flavor=beta2&slug=linux.arm32.zip&platform=linux.arm32",
+                "linux_arm64": "https://downloads.godotengine.org/?version=4.7&flavor=beta2&slug=linux.arm64.zip&platform=linux.arm64",
+                "macos": "https://downloads.godotengine.org/?version=4.7&flavor=beta2&slug=macos.universal.zip&platform=macos.universal"
+            },
+            "dotnet": {
+                "windows_x86": "https://downloads.godotengine.org/?version=4.7&flavor=beta2&slug=mono_win32.zip&platform=windows.32",
+                "windows_x64": "https://downloads.godotengine.org/?version=4.7&flavor=beta2&slug=mono_win64.zip&platform=windows.64",
+                "linux_x86": "https://downloads.godotengine.org/?version=4.7&flavor=beta2&slug=mono_linux_x86_32.zip&platform=linux.32",
+                "linux_x64": "https://downloads.godotengine.org/?version=4.7&flavor=beta2&slug=mono_linux_x86_64.zip&platform=linux.64",
+                "linux_arm32": "https://downloads.godotengine.org/?version=4.7&flavor=beta2&slug=mono_linux_arm32.zip&platform=linux.arm32",
+                "linux_arm64": "https://downloads.godotengine.org/?version=4.7&flavor=beta2&slug=mono_linux_arm64.zip&platform=linux.arm64",
+                "macos": "https://downloads.godotengine.org/?version=4.7&flavor=beta2&slug=mono_macos.universal.zip&platform=macos.universal"
+            }
+        },
+        {
+            "id": "4.7-beta1",
+            "base_version": "4.7",
+            "standard": {
+                "windows_x86": "https://downloads.godotengine.org/?version=4.7&flavor=beta1&slug=win32.exe.zip&platform=windows.32",
+                "windows_x64": "https://downloads.godotengine.org/?version=4.7&flavor=beta1&slug=win64.exe.zip&platform=windows.64",
+                "linux_x86": "https://downloads.godotengine.org/?version=4.7&flavor=beta1&slug=linux.x86_32.zip&platform=linux.32",
+                "linux_x64": "https://downloads.godotengine.org/?version=4.7&flavor=beta1&slug=linux.x86_64.zip&platform=linux.64",
+                "linux_arm32": "https://downloads.godotengine.org/?version=4.7&flavor=beta1&slug=linux.arm32.zip&platform=linux.arm32",
+                "linux_arm64": "https://downloads.godotengine.org/?version=4.7&flavor=beta1&slug=linux.arm64.zip&platform=linux.arm64",
+                "macos": "https://downloads.godotengine.org/?version=4.7&flavor=beta1&slug=macos.universal.zip&platform=macos.universal"
+            },
+            "dotnet": {
+                "windows_x86": "https://downloads.godotengine.org/?version=4.7&flavor=beta1&slug=mono_win32.zip&platform=windows.32",
+                "windows_x64": "https://downloads.godotengine.org/?version=4.7&flavor=beta1&slug=mono_win64.zip&platform=windows.64",
+                "linux_x86": "https://downloads.godotengine.org/?version=4.7&flavor=beta1&slug=mono_linux_x86_32.zip&platform=linux.32",
+                "linux_x64": "https://downloads.godotengine.org/?version=4.7&flavor=beta1&slug=mono_linux_x86_64.zip&platform=linux.64",
+                "linux_arm32": "https://downloads.godotengine.org/?version=4.7&flavor=beta1&slug=mono_linux_arm32.zip&platform=linux.arm32",
+                "linux_arm64": "https://downloads.godotengine.org/?version=4.7&flavor=beta1&slug=mono_linux_arm64.zip&platform=linux.arm64",
+                "macos": "https://downloads.godotengine.org/?version=4.7&flavor=beta1&slug=mono_macos.universal.zip&platform=macos.universal"
+            }
+        },
+        {
+            "id": "4.7-dev5",
+            "base_version": "4.7",
+            "standard": {
+                "windows_x86": "https://downloads.godotengine.org/?version=4.7&flavor=dev5&slug=win32.exe.zip&platform=windows.32",
+                "windows_x64": "https://downloads.godotengine.org/?version=4.7&flavor=dev5&slug=win64.exe.zip&platform=windows.64",
+                "linux_x86": "https://downloads.godotengine.org/?version=4.7&flavor=dev5&slug=linux.x86_32.zip&platform=linux.32",
+                "linux_x64": "https://downloads.godotengine.org/?version=4.7&flavor=dev5&slug=linux.x86_64.zip&platform=linux.64",
+                "linux_arm32": "https://downloads.godotengine.org/?version=4.7&flavor=dev5&slug=linux.arm32.zip&platform=linux.arm32",
+                "linux_arm64": "https://downloads.godotengine.org/?version=4.7&flavor=dev5&slug=linux.arm64.zip&platform=linux.arm64",
+                "macos": "https://downloads.godotengine.org/?version=4.7&flavor=dev5&slug=macos.universal.zip&platform=macos.universal"
+            },
+            "dotnet": {
+                "windows_x86": "https://downloads.godotengine.org/?version=4.7&flavor=dev5&slug=mono_win32.zip&platform=windows.32",
+                "windows_x64": "https://downloads.godotengine.org/?version=4.7&flavor=dev5&slug=mono_win64.zip&platform=windows.64",
+                "linux_x86": "https://downloads.godotengine.org/?version=4.7&flavor=dev5&slug=mono_linux_x86_32.zip&platform=linux.32",
+                "linux_x64": "https://downloads.godotengine.org/?version=4.7&flavor=dev5&slug=mono_linux_x86_64.zip&platform=linux.64",
+                "linux_arm32": "https://downloads.godotengine.org/?version=4.7&flavor=dev5&slug=mono_linux_arm32.zip&platform=linux.arm32",
+                "linux_arm64": "https://downloads.godotengine.org/?version=4.7&flavor=dev5&slug=mono_linux_arm64.zip&platform=linux.arm64",
+                "macos": "https://downloads.godotengine.org/?version=4.7&flavor=dev5&slug=mono_macos.universal.zip&platform=macos.universal"
+            }
+        },
+        {
+            "id": "4.7-dev4",
+            "base_version": "4.7",
+            "standard": {
+                "windows_x86": "https://downloads.godotengine.org/?version=4.7&flavor=dev4&slug=win32.exe.zip&platform=windows.32",
+                "windows_x64": "https://downloads.godotengine.org/?version=4.7&flavor=dev4&slug=win64.exe.zip&platform=windows.64",
+                "linux_x86": "https://downloads.godotengine.org/?version=4.7&flavor=dev4&slug=linux.x86_32.zip&platform=linux.32",
+                "linux_x64": "https://downloads.godotengine.org/?version=4.7&flavor=dev4&slug=linux.x86_64.zip&platform=linux.64",
+                "linux_arm32": "https://downloads.godotengine.org/?version=4.7&flavor=dev4&slug=linux.arm32.zip&platform=linux.arm32",
+                "linux_arm64": "https://downloads.godotengine.org/?version=4.7&flavor=dev4&slug=linux.arm64.zip&platform=linux.arm64",
+                "macos": "https://downloads.godotengine.org/?version=4.7&flavor=dev4&slug=macos.universal.zip&platform=macos.universal"
+            },
+            "dotnet": {
+                "windows_x86": "https://downloads.godotengine.org/?version=4.7&flavor=dev4&slug=mono_win32.zip&platform=windows.32",
+                "windows_x64": "https://downloads.godotengine.org/?version=4.7&flavor=dev4&slug=mono_win64.zip&platform=windows.64",
+                "linux_x86": "https://downloads.godotengine.org/?version=4.7&flavor=dev4&slug=mono_linux_x86_32.zip&platform=linux.32",
+                "linux_x64": "https://downloads.godotengine.org/?version=4.7&flavor=dev4&slug=mono_linux_x86_64.zip&platform=linux.64",
+                "linux_arm32": "https://downloads.godotengine.org/?version=4.7&flavor=dev4&slug=mono_linux_arm32.zip&platform=linux.arm32",
+                "linux_arm64": "https://downloads.godotengine.org/?version=4.7&flavor=dev4&slug=mono_linux_arm64.zip&platform=linux.arm64",
+                "macos": "https://downloads.godotengine.org/?version=4.7&flavor=dev4&slug=mono_macos.universal.zip&platform=macos.universal"
+            }
+        },
+        {
+            "id": "4.7-dev3",
+            "base_version": "4.7",
+            "standard": {
+                "windows_x86": "https://downloads.godotengine.org/?version=4.7&flavor=dev3&slug=win32.exe.zip&platform=windows.32",
+                "windows_x64": "https://downloads.godotengine.org/?version=4.7&flavor=dev3&slug=win64.exe.zip&platform=windows.64",
+                "linux_x86": "https://downloads.godotengine.org/?version=4.7&flavor=dev3&slug=linux.x86_32.zip&platform=linux.32",
+                "linux_x64": "https://downloads.godotengine.org/?version=4.7&flavor=dev3&slug=linux.x86_64.zip&platform=linux.64",
+                "linux_arm32": "https://downloads.godotengine.org/?version=4.7&flavor=dev3&slug=linux.arm32.zip&platform=linux.arm32",
+                "linux_arm64": "https://downloads.godotengine.org/?version=4.7&flavor=dev3&slug=linux.arm64.zip&platform=linux.arm64",
+                "macos": "https://downloads.godotengine.org/?version=4.7&flavor=dev3&slug=macos.universal.zip&platform=macos.universal"
+            },
+            "dotnet": {
+                "windows_x86": "https://downloads.godotengine.org/?version=4.7&flavor=dev3&slug=mono_win32.zip&platform=windows.32",
+                "windows_x64": "https://downloads.godotengine.org/?version=4.7&flavor=dev3&slug=mono_win64.zip&platform=windows.64",
+                "linux_x86": "https://downloads.godotengine.org/?version=4.7&flavor=dev3&slug=mono_linux_x86_32.zip&platform=linux.32",
+                "linux_x64": "https://downloads.godotengine.org/?version=4.7&flavor=dev3&slug=mono_linux_x86_64.zip&platform=linux.64",
+                "linux_arm32": "https://downloads.godotengine.org/?version=4.7&flavor=dev3&slug=mono_linux_arm32.zip&platform=linux.arm32",
+                "linux_arm64": "https://downloads.godotengine.org/?version=4.7&flavor=dev3&slug=mono_linux_arm64.zip&platform=linux.arm64",
+                "macos": "https://downloads.godotengine.org/?version=4.7&flavor=dev3&slug=mono_macos.universal.zip&platform=macos.universal"
+            }
+        },
+        {
+            "id": "4.7-dev2",
+            "base_version": "4.7",
+            "standard": {
+                "windows_x86": "https://downloads.godotengine.org/?version=4.7&flavor=dev2&slug=win32.exe.zip&platform=windows.32",
+                "windows_x64": "https://downloads.godotengine.org/?version=4.7&flavor=dev2&slug=win64.exe.zip&platform=windows.64",
+                "linux_x86": "https://downloads.godotengine.org/?version=4.7&flavor=dev2&slug=linux.x86_32.zip&platform=linux.32",
+                "linux_x64": "https://downloads.godotengine.org/?version=4.7&flavor=dev2&slug=linux.x86_64.zip&platform=linux.64",
+                "linux_arm32": "https://downloads.godotengine.org/?version=4.7&flavor=dev2&slug=linux.arm32.zip&platform=linux.arm32",
+                "linux_arm64": "https://downloads.godotengine.org/?version=4.7&flavor=dev2&slug=linux.arm64.zip&platform=linux.arm64",
+                "macos": "https://downloads.godotengine.org/?version=4.7&flavor=dev2&slug=macos.universal.zip&platform=macos.universal"
+            },
+            "dotnet": {
+                "windows_x86": "https://downloads.godotengine.org/?version=4.7&flavor=dev2&slug=mono_win32.zip&platform=windows.32",
+                "windows_x64": "https://downloads.godotengine.org/?version=4.7&flavor=dev2&slug=mono_win64.zip&platform=windows.64",
+                "linux_x86": "https://downloads.godotengine.org/?version=4.7&flavor=dev2&slug=mono_linux_x86_32.zip&platform=linux.32",
+                "linux_x64": "https://downloads.godotengine.org/?version=4.7&flavor=dev2&slug=mono_linux_x86_64.zip&platform=linux.64",
+                "linux_arm32": "https://downloads.godotengine.org/?version=4.7&flavor=dev2&slug=mono_linux_arm32.zip&platform=linux.arm32",
+                "linux_arm64": "https://downloads.godotengine.org/?version=4.7&flavor=dev2&slug=mono_linux_arm64.zip&platform=linux.arm64",
+                "macos": "https://downloads.godotengine.org/?version=4.7&flavor=dev2&slug=mono_macos.universal.zip&platform=macos.universal"
+            }
+        },
+        {
             "id": "4.7-dev1",
             "base_version": "4.7",
             "standard": {
@@ -20,6 +152,78 @@
                 "linux_arm32": "https://downloads.godotengine.org/?version=4.7&flavor=dev1&slug=mono_linux_arm32.zip&platform=linux.arm32",
                 "linux_arm64": "https://downloads.godotengine.org/?version=4.7&flavor=dev1&slug=mono_linux_arm64.zip&platform=linux.arm64",
                 "macos": "https://downloads.godotengine.org/?version=4.7&flavor=dev1&slug=mono_macos.universal.zip&platform=macos.universal"
+            }
+        },
+        {
+            "id": "4.6.2-stable",
+            "base_version": "4.6",
+            "standard": {
+                "windows_x86": "https://downloads.godotengine.org/?version=4.6.2&flavor=stable&slug=win32.exe.zip&platform=windows.32",
+                "windows_x64": "https://downloads.godotengine.org/?version=4.6.2&flavor=stable&slug=win64.exe.zip&platform=windows.64",
+                "windows_arm64": "https://downloads.godotengine.org/?version=4.6.2&flavor=stable&slug=windows_arm64.exe.zip&platform=windows.arm64",
+                "linux_x86": "https://downloads.godotengine.org/?version=4.6.2&flavor=stable&slug=linux.x86_32.zip&platform=linux.32",
+                "linux_x64": "https://downloads.godotengine.org/?version=4.6.2&flavor=stable&slug=linux.x86_64.zip&platform=linux.64",
+                "linux_arm32": "https://downloads.godotengine.org/?version=4.6.2&flavor=stable&slug=linux.arm32.zip&platform=linux.arm32",
+                "linux_arm64": "https://downloads.godotengine.org/?version=4.6.2&flavor=stable&slug=linux.arm64.zip&platform=linux.arm64",
+                "macos": "https://downloads.godotengine.org/?version=4.6.2&flavor=stable&slug=macos.universal.zip&platform=macos.universal"
+            },
+            "dotnet": {
+                "windows_x86": "https://downloads.godotengine.org/?version=4.6.2&flavor=stable&slug=mono_win32.zip&platform=windows.32",
+                "windows_x64": "https://downloads.godotengine.org/?version=4.6.2&flavor=stable&slug=mono_win64.zip&platform=windows.64",
+                "windows_arm64": "https://downloads.godotengine.org/?version=4.6.2&flavor=stable&slug=mono_windows_arm64.zip&platform=windows.arm64",
+                "linux_x86": "https://downloads.godotengine.org/?version=4.6.2&flavor=stable&slug=mono_linux_x86_32.zip&platform=linux.32",
+                "linux_x64": "https://downloads.godotengine.org/?version=4.6.2&flavor=stable&slug=mono_linux_x86_64.zip&platform=linux.64",
+                "linux_arm32": "https://downloads.godotengine.org/?version=4.6.2&flavor=stable&slug=mono_linux_arm32.zip&platform=linux.arm32",
+                "linux_arm64": "https://downloads.godotengine.org/?version=4.6.2&flavor=stable&slug=mono_linux_arm64.zip&platform=linux.arm64",
+                "macos": "https://downloads.godotengine.org/?version=4.6.2&flavor=stable&slug=mono_macos.universal.zip&platform=macos.universal"
+            }
+        },
+        {
+            "id": "4.6.2-rc2",
+            "base_version": "4.6",
+            "standard": {
+                "windows_x86": "https://downloads.godotengine.org/?version=4.6.2&flavor=rc2&slug=win32.exe.zip&platform=windows.32",
+                "windows_x64": "https://downloads.godotengine.org/?version=4.6.2&flavor=rc2&slug=win64.exe.zip&platform=windows.64",
+                "windows_arm64": "https://downloads.godotengine.org/?version=4.6.2&flavor=rc2&slug=windows_arm64.exe.zip&platform=windows.arm64",
+                "linux_x86": "https://downloads.godotengine.org/?version=4.6.2&flavor=rc2&slug=linux.x86_32.zip&platform=linux.32",
+                "linux_x64": "https://downloads.godotengine.org/?version=4.6.2&flavor=rc2&slug=linux.x86_64.zip&platform=linux.64",
+                "linux_arm32": "https://downloads.godotengine.org/?version=4.6.2&flavor=rc2&slug=linux.arm32.zip&platform=linux.arm32",
+                "linux_arm64": "https://downloads.godotengine.org/?version=4.6.2&flavor=rc2&slug=linux.arm64.zip&platform=linux.arm64",
+                "macos": "https://downloads.godotengine.org/?version=4.6.2&flavor=rc2&slug=macos.universal.zip&platform=macos.universal"
+            },
+            "dotnet": {
+                "windows_x86": "https://downloads.godotengine.org/?version=4.6.2&flavor=rc2&slug=mono_win32.zip&platform=windows.32",
+                "windows_x64": "https://downloads.godotengine.org/?version=4.6.2&flavor=rc2&slug=mono_win64.zip&platform=windows.64",
+                "windows_arm64": "https://downloads.godotengine.org/?version=4.6.2&flavor=rc2&slug=mono_windows_arm64.zip&platform=windows.arm64",
+                "linux_x86": "https://downloads.godotengine.org/?version=4.6.2&flavor=rc2&slug=mono_linux_x86_32.zip&platform=linux.32",
+                "linux_x64": "https://downloads.godotengine.org/?version=4.6.2&flavor=rc2&slug=mono_linux_x86_64.zip&platform=linux.64",
+                "linux_arm32": "https://downloads.godotengine.org/?version=4.6.2&flavor=rc2&slug=mono_linux_arm32.zip&platform=linux.arm32",
+                "linux_arm64": "https://downloads.godotengine.org/?version=4.6.2&flavor=rc2&slug=mono_linux_arm64.zip&platform=linux.arm64",
+                "macos": "https://downloads.godotengine.org/?version=4.6.2&flavor=rc2&slug=mono_macos.universal.zip&platform=macos.universal"
+            }
+        },
+        {
+            "id": "4.6.2-rc1",
+            "base_version": "4.6",
+            "standard": {
+                "windows_x86": "https://downloads.godotengine.org/?version=4.6.2&flavor=rc1&slug=win32.exe.zip&platform=windows.32",
+                "windows_x64": "https://downloads.godotengine.org/?version=4.6.2&flavor=rc1&slug=win64.exe.zip&platform=windows.64",
+                "windows_arm64": "https://downloads.godotengine.org/?version=4.6.2&flavor=rc1&slug=windows_arm64.exe.zip&platform=windows.arm64",
+                "linux_x86": "https://downloads.godotengine.org/?version=4.6.2&flavor=rc1&slug=linux.x86_32.zip&platform=linux.32",
+                "linux_x64": "https://downloads.godotengine.org/?version=4.6.2&flavor=rc1&slug=linux.x86_64.zip&platform=linux.64",
+                "linux_arm32": "https://downloads.godotengine.org/?version=4.6.2&flavor=rc1&slug=linux.arm32.zip&platform=linux.arm32",
+                "linux_arm64": "https://downloads.godotengine.org/?version=4.6.2&flavor=rc1&slug=linux.arm64.zip&platform=linux.arm64",
+                "macos": "https://downloads.godotengine.org/?version=4.6.2&flavor=rc1&slug=macos.universal.zip&platform=macos.universal"
+            },
+            "dotnet": {
+                "windows_x86": "https://downloads.godotengine.org/?version=4.6.2&flavor=rc1&slug=mono_win32.zip&platform=windows.32",
+                "windows_x64": "https://downloads.godotengine.org/?version=4.6.2&flavor=rc1&slug=mono_win64.zip&platform=windows.64",
+                "windows_arm64": "https://downloads.godotengine.org/?version=4.6.2&flavor=rc1&slug=mono_windows_arm64.zip&platform=windows.arm64",
+                "linux_x86": "https://downloads.godotengine.org/?version=4.6.2&flavor=rc1&slug=mono_linux_x86_32.zip&platform=linux.32",
+                "linux_x64": "https://downloads.godotengine.org/?version=4.6.2&flavor=rc1&slug=mono_linux_x86_64.zip&platform=linux.64",
+                "linux_arm32": "https://downloads.godotengine.org/?version=4.6.2&flavor=rc1&slug=mono_linux_arm32.zip&platform=linux.arm32",
+                "linux_arm64": "https://downloads.godotengine.org/?version=4.6.2&flavor=rc1&slug=mono_linux_arm64.zip&platform=linux.arm64",
+                "macos": "https://downloads.godotengine.org/?version=4.6.2&flavor=rc1&slug=mono_macos.universal.zip&platform=macos.universal"
             }
         },
         {
@@ -338,6 +542,30 @@
                 "linux_arm32": "https://downloads.godotengine.org/?version=4.6&flavor=dev1&slug=mono_linux_arm32.zip&platform=linux.arm32",
                 "linux_arm64": "https://downloads.godotengine.org/?version=4.6&flavor=dev1&slug=mono_linux_arm64.zip&platform=linux.arm64",
                 "macos": "https://downloads.godotengine.org/?version=4.6&flavor=dev1&slug=mono_macos.universal.zip&platform=macos.universal"
+            }
+        },
+        {
+            "id": "4.5.2-stable",
+            "base_version": "4.5",
+            "standard": {
+                "windows_x86": "https://downloads.godotengine.org/?version=4.5.2&flavor=stable&slug=win32.exe.zip&platform=windows.32",
+                "windows_x64": "https://downloads.godotengine.org/?version=4.5.2&flavor=stable&slug=win64.exe.zip&platform=windows.64",
+                "windows_arm64": "https://downloads.godotengine.org/?version=4.5.2&flavor=stable&slug=windows_arm64.exe.zip&platform=windows.arm64",
+                "linux_x86": "https://downloads.godotengine.org/?version=4.5.2&flavor=stable&slug=linux.x86_32.zip&platform=linux.32",
+                "linux_x64": "https://downloads.godotengine.org/?version=4.5.2&flavor=stable&slug=linux.x86_64.zip&platform=linux.64",
+                "linux_arm32": "https://downloads.godotengine.org/?version=4.5.2&flavor=stable&slug=linux.arm32.zip&platform=linux.arm32",
+                "linux_arm64": "https://downloads.godotengine.org/?version=4.5.2&flavor=stable&slug=linux.arm64.zip&platform=linux.arm64",
+                "macos": "https://downloads.godotengine.org/?version=4.5.2&flavor=stable&slug=macos.universal.zip&platform=macos.universal"
+            },
+            "dotnet": {
+                "windows_x86": "https://downloads.godotengine.org/?version=4.5.2&flavor=stable&slug=mono_win32.zip&platform=windows.32",
+                "windows_x64": "https://downloads.godotengine.org/?version=4.5.2&flavor=stable&slug=mono_win64.zip&platform=windows.64",
+                "windows_arm64": "https://downloads.godotengine.org/?version=4.5.2&flavor=stable&slug=mono_windows_arm64.zip&platform=windows.arm64",
+                "linux_x86": "https://downloads.godotengine.org/?version=4.5.2&flavor=stable&slug=mono_linux_x86_32.zip&platform=linux.32",
+                "linux_x64": "https://downloads.godotengine.org/?version=4.5.2&flavor=stable&slug=mono_linux_x86_64.zip&platform=linux.64",
+                "linux_arm32": "https://downloads.godotengine.org/?version=4.5.2&flavor=stable&slug=mono_linux_arm32.zip&platform=linux.arm32",
+                "linux_arm64": "https://downloads.godotengine.org/?version=4.5.2&flavor=stable&slug=mono_linux_arm64.zip&platform=linux.arm64",
+                "macos": "https://downloads.godotengine.org/?version=4.5.2&flavor=stable&slug=mono_macos.universal.zip&platform=macos.universal"
             }
         },
         {
