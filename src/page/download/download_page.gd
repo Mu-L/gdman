@@ -14,16 +14,51 @@ const CODE_DOWNLOADER_CARD: PackedScene = preload("uid://df2xo4wx3n3rc")
 @onready var code_download_button: Button = $OptionContainer/CodeDownloadButton
 @onready var update_prompt_button: LinkButton = $OptionContainer/UpdatePromptButton
 
+@onready var card_container: VBoxContainer = $HSplitContainer/PanelContainer/MarginContainer/ScrollContainer/CardContainer
 @onready var downloader_container: VBoxContainer = $HSplitContainer/PanelContainer2/MarginContainer/ScrollContainer/DownloaderContainer
 
+var version_request: Array[String] = []
+
 func _ready() -> void:
+	set_process(false)
 	update_prompt_button.hide()
-	DownloadManager.source_updated.connect(update_prompt_button.show)
-	var version_containers: Array[Node] = get_tree().get_nodes_in_group("download_version_container")
-	for container: Control in version_containers:
-		container.download.connect(_on_version_container_download)
+	DownloadManager.source_updated.connect(_on_source_updated)
+	_load_version()
+	DownloadManager.source_loaded.connect(_load_version)
 	_handle_component()
 	Config.config_updated.connect(_config_update)
+
+func _on_source_updated() -> void:
+	if is_visible_in_tree():
+		update_prompt_button.show()
+	else:
+		DownloadManager.load_source()
+
+func _process(_delta: float) -> void:
+	if version_request.size() <= 0:
+		set_process(false)
+	else:
+		_add_version_container(version_request.pop_back())
+
+func _load_version() -> void:
+	for container: Control in card_container.get_children():
+		container.queue_free()
+	version_request.clear()
+	if Config.fast_load:
+		for version: String in DownloadManager.valid_version.keys():
+			version_request.append(version)
+		# 待处理列表作为栈使用，反转后从新版本开始加载
+		version_request.reverse()
+		set_process(true)
+	else:
+		for version: String in DownloadManager.valid_version.keys():
+			_add_version_container(version)
+
+func _add_version_container(version: String) -> void:
+	var container: Control = VERSION_CONTAINER.instantiate()
+	container.title = version
+	container.download.connect(_on_version_container_download)
+	card_container.add_child.call_deferred(container)
 
 func _config_update(config_name: String) -> void:
 	match config_name:

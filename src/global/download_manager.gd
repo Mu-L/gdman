@@ -79,6 +79,7 @@ func load_source() -> void:
 				var dotnet_url: String = version_data[BUILD_DOTNET].get(arch, "")
 				if dotnet_url != "":
 					_add_source(base_version, id, BUILD_DOTNET, source_name, dotnet_url)
+	_sort_valid_version()
 	source_loaded.emit()
 
 func _config_update(config_name: String) -> void:
@@ -106,6 +107,43 @@ func _add_source(base_version: String, id: String, build_type: String, source_na
 	# Record valid sources
 	if source_name not in valid_source:
 		valid_source.append(source_name)
+
+func _sort_valid_version() -> void:
+	var versions: Array[String] = []
+	for version: String in valid_version.keys():
+		versions.append(version)
+	versions.sort_custom(_is_base_version_newer)
+	var sorted_valid_version: Dictionary[String, Array] = {}
+	for version: String in versions:
+		var engine_ids: Array[String] = []
+		for engine_id: String in valid_version[version]:
+			engine_ids.append(engine_id)
+		engine_ids.sort_custom(_is_engine_id_newer)
+		sorted_valid_version[version] = engine_ids
+	valid_version = sorted_valid_version
+
+func _is_base_version_newer(version_a: String, version_b: String) -> bool:
+	return version_a.naturalnocasecmp_to(version_b) > 0
+
+func _is_engine_id_newer(engine_id_a: String, engine_id_b: String) -> bool:
+	var info_a: EngineManager.EngineInfo = EngineManager.id_to_engine_info(engine_id_a)
+	var info_b: EngineManager.EngineInfo = EngineManager.id_to_engine_info(engine_id_b)
+	if info_a == null or info_b == null:
+		return engine_id_a.naturalnocasecmp_to(engine_id_b) > 0
+	if info_a.major_version != info_b.major_version:
+		return info_a.major_version > info_b.major_version
+	if info_a.minor_version != info_b.minor_version:
+		return info_a.minor_version > info_b.minor_version
+	if info_a.patch_version != info_b.patch_version:
+		return info_a.patch_version > info_b.patch_version
+	# 发布阶段枚举值按 stable 到 dev 排列，较小值代表更新版本
+	if info_a.flavor != info_b.flavor:
+		return info_a.flavor < info_b.flavor
+	if info_a.build != info_b.build:
+		return info_a.build > info_b.build
+	if info_a.is_dotnet != info_b.is_dotnet:
+		return not info_a.is_dotnet
+	return engine_id_a.naturalnocasecmp_to(engine_id_b) > 0
 
 func get_source_url(version: String, id: String, is_dotnet: bool, source_name: String) -> String:
 	var build_type: String = BUILD_STANDARD

@@ -26,6 +26,8 @@ func _load_source() -> void:
 	if Config.fast_load:
 		for engine_id: String in DownloadManager.valid_version.get(title, []):
 			engine_id_request.append(engine_id)
+		# 待处理列表作为栈使用，反转后从新版本开始加载
+		engine_id_request.reverse()
 		set_process(true)
 	else:
 		for engine_id: String in DownloadManager.valid_version.get(title, []):

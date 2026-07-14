@@ -1,7 +1,6 @@
 [gd_scene format=3 uid="uid://cq7qp7e00w6ol"]
 
 [ext_resource type="Script" uid="uid://wst25oki1eps" path="res://src/page/download/download_page.gd" id="1_0gws8"]
-[ext_resource type="PackedScene" uid="uid://byfxbqtgp68d" path="res://src/page/download/version_container.tscn" id="2_gw8yc"]
 [ext_resource type="PackedScene" uid="uid://dhppyf1y4otgk" path="res://src/page/download/engine_download_dialog.tscn" id="3_ajk1a"]
 [ext_resource type="Texture2D" uid="uid://ddqhbrd1han2p" path="res://asset/icon/download.svg" id="3_qrc2e"]
 [ext_resource type="PackedScene" uid="uid://bge5qk8gnq2or" path="res://src/page/download/code_download_dialog.tscn" id="4_lv5il"]
@@ -118,38 +117,6 @@ size_flags_vertical = 3
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 2
-
-[node name="VersionContainer47" parent="HSplitContainer/PanelContainer/MarginContainer/ScrollContainer/CardContainer" unique_id=1018036535 instance=ExtResource("2_gw8yc")]
-layout_mode = 2
-title = "4.7"
-
-[node name="VersionContainer46" parent="HSplitContainer/PanelContainer/MarginContainer/ScrollContainer/CardContainer" unique_id=187689483 instance=ExtResource("2_gw8yc")]
-layout_mode = 2
-title = "4.6"
-
-[node name="VersionContainer45" parent="HSplitContainer/PanelContainer/MarginContainer/ScrollContainer/CardContainer" unique_id=1919425106 instance=ExtResource("2_gw8yc")]
-layout_mode = 2
-title = "4.5"
-
-[node name="VersionContainer44" parent="HSplitContainer/PanelContainer/MarginContainer/ScrollContainer/CardContainer" unique_id=1368840048 instance=ExtResource("2_gw8yc")]
-layout_mode = 2
-title = "4.4"
-
-[node name="VersionContainer43" parent="HSplitContainer/PanelContainer/MarginContainer/ScrollContainer/CardContainer" unique_id=1021360041 instance=ExtResource("2_gw8yc")]
-layout_mode = 2
-title = "4.3"
-
-[node name="VersionContainer42" parent="HSplitContainer/PanelContainer/MarginContainer/ScrollContainer/CardContainer" unique_id=1969246424 instance=ExtResource("2_gw8yc")]
-layout_mode = 2
-title = "4.2"
-
-[node name="VersionContainer41" parent="HSplitContainer/PanelContainer/MarginContainer/ScrollContainer/CardContainer" unique_id=634278289 instance=ExtResource("2_gw8yc")]
-layout_mode = 2
-title = "4.1"
-
-[node name="VersionContainer40" parent="HSplitContainer/PanelContainer/MarginContainer/ScrollContainer/CardContainer" unique_id=1372194774 instance=ExtResource("2_gw8yc")]
-layout_mode = 2
-title = "4.0"
 
 [node name="PanelContainer2" type="PanelContainer" parent="HSplitContainer" unique_id=1207972682]
 custom_minimum_size = Vector2(240, 0)
