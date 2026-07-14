@@ -1,7 +1,8 @@
 extends VBoxContainer
 
-const ENGINE_DOWNLOADER_CARD = preload("uid://dqqd7c1vpwb5y")
-const CODE_DOWNLOADER_CARD = preload("uid://df2xo4wx3n3rc")
+const VERSION_CONTAINER: PackedScene = preload("uid://byfxbqtgp68d")
+const ENGINE_DOWNLOADER_CARD: PackedScene = preload("uid://dqqd7c1vpwb5y")
+const CODE_DOWNLOADER_CARD: PackedScene = preload("uid://df2xo4wx3n3rc")
 
 @onready var engine_download_dialog: ConfirmationDialog = $EngineDownloadDialog
 @onready var code_download_dialog: ConfirmationDialog = $OptionContainer/CodeDownloadButton/CodeDownloadDialog
