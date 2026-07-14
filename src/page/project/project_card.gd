@@ -129,28 +129,11 @@ func _uid_path_to_res_path(uid_path: String, project_root: String) -> String:
 
 
 func _get_directory_last_edited_time(dir_path: String) -> int:
-	var os_name: String = OS.get_name()
-	if os_name in ["Windows", "macOS", "Linux"]:
-		var exit_code: int = -1
-		var output: Array[String] = []
-		match os_name:
-			"Windows":
-				exit_code = OS.execute("powershell",
-				["-Command",
-				"[DateTimeOffset]::new((Get-Item '%s').LastWriteTimeUtc).ToUnixTimeSeconds()" % dir_path],
-				output)
-			"macOS":
-				exit_code = OS.execute("stat",
-				["-f", "%m", dir_path],
-				output)
-			"Linux":
-				exit_code = OS.execute("stat",
-				["-c", "%Y", dir_path],
-				output)
-		if exit_code == 0 and not output.is_empty():
-			return (output[0].strip_edges().to_int()
-				+ Time.get_time_zone_from_system().bias * 60)
-	return 0
+	# Godot 平台层支持直接读取目录修改时间，避免启动外部进程阻塞主线程
+	var modified_time: int = FileAccess.get_modified_time(dir_path)
+	if modified_time <= 0:
+		return 0
+	return modified_time + Time.get_time_zone_from_system().bias * 60
 
 func _on_path_button_pressed() -> void:
 	OS.shell_show_in_file_manager(project_path)

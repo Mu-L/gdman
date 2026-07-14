@@ -6,11 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://ddqhbrd1han2p" path="res://asset/icon/download.svg" id="5_srxbw"]
 [ext_resource type="Texture2D" uid="uid://cdxig436m2j1x" path="res://asset/icon/compile.svg" id="5_uewes"]
 [ext_resource type="Texture2D" uid="uid://mgdysp5iuh4l" path="res://asset/icon/setting.svg" id="6_d3u4l"]
-[ext_resource type="PackedScene" uid="uid://cwn383vbptm1q" path="res://src/page/engine/engine_page.tscn" id="8_kf8lf"]
 [ext_resource type="PackedScene" uid="uid://cipjvpn3l8a48" path="res://src/page/project/project_page.tscn" id="8_tb146"]
-[ext_resource type="PackedScene" uid="uid://cq7qp7e00w6ol" path="res://src/page/download/download_page.tscn" id="9_e7lu8"]
-[ext_resource type="PackedScene" uid="uid://dt41w75686fay" path="res://src/page/setting/setting_page.tscn" id="9_kf8lf"]
-[ext_resource type="PackedScene" uid="uid://dfiwhf1wgf7ij" path="res://src/page/compile/compile_page.tscn" id="10_mgm53"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_kf8lf"]
 
@@ -125,27 +121,6 @@ tabs_visible = false
 [node name="ProjectPage" parent="MarginContainer/HBoxContainer/PageContainer" unique_id=828684455 instance=ExtResource("8_tb146")]
 layout_mode = 2
 metadata/_tab_index = 0
-
-[node name="EnginePage" parent="MarginContainer/HBoxContainer/PageContainer" unique_id=1313993800 instance=ExtResource("8_kf8lf")]
-visible = false
-layout_mode = 2
-size_flags_vertical = 3
-metadata/_tab_index = 1
-
-[node name="CompilePage" parent="MarginContainer/HBoxContainer/PageContainer" unique_id=68255320 instance=ExtResource("10_mgm53")]
-visible = false
-layout_mode = 2
-metadata/_tab_index = 2
-
-[node name="DownloadPage" parent="MarginContainer/HBoxContainer/PageContainer" unique_id=1939612761 instance=ExtResource("9_e7lu8")]
-visible = false
-layout_mode = 2
-metadata/_tab_index = 3
-
-[node name="SettingPage" parent="MarginContainer/HBoxContainer/PageContainer" unique_id=458143825 instance=ExtResource("9_kf8lf")]
-visible = false
-layout_mode = 2
-metadata/_tab_index = 4
 
 [connection signal="pressed" from="MarginContainer/HBoxContainer/SideBar/ProjectNav" to="." method="_on_project_nav_pressed"]
 [connection signal="pressed" from="MarginContainer/HBoxContainer/SideBar/EngineNav" to="." method="_on_engine_nav_pressed"]

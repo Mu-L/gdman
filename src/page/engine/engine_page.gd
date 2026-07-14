@@ -33,11 +33,7 @@ func _load_engine() -> void:
 	engine_id_request = EngineManager.local_engines.keys()
 	engine_id_request.sort()
 	engine_id_request.reverse()
-	if Config.fast_load:
-		set_process(true)
-	else:
-		for engine_id: String in engine_id_request:
-			_add_engine_card(engine_id)
+	set_process(true)
 
 func _add_engine_card(engine_id: String) -> void:
 	var local_engine: EngineManager.LocalEngine = EngineManager.local_engines.get(engine_id, null)

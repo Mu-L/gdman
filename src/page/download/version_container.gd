@@ -23,15 +23,11 @@ func _load_source() -> void:
 	for card: Control in card_container.get_children():
 		card.queue_free()
 	engine_id_request.clear()
-	if Config.fast_load:
-		for engine_id: String in DownloadManager.valid_version.get(title, []):
-			engine_id_request.append(engine_id)
-		# 待处理列表作为栈使用，反转后从新版本开始加载
-		engine_id_request.reverse()
-		set_process(true)
-	else:
-		for engine_id: String in DownloadManager.valid_version.get(title, []):
-			_add_source_card(engine_id)
+	for engine_id: String in DownloadManager.valid_version.get(title, []):
+		engine_id_request.append(engine_id)
+	# 待处理列表作为栈使用，反转后从新版本开始加载
+	engine_id_request.reverse()
+	set_process(true)
 
 func _add_source_card(engine_id: String) -> void:
 	var card: Control = SOURCE_CARD.instantiate()

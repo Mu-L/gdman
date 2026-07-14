@@ -25,13 +25,9 @@ func _load_source_code() -> void:
 	var source_code_dir: DirAccess = DirAccess.open(CompileManager.SOURCE_CODE_DIR)
 	if source_code_dir == null:
 		return
-	if Config.fast_load:
-		for dir_name: String in source_code_dir.get_directories():
-			source_code_request.append(dir_name)
-		set_process(true)
-	else:
-		for dir_name: String in source_code_dir.get_directories():
-			_add_source_code_card(dir_name)
+	for dir_name: String in source_code_dir.get_directories():
+		source_code_request.append(dir_name)
+	set_process(true)
 
 func _add_source_code_card(file_name: String) -> void:
 	var card: Control = SOURCE_CODE_CARD.instantiate()

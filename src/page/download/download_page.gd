@@ -44,15 +44,11 @@ func _load_version() -> void:
 	for container: Control in card_container.get_children():
 		container.queue_free()
 	version_request.clear()
-	if Config.fast_load:
-		for version: String in DownloadManager.valid_version.keys():
-			version_request.append(version)
-		# 待处理列表作为栈使用，反转后从新版本开始加载
-		version_request.reverse()
-		set_process(true)
-	else:
-		for version: String in DownloadManager.valid_version.keys():
-			_add_version_container(version)
+	for version: String in DownloadManager.valid_version.keys():
+		version_request.append(version)
+	# 待处理列表作为栈使用，反转后从新版本开始加载
+	version_request.reverse()
+	set_process(true)
 
 func _add_version_container(version: String) -> void:
 	var container: Control = VERSION_CONTAINER.instantiate()
