@@ -37,22 +37,54 @@ var valid_source: Array[String] = []
 var downloading_task: Dictionary[String, bool] = {}
 
 var remote_source_version: String = ""
-var source_need_download_count: int = 0
-var source_downloaded_count: int = 0
 var source_downloaded_data: Dictionary[String, PackedByteArray] = {}
+var _remote_source_batch_id: int = 0
+var _remote_requests: Array[HTTPRequest] = []
 
 var display_standard: bool = true
 var display_dotnet: bool = false
 var display_stable: bool = true
 var display_unstable: bool = false
 
+func resolve_safe_zip_entry_path(target_root: String, entry_path: String) -> String:
+	var normalized_entry: String = entry_path.replace("\\", "/")
+	if normalized_entry == "" or normalized_entry.begins_with("/"):
+		return ""
+	# 显式拒绝 Windows 盘符路径，避免 ZIP 条目覆盖目标目录之外的文件
+	if normalized_entry.length() >= 2:
+		var drive_letter: int = normalized_entry.unicode_at(0)
+		if ((drive_letter >= 65 and drive_letter <= 90)
+			or (drive_letter >= 97 and drive_letter <= 122)):
+			if normalized_entry.unicode_at(1) == 58:
+				return ""
+	for character: String in normalized_entry:
+		var codepoint: int = character.unicode_at(0)
+		if codepoint < 32 or codepoint == 127:
+			return ""
+	var handled_entry: String = normalized_entry.trim_suffix("/")
+	if handled_entry == "":
+		return ""
+	for segment: String in handled_entry.split("/", false):
+		if segment == "." or segment == "..":
+			return ""
+	var normalized_root: String = target_root.replace("\\", "/").simplify_path().trim_suffix("/")
+	var resolved_path: String = normalized_root.path_join(handled_entry).simplify_path()
+	# 添加目录分隔符，避免 /target-other 通过 /target 的前缀检查
+	if not resolved_path.begins_with(normalized_root + "/"):
+		return ""
+	return resolved_path
+
 func _ready() -> void:
 	load_source()
 	Config.config_updated.connect(_config_update)
 	_request_remote_source()
 
+func _exit_tree() -> void:
+	_clear_remote_requests()
+
 func load_source() -> void:
 	source.clear()
+	valid_id.clear()
 	valid_version.clear()
 	valid_source.clear()
 	var arch: String = Config.get_architecture()
@@ -70,7 +102,8 @@ func load_source() -> void:
 			var base_version: String = version_data.get("base_version", "")
 			if id == "" or base_version == "":
 				continue
-			valid_id.append(id)
+			if id not in valid_id:
+				valid_id.append(id)
 			if version_data.has(BUILD_STANDARD):
 				var standard_url: String = version_data[BUILD_STANDARD].get(arch, "")
 				if standard_url != "":
@@ -162,22 +195,35 @@ func get_source_url_by_id(engine_id: String, source_name: String) -> String:
 
 
 func _request_remote_source() -> void:
+	# 新批次会令旧回调失效，并释放尚未结束的请求节点
+	_remote_source_batch_id += 1
+	_clear_remote_requests()
+	remote_source_version = ""
+	source_downloaded_data.clear()
 	if not Config.remote_source:
 		return
 	if DirAccess.make_dir_recursive_absolute(ProjectSettings.globalize_path(LOCAL_SOURCE_DIR)) != OK:
 		return
+	var batch_id: int = _remote_source_batch_id
 	var version_request: HTTPRequest = HTTPRequest.new()
 	version_request.timeout = 10
 	add_child(version_request)
-	version_request.request_completed.connect(_on_version_request_completed)
-	version_request.request(REMOTE_SOURCE_VERSION_URL)
+	_remote_requests.append(version_request)
+	version_request.request_completed.connect(
+		_on_version_request_completed.bind(version_request, batch_id))
+	if version_request.request(REMOTE_SOURCE_VERSION_URL) != OK:
+		_abort_remote_source_batch(batch_id)
 
 
-func _on_version_request_completed(result: int, response_code: int, _headers: PackedStringArray, body: PackedByteArray) -> void:
+func _on_version_request_completed(result: int, response_code: int, _headers: PackedStringArray,
+	body: PackedByteArray, request: HTTPRequest, batch_id: int) -> void:
+	_release_remote_request(request)
+	if batch_id != _remote_source_batch_id:
+		return
 	if result != OK or response_code != 200:
 		return
 	var json: JSON = JSON.new()
-	if json.parse(body.get_string_from_utf8()) != OK:
+	if json.parse(body.get_string_from_utf8()) != OK or not (json.data is Dictionary):
 		return
 	remote_source_version = (json.data as Dictionary).get("object", {}).get("sha", "")
 	if remote_source_version == "":
@@ -193,32 +239,71 @@ func _on_version_request_completed(result: int, response_code: int, _headers: Pa
 		var source_request: HTTPRequest = HTTPRequest.new()
 		source_request.timeout = 10
 		add_child(source_request)
-		source_request.request_completed.connect(_on_source_request_finished)
-		source_request.request(source_url)
-		source_need_download_count += 1
+		_remote_requests.append(source_request)
+		source_request.request_completed.connect(
+			_on_source_request_finished.bind(source_name, source_request, batch_id))
+		if source_request.request(source_url) != OK:
+			_abort_remote_source_batch(batch_id)
+			return
 
-func _on_source_request_finished(result: int, response_code: int, _headers: PackedStringArray, body: PackedByteArray) -> void:
+func _on_source_request_finished(result: int, response_code: int, _headers: PackedStringArray,
+	body: PackedByteArray, source_name: String, request: HTTPRequest, batch_id: int) -> void:
+	_release_remote_request(request)
+	if batch_id != _remote_source_batch_id:
+		return
 	# check if the result is valid
 	if result != OK or response_code != 200:
+		_abort_remote_source_batch(batch_id)
 		return
 	var json: JSON = JSON.new()
-	if json.parse(body.get_string_from_utf8()) != OK:
+	if json.parse(body.get_string_from_utf8()) != OK or not (json.data is Dictionary):
+		_abort_remote_source_batch(batch_id)
 		return
-	var source_name: String = ""
-	for key: String in (json.data as Dictionary).keys():
-		if key in SOURCES:
-			source_name = key
-			break
-	if source_name == "":
+	# 请求创建时已绑定来源，只接受与请求来源一致的清单结构
+	if not (json.data as Dictionary).has(source_name):
+		_abort_remote_source_batch(batch_id)
 		return
 	source_downloaded_data[source_name] = body
-	source_downloaded_count += 1
-	if source_downloaded_count == source_need_download_count:
-		for downloaded_source_name: String in source_downloaded_data.keys():
-			var source_file: FileAccess = FileAccess.open(LOCAL_SOURCE_PATH % downloaded_source_name, FileAccess.WRITE)
-			source_file.store_string(source_downloaded_data[downloaded_source_name].get_string_from_utf8())
-			source_file.close()
-		var version_file: FileAccess = FileAccess.open(LOCAL_SOURCE_VERSION_PATH, FileAccess.WRITE)
-		version_file.store_string(remote_source_version)
-		version_file.close()
+	if source_downloaded_data.size() == SOURCES.size():
+		if not _store_remote_source_data():
+			_abort_remote_source_batch(batch_id)
+			return
+		source_downloaded_data.clear()
 		source_updated.emit()
+
+func _store_remote_source_data() -> bool:
+	for source_name: String in SOURCES:
+		if not source_downloaded_data.has(source_name):
+			return false
+		var source_file: FileAccess = FileAccess.open(
+			LOCAL_SOURCE_PATH % source_name, FileAccess.WRITE)
+		if source_file == null:
+			return false
+		source_file.store_string(source_downloaded_data[source_name].get_string_from_utf8())
+		source_file.close()
+	var version_file: FileAccess = FileAccess.open(LOCAL_SOURCE_VERSION_PATH, FileAccess.WRITE)
+	if version_file == null:
+		return false
+	version_file.store_string(remote_source_version)
+	version_file.close()
+	return true
+
+func _release_remote_request(request: HTTPRequest) -> void:
+	_remote_requests.erase(request)
+	if is_instance_valid(request):
+		request.queue_free()
+
+func _clear_remote_requests() -> void:
+	for request: HTTPRequest in _remote_requests:
+		if is_instance_valid(request):
+			request.cancel_request()
+			request.queue_free()
+	_remote_requests.clear()
+
+func _abort_remote_source_batch(batch_id: int) -> void:
+	if batch_id != _remote_source_batch_id:
+		return
+	_remote_source_batch_id += 1
+	_clear_remote_requests()
+	remote_source_version = ""
+	source_downloaded_data.clear()

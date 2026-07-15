@@ -96,26 +96,32 @@ func _on_android_sdk_path_button_pressed() -> void:
 	android_sdk_file_dialog.popup_centered()
 
 func _on_mingw_file_dialog_dir_selected(dir: String) -> void:
-	mingw_path_line.text = dir
-	Config.mingw_prefix = dir
+	_store_compile_path(mingw_path_line, "mingw_prefix", dir)
 
 func _on_jdk_file_dialog_dir_selected(dir: String) -> void:
-	jdk_path_line.text = dir
-	jdk_path_line.tooltip_text = dir
-	Config.java_home = dir
+	_store_compile_path(jdk_path_line, "java_home", dir)
 
 func _on_android_sdk_file_dialog_dir_selected(dir: String) -> void:
-	android_sdk_path_line.text = dir
-	android_sdk_path_line.tooltip_text = dir
-	Config.android_home = dir
+	_store_compile_path(android_sdk_path_line, "android_home", dir)
 
 func _on_mingw_path_line_text_submitted(new_text: String) -> void:
-	Config.mingw_prefix = new_text
+	_store_compile_path(mingw_path_line, "mingw_prefix", new_text)
 
 
 func _on_jdk_path_line_text_submitted(new_text: String) -> void:
-	Config.java_home = new_text
+	_store_compile_path(jdk_path_line, "java_home", new_text)
 
 
 func _on_android_sdk_path_line_text_submitted(new_text: String) -> void:
-	Config.android_home = new_text
+	_store_compile_path(android_sdk_path_line, "android_home", new_text)
+
+func _store_compile_path(path_line: LineEdit, config_name: String, new_path: String) -> void:
+	if not CompileManager.is_safe_shell_path(new_path):
+		# 非法输入不写入配置，并恢复最近一次有效值
+		var stored_path: String = str(Config.get(config_name))
+		path_line.text = stored_path
+		path_line.tooltip_text = stored_path
+		return
+	path_line.text = new_path
+	path_line.tooltip_text = new_path
+	Config.set(config_name, new_path)

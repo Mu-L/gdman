@@ -3,45 +3,56 @@ extends Node
 const CONFIG_PATH: String = "user://config.cfg"
 signal config_updated(config_name: String)
 
+var _is_loading_config: bool = false
+
 ### General ###
 
 var language: String = "auto":
 	set(v):
 		language = v
-		if language == "auto":
-			App.set_language(OS.get_locale())
-		else:
-			TranslationServer.set_locale(language)
+		if _is_loading_config:
+			return
+		_apply_language()
 		store_config.call_deferred()
 		config_updated.emit("language")
 
 var architecture: String = "auto":
 	set(v):
 		architecture = v
+		if _is_loading_config:
+			return
 		store_config.call_deferred()
 		config_updated.emit("architecture")
 
 var delete_download_file: bool = false:
 	set(v):
 		delete_download_file = v
+		if _is_loading_config:
+			return
 		store_config.call_deferred()
 		config_updated.emit("delete_download_file")
 
 var external_editor_path: String = "":
 	set(v):
 		external_editor_path = v
+		if _is_loading_config:
+			return
 		store_config.call_deferred()
 		config_updated.emit("external_editor_path")
 
 var hide_path: bool = false:
 	set(v):
 		hide_path = v
+		if _is_loading_config:
+			return
 		store_config.call_deferred()
 		config_updated.emit("hide_path")
 
 var remote_source: bool = false:
 	set(v):
 		remote_source = v
+		if _is_loading_config:
+			return
 		store_config.call_deferred()
 		config_updated.emit("remote_source")
 
@@ -50,18 +61,24 @@ var remote_source: bool = false:
 var mingw_prefix: String = "": # MINGW_PREFIX
 	set(v):
 		mingw_prefix = v
+		if _is_loading_config:
+			return
 		store_config.call_deferred()
 		config_updated.emit("mingw_prefix")
 
 var java_home: String = "": # JAVA_HOME
 	set(v):
 		java_home = v
+		if _is_loading_config:
+			return
 		store_config.call_deferred()
 		config_updated.emit("java_home")
 
 var android_home: String = "": # ANDROID_HOME
 	set(v):
 		android_home = v
+		if _is_loading_config:
+			return
 		store_config.call_deferred()
 		config_updated.emit("android_home")
 
@@ -70,6 +87,12 @@ func _ready() -> void:
 
 func _exit_tree() -> void:
 	store_config()
+
+func _apply_language() -> void:
+	if language == "auto":
+		App.set_language(OS.get_locale())
+	else:
+		TranslationServer.set_locale(language)
 
 func store_config() -> void:
 	var config: ConfigFile = ConfigFile.new()
@@ -87,7 +110,10 @@ func store_config() -> void:
 func load_config() -> void:
 	var config: ConfigFile = ConfigFile.new()
 	if config.load(CONFIG_PATH) != OK:
+		_apply_language()
 		return
+	# Setter 在加载阶段只赋值，避免每个字段分别触发写盘和信号
+	_is_loading_config = true
 	language = config.get_value("general", "language", "auto")
 	architecture = config.get_value("general", "architecture", "auto")
 	delete_download_file = config.get_value("general", "delete_download_file", false)
@@ -97,6 +123,8 @@ func load_config() -> void:
 	mingw_prefix = config.get_value("compile", "mingw_prefix", "")
 	java_home = config.get_value("compile", "java_home", "")
 	android_home = config.get_value("compile", "android_home", "")
+	_is_loading_config = false
+	_apply_language()
 
 func get_architecture() -> String:
 	if architecture == "auto":

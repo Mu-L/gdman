@@ -17,11 +17,18 @@ func _handle_data() -> bool:
 
 func _pre_extract_file() -> bool:
 	var zip: ZIPReader = ZIPReader.new()
-	if zip.open(download_path) == OK:
-		var files: PackedStringArray = zip.get_files()
+	if zip.open(download_path) != OK:
 		zip.close()
-		if files.size() <= 0:
+		return false
+	var files: PackedStringArray = zip.get_files()
+	if files.size() <= 0:
+		zip.close()
+		return false
+	for file_path: String in files:
+		if DownloadManager.resolve_safe_zip_entry_path(target_dir_path, file_path) == "":
+			zip.close()
 			return false
+	zip.close()
 	return true
 
 func _extract_task() -> void:
@@ -32,22 +39,30 @@ func _extract_task() -> void:
 		return
 	var files: PackedStringArray = zip.get_files()
 	for file_path: String in files:
+		var full_path: String = DownloadManager.resolve_safe_zip_entry_path(
+			target_dir_path, file_path)
+		if full_path == "":
+			zip.close()
+			_failed.call_deferred()
+			return
 		if file_path.ends_with("/"):
-			if DirAccess.make_dir_recursive_absolute(target_dir_path.path_join(file_path)) != OK:
+			if DirAccess.make_dir_recursive_absolute(full_path) != OK:
 				zip.close()
 				_failed.call_deferred()
 				return
 			continue
+		if DirAccess.make_dir_recursive_absolute(full_path.get_base_dir()) != OK:
+			zip.close()
+			_failed.call_deferred()
+			return
 		var buffer: PackedByteArray = zip.read_file(file_path)
-		if buffer.size() > 0:
-			var full_path: String = target_dir_path.path_join(file_path)
-			var file: FileAccess = FileAccess.open(full_path, FileAccess.WRITE)
-			if file == null:
-				zip.close()
-				_failed.call_deferred()
-				return
-			file.store_buffer(buffer)
-			file.close()
+		var file: FileAccess = FileAccess.open(full_path, FileAccess.WRITE)
+		if file == null:
+			zip.close()
+			_failed.call_deferred()
+			return
+		file.store_buffer(buffer)
+		file.close()
 	zip.close()
 	extracted.emit.call_deferred()
 

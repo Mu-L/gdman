@@ -1,19 +1,12 @@
 extends AcceptDialog
 
-const SHELL_ENV_COMMAND: Dictionary[String, String] = {
-	"POSIX": "export %s=\"%s\"",
-	"PowerShell": "$env:%s = \"%s\"",
-	"CMD": "set %s=%s",
-	"Fish": "set -x %s \"%s\"",
-}
+const SHELLS: Array[String] = ["POSIX", "PowerShell", "CMD", "Fish"]
 
 @onready var platform_option: OptionButton = $VBoxContainer/GridContainer/PlatformOption
 @onready var architecture_option: OptionButton = $VBoxContainer/GridContainer/ArchitectureOption
 @onready var shell_option: OptionButton = $VBoxContainer/GridContainer/ShellOption
 @onready var command_text: RichTextLabel = $VBoxContainer/PanelContainer/MarginContainer/CommandText
 @onready var copy_button: Button = $VBoxContainer/PanelContainer/MarginContainer/Control/CopyButton
-
-var file_path: String = ""
 
 var platform_param: String = ""
 var architecture_param: String = ""
@@ -23,7 +16,7 @@ func _ready() -> void:
 	var target_width: int = platform_option.get_theme_font_size("font_size") + platform_option.get_theme_constant("h_separation")
 	for i: int in range(platform_option.get_item_count()):
 		platform_option.get_popup().set_item_icon_max_width(i, target_width)
-	for shell: String in SHELL_ENV_COMMAND.keys():
+	for shell: String in SHELLS:
 		shell_option.add_item(shell)
 	
 func display() -> void:
@@ -36,25 +29,32 @@ func display() -> void:
 
 func _update_command() -> void:
 	var env_commands: Array[String] = []
-	if shell_option.get_selected_id() >= 0:
-		command_text.text = "scons"
-		var set_env_command: String = SHELL_ENV_COMMAND.get(shell_option.get_item_text(shell_option.get_selected_id()), "")
+	var shell: String = ""
+	var selected_shell_id: int = shell_option.get_selected_id()
+	if selected_shell_id >= 0:
+		shell = shell_option.get_item_text(selected_shell_id)
 		if Config.mingw_prefix != "":
-			env_commands.append(set_env_command % ["MINGW_PREFIX", Config.mingw_prefix])
+			_append_env_command(env_commands, shell, "MINGW_PREFIX", Config.mingw_prefix)
 		if platform_param == "android":
 			if Config.java_home != "":
-				env_commands.append(set_env_command % ["JAVA_HOME", Config.java_home])
+				_append_env_command(env_commands, shell, "JAVA_HOME", Config.java_home)
 			if Config.android_home != "":
-				env_commands.append(set_env_command % ["ANDROID_HOME", Config.android_home])
+				_append_env_command(env_commands, shell, "ANDROID_HOME", Config.android_home)
 	var command: String = ""
 	if env_commands.size() > 0:
-		command = "; ".join(env_commands) + "; "
+		var command_separator: String = " && " if shell == "CMD" else "; "
+		command = command_separator.join(env_commands) + command_separator
 	command += "scons"
 	if platform_param != "":
 		command += " platform=%s" % platform_param
 	if architecture_param != "":
 		command += " arch=%s" % architecture_param
 	command_text.text = command
+
+func _append_env_command(commands: Array[String], shell: String, environment_name: String, path: String) -> void:
+	var command: String = CompileManager.format_shell_env_command(shell, environment_name, path)
+	if command != "":
+		commands.append(command)
 
 func _on_platform_option_item_selected(index: int) -> void:
 	match index:

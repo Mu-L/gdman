@@ -31,7 +31,8 @@ var window_sizes: Array[Vector2i] = [
 var url_regex: RegEx = RegEx.new()
 
 func _ready() -> void:
-	url_regex.compile(r"^https?://[^\s/$.?#].[^\s]*$")
+	# 仅接受带有效主机名的 HTTPS 地址，同时保留自定义下载域名能力
+	url_regex.compile(r"^https://(?:\[[0-9A-Fa-f:.]+\]|[A-Za-z0-9](?:[A-Za-z0-9.-]*[A-Za-z0-9])?)(?::([0-9]{1,5}))?(?:[/?#][^\s]*)?$")
 	_set_windowed()
 
 func get_architecture() -> String:
@@ -118,7 +119,11 @@ func fix_button_width(button: Button) -> void:
 		button.get_theme_font_size("font_size")).x + button.get_theme_constant("h_separation") + button.size.y
 
 func is_valid_url(url: String) -> bool:
-	return url_regex.search(url) != null
+	var matched_url: RegExMatch = url_regex.search(url)
+	if matched_url == null:
+		return false
+	var port: String = matched_url.get_string(1)
+	return port == "" or (port.to_int() >= 1 and port.to_int() <= 65535)
 
 func is_unix_platform() -> bool:
 	return OS.get_name() in ["macOS", "Linux", "FreeBSD", "NetBSD", "OpenBSD", "BSD", ]

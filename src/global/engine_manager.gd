@@ -101,7 +101,6 @@ func id_to_engine_info(engine_id: String) -> EngineInfo:
 	return engine_info
 	
 func _get_executable_path(dir_name: String) -> String:
-	var target_path: String = ""
 	var target_suffix: String = App.architecture_to_executable_suffix(Config.get_architecture())
 	var dirs_to_scan: Array[String] = [ENGINE_DIR.path_join(dir_name)]
 	while dirs_to_scan.size() > 0:
@@ -112,11 +111,12 @@ func _get_executable_path(dir_name: String) -> String:
 			var file_name: String = current_dir.get_next()
 			while file_name != "":
 				if file_name.ends_with(target_suffix):
-					target_path = current_path.path_join(file_name)
-					break
+					var target_path: String = current_path.path_join(file_name)
+					current_dir.list_dir_end()
+					return target_path
 				elif current_dir.current_is_dir():
 					if file_name != "." and file_name != "..":
 						dirs_to_scan.append(current_path.path_join(file_name))
 				file_name = current_dir.get_next()
 			current_dir.list_dir_end()
-	return target_path
+	return ""

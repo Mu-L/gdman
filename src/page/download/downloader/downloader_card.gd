@@ -26,7 +26,7 @@ func _ready() -> void:
 	if DirAccess.make_dir_recursive_absolute(DownloadManager.DOWNLOAD_DIR) != OK:
 		_failed()
 		return
-	if not _handle_data():
+	if not _handle_data() or not App.is_valid_url(url):
 		queue_free()
 		return
 	# 重复任务检查

@@ -1,8 +1,40 @@
 extends Node
 
 const SOURCE_CODE_DIR: String = "user://code"
+const UNSAFE_SHELL_PATH_CHARACTERS: String = "`$%!^&|;<>()"
 
 signal source_code_added(file_name: String)
+
+func is_safe_shell_path(path: String, shell: String = "") -> bool:
+	# 空路径不会进入循环，因此仍会判定为安全并使用系统环境变量
+	for character: String in path:
+		var codepoint: int = character.unicode_at(0)
+		if codepoint < 32 or codepoint == 127:
+			return false
+		if UNSAFE_SHELL_PATH_CHARACTERS.contains(character):
+			return false
+	# CMD 无法在 set "NAME=value" 形式中安全保留双引号
+	if shell == "CMD" and path.contains("\""):
+		return false
+	return true
+
+func format_shell_env_command(shell: String, environment_name: String, path: String) -> String:
+	if not is_safe_shell_path(path, shell):
+		return ""
+	match shell:
+		"POSIX":
+			# 单引号需要暂时结束字面量，再转义字符并重新开始字面量
+			var posix_literal: String = "'" + path.replace("'", "'\\''") + "'"
+			return "export %s=%s" % [environment_name, posix_literal]
+		"Fish":
+			var fish_literal: String = path.replace("\\", "\\\\").replace("'", "\\'")
+			return "set -x %s '%s'" % [environment_name, fish_literal]
+		"PowerShell":
+			var powershell_literal: String = path.replace("'", "''")
+			return "$env:%s = '%s'" % [environment_name, powershell_literal]
+		"CMD":
+			return "set \"%s=%s\"" % [environment_name, path]
+	return ""
 
 func _command_to_version_text(path: String, args: PackedStringArray) -> String:
 	var output: Array[String] = []
