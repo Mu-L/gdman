@@ -43,6 +43,8 @@ func _add_engine_card(engine_id: String) -> void:
 	card.engine_id = local_engine.info.id
 	card.dir_path = local_engine.dir_path
 	card.executable_path = local_engine.executable_path
+	card.architecture = local_engine.architecture
+	card.can_run = local_engine.can_run
 	card_container.add_child.call_deferred(card)
 
 func _switch_display(_pass: bool) -> void:

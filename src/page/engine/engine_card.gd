@@ -5,6 +5,8 @@ const DOTNET: CompressedTexture2D = preload("uid://b5cuh2fee8rn5")
 var engine_id: String = ""
 var dir_path: String = ""
 var executable_path: String = ""
+var architecture: String = ""
+var can_run: bool = false
 var is_stable: bool = false
 var is_dotnet: bool = false
 
@@ -32,6 +34,7 @@ func _ready() -> void:
 	is_stable = engine_info.flavor == EngineManager.EngineFlavor.STABLE
 	is_dotnet = engine_info.is_dotnet
 	unstable_icon.visible = not is_stable
+	run_button.disabled = not can_run
 	Config.config_updated.connect(_config_updated)
 	_handle_component()
 	
@@ -52,6 +55,8 @@ func _on_delete_button_pressed() -> void:
 
 
 func _on_run_button_pressed() -> void:
+	if not can_run:
+		return
 	if App.is_unix_platform():
 		OS.execute("chmod", ["-R", "+x", executable_path])
 	OS.create_process(executable_path, [])

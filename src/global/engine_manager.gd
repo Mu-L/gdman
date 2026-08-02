@@ -33,18 +33,38 @@ class LocalEngine:
 	var dir_path: String
 	var executable_path: String
 	var info: EngineInfo
+	var architecture: String
+	var can_run: bool
 
 var _cache_engine_info: Dictionary[String, EngineInfo] = {}
 
 var local_engines: Dictionary[String, LocalEngine] = {}
 
 func _ready() -> void:
+	Config.config_updated.connect(_config_update)
 	load_engines()
+
+func get_architecture_engine_dir(architecture: String = "") -> String:
+	var resolved_architecture: String = architecture
+	if resolved_architecture == "" or resolved_architecture == "auto":
+		# 目录必须使用实际架构，不能保留配置层的 auto
+		resolved_architecture = Config.get_architecture()
+	if resolved_architecture == "" or resolved_architecture == "auto":
+		return ""
+	return ENGINE_DIR.path_join(resolved_architecture)
 
 func load_engines() -> void:
 	local_engines.clear()
-	var engines_dir: DirAccess = DirAccess.open(ENGINE_DIR)
+	var architecture: String = Config.get_architecture()
+	var architecture_engine_dir: String = get_architecture_engine_dir(architecture)
+	if architecture_engine_dir == "":
+		# 无有效目录时仍需通知页面清除上一架构的数据
+		engines_loaded.emit.call_deferred()
+		return
+	var engines_dir: DirAccess = DirAccess.open(architecture_engine_dir)
 	if engines_dir == null:
+		# 架构目录不存在也属于有效的空列表状态
+		engines_loaded.emit.call_deferred()
 		return
 	for dir_name: String in engines_dir.get_directories():
 		var engine_info: EngineInfo = id_to_engine_info(dir_name)
@@ -52,10 +72,19 @@ func load_engines() -> void:
 			continue
 		var local_engine: LocalEngine = LocalEngine.new()
 		local_engine.info = engine_info
-		local_engine.dir_path = ProjectSettings.globalize_path(ENGINE_DIR.path_join(dir_name))
-		local_engine.executable_path = ProjectSettings.globalize_path(_get_executable_path(dir_name))
+		local_engine.architecture = architecture
+		# 非本机架构仅供管理和下载，不允许直接运行
+		local_engine.can_run = architecture == App.get_architecture()
+		local_engine.dir_path = ProjectSettings.globalize_path(
+			architecture_engine_dir.path_join(dir_name))
+		local_engine.executable_path = ProjectSettings.globalize_path(
+			_get_executable_path(architecture_engine_dir, dir_name, architecture))
 		local_engines[engine_info.id] = local_engine
 	engines_loaded.emit.call_deferred()
+
+func _config_update(config_name: String) -> void:
+	if config_name == "architecture":
+		load_engines()
 
 func id_to_engine_info(engine_id: String) -> EngineInfo:
 	if _cache_engine_info.has(engine_id):
@@ -100,9 +129,10 @@ func id_to_engine_info(engine_id: String) -> EngineInfo:
 	_cache_engine_info[engine_id] = engine_info
 	return engine_info
 	
-func _get_executable_path(dir_name: String) -> String:
-	var target_suffix: String = App.architecture_to_executable_suffix(Config.get_architecture())
-	var dirs_to_scan: Array[String] = [ENGINE_DIR.path_join(dir_name)]
+func _get_executable_path(architecture_engine_dir: String, dir_name: String,
+	architecture: String) -> String:
+	var target_suffix: String = App.architecture_to_executable_suffix(architecture)
+	var dirs_to_scan: Array[String] = [architecture_engine_dir.path_join(dir_name)]
 	while dirs_to_scan.size() > 0:
 		var current_path: String = dirs_to_scan.pop_back()
 		var current_dir: DirAccess = DirAccess.open(current_path)

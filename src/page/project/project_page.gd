@@ -14,6 +14,7 @@ func _ready() -> void:
 	set_process(false)
 	_load_project()
 	_request_project_card()
+	EngineManager.engines_loaded.connect(_refresh_project_engines)
 	_handle_component()
 	Config.config_updated.connect(_config_update)
 
@@ -69,6 +70,11 @@ func _add_project_card(project_path: String) -> void:
 	card.project_path = project.path
 	card.prefer_engine_id = project.prefer_engine_id
 	card_container.add_child.call_deferred(card)
+
+# 页面统一分发刷新，避免每张项目卡片重复连接全局信号
+func _refresh_project_engines() -> void:
+	for card: Control in card_container.get_children():
+		card.refresh_engines()
 
 func _config_update(config_name: String) -> void:
 	match config_name:

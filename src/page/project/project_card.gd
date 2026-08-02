@@ -51,8 +51,7 @@ func _ready() -> void:
 		tag_node.text = tag
 		tag_container.add_child(tag_node)
 	editor_button.disabled = Config.external_editor_path == ""
-	EngineManager.engines_loaded.connect(_load_engines)
-	_load_engines()
+	refresh_engines()
 	App.small_update.connect(_small_update)
 	Config.config_updated.connect(_config_update)
 	_handle_component()
@@ -87,7 +86,7 @@ func _handle_component() -> void:
 	App.fix_button_width(editor_button)
 	App.fix_button_width(engine_button)
 
-func _load_engines() -> void:
+func refresh_engines() -> void:
 	engine_option.load_engine()
 	engine_option.select_id(prefer_engine_id)
 	engine_button.disabled = engine_option.get_selected_id() == -1
@@ -123,9 +122,12 @@ func _on_path_button_pressed() -> void:
 
 
 func _on_engine_button_pressed() -> void:
+	var selected_index: int = engine_option.selected
+	if selected_index < 0 or engine_option.is_item_disabled(selected_index):
+		return
 	var engine: EngineManager.LocalEngine = EngineManager.local_engines.get(
-		engine_option.get_item_text(engine_option.selected), null)
-	if engine == null:
+		engine_option.get_item_text(selected_index), null)
+	if engine == null or not engine.can_run:
 		return
 	if App.is_unix_platform():
 		OS.execute("chmod", ["-R", "+x", engine.executable_path])
@@ -147,7 +149,9 @@ func _on_editor_button_pressed() -> void:
 
 
 func _on_engine_option_item_selected(index: int) -> void:
-	if index >= 0:
-		engine_button.disabled = false
-	else:
+	if index < 0 or engine_option.is_item_disabled(index):
 		engine_button.disabled = true
+		return
+	var engine: EngineManager.LocalEngine = EngineManager.local_engines.get(
+		engine_option.get_item_text(index), null)
+	engine_button.disabled = engine == null or not engine.can_run

@@ -21,3 +21,7 @@ func load_engine() -> void:
 	engine_ids.reverse()
 	for engine_id: String in engine_ids:
 		add_item(engine_id)
+		var local_engine: EngineManager.LocalEngine = EngineManager.local_engines.get(
+			engine_id, null)
+		set_item_disabled(get_item_count() - 1,
+			local_engine == null or not local_engine.can_run)

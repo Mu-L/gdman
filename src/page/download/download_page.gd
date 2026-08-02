@@ -73,11 +73,12 @@ func _switch_display() -> void:
 	for container: Control in version_containers:
 		container.switch_display()
 
-
 func _on_engine_download_dialog_download(url: String, engine_id: String) -> void:
 	var downloader_card: Control = ENGINE_DOWNLOADER_CARD.instantiate()
 	downloader_card.url = url
 	downloader_card.engine_id = engine_id
+	# 固定任务创建时的架构，后续设置变化不应改变下载目标
+	downloader_card.architecture = Config.get_architecture()
 	downloader_container.add_child(downloader_card)
 
 

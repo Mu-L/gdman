@@ -1,17 +1,23 @@
 extends "res://src/page/download/downloader/downloader_card.gd"
 
 var engine_id: String = ""
+var architecture: String = ""
 
 func _handle_data() -> bool:
 	if (engine_id == ""
-		or url == ""):
+			or architecture == ""
+			or url == ""):
 		return false
-	download_task_id = "engine-%s" % engine_id
+	# 隔离同版本的不同架构缓存，避免复用错误压缩包
+	download_task_id = "engine-%s-%s" % [architecture, engine_id]
 	var download_dir: String = ProjectSettings.globalize_path(DownloadManager.DOWNLOAD_DIR)
 	cache_path = download_dir.path_join("%s.tmp" % download_task_id)
 	download_path = download_dir.path_join("%s.zip" % download_task_id)
+	var architecture_engine_dir: String = EngineManager.get_architecture_engine_dir(architecture)
+	if architecture_engine_dir == "":
+		return false
 	target_dir_path = ProjectSettings.globalize_path(
-		EngineManager.ENGINE_DIR).path_join(engine_id)
+		architecture_engine_dir.path_join(engine_id))
 	return true
 
 
