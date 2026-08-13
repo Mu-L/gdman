@@ -44,14 +44,10 @@ func _ready() -> void:
 	Config.config_updated.connect(_config_update)
 	load_engines()
 
-func get_architecture_engine_dir(architecture: String = "") -> String:
-	var resolved_architecture: String = architecture
-	if resolved_architecture == "" or resolved_architecture == "auto":
-		# 目录必须使用实际架构，不能保留配置层的 auto
-		resolved_architecture = Config.get_architecture()
-	if resolved_architecture == "" or resolved_architecture == "auto":
-		return ""
-	return ENGINE_DIR.path_join(resolved_architecture)
+func get_architecture_engine_dir(architecture: String) -> String:
+	if App.ARCHITECTURE.has(architecture):
+		return ENGINE_DIR.path_join(architecture)
+	return ENGINE_DIR.path_join(App.get_architecture())
 
 func load_engines() -> void:
 	local_engines.clear()

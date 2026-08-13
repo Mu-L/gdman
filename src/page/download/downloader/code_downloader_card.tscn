@@ -2,6 +2,10 @@
 
 [ext_resource type="PackedScene" uid="uid://bgk1814jgblda" path="res://src/page/download/downloader/downloader_card.tscn" id="1_syf6h"]
 [ext_resource type="Script" uid="uid://4ybmaaumj705" path="res://src/page/download/downloader/code_downloader_card.gd" id="2_ve0v4"]
+[ext_resource type="Texture2D" uid="uid://cdxig436m2j1x" path="res://asset/icon/compile.svg" id="3_q8d7t"]
 
 [node name="CodeDownloaderCard" unique_id=1990204292 instance=ExtResource("1_syf6h")]
 script = ExtResource("2_ve0v4")
+
+[node name="DownloadIcon" parent="MarginContainer/VBoxContainer/TitleContainer" parent_id_path=PackedInt32Array(97087460) index="0" unique_id=1740949170]
+texture = ExtResource("3_q8d7t")

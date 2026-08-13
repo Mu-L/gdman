@@ -8,8 +8,8 @@ signal source_code_added(file_name: String)
 func is_safe_shell_path(path: String, shell: String = "") -> bool:
 	# 空路径不会进入循环，因此仍会判定为安全并使用系统环境变量
 	for character: String in path:
-		var codepoint: int = character.unicode_at(0)
-		if codepoint < 32 or codepoint == 127:
+		var code_point: int = character.unicode_at(0)
+		if code_point < 32 or code_point == 127:
 			return false
 		if UNSAFE_SHELL_PATH_CHARACTERS.contains(character):
 			return false

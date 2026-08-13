@@ -13,27 +13,12 @@ const ARCHITECTURE: Array[String] = [
 	"macos",
 ]
 
-# resolution
-var window_sizes: Array[Vector2i] = [
-	Vector2i(3840, 2400), # 4K UHD
-	Vector2i(3200, 2000), # QHD+
-	Vector2i(2560, 1600), # QHD
-	Vector2i(2048, 1280), # QWXGA
-	Vector2i(1920, 1200), # Full HD
-	Vector2i(1600, 1000), # HD+
-	Vector2i(1366, 768), # FWXGA
-	Vector2i(1280, 800), # HD
-	Vector2i(1024, 640), # WSVGA
-	Vector2i(960, 600), # qHD
-	Vector2i(640, 400), # nHD
-]
-
 var url_regex: RegEx = RegEx.new()
 
 func _ready() -> void:
+	_set_windowed()
 	# 仅接受带有效主机名的 HTTPS 地址，同时保留自定义下载域名能力
 	url_regex.compile(r"^https://(?:\[[0-9A-Fa-f:.]+\]|[A-Za-z0-9](?:[A-Za-z0-9.-]*[A-Za-z0-9])?)(?::([0-9]{1,5}))?(?:[/?#][^\s]*)?$")
-	_set_windowed()
 
 func get_architecture() -> String:
 	match OS.get_name():
@@ -59,6 +44,7 @@ func get_architecture() -> String:
 					return "linux_arm64"
 	return ""
 
+# 根据系统架构决定执行文件的格式后缀
 func architecture_to_executable_suffix(architecture: String) -> String:
 	match architecture:
 		"windows_x86", "windows_x64", "windows_arm64":
@@ -73,30 +59,25 @@ func architecture_to_executable_suffix(architecture: String) -> String:
 			return "arm64"
 		"macos":
 			return ".app"
-	return "foo" # Should not reach here
+	return "foo" # 不应该发生的情况
 
-
-func set_language(locale: String) -> void:
-	var lang: PackedStringArray = locale.split("_")
-	if lang.size() < 1:
-		TranslationServer.set_locale("en")
-	else:
-		match lang[0]:
-			"zh":
-				if lang.size() > 1:
-					match lang[1]:
-						"HK", "MO", "TW": # Hong Kong, Macau, Taiwan use Traditional Chinese
-							TranslationServer.set_locale("zh_HK")
-						_:
-							TranslationServer.set_locale("zh_CN")
-				else:
-					TranslationServer.set_locale("zh_CN")
-			_:
-				TranslationServer.set_locale("en")
-
-
+# 设置第二大的不超过屏幕分辨率的窗口大小
+# 第一大的有点太大了
 func _set_windowed() -> void:
 	DisplayServer.window_set_mode(DisplayServer.WindowMode.WINDOW_MODE_WINDOWED)
+	var window_sizes: Array[Vector2i] = [
+		Vector2i(3840, 2400), # 4K UHD
+		Vector2i(3200, 2000), # QHD+
+		Vector2i(2560, 1600), # QHD
+		Vector2i(2048, 1280), # QWXGA
+		Vector2i(1920, 1200), # Full HD
+		Vector2i(1600, 1000), # HD+
+		Vector2i(1366, 768), # FWXGA
+		Vector2i(1280, 800), # HD
+		Vector2i(1024, 640), # WSVGA
+		Vector2i(960, 600), # qHD
+		Vector2i(640, 400), # nHD
+	]
 	for idx: int in window_sizes.size():
 		if window_sizes[idx] < DisplayServer.screen_get_size():
 			DisplayServer.window_set_size(window_sizes[mini(idx + 1, window_sizes.size() - 1)])
@@ -106,6 +87,7 @@ func _set_windowed() -> void:
 func _on_small_update_timer_timeout() -> void:
 	small_update.emit()
 
+# 不同语言会导致按钮的文本宽度不同，因此需要根据文本和图标的宽度来设置按钮的最小宽度
 func fix_button_width(button: Button) -> void:
 	if button.icon == null:
 		return
@@ -128,6 +110,7 @@ func is_valid_url(url: String) -> bool:
 func is_unix_platform() -> bool:
 	return OS.get_name() in ["macOS", "Linux", "FreeBSD", "NetBSD", "OpenBSD", "BSD", ]
 
+# 删除文件，如果删除失败则尝试移动到回收站
 func remove_file(path: String) -> void:
 	var handled_path: String = ProjectSettings.globalize_path(path)
 	if DirAccess.remove_absolute(handled_path) != OK:

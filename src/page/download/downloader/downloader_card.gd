@@ -5,9 +5,12 @@ signal extracted()
 var url: String = ""
 
 var download_task_id: String = "" # 用于下载任务的唯一标识，防止重复下载
+var download_task_name: String = "" # 用于显示的下载任务名称
 var cache_path: String = "" # 下载文件的临时路径
 var download_path: String = "" # 下载完成后更名为该路径
 var target_dir_path: String = "" # 提取目标路径
+
+var _download_dir: String = DownloadManager.DOWNLOAD_DIR
 
 var extract_task_id: int = -1
 
@@ -21,6 +24,7 @@ var extract_task_id: int = -1
 @onready var timer: Timer = $Timer
 
 func _ready() -> void:
+	_download_dir = ProjectSettings.globalize_path(DownloadManager.DOWNLOAD_DIR)
 	_handle_component()
 	Config.config_updated.connect(_config_update)
 	if DirAccess.make_dir_recursive_absolute(DownloadManager.DOWNLOAD_DIR) != OK:
@@ -35,7 +39,7 @@ func _ready() -> void:
 		return
 	DownloadManager.downloading_task[download_task_id] = true
 	download_icon.tooltip_text = url
-	title_label.text = download_task_id
+	title_label.text = download_task_name
 	title_label.tooltip_text = download_task_id
 	if FileAccess.file_exists(download_path):
 		_extract_file()
@@ -102,9 +106,11 @@ func _extract_file() -> void:
 		return
 	extract_task_id = WorkerThreadPool.add_task(_extract_task)
 
+# 提取前的预处理，返回是否成功
 func _pre_extract_file() -> bool:
 	return true
 
+# 提取任务，必须在子线程中执行
 func _extract_task() -> void:
 	pass
 
@@ -136,6 +142,14 @@ func _on_cancel_button_pressed() -> void:
 
 func _on_close_button_pressed() -> void:
 	queue_free()
+
+func encode_id(raw_id: String) -> String:
+	# 将下载任务 ID 转为 Base64，避免出现不安全的文件名字符
+	return Marshalls.utf8_to_base64(raw_id)
+
+func decode_id(encoded_id: String) -> String:
+	# 将 Base64 转回下载任务 ID
+	return Marshalls.base64_to_utf8(encoded_id)
 
 func _pass() -> void:
 	extracted.emit()

@@ -5,14 +5,14 @@ signal config_updated(config_name: String)
 
 var _is_loading_config: bool = false
 
-### General ###
+# 常规
 
 var language: String = "auto":
 	set(v):
 		language = v
 		if _is_loading_config:
 			return
-		_apply_language()
+		_set_language()
 		store_config.call_deferred()
 		config_updated.emit("language")
 
@@ -56,7 +56,7 @@ var remote_source: bool = false:
 		store_config.call_deferred()
 		config_updated.emit("remote_source")
 
-### Compile ###
+# 编译
 
 var mingw_prefix: String = "": # MINGW_PREFIX
 	set(v):
@@ -88,9 +88,25 @@ func _ready() -> void:
 func _exit_tree() -> void:
 	store_config()
 
-func _apply_language() -> void:
+func _set_language() -> void:
 	if language == "auto":
-		App.set_language(OS.get_locale())
+		# 自动则根据系统语言设置
+		var lang: PackedStringArray = OS.get_locale().split("_")
+		if lang.size() < 1:
+			TranslationServer.set_locale("en")
+		else:
+			match lang[0]:
+				"zh":
+					if lang.size() > 1:
+						match lang[1]:
+							"HK", "MO", "TW": # 港澳台使用繁体中文
+								TranslationServer.set_locale("zh_HK")
+							_:
+								TranslationServer.set_locale("zh_CN")
+					else:
+						TranslationServer.set_locale("zh_CN")
+				_:
+					TranslationServer.set_locale("en")
 	else:
 		TranslationServer.set_locale(language)
 
@@ -110,7 +126,7 @@ func store_config() -> void:
 func load_config() -> void:
 	var config: ConfigFile = ConfigFile.new()
 	if config.load(CONFIG_PATH) != OK:
-		_apply_language()
+		_set_language()
 		return
 	# Setter 在加载阶段只赋值，避免每个字段分别触发写盘和信号
 	_is_loading_config = true
@@ -124,7 +140,7 @@ func load_config() -> void:
 	java_home = config.get_value("compile", "java_home", "")
 	android_home = config.get_value("compile", "android_home", "")
 	_is_loading_config = false
-	_apply_language()
+	_set_language()
 
 func get_architecture() -> String:
 	if architecture == "auto":

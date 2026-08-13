@@ -6,10 +6,11 @@ func _handle_data() -> bool:
 	if (file_name == ""
 		or url == ""):
 		return false
-	download_task_id = "code-%s-%d" % [file_name.replace(" ", "_"), Time.get_unix_time_from_system()]
-	var download_dir: String = ProjectSettings.globalize_path(DownloadManager.DOWNLOAD_DIR)
-	cache_path = download_dir.path_join("%s.tmp" % download_task_id)
-	download_path = download_dir.path_join("%s.tar.xz" % download_task_id)
+	download_task_name = file_name
+	download_task_id = Marshalls.utf8_to_base64("code:%s:%d" % [
+		file_name, Time.get_unix_time_from_system()])
+	cache_path = _download_dir.path_join("%s.tmp" % download_task_id)
+	download_path = _download_dir.path_join("%s.tar.xz" % download_task_id)
 	target_dir_path = ProjectSettings.globalize_path(
 		CompileManager.SOURCE_CODE_DIR).path_join(file_name)
 	return true

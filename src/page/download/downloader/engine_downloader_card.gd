@@ -8,18 +8,15 @@ func _handle_data() -> bool:
 			or architecture == ""
 			or url == ""):
 		return false
-	# 隔离同版本的不同架构缓存，避免复用错误压缩包
-	download_task_id = "engine-%s-%s" % [architecture, engine_id]
-	var download_dir: String = ProjectSettings.globalize_path(DownloadManager.DOWNLOAD_DIR)
-	cache_path = download_dir.path_join("%s.tmp" % download_task_id)
-	download_path = download_dir.path_join("%s.zip" % download_task_id)
-	var architecture_engine_dir: String = EngineManager.get_architecture_engine_dir(architecture)
-	if architecture_engine_dir == "":
-		return false
+	download_task_name = "%s:%s" % [engine_id, architecture]
+	# 将下载任务 ID 转为 Base64，避免出现不安全的文件名字符
+	download_task_id = encode_id("engine:%s:%s" % [architecture, engine_id])
+	cache_path = _download_dir.path_join("%s.tmp" % download_task_id)
+	download_path = _download_dir.path_join("%s.zip" % download_task_id)
 	target_dir_path = ProjectSettings.globalize_path(
-		architecture_engine_dir.path_join(engine_id))
+		EngineManager.get_architecture_engine_dir(
+		architecture).path_join(engine_id))
 	return true
-
 
 func _pre_extract_file() -> bool:
 	var zip: ZIPReader = ZIPReader.new()
