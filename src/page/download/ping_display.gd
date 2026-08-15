@@ -22,6 +22,7 @@ func ping(url: String) -> void:
 	start_time = Time.get_ticks_msec()
 	ping_label.text = "..."
 	texture_rect.modulate = Color.BLUE
+	# 仅请求响应头，避免测速时下载文件正文
 	if http_request.request(url, [], HTTPClient.METHOD_HEAD) != OK:
 		ping_label.text = "x"
 		texture_rect.modulate = Color.RED

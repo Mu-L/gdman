@@ -17,6 +17,7 @@ func _process(_delta: float) -> void:
 	if engine_id_request.size() <= 0:
 		set_process(false)
 	else:
+		# 每帧只创建一张来源卡片，避免展开大版本列表时卡顿
 		_add_source_card(engine_id_request.pop_back())
 
 func _load_source() -> void:

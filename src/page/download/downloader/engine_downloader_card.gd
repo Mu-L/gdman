@@ -9,7 +9,7 @@ func _handle_data() -> bool:
 			or url == ""):
 		return false
 	download_task_name = "%s:%s" % [engine_id, architecture]
-	# 将下载任务 ID 转为 Base64，避免出现不安全的文件名字符
+	# 架构写入任务 ID，使同版本的不同架构拥有独立缓存
 	download_task_id = encode_id("engine:%s:%s" % [architecture, engine_id])
 	cache_path = _download_dir.path_join("%s.tmp" % download_task_id)
 	download_path = _download_dir.path_join("%s.zip" % download_task_id)
@@ -27,6 +27,7 @@ func _pre_extract_file() -> bool:
 	if files.size() <= 0:
 		zip.close()
 		return false
+	# 提取前完整校验条目，避免写入一半后才发现越界路径
 	for file_path: String in files:
 		if DownloadManager.resolve_safe_zip_entry_path(target_dir_path, file_path) == "":
 			zip.close()
@@ -42,6 +43,7 @@ func _extract_task() -> void:
 		return
 	var files: PackedStringArray = zip.get_files()
 	for file_path: String in files:
+		# 写入前重新解析安全路径，不复用未经约束的压缩包条目
 		var full_path: String = DownloadManager.resolve_safe_zip_entry_path(
 			target_dir_path, file_path)
 		if full_path == "":

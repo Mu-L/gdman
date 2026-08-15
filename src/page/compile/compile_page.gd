@@ -16,6 +16,7 @@ func _process(_delta: float) -> void:
 	if source_code_request.size() <= 0:
 		set_process(false)
 	else:
+		# 每帧只创建一张卡片，避免大量节点同时实例化
 		_add_source_code_card(source_code_request.pop_back())
 
 func _load_source_code() -> void:

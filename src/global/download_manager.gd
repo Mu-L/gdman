@@ -91,6 +91,7 @@ func load_source() -> void:
 	for source_name: String in SOURCES:
 		var source_path: String = LOCAL_SOURCE_PATH % source_name
 		var json: JSON = JSON.new()
+		# 本地清单缺失或损坏时回退到内置清单
 		if (not FileAccess.file_exists(source_path)
 			or json.parse(FileAccess.get_file_as_string(source_path)) != OK):
 			source_path = BUILT_IN_SOURCE_PATH % source_name
@@ -131,13 +132,13 @@ func _add_source(base_version: String, id: String, build_type: String, source_na
 	if not source[base_version][id].has(build_type):
 		source[base_version][id][build_type] = {}
 	source[base_version][id][build_type][source_name] = url
-	# Record valid versions
+	# 记录可展示的版本
 	var handled_id: String = id if build_type == BUILD_STANDARD else "%s-dotnet" % id
 	if not valid_version.has(base_version):
 		valid_version[base_version] = []
 	if handled_id not in valid_version[base_version]:
 		valid_version[base_version].append(handled_id)
-	# Record valid sources
+	# 记录实际提供下载地址的来源
 	if source_name not in valid_source:
 		valid_source.append(source_name)
 
@@ -228,12 +229,12 @@ func _on_version_request_completed(result: int, response_code: int, _headers: Pa
 	remote_source_version = (json.data as Dictionary).get("object", {}).get("sha", "")
 	if remote_source_version == "":
 		return
-	# local version is up-to-date
+	# 本地清单已经对应当前远程提交
 	if FileAccess.file_exists(LOCAL_SOURCE_VERSION_PATH):
 		var local_version: String = FileAccess.get_file_as_string(LOCAL_SOURCE_VERSION_PATH).strip_edges()
 		if remote_source_version == local_version:
 			return
-	# download remote source files
+	# 仅在版本变化时下载整批来源清单
 	for source_name: String in SOURCES:
 		var source_url: String = REMOTE_SOURCE_URL % source_name
 		var source_request: HTTPRequest = HTTPRequest.new()
@@ -251,7 +252,7 @@ func _on_source_request_finished(result: int, response_code: int, _headers: Pack
 	_release_remote_request(request)
 	if batch_id != _remote_source_batch_id:
 		return
-	# check if the result is valid
+	# 任一来源失败都会废弃整批结果
 	if result != OK or response_code != 200:
 		_abort_remote_source_batch(batch_id)
 		return
@@ -264,6 +265,7 @@ func _on_source_request_finished(result: int, response_code: int, _headers: Pack
 		_abort_remote_source_batch(batch_id)
 		return
 	source_downloaded_data[source_name] = body
+	# 收齐全部来源后再写盘，避免单个响应提前触发更新
 	if source_downloaded_data.size() == SOURCES.size():
 		if not _store_remote_source_data():
 			_abort_remote_source_batch(batch_id)
@@ -281,6 +283,7 @@ func _store_remote_source_data() -> bool:
 			return false
 		source_file.store_string(source_downloaded_data[source_name].get_string_from_utf8())
 		source_file.close()
+	# 最后写入版本号，避免不完整清单在下次启动时被视为最新
 	var version_file: FileAccess = FileAccess.open(LOCAL_SOURCE_VERSION_PATH, FileAccess.WRITE)
 	if version_file == null:
 		return false
@@ -303,6 +306,7 @@ func _clear_remote_requests() -> void:
 func _abort_remote_source_batch(batch_id: int) -> void:
 	if batch_id != _remote_source_batch_id:
 		return
+	# 递增批次号，使尚未返回的同批回调全部失效
 	_remote_source_batch_id += 1
 	_clear_remote_requests()
 	remote_source_version = ""

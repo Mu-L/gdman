@@ -29,7 +29,7 @@ func _ready() -> void:
 	load_config()
 
 func _exit_tree() -> void:
-	# Autoload 退出前回收所有扫描任务，避免工作线程继续访问已释放对象
+	# 全局单例退出前回收所有扫描任务，避免工作线程继续访问已释放对象
 	for request_id: int in _uid_scan_task_ids.keys():
 		wait_for_uid_scan(request_id)
 
@@ -40,6 +40,7 @@ func request_uid_path(uid_path: String, project_root: String) -> int:
 		_scan_uid_path.bind(request_id, uid_path, project_root))
 	if task_id < 0:
 		return -1
+	# 同时保留业务请求号和线程任务号，便于回调过滤与任务回收
 	_uid_scan_task_ids[request_id] = task_id
 	return request_id
 
@@ -77,6 +78,7 @@ func _scan_uid_path(request_id: int, uid_path: String, project_root: String) -> 
 					break
 			file_name = current_dir.get_next()
 		current_dir.list_dir_end()
+	# 扫描在线程池完成，结果延迟回主线程发送
 	_complete_uid_scan.call_deferred(request_id, resource_path)
 
 func _complete_uid_scan(request_id: int, resource_path: String) -> void:

@@ -42,6 +42,7 @@ func _update_command() -> void:
 				_append_env_command(env_commands, shell, "ANDROID_HOME", Config.android_home)
 	var command: String = ""
 	if env_commands.size() > 0:
+		# CMD（命令提示符）使用条件连接符，其余命令环境使用语句分隔符
 		var command_separator: String = " && " if shell == "CMD" else "; "
 		command = command_separator.join(env_commands) + command_separator
 	command += "scons"

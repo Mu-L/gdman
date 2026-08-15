@@ -128,7 +128,7 @@ func load_config() -> void:
 	if config.load(CONFIG_PATH) != OK:
 		_set_language()
 		return
-	# Setter 在加载阶段只赋值，避免每个字段分别触发写盘和信号
+	# 属性设置器在加载阶段只赋值，避免每个字段分别触发写盘和信号
 	_is_loading_config = true
 	language = config.get_value("general", "language", "auto")
 	architecture = config.get_value("general", "architecture", "auto")

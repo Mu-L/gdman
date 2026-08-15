@@ -33,7 +33,7 @@ func _ready() -> void:
 	if not _handle_data() or not App.is_valid_url(url):
 		queue_free()
 		return
-	# 重复任务检查
+	# 以任务 ID 互斥，防止多个卡片并发写入同一缓存
 	if DownloadManager.downloading_task.get(download_task_id, false):
 		queue_free()
 		return
@@ -41,6 +41,7 @@ func _ready() -> void:
 	download_icon.tooltip_text = url
 	title_label.text = download_task_name
 	title_label.tooltip_text = download_task_id
+	# 完整缓存可直接进入提取流程，临时文件不会走到此分支
 	if FileAccess.file_exists(download_path):
 		_extract_file()
 		return
@@ -60,7 +61,7 @@ func _config_update(config_name: String) -> void:
 func _handle_component() -> void:
 	App.fix_button_width(cancel_button)
 
-# 数据预处理，返回是否成功
+# 子类在下载前生成任务标识和全部路径
 func _handle_data() -> bool:
 	return false
 
@@ -92,6 +93,7 @@ func _on_http_request_request_completed(result: int, response_code: int, _header
 		or response_code != 200):
 		_failed()
 		return
+	# 改名后才将临时文件视为可复用的完整缓存
 	if DirAccess.rename_absolute(cache_path, download_path) != OK:
 		_failed()
 		return
@@ -106,7 +108,7 @@ func _extract_file() -> void:
 		return
 	extract_task_id = WorkerThreadPool.add_task(_extract_task)
 
-# 提取前的预处理，返回是否成功
+# 子类在创建目标目录前完成格式和路径安全校验
 func _pre_extract_file() -> bool:
 	return true
 
@@ -144,11 +146,11 @@ func _on_close_button_pressed() -> void:
 	queue_free()
 
 func encode_id(raw_id: String) -> String:
-	# 将下载任务 ID 转为 Base64，避免出现不安全的文件名字符
+	# 转为 Base64（文本编码），避免任务 ID 中的字符污染缓存文件名
 	return Marshalls.utf8_to_base64(raw_id)
 
 func decode_id(encoded_id: String) -> String:
-	# 将 Base64 转回下载任务 ID
+	# 从缓存文件名恢复原始任务 ID
 	return Marshalls.base64_to_utf8(encoded_id)
 
 func _pass() -> void:

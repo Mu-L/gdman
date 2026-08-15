@@ -38,6 +38,7 @@ func _process(_delta: float) -> void:
 	if version_request.size() <= 0:
 		set_process(false)
 	else:
+		# 每帧只创建一个版本容器，避免大量节点同时实例化
 		_add_version_container(version_request.pop_back())
 
 func _load_version() -> void:

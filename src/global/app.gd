@@ -44,7 +44,7 @@ func get_architecture() -> String:
 					return "linux_arm64"
 	return ""
 
-# 根据系统架构决定执行文件的格式后缀
+# 将架构标识映射为压缩包内的可执行文件后缀
 func architecture_to_executable_suffix(architecture: String) -> String:
 	match architecture:
 		"windows_x86", "windows_x64", "windows_arm64":
@@ -59,10 +59,9 @@ func architecture_to_executable_suffix(architecture: String) -> String:
 			return "arm64"
 		"macos":
 			return ".app"
-	return "foo" # 不应该发生的情况
+	return "foo" # 上游仅应传入 ARCHITECTURE 中的有效值
 
-# 设置第二大的不超过屏幕分辨率的窗口大小
-# 第一大的有点太大了
+# 选择第二大的可用尺寸，避免窗口接近占满屏幕
 func _set_windowed() -> void:
 	DisplayServer.window_set_mode(DisplayServer.WindowMode.WINDOW_MODE_WINDOWED)
 	var window_sizes: Array[Vector2i] = [
@@ -110,7 +109,7 @@ func is_valid_url(url: String) -> bool:
 func is_unix_platform() -> bool:
 	return OS.get_name() in ["macOS", "Linux", "FreeBSD", "NetBSD", "OpenBSD", "BSD", ]
 
-# 删除文件，如果删除失败则尝试移动到回收站
+# 优先直接删除，失败时回退到系统回收站
 func remove_file(path: String) -> void:
 	var handled_path: String = ProjectSettings.globalize_path(path)
 	if DirAccess.remove_absolute(handled_path) != OK:

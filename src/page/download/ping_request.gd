@@ -7,6 +7,7 @@ var start_time: int = 0
 func ping(url: String) -> void:
 	cancel_request()
 	start_time = Time.get_ticks_msec()
+	# 仅请求响应头，避免测速时下载文件正文
 	if request(url, [], HTTPClient.METHOD_HEAD) != OK:
 		ping_result.emit(-1)
 

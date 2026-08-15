@@ -18,6 +18,7 @@ var url_dict: Dictionary[int, String] = {}
 
 func display(engine_id: String) -> void:
 	if last_engine_id == engine_id:
+		# 相同版本复用上次测速和来源选择结果
 		popup_centered()
 		return
 	last_engine_id = engine_id

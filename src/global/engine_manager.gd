@@ -20,8 +20,8 @@ const FLAVOR_NAME: Dictionary[EngineFlavor, String] = {
 signal engines_loaded()
 
 class EngineInfo:
-	var id: String # x.y[.z]-flavor[a][-dotnet]
-	var name: String # Display name
+	var id: String # 格式：x.y[.z]-flavor[a][-dotnet]，flavor 表示发布阶段
+	var name: String # 界面显示名称
 	var major_version: int
 	var minor_version: int
 	var patch_version: int
@@ -47,6 +47,7 @@ func _ready() -> void:
 func get_architecture_engine_dir(architecture: String) -> String:
 	if App.ARCHITECTURE.has(architecture):
 		return ENGINE_DIR.path_join(architecture)
+	# 无效标识回退到本机架构，避免生成任意目录
 	return ENGINE_DIR.path_join(App.get_architecture())
 
 func load_engines() -> void:
@@ -90,14 +91,14 @@ func id_to_engine_info(engine_id: String) -> EngineInfo:
 		return null
 	var engine_info: EngineInfo = EngineInfo.new()
 	engine_info.id = engine_id
-	# version
+	# 解析版本号
 	var version_info: PackedStringArray = info[0].split(".")
 	if version_info.size() >= 2:
 		engine_info.major_version = version_info[0].to_int()
 		engine_info.minor_version = version_info[1].to_int()
 		if version_info.size() == 3:
 			engine_info.patch_version = version_info[2].to_int()
-	# flavor
+	# 解析发布阶段
 	if info[1] == "stable":
 		engine_info.flavor = EngineFlavor.STABLE
 	elif info[1].begins_with("rc"):
@@ -110,7 +111,7 @@ func id_to_engine_info(engine_id: String) -> EngineInfo:
 		engine_info.flavor = EngineFlavor.DEV
 	engine_info.build = info[1].to_int()
 	engine_info.is_dotnet = info.size() == 3 and info[2] == "dotnet"
-	# name
+	# 生成界面显示名称
 	var name_array: Array[String] = []
 	name_array.append("%d.%d" % [engine_info.major_version, engine_info.minor_version])
 	if engine_info.patch_version > 0:
@@ -127,6 +128,7 @@ func id_to_engine_info(engine_id: String) -> EngineInfo:
 	
 func _get_executable_path(architecture_engine_dir: String, dir_name: String,
 	architecture: String) -> String:
+	# 发布包目录层级不固定，递归查找符合目标架构后缀的文件
 	var target_suffix: String = App.architecture_to_executable_suffix(architecture)
 	var dirs_to_scan: Array[String] = [architecture_engine_dir.path_join(dir_name)]
 	while dirs_to_scan.size() > 0:

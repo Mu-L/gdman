@@ -16,6 +16,7 @@ func _handle_data() -> bool:
 	return true
 
 func _extract_task() -> void:
+	# tar.xz 交由系统 tar 解压，失败结果延迟回主线程处理
 	if OS.execute("tar", ["-xJf", download_path, "-C", target_dir_path]) != OK:
 		_failed.call_deferred()
 		return

@@ -22,6 +22,7 @@ func _process(_delta: float) -> void:
 	if project_card_scene == null:
 		if not project_card_requested:
 			return
+		# 轮询线程加载状态，避免同步读取场景阻塞首屏
 		var load_status: int = ResourceLoader.load_threaded_get_status(PROJECT_CARD_PATH)
 		match load_status:
 			ResourceLoader.THREAD_LOAD_IN_PROGRESS:
@@ -40,6 +41,7 @@ func _process(_delta: float) -> void:
 		import_button.disabled = false
 		set_process(false)
 	else:
+		# 场景就绪后仍逐帧创建项目卡片，控制单帧开销
 		_add_project_card(project_request.pop_back())
 
 func _load_project() -> void:

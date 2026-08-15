@@ -33,6 +33,7 @@ func _process(_delta: float) -> void:
 	if page_request.is_empty():
 		set_process(false)
 		return
+	# 只消费队首，保证页面添加顺序与导航索引一致
 	var page_path: String = page_request[0]
 	var load_status: int = ResourceLoader.load_threaded_get_status(page_path)
 	match load_status:
@@ -79,6 +80,7 @@ func _disable_nav(nav: Button) -> void:
 	nav.disabled = true
 
 func _request_page(tab: int, nav: Button) -> void:
+	# 目标页面可能仍在异步加载，先保存用户的导航意图
 	pending_tab = tab
 	pending_nav = nav
 	_switch_pending_page()

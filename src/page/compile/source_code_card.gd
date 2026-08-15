@@ -29,6 +29,7 @@ func _ready() -> void:
 	if sub_dir.size() == 0:
 		queue_free()
 		return
+	# 源码压缩包通常多一层版本目录，以 version.py 定位实际源码根目录
 	for dir_name: String in sub_dir:
 		var sub_dir_path: String = dir_path.path_join(dir_name)
 		if FileAccess.file_exists(sub_dir_path.path_join("version.py")):
@@ -77,6 +78,7 @@ func _on_bin_button_pressed() -> void:
 	OS.shell_show_in_file_manager(bin_dir_path)
 
 func _on_custom_button_pressed() -> void:
+	# 仅在缺失时生成默认配置，保留用户已有的 custom.py
 	if not FileAccess.file_exists(custom_file_path):
 		var file: FileAccess = FileAccess.open(custom_file_path, FileAccess.WRITE)
 		if file != null:

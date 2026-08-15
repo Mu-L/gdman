@@ -4,7 +4,7 @@ const SOURCE_CODE_URL: String = "https://github.com/godotengine/godot-builds/rel
 
 var valid_name_regex: RegEx = RegEx.new()
 
-# https://help.interfaceware.com/v6/windows-reserved-file-names
+# Windows 保留文件名参考：https://help.interfaceware.com/v6/windows-reserved-file-names
 const WINDOWS_RESERVED_FILE_NAMES: PackedStringArray = [
 	"CON",
 	"PRN",
@@ -63,7 +63,7 @@ func _is_valid_file_name(file_name: String) -> bool:
 		return false
 	if file_name.length() > 200:
 		return false
-	# Windows保留名
+	# 即使运行在其他平台，也拒绝 Windows 保留名，保证目录名可跨平台使用
 	if WINDOWS_RESERVED_FILE_NAMES.has(file_name.to_upper()):
 		return false
 	if valid_name_regex.search(file_name) == null:

@@ -39,6 +39,7 @@ func _ready() -> void:
 		mingw_path_line.editable = false
 		mingw_path_button.disabled = true
 	
+# 外部命令在线程池执行，控件状态延迟回主线程更新
 func _check_version_task() -> void:
 	_set_version_check(python_check,
 		CompileManager.get_python_version())

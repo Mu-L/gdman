@@ -29,6 +29,7 @@ func _ready() -> void:
 	if configured_icon_path.begins_with("res://"):
 		_load_project_icon(configured_icon_path)
 	elif configured_icon_path.begins_with("uid://"):
+		# UID（资源唯一标识）图标需扫描导入映射，请求号用于过滤其他卡片的结果
 		ProjectManager.uid_path_resolved.connect(_on_uid_path_resolved)
 		uid_scan_request_id = ProjectManager.request_uid_path(configured_icon_path, project_path)
 	version_label.text = _get_project_version(config)
