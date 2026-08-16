@@ -19,11 +19,12 @@ var uid_scan_request_id: int = -1
 @onready var engine_button: Button = $MarginContainer/VBoxContainer/HBoxContainer2/EngineButton
 
 func _ready() -> void:
+	# 获取项目配置，根据配置加载图标、版本、标签等信息
 	var config: ConfigFile = ConfigFile.new()
 	if config.load(project_path.path_join("project.godot")) != OK:
 		queue_free()
 		return
-	name_label.text = config.get_value("application", "config/name", "Unnamed Project")
+	name_label.text = config.get_value("application", "config/name", "")
 	name_label.tooltip_text = name_label.text
 	var configured_icon_path: String = config.get_value("application", "config/icon", "")
 	if configured_icon_path.begins_with("res://"):
@@ -34,26 +35,16 @@ func _ready() -> void:
 		uid_scan_request_id = ProjectManager.request_uid_path(configured_icon_path, project_path)
 	version_label.text = _get_project_version(config)
 	dotnet_icon.visible = config.has_section("dotnet")
-	var time_dict: Dictionary = Time.get_datetime_dict_from_unix_time(
-		_get_directory_last_edited_time(project_path))
-	time_label.text = "%d/%d/%d-%d:%d:%d" % [
-		time_dict.get("year", 1970),
-		time_dict.get("month", 1),
-		time_dict.get("day", 1),
-		time_dict.get("hour", 0),
-		time_dict.get("minute", 0),
-		time_dict.get("second", 0),
-	]
 	path_line.text = project_path
 	path_line.tooltip_text = project_path
 	path_line.secret = Config.hide_path
+	_refresh_project_time()
 	for tag: String in config.get_value("application", "config/tags", []):
 		var tag_node: Control = PROJECT_TAG.instantiate()
 		tag_node.text = tag
 		tag_container.add_child(tag_node)
 	editor_button.disabled = Config.external_editor_path == ""
 	refresh_engines()
-	App.small_update.connect(_small_update)
 	Config.config_updated.connect(_config_update)
 	_handle_component()
 
@@ -61,9 +52,10 @@ func _exit_tree() -> void:
 	if uid_scan_request_id >= 0:
 		ProjectManager.wait_for_uid_scan(uid_scan_request_id)
 
-func _small_update() -> void:
-	var time_dict: Dictionary = Time.get_datetime_dict_from_unix_time(
-		_get_directory_last_edited_time(project_path))
+func _refresh_project_time() -> void:
+	var time_dict: Dictionary = Time.get_datetime_dict_from_unix_time((
+		App.unix_time_to_current(
+		FileAccess.get_modified_time(project_path))))
 	time_label.text = "%d/%d/%d-%d:%d:%d" % [
 		time_dict.get("year", 1970),
 		time_dict.get("month", 1),
@@ -109,14 +101,6 @@ func _on_uid_path_resolved(request_id: int, resource_path: String) -> void:
 		return
 	uid_scan_request_id = -1
 	_load_project_icon(resource_path)
-
-
-func _get_directory_last_edited_time(dir_path: String) -> int:
-	# Godot 平台层支持直接读取目录修改时间，避免启动外部进程阻塞主线程
-	var modified_time: int = FileAccess.get_modified_time(dir_path)
-	if modified_time <= 0:
-		return 0
-	return modified_time + Time.get_time_zone_from_system().bias * 60
 
 func _on_path_button_pressed() -> void:
 	OS.shell_show_in_file_manager(project_path)

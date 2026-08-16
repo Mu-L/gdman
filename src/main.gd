@@ -20,7 +20,7 @@ const PAGE_PATH_LIST: Array[String] = [
 @onready var download_nav: Button = $MarginContainer/HBoxContainer/SideBar/DownloadNav
 @onready var setting_nav: Button = $MarginContainer/HBoxContainer/SideBar/SettingNav
 
-var page_request: Array[String] = []
+var page_request: Array[String] = [] # 异步页面加载队列
 var pending_tab: int = -1
 var pending_nav: Button = null
 

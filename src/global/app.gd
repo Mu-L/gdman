@@ -114,3 +114,7 @@ func remove_file(path: String) -> void:
 	var handled_path: String = ProjectSettings.globalize_path(path)
 	if DirAccess.remove_absolute(handled_path) != OK:
 		OS.move_to_trash(handled_path)
+
+# 将 Unix 时间戳转换为当前时区的时间戳
+func unix_time_to_current(unix_time: int) -> int:
+	return unix_time + Time.get_time_zone_from_system().bias * 60
