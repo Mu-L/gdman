@@ -18,8 +18,32 @@ var url_regex: RegEx = RegEx.new()
 func _ready() -> void:
 	_set_windowed()
 	# 仅接受带有效主机名的 HTTPS 地址，同时保留自定义下载域名能力
-	url_regex.compile(r"^https://(?:\[[0-9A-Fa-f:.]+\]|[A-Za-z0-9](?:[A-Za-z0-9.-]*[A-Za-z0-9])?)(?::([0-9]{1,5}))?(?:[/?#][^\s]*)?$")
+	url_regex.compile(r"^https?://(?:\[[0-9A-Fa-f:.]+\]|[A-Za-z0-9](?:[A-Za-z0-9.-]*[A-Za-z0-9])?)(?::([0-9]{1,5}))?(?:[/?#][^\s]*)?$")
 
+# 设置合适的窗口尺寸
+# 选择第二大的可用尺寸，防止窗口过大
+func _set_windowed() -> void:
+	DisplayServer.window_set_mode(DisplayServer.WindowMode.WINDOW_MODE_WINDOWED)
+	var window_sizes: Array[Vector2i] = [
+		Vector2i(3840, 2400), # 4K UHD
+		Vector2i(3200, 2000), # QHD+
+		Vector2i(2560, 1600), # QHD
+		Vector2i(2048, 1280), # QWXGA
+		Vector2i(1920, 1200), # Full HD
+		Vector2i(1600, 1000), # HD+
+		Vector2i(1366, 768), # FWXGA
+		Vector2i(1280, 800), # HD
+		Vector2i(1024, 640), # WSVGA
+		Vector2i(960, 600), # qHD
+		Vector2i(640, 400), # nHD
+	]
+	for idx: int in window_sizes.size():
+		if window_sizes[idx] < DisplayServer.screen_get_size():
+			DisplayServer.window_set_size(window_sizes[mini(idx + 1, window_sizes.size() - 1)])
+			break
+	get_window().move_to_center.call_deferred()
+
+# 获取当前运行平台的架构标识
 func get_architecture() -> String:
 	match OS.get_name():
 		"Windows":
@@ -44,11 +68,16 @@ func get_architecture() -> String:
 					return "linux_arm64"
 	return ""
 
-# 将架构标识映射为压缩包内的可执行文件后缀
+# 将架构标识映射为可执行文件后缀
+# Windows：exe
+# MacOS：app
+# Linux：基于架构
 func architecture_to_executable_suffix(architecture: String) -> String:
 	match architecture:
 		"windows_x86", "windows_x64", "windows_arm64":
 			return ".exe"
+		"macos":
+			return ".app"
 		"linux_x86":
 			return "x86_32"
 		"linux_x64":
@@ -57,34 +86,7 @@ func architecture_to_executable_suffix(architecture: String) -> String:
 			return "arm32"
 		"linux_arm64":
 			return "arm64"
-		"macos":
-			return ".app"
 	return "foo" # 上游仅应传入 ARCHITECTURE 中的有效值
-
-# 选择第二大的可用尺寸，避免窗口接近占满屏幕
-func _set_windowed() -> void:
-	DisplayServer.window_set_mode(DisplayServer.WindowMode.WINDOW_MODE_WINDOWED)
-	var window_sizes: Array[Vector2i] = [
-		Vector2i(3840, 2400), # 4K UHD
-		Vector2i(3200, 2000), # QHD+
-		Vector2i(2560, 1600), # QHD
-		Vector2i(2048, 1280), # QWXGA
-		Vector2i(1920, 1200), # Full HD
-		Vector2i(1600, 1000), # HD+
-		Vector2i(1366, 768), # FWXGA
-		Vector2i(1280, 800), # HD
-		Vector2i(1024, 640), # WSVGA
-		Vector2i(960, 600), # qHD
-		Vector2i(640, 400), # nHD
-	]
-	for idx: int in window_sizes.size():
-		if window_sizes[idx] < DisplayServer.screen_get_size():
-			DisplayServer.window_set_size(window_sizes[mini(idx + 1, window_sizes.size() - 1)])
-			break
-	get_window().move_to_center.call_deferred()
-
-func _on_small_update_timer_timeout() -> void:
-	small_update.emit()
 
 # 不同语言会导致按钮的文本宽度不同，因此需要根据文本和图标的宽度来设置按钮的最小宽度
 func fix_button_width(button: Button) -> void:
@@ -99,6 +101,7 @@ func fix_button_width(button: Button) -> void:
 		-1,
 		button.get_theme_font_size("font_size")).x + button.get_theme_constant("h_separation") + button.size.y
 
+# 检查 URL 是否有效
 func is_valid_url(url: String) -> bool:
 	var matched_url: RegExMatch = url_regex.search(url)
 	if matched_url == null:
@@ -106,6 +109,7 @@ func is_valid_url(url: String) -> bool:
 	var port: String = matched_url.get_string(1)
 	return port == "" or (port.to_int() >= 1 and port.to_int() <= 65535)
 
+# 检查当前运行平台是否为 Unix-like 系统
 func is_unix_platform() -> bool:
 	return OS.get_name() in ["macOS", "Linux", "FreeBSD", "NetBSD", "OpenBSD", "BSD", ]
 
@@ -118,3 +122,6 @@ func remove_file(path: String) -> void:
 # 将 Unix 时间戳转换为当前时区的时间戳
 func unix_time_to_current(unix_time: int) -> int:
 	return unix_time + Time.get_time_zone_from_system().bias * 60
+
+func _on_small_update_timer_timeout() -> void:
+	small_update.emit()

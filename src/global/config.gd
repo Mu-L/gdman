@@ -1,6 +1,7 @@
 extends Node
 
-const CONFIG_PATH: String = "user://config.cfg"
+const CONFIG_PATH: String = "user://config.cfg" # 配置文件路径
+
 signal config_updated(config_name: String)
 
 var _is_loading_config: bool = false
@@ -47,15 +48,6 @@ var hide_path: bool = false:
 			return
 		store_config.call_deferred()
 		config_updated.emit("hide_path")
-
-var remote_source: bool = false:
-	set(v):
-		remote_source = v
-		if _is_loading_config:
-			return
-		store_config.call_deferred()
-		config_updated.emit("remote_source")
-
 # 编译
 
 var mingw_prefix: String = "": # MINGW_PREFIX
@@ -110,6 +102,7 @@ func _set_language() -> void:
 	else:
 		TranslationServer.set_locale(language)
 
+# 存储配置
 func store_config() -> void:
 	var config: ConfigFile = ConfigFile.new()
 	config.set_value("general", "language", language)
@@ -117,12 +110,12 @@ func store_config() -> void:
 	config.set_value("general", "delete_download_file", delete_download_file)
 	config.set_value("general", "external_editor_path", external_editor_path)
 	config.set_value("general", "hide_path", hide_path)
-	config.set_value("general", "remote_source", remote_source)
 	config.set_value("compile", "mingw_prefix", mingw_prefix)
 	config.set_value("compile", "java_home", java_home)
 	config.set_value("compile", "android_home", android_home)
 	config.save(CONFIG_PATH)
 
+# 加载配置
 func load_config() -> void:
 	var config: ConfigFile = ConfigFile.new()
 	if config.load(CONFIG_PATH) != OK:
@@ -135,13 +128,13 @@ func load_config() -> void:
 	delete_download_file = config.get_value("general", "delete_download_file", false)
 	external_editor_path = config.get_value("general", "external_editor_path", "")
 	hide_path = config.get_value("general", "hide_path", false)
-	remote_source = config.get_value("general", "remote_source", false)
 	mingw_prefix = config.get_value("compile", "mingw_prefix", "")
 	java_home = config.get_value("compile", "java_home", "")
 	android_home = config.get_value("compile", "android_home", "")
 	_is_loading_config = false
 	_set_language()
 
+# 获取配置的架构
 func get_architecture() -> String:
 	if architecture == "auto":
 		return App.get_architecture()

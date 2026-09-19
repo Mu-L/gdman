@@ -1,7 +1,7 @@
 extends Node
 
-const SOURCE_CODE_DIR: String = "user://code"
-const UNSAFE_SHELL_PATH_CHARACTERS: String = "`$%!^&|;<>()"
+const SOURCE_CODE_DIR: String = "user://code" # 源码存放目录
+const UNSAFE_SHELL_PATH_CHARACTERS: String = "`$%!^&|;<>()" # 不安全的 shell 路径字符集
 
 signal source_code_added(file_name: String)
 
