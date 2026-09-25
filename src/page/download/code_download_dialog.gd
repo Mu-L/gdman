@@ -42,8 +42,6 @@ var existing_names: Array[String] = []
 
 func _ready() -> void:
 	valid_name_regex.compile("^[\\p{L}\\p{N} ]+$")
-	for id: String in DownloadManager.valid_id:
-		version_option.add_item(id)
 
 func display() -> void:
 	file_name_line.text = ""

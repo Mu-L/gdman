@@ -49,10 +49,10 @@ const PROGRAM_MANIFEST_TEMPLATE: Dictionary = {
 var manifest: Dictionary = {}
 var downloading_task: Dictionary[String, bool] = {}
 
-var is_requesting_remote_manifest: bool = false
-var remote_version_request: HTTPRequest = null
-var remote_manifest_requests: Dictionary[String, HTTPRequest] = {}
+var is_requesting_remote_manifest: bool = false # 正在请求远程清单，防止重复请求
+var remoting_manifest_requests: Dictionary[String, HTTPRequest] = {}
 var remote_version: String = ""
+var remote_manifest: Dictionary[String, String] = {}
 
 var display_standard: bool = true
 var display_dotnet: bool = false
@@ -63,14 +63,6 @@ func _ready() -> void:
 	load_manifest()
 	Config.config_updated.connect(_config_update)
 	_request_remote_manifest()
-
-func _exit_tree() -> void:
-	if remote_version_request != null:
-		remote_version_request.queue_free()
-	for provider_name: String in remote_manifest_requests.keys():
-		var request: HTTPRequest = remote_manifest_requests[provider_name]
-		if request != null:
-			request.queue_free()
 
 func _config_update(config_name: String) -> void:
 	match config_name:
@@ -129,28 +121,37 @@ func get_download_url_by_id(engine_id: String, provider: String) -> String:
 	var build_type: String = BUILD_STANDARD if not engine_info.is_dotnet else BUILD_DOTNET
 	return manifest.get(engine_info.base_version, {}).get(handled_id, {}).get(build_type, {}).get(provider, "")
 
-
+# 请求远程清单
+# 步骤
+# 1. 请求远程清单版本号
+# 2. 对比远程清单版本和本地清单版本
+# 3. 如果不同则请求远程清单
 func _request_remote_manifest() -> void:
 	if is_requesting_remote_manifest:
 		return
 	is_requesting_remote_manifest = true
-	if DirAccess.make_dir_recursive_absolute(ProjectSettings.globalize_path(LOCAL_MANIFEST_PATH)) != OK:
+	# 重置远程清单相关变量
+	remote_version = ""
+	remote_manifest.clear()
+	for provider_name: String in remoting_manifest_requests.keys():
+		remoting_manifest_requests[provider_name].queue_free()
+	remoting_manifest_requests.clear()
+	# 确认本地清单目录能正常访问
+	if DirAccess.make_dir_recursive_absolute(ProjectSettings.globalize_path(LOCAL_MANIFEST_DIR)) != OK:
 		is_requesting_remote_manifest = false
 		return
 	# 先请求远程清单版本号
 	var version_request: HTTPRequest = HTTPRequest.new()
-	version_request.request_completed.connect(_on_version_request_completed)
+	version_request.request_completed.connect(_on_version_request_completed.bind(version_request))
 	version_request.timeout = 10
 	version_request.use_threads = true
 	add_child(version_request)
-	if version_request.request(REMOTE_MANIFEST_VERSION_URL) == OK:
-		remote_version_request = version_request
-	else:
+	if version_request.request(REMOTE_MANIFEST_VERSION_URL) != OK:
 		version_request.queue_free()
 		is_requesting_remote_manifest = false
 
-func _on_version_request_completed(result: int, response_code: int, _headers: PackedStringArray, body: PackedByteArray) -> void:
-	remote_version_request.queue_free()
+func _on_version_request_completed(result: int, response_code: int, _headers: PackedStringArray, body: PackedByteArray, version_request: HTTPRequest) -> void:
+	version_request.queue_free()
 	if result != OK or response_code != 200:
 		is_requesting_remote_manifest = false
 		return
@@ -158,24 +159,64 @@ func _on_version_request_completed(result: int, response_code: int, _headers: Pa
 	if json.parse(body.get_string_from_utf8()) != OK:
 		is_requesting_remote_manifest = false
 		return
-	# 对比远程清单版本和本地清单版本
-	remote_version = json.data.get("object", {}).get("sha", "")
-	if remote_version == "" or remote_version == FileAccess.get_file_as_string(LOCAL_MANIFEST_VERSION_PATH):
+	# 版本使用 GitHub API 返回的 SHA 值
+	var version_from_remote: String = json.data.get("object", {}).get("sha", "")
+	# 远程版本为空（请求问题）或本地版本与远程版本一致，不需要更新
+	if version_from_remote == "" or version_from_remote == FileAccess.get_file_as_string(LOCAL_MANIFEST_VERSION_PATH):
 		is_requesting_remote_manifest = false
 		return
-	# 如果不同则请求远程清单
+	# 如果不同则开始获取新版本的远程清单
+	remote_version = version_from_remote
+	# 需要保证所有请求都发送成功
+	var all_request_sent: bool = true
 	for provider_name: String in PROVIDERS:
 		var manifest_request: HTTPRequest = HTTPRequest.new()
-		manifest_request.request_completed.connect(_on_manifest_request_completed)
+		manifest_request.request_completed.connect(
+			_on_manifest_request_completed.bind(provider_name))
 		manifest_request.timeout = 10
 		manifest_request.use_threads = true
 		add_child(manifest_request)
 		if manifest_request.request(REMOTE_MANIFEST_URL % provider_name) == OK:
-			remote_manifest_requests[provider_name] = manifest_request
+			remoting_manifest_requests[provider_name] = manifest_request
 		else:
 			manifest_request.queue_free()
-			is_requesting_remote_manifest = false
+			all_request_sent = false
 			break
+	# 如果有任何请求发送失败，需要停止请求远程清单
+	if not all_request_sent:
+		for provider_name: String in remoting_manifest_requests.keys():
+			remoting_manifest_requests[provider_name].queue_free()
+		remoting_manifest_requests.clear()
+		is_requesting_remote_manifest = false
 
-func _on_manifest_request_completed(result: int, response_code: int, _headers: PackedStringArray, body: PackedByteArray) -> void:
-	pass
+func _on_manifest_request_completed(result: int, response_code: int, _headers: PackedStringArray, body: PackedByteArray, request_name: String) -> void:
+	if remoting_manifest_requests.has(request_name):
+		remoting_manifest_requests[request_name].queue_free()
+	remoting_manifest_requests.erase(request_name)
+	if result != OK or response_code != 200:
+		if remoting_manifest_requests.size() != 0:
+			is_requesting_remote_manifest = false
+		return
+	var manifest_data: String = body.get_string_from_utf8()
+	# 判断远程清单是否为有效的 JSON 数组
+	var json: JSON = JSON.new()
+	if json.parse(manifest_data) != OK or not json.data is Array:
+		if remoting_manifest_requests.size() != 0:
+			is_requesting_remote_manifest = false
+		return
+	remote_manifest[request_name] = manifest_data
+	_store_remote_manifest_to_local()
+	
+# 远程数据存入本地清单
+func _store_remote_manifest_to_local() -> void:
+	# 因为远程清单请求可能有多个，所以需要等待所有请求完成后再写入本地清单
+	if remoting_manifest_requests.size() != 0:
+		return
+	var version_file: FileAccess = FileAccess.open(LOCAL_MANIFEST_VERSION_PATH, FileAccess.WRITE)
+	version_file.store_string(remote_version)
+	version_file.close()
+	for provider_name: String in remote_manifest.keys():
+		var file: FileAccess = FileAccess.open(LOCAL_MANIFEST_PATH % provider_name, FileAccess.WRITE)
+		file.store_string(remote_manifest.get(provider_name, ""))
+		file.close()
+	is_requesting_remote_manifest = false

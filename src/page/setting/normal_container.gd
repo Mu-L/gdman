@@ -34,7 +34,6 @@ func _ready() -> void:
 	editor_path_line.text = Config.external_editor_path
 	editor_path_line.tooltip_text = Config.external_editor_path
 	hide_path_check.button_pressed = Config.hide_path
-	remote_source_check.button_pressed = Config.remote_source
 	version_name_label.text = ProjectSettings.get_setting("application/config/version", "unknown")
 	user_path_line.text = ProjectSettings.globalize_path("user://")
 	user_path_line.tooltip_text = ProjectSettings.globalize_path("user://")
@@ -66,10 +65,6 @@ func _on_architecture_option_item_selected(index: int) -> void:
 		Config.architecture = "auto"
 	else:
 		Config.architecture = architecture_option.get_item_text(index)
-
-
-func _on_remote_source_check_toggled(toggled_on: bool) -> void:
-	Config.remote_source = toggled_on
 
 func _on_delete_download_check_toggled(toggled_on: bool) -> void:
 	Config.delete_download_file = toggled_on
